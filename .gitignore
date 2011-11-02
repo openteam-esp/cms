@@ -1,0 +1,16 @@
+*.swp
+.bundle/
+.rake_tasks~
+.sass-cache/
+bin/
+config/database.yml
+config/settings.yml
+config/sunspot.yml
+db/*.sqlite3
+log/*.log
+log/*.log.lck
+public/assets/
+public/*.pdf
+solr/data/
+solr/pids/
+tmp/
