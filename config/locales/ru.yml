@@ -1,0 +1,14 @@
+ru:
+  application: "Система управления контентом"
+
+  actions:
+    index: Список
+    new: Добавление
+    edit: Изменение
+
+  pluralize:
+    site:
+      one: "сайт"
+      few: "cайта"
+      many: "сайтов"
+
