@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111102051719) do
+ActiveRecord::Schema.define(:version => 20111102083446) do
 
   create_table "locales", :force => true do |t|
     t.string   "title"
@@ -28,14 +28,25 @@ ActiveRecord::Schema.define(:version => 20111102051719) do
     t.string   "ancestry"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "template_id"
   end
 
   add_index "pages", ["locale_id"], :name => "index_pages_on_locale_id"
+  add_index "pages", ["template_id"], :name => "index_pages_on_template_id"
 
   create_table "sites", :force => true do |t|
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "templates", :force => true do |t|
+    t.string   "title"
+    t.integer  "site_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "templates", ["site_id"], :name => "index_templates_on_site_id"
 
 end

@@ -1,4 +1,6 @@
 Cms::Application.routes.draw do
+  resources :templates
+
   resources :pages
 
   resources :locales
