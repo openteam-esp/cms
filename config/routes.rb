@@ -1,4 +1,10 @@
 Cms::Application.routes.draw do
+  resources :pages
+
+  resources :locales
+
+  resources :sites
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

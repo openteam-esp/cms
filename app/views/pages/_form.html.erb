@@ -1,0 +1,11 @@
+<%= semantic_form_for @page do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :title %>
+    <%= f.input :locale %>
+    <%= f.input :ancestry %>
+  <% end %>
+
+  <%= f.buttons do %>
+    <%= f.commit_button %>
+  <% end %>
+<% end %>

@@ -1,7 +1,10 @@
 source 'http://rubygems.org'
 
+gem 'ancestry'
 gem 'compass',                  '~> 0.12.alpha'
 gem 'configliere'
+gem 'formtastic'
+gem 'inherited_resources'
 gem 'jquery-rails'
 gem 'rails'
 gem 'russian'
@@ -19,11 +22,15 @@ group :development do
   gem 'rails-dev-tweaks'
 end
 
+group :test do
+  gem 'fabrication'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'sqlite3'
+end
+
 group :production do
   gem 'hoptoad_notifier'
   gem 'pg',                                       :require => false
 end
 
-group :test do
-  gem 'sqlite3'
-end

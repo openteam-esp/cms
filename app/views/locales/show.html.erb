@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @locale.title %>
+</p>
+
+<p>
+  <b>Site:</b>
+  <%= @locale.site %>
+</p>
+
+
+<%= link_to 'Edit', edit_locale_path(@locale) %> |
+<%= link_to 'Back', locales_path %>
