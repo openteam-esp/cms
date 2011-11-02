@@ -55,6 +55,13 @@ module Cms
       generators.test_framework       :rspec, :fixture => true
       generators.fixture_replacement  :fabrication
       generators.stylesheet_engine    :sass
+      generators.helper               false
+      generators.assets               false
+      generators.stylesheets          false
+      generators.controller_specs     false
+      generators.helper_specs         false
+      generators.routing_specs        false
+      generators.view_specs           false
     end
 
     config.sass.preferred_syntax = :sass if config.respond_to? :sass

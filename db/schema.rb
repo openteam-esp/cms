@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111102083446) do
+ActiveRecord::Schema.define(:version => 20111102085204) do
 
   create_table "locales", :force => true do |t|
     t.string   "title"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(:version => 20111102083446) do
 
   add_index "pages", ["locale_id"], :name => "index_pages_on_locale_id"
   add_index "pages", ["template_id"], :name => "index_pages_on_template_id"
+
+  create_table "regions", :force => true do |t|
+    t.string   "title"
+    t.integer  "template_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "regions", ["template_id"], :name => "index_regions_on_template_id"
 
   create_table "sites", :force => true do |t|
     t.string   "title"
