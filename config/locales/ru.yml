@@ -1,6 +1,10 @@
 ru:
   application: "Система управления контентом"
 
+  toolbar:
+    sites: Сайты
+    pages: Контент
+
   actions:
     index: Список
     new: Добавление
@@ -11,4 +15,8 @@ ru:
       one: "сайт"
       few: "cайта"
       many: "сайтов"
+    page:
+      one: "страница"
+      few: "страницы"
+      many: "страниц"
 

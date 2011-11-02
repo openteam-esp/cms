@@ -8,6 +8,7 @@ gem 'inherited_resources'
 gem 'jquery-rails'
 gem 'rails'
 gem 'russian'
+gem 'simple-navigation'
 
 group :assets do
   gem 'sass-rails'

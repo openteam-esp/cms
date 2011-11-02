@@ -1,0 +1,25 @@
+@import "compass/utilities"
+@import "compass/css3"
+
+#toolbar
+  +clearfix
+  border: 1px solid #aaa
+  border-top: none
+  +border-bottom-left-radius
+  +border-bottom-right-radius
+  +linear-gradient(color-stops(#fff, #ededed))
+  padding: 8px 0
+  li
+    font-size: 11px
+    float: left
+    padding: 0 10px
+    border-right: 1px solid #aaa
+    a
+      color: #777
+      &:hover
+        color: #333
+      &:active
+        color: #000
+    &.selected
+      a
+        color: #000
