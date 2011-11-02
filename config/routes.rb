@@ -1,4 +1,8 @@
 Cms::Application.routes.draw do
+  resources :parts
+
+  resources :contents
+
   resources :regions
 
   resources :templates
