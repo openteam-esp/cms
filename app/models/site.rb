@@ -4,6 +4,7 @@ class Site < ActiveRecord::Base
   has_many :templates
 
   accepts_nested_attributes_for :locales, :reject_if => :all_blank, :allow_destroy => true
+  default_value_for :locales_attributes, [ { :locale => :ru } ]
 
   def to_s
     title
