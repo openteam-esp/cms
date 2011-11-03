@@ -1,6 +1,7 @@
 ru:
   application:        Система управления контентом
   'Are you sure?':    Вы уверены что хотите удалить?
+  cancel:             Отменить
 
   toolbar:
     sites:            Сайты

@@ -1,2 +1,6 @@
-<p>Языки: <%= resource.locales.join(", ") %></p>
-<%= link_to "Шаблоны", site_templates_path(resource) %>
+<ul>
+  <% resource.locales.each do | locale | %>
+    <li><%= link_to locale, locale_pages_path(locale) %></li>
+  <% end %>
+  <li><%= link_to "Шаблоны", site_templates_path(resource) %></li>
+</ul>
