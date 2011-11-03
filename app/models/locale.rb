@@ -3,6 +3,10 @@ class Locale < ActiveRecord::Base
   belongs_to :site
   has_many :pages
 
+  validates_presence_of :locale
+
+  has_enum :locale
+
   def to_s
     locale
   end

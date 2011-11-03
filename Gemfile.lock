@@ -64,6 +64,8 @@ GEM
     guard-spork (0.3.1)
       guard (>= 0.8.4)
       spork (>= 0.8.4)
+    has_enum (0.9.4)
+      rails (> 3.0.0)
     has_scope (0.5.1)
     hike (1.2.1)
     hirb (0.5.0)
@@ -177,6 +179,7 @@ DEPENDENCIES
   formtastic
   guard-rspec
   guard-spork
+  has_enum
   hirb
   hoptoad_notifier
   inherited_resources

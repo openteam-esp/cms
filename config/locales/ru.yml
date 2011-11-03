@@ -1,44 +1,53 @@
 ru:
-  application: 'Система управления контентом'
-  'Are you sure?': 'Вы уверены что хотите удалить?'
+  application:        Система управления контентом
+  'Are you sure?':    Вы уверены что хотите удалить?
 
   toolbar:
-    sites: Сайты
-    pages: Контент
+    sites:            Сайты
+    pages:            Контент
 
   actions:
-    index: Список
-    new: Добавление
-    edit: Изменение
-    destroy: Удаление
+    index:            Список
+    new:              Добавление
+    edit:             Изменение
+    destroy:          Удаление
 
   pluralize:
     content:
-      one: 'контент'
-      few: 'контент'
-      many: 'контент'
+      one:            контент
+      few:            контент
+      many:           контент
 
     locale:
-      one: 'язык'
-      few: 'языка'
-      many: 'языков'
+      one:            язык
+      few:            языка
+      many:           языков
 
     page:
-      one: 'страница'
-      few: 'страницы'
-      many: 'страниц'
+      one:            страница
+      few:            страницы
+      many:           страниц
 
     region:
-      one: 'область'
-      few: 'области'
-      many: 'областей'
+      one:            область
+      few:            области
+      many:           областей
 
     site:
-      one: 'сайт'
-      few: 'cайта'
-      many: 'сайтов'
+      one:            сайт
+      few:            cайта
+      many:           сайтов
 
     template:
-      one: 'шаблон'
-      few: 'шаблона'
-      many: 'шаблонов'
+      one:            шаблон
+      few:            шаблона
+      many:           шаблонов
+
+  activerecord:
+    attributes:
+      locale:
+        locale_enum:
+          ru:         русский
+          en:         английский
+          de:         немецкий
+          fr:         французский
