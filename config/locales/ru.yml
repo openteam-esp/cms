@@ -1,10 +1,11 @@
 ru:
-  application: "Система управления контентом"
-  "Are you sure?": "Вы уверены что хотите удалить?"
+  application: 'Система управления контентом'
+  'Are you sure?': 'Вы уверены что хотите удалить?'
 
   toolbar:
     sites: Сайты
     pages: Контент
+
 
   actions:
     index: Список
@@ -13,12 +14,32 @@ ru:
     destroy: Удаление
 
   pluralize:
-    site:
-      one: "сайт"
-      few: "cайта"
-      many: "сайтов"
-    page:
-      one: "страница"
-      few: "страницы"
-      many: "страниц"
+    content:
+      one: 'контент'
+      few: 'контент'
+      many: 'контент'
 
+    locale:
+      one: 'язык'
+      few: 'языка'
+      many: 'языков'
+
+    page:
+      one: 'страница'
+      few: 'страницы'
+      many: 'страниц'
+
+    region:
+      one: 'область'
+      few: 'области'
+      many: 'областей'
+
+    site:
+      one: 'сайт'
+      few: 'cайта'
+      many: 'сайтов'
+
+    template:
+      one: 'шаблон'
+      few: 'шаблона'
+      many: 'шаблонов'

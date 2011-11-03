@@ -1,0 +1,6 @@
+<% content_for :actions do %>
+  <%= link_to action_title(:action => 'edit'), edit_resource_path %>
+  <%= link_to action_title(:action => 'destroy'), resource_path, confirm: t('Are you sure?'), method: :delete %>
+  <%= render :partial => 'extra_actions' %>
+<% end %>
+
