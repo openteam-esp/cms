@@ -8,6 +8,7 @@ describe Part do
   it { should validate_presence_of :region }
   it { should validate_presence_of :content }
 end
+
 # == Schema Information
 #
 # Table name: parts

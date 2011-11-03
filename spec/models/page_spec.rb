@@ -6,6 +6,7 @@ describe Page do
   it { should have_many :contents }
   it { should validate_presence_of :template }
 end
+
 # == Schema Information
 #
 # Table name: pages

@@ -7,6 +7,7 @@ class Page < ActiveRecord::Base
 
   validates :template, :presence => true
 end
+
 # == Schema Information
 #
 # Table name: pages

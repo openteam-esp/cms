@@ -11,6 +11,7 @@ class Site < ActiveRecord::Base
   end
 
 end
+
 # == Schema Information
 #
 # Table name: sites

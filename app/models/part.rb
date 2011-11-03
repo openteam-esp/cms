@@ -4,6 +4,7 @@ class Part < ActiveRecord::Base
   belongs_to :region
   validates :content, :page, :region, :presence => true
 end
+
 # == Schema Information
 #
 # Table name: parts

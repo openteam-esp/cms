@@ -8,6 +8,7 @@ class Locale < ActiveRecord::Base
   end
 
 end
+
 # == Schema Information
 #
 # Table name: locales
