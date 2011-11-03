@@ -10,11 +10,12 @@ end
 #
 # Table name: pages
 #
-#  id         :integer         not null, primary key
-#  title      :string(255)
-#  locale_id  :integer
-#  ancestry   :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id          :integer         not null, primary key
+#  title       :string(255)
+#  locale_id   :integer
+#  ancestry    :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  template_id :integer
 #
 

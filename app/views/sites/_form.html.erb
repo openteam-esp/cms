@@ -1,9 +1,19 @@
-<%= semantic_form_for @site do |f| %>
-  <%= f.inputs do %>
-    <%= f.input :title %>
+<%= semantic_nested_form_for @site do | form | %>
+  <%= form.inputs do %>
+    <%= form.input :title %>
   <% end %>
 
-  <%= f.buttons do %>
-    <%= f.commit_button %>
+  <%= form.semantic_fields_for :locales do | locale_form | %>
+    <%= locale_form.inputs do %>
+      <%= locale_form.input :locale %>
+      <li class="destroy_action"><%= locale_form.link_to_remove action_title(:action => 'destroy', :controller => 'locales') %></li>
+    <% end %>
+  <% end %>
+  <div class="locales_fieldset">
+    <%= form.link_to_add action_title(:action => 'new', :controller => 'locales'), :locales %>
+  </div>
+
+  <%= form.buttons do %>
+    <%= form.commit_button %>
   <% end %>
 <% end %>

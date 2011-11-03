@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/kfprimm/nested_form
+  revision: dc5657e0c07cfa73ca48b9f8c24e262db6cfa3e4
+  specs:
+    nested_form (0.1.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -175,6 +181,7 @@ DEPENDENCIES
   itslog
   jquery-rails
   libnotify
+  nested_form!
   pg
   rails
   rails-dev-tweaks

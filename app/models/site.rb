@@ -1,6 +1,9 @@
 class Site < ActiveRecord::Base
+
   has_many :locales
   has_many :templates
+
+  accepts_nested_attributes_for :locales, :reject_if => :all_blank, :allow_destroy => true
 
   def to_s
     title
