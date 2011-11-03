@@ -1,9 +1,16 @@
 module ApplicationHelper
 
+  def title
+    action_title
+  end
+
+  def pluralized_model(controller_name = params[:controller])
+    "pluralize.#{controller_name.to_s.singularize}"
+  end
+
   def action_title(options={})
-    controller = options[:controller] || params[:controller]
+    controller_name = options[:controller] || params[:controller]
     action = options[:action] || params[:action]
-    model  = "pluralize.#{controller.to_s.singularize}"
     action_conf = case action
       when 'show'
         return resource
@@ -16,11 +23,7 @@ module ApplicationHelper
       else
         { :action => action, :count => 2 }
     end
-    "#{I18n.t("actions.#{action_conf[:action]}")} #{I18n.t(model, :count => action_conf[:count])}"
-  end
-
-  def title
-    action_title
+    "#{I18n.t("actions.#{action_conf[:action]}")} #{I18n.t(pluralized_model(controller_name), :count => action_conf[:count])}"
   end
 
 end

@@ -2,8 +2,12 @@
   <%= link_to action_title(:action => 'new'), new_resource_path %>
 <% end %>
 
-<%= content_tag :ul, :class => "collection_list" do %>
-  <% collection.each do |site| %>
-    <%= content_tag :li, link_to(site, site) %>
-  <% end %>
-<% end if collection.any? %>
+<% if collection.any? %>
+  <ul class="collection_list">
+    <% collection.each do | item | %>
+      <li><%= render item %></li>
+    <% end %>
+  </ul>
+<% else %>
+  Список <%= t(pluralized_model, :count => 10) %> пуст
+<% end %>
