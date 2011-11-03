@@ -1,10 +1,5 @@
-<p id="notice"><%= notice %></p>
+<% content_for :actions do %>
+  <%= link_to action_title('sites', 'edit'), edit_resource_path %>
+  <%= link_to action_title('sites', 'destroy'), resource_path, confirm: t('Are you sure?'), method: :delete %>
+<% end %>
 
-<p>
-  <b>Title:</b>
-  <%= @site.title %>
-</p>
-
-
-<%= link_to 'Edit', edit_site_path(@site) %> |
-<%= link_to 'Back', sites_path %>

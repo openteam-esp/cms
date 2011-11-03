@@ -1,17 +1,22 @@
 module ApplicationHelper
 
-  def title
-    model  = "pluralize.#{params[:controller].singularize}"
-    case params[:action]
-    when 'index'
-      "#{I18n.t('actions.index')} #{I18n.t(model, :count => 5)}"
+  def action_title(controller = params[:controller], action = params[:action])
+    model  = "pluralize.#{controller.singularize}"
+    action = case action
     when 'show'
-      resource
-    when 'new', 'create'
-      "#{I18n.t('actions.new')} #{I18n.t(model, :count => 2)}"
-    when 'edit', 'update'
-      "#{I18n.t('actions.edit')} #{I18n.t(model, :count => 2)}"
+      return resource
+    when 'create'
+      'new'
+    when 'update'
+      'edit'
+    else
+      action
     end
+    "#{I18n.t("actions.#{action}")} #{I18n.t(model, :count => 2)}"
+  end
+
+  def title
+    action_title
   end
 
 end

@@ -1,5 +1,6 @@
 ru:
   application: "Система управления контентом"
+  "Are you sure?": "Вы уверены что хотите удалить?"
 
   toolbar:
     sites: Сайты
@@ -9,6 +10,7 @@ ru:
     index: Список
     new: Добавление
     edit: Изменение
+    destroy: Удаление
 
   pluralize:
     site:

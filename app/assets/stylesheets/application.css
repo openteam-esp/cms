@@ -5,6 +5,9 @@
  *= require_self
  *= require reset
  *= require text
+ *= require errors
  *= require layout
  *= require toolbar
+ *= require title
+ *= require content
 */

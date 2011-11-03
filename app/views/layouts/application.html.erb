@@ -8,7 +8,12 @@
 </head>
 <body>
   <%= render_navigation :context => :toolbar %>
-  <h1><%= title %></h1>
-  <%= yield %>
+  <div id="title_wrapper">
+    <%= content_tag :div, yield(:actions), :class => "actions" if content_for?(:actions) %>
+    <h1><%= title %></h1>
+  </div>
+  <div id="content_wrapper">
+    <%= yield %>
+  </div>
 </body>
 </html>

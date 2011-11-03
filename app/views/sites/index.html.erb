@@ -1,21 +1,9 @@
-<table>
-  <tr>
-    <th>Title</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @sites.each do |site| %>
-  <tr>
-    <td><%= site.title %></td>
-    <td><%= link_to 'Show', site %></td>
-    <td><%= link_to 'Edit', edit_site_path(site) %></td>
-    <td><%= link_to 'Destroy', site, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% content_for :actions do %>
+  <%= link_to action_title('sites', 'new'), new_resource_path %>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New Site', new_site_path %>
+<%= content_tag :ul, :class => "collection_list" do %>
+  <% collection.each do |site| %>
+    <%= content_tag :li, link_to(site, site) %>
+  <% end %>
+<% end if collection.any? %>
