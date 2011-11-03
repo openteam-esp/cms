@@ -1,5 +1,5 @@
-<%%= f.inputs do %>
+<%%= form.inputs do %>
   <%- attributes.each do |attribute| -%>
-    <%%= f.input :<%= attribute.name %> %>
+    <%%= form.input :<%= attribute.name %> %>
   <%- end -%>
 <%% end %>

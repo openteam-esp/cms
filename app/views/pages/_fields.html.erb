@@ -1,0 +1,5 @@
+<%= form.inputs do %>
+  <%= form.input :title %>
+  <%= form.input :slug %>
+  <%= form.input :template, :collection => @site.templates %>
+<% end %>

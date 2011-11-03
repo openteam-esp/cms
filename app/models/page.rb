@@ -6,6 +6,11 @@ class Page < ActiveRecord::Base
   has_many :contents, :through => :parts
 
   validates :template, :presence => true
+
+  def to_s
+    slug
+  end
+
 end
 
 # == Schema Information
