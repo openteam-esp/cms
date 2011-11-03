@@ -1,4 +1,4 @@
-<%= semantic_nested_form_for @site do | form | %>
+<%= semantic_nested_form_for @site, :url => sites_path do | form | %>
   <%= form.inputs do %>
     <%= form.input :title %>
   <% end %>

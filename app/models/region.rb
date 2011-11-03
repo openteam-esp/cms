@@ -1,5 +1,11 @@
 class Region < ActiveRecord::Base
+
   belongs_to :template
+
+  def to_s
+    "#{title} (#{slug})"
+  end
+
 end
 
 # == Schema Information

@@ -1,10 +1,21 @@
-<%= semantic_form_for @template do |f| %>
-  <%= f.inputs do %>
-    <%= f.input :title %>
-    <%= f.input :site %>
+<%= semantic_nested_form_for(@template, :url => smart_resource_url) do | form | %>
+  <%= form.inputs do %>
+    <%= form.input :title %>
+    <%= form.input :slug %>
   <% end %>
 
-  <%= f.buttons do %>
-    <%= f.commit_button %>
+  <%= form.semantic_fields_for :regions do | region_form | %>
+    <%= region_form.inputs do %>
+      <%= region_form.input :title %>
+      <%= region_form.input :slug %>
+      <li class="destroy_action"><%= region_form.link_to_remove action_title(:action => 'destroy', :controller => 'regions') %></li>
+    <% end %>
+  <% end %>
+  <div class="regions_fieldset">
+    <%= form.link_to_add action_title(:action => 'new', :controller => 'regions'), :regions %>
+  </div>
+
+  <%= form.buttons do %>
+    <%= form.commit_button %>
   <% end %>
 <% end %>

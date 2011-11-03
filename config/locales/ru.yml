@@ -6,7 +6,6 @@ ru:
     sites: Сайты
     pages: Контент
 
-
   actions:
     index: Список
     new: Добавление

@@ -1,6 +1,14 @@
 class Template < ActiveRecord::Base
+
   belongs_to :site
   has_many :regions
+
+  accepts_nested_attributes_for :regions, :reject_if => :all_blank, :allow_destroy => true
+
+  def to_s
+    "#{title} (#{slug})"
+  end
+
 end
 
 # == Schema Information

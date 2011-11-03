@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111103041135) do
+ActiveRecord::Schema.define(:version => 20111103053810) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20111103041135) do
     t.integer  "template_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   add_index "regions", ["template_id"], :name => "index_regions_on_template_id"
@@ -73,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20111103041135) do
     t.integer  "site_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "slug"
   end
 
   add_index "templates", ["site_id"], :name => "index_templates_on_site_id"

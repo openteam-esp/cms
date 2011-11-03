@@ -8,7 +8,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
   navigation.items do |primary|
     primary.item :sites, I18n.t('toolbar.sites'), sites_path,
-      :highlights_on => /^\/sites|^\/$/
+      :highlights_on => /^\/$|^\/sites|\/templates/
     primary.item :pages, I18n.t('toolbar.pages'), pages_path,
       :highlights_on => /^\/pages/
 
