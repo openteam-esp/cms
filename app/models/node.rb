@@ -1,5 +1,6 @@
 class Node < ActiveRecord::Base
-  validates_presence_of :slug
+
+  validates :slug, :presence => true, :format => { :with => %r{^[[:alnum:]_\.-]+$} }
   has_ancestry
 
   alias :site :root
