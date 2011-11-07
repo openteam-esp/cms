@@ -13,5 +13,6 @@ end
 #  template_id :integer
 #  created_at  :datetime
 #  updated_at  :datetime
+#  slug        :string(255)
 #
 

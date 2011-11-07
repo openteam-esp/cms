@@ -1,5 +1,6 @@
 Fabricator(:page) do
   title "MyString"
-  locale nil
-  ancestry "MyString"
+  slug "name"
+  parent! { Fabricate(:site).locales.first }
+  template! { Fabricate(:template) }
 end

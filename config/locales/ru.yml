@@ -50,7 +50,7 @@ ru:
         title:        Заголовок
         body:         Текст
       locale:
-        locale_enum:
+        slug_enum:
           ru:         русский
           en:         английский
           de:         немецкий

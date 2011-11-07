@@ -29,7 +29,7 @@ group :development do
 end
 
 group :test do
-  gem 'fabrication'
+  gem 'fabrication',                              :require => false
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'libnotify'

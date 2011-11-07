@@ -1,33 +1,28 @@
-class Page < ActiveRecord::Base
-  belongs_to :locale
+class Page < Node
   belongs_to :template
-  belongs_to :site
 
   has_many :parts
   has_many :contents, :through => :parts
 
   validates :template, :presence => true
 
-  has_ancestry
-
-  alias :pages :children
-
-  def to_s
-    slug
+  def locale
+    ancestors.second
   end
 
 end
 
 # == Schema Information
 #
-# Table name: pages
+# Table name: nodes
 #
 #  id          :integer         not null, primary key
+#  slug        :string(255)
 #  title       :string(255)
-#  locale_id   :integer
 #  ancestry    :string(255)
+#  template_id :integer
+#  type        :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
-#  template_id :integer
 #
 

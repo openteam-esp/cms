@@ -1,22 +1,24 @@
 require 'spec_helper'
 
 describe Page do
-  it { should belong_to :locale }
   it { should belong_to :template }
   it { should have_many :contents }
   it { should validate_presence_of :template }
+  it { Fabricate(:page).locale.slug.should == 'ru' }
+  it { Fabricate(:page, :parent => Fabricate(:page)).locale.slug.should == 'ru' }
 end
 
 # == Schema Information
 #
-# Table name: pages
+# Table name: nodes
 #
 #  id          :integer         not null, primary key
+#  slug        :string(255)
 #  title       :string(255)
-#  locale_id   :integer
 #  ancestry    :string(255)
+#  template_id :integer
+#  type        :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
-#  template_id :integer
 #
 

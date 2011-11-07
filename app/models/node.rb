@@ -1,9 +1,10 @@
-require 'spec_helper'
+class Node < ActiveRecord::Base
+  validates_presence_of :slug
+  has_ancestry
 
-describe Site do
-  it { should have_many :locales }
-  it { should have_many :templates }
-  it { subject.locales.map(&:slug).should == [ 'ru' ] }
+  def to_s
+    slug
+  end
 end
 
 # == Schema Information
