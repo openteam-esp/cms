@@ -12,7 +12,7 @@
     <li>
       <%= region %>
       <% if part = resource.parts.where(:region_id => region).first %>
-        <%= part.body %>
+        <%= raw part.body %>
         <%= link_to action_title(:action => 'edit', :controller => 'parts'), edit_part_path(part) %>
       <% end %>
     </li>
