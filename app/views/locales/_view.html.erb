@@ -1,0 +1,7 @@
+<%= link_to parent, parent %>
+<ul>
+  <% resource.children.each do | child | %>
+    <li><%= link_to child, child %></li>
+  <% end %>
+  <li><%= link_to action_title(:action => 'new', :controller => 'pages'), new_node_page_path(resource) %></li>
+</ul>

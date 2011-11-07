@@ -6,6 +6,10 @@ class Page < Node
 
   validates_presence_of :parent, :template
 
+  delegate :templates, :to => :site
+
+  alias :node :parent
+
 
   def locale
     ancestors.second

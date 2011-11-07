@@ -6,11 +6,11 @@ Cms::Application.routes.draw do
 
   resources :regions
 
-  resources :parent_pages, :only => [] do
+  resources :node, :only => [] do
     resources :pages, :only => [:new, :create]
   end
 
-  resources :pages
+  resources :pages, :only => [:show, :edit, :update, :destroy]
 
   resources :locales, :only => [:show, :edit, :update, :destroy]
 

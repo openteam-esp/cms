@@ -1,0 +1,5 @@
+<%= f.inputs do %>
+  <%= f.input :title %>
+  <%= javascript_include_tag "ckeditor/ckeditor.js" %>
+  <%= f.input :body, :as => :ckeditor %>
+<% end %>

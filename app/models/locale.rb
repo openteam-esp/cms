@@ -2,6 +2,7 @@ class Locale < Node
   has_enum :slug
   validates_presence_of :parent
   alias :site :parent
+
 end
 
 # == Schema Information

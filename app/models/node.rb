@@ -2,9 +2,16 @@ class Node < ActiveRecord::Base
   validates_presence_of :slug
   has_ancestry
 
+  alias :site :root
+
   def to_s
     slug
   end
+
+  def pages
+    Page.where(:ancestry => child_ancestry)
+  end
+
 end
 
 # == Schema Information

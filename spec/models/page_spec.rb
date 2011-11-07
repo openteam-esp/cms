@@ -7,6 +7,8 @@ describe Page do
   it { should validate_presence_of :parent }
   it { Fabricate(:page).locale.slug.should == 'ru' }
   it { Fabricate(:page, :parent => Fabricate(:page)).locale.slug.should == 'ru' }
+  it { Fabricate(:page).site.should be_is_root }
+  it { Fabricate(:page, :parent => Fabricate(:page)).site.should be_is_root }
 end
 
 # == Schema Information
