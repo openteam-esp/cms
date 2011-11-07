@@ -12,21 +12,21 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 .cke_skin_v2 a:visited,
 .cke_skin_v2 a:active
 {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	background: transparent;
-	text-decoration: none;
-	font: normal normal normal 100% Sans-Serif;
-	width: auto;
-	height: auto;
-	border-collapse: collapse;
-	text-align: left;
-	vertical-align: baseline;
-	white-space: nowrap;
-	cursor: auto;
-	color: #000;
-	float: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-decoration: none;
+  font: normal normal normal 100% Sans-Serif;
+  width: auto;
+  height: auto;
+  border-collapse: collapse;
+  text-align: left;
+  vertical-align: baseline;
+  white-space: nowrap;
+  cursor: auto;
+  color: #000;
+  float: none;
 
     font-size: 11px;
     font-family: 'Microsoft Sans Serif' , Tahoma, Arial, Verdana, Sans-Serif;
@@ -43,43 +43,43 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 .cke_rtl .cke_skin_v2 a:visited,
 .cke_rtl .cke_skin_v2 a:active
 {
-	text-align: right;
+  text-align: right;
 }
 
 .cke_skin_v2 iframe
 {
-	vertical-align: inherit;	/** For IE */
+  vertical-align: inherit;  /** For IE */
 }
 
 .cke_skin_v2 textarea
 {
-	white-space: pre;
+  white-space: pre;
 }
 
 .cke_skin_v2 .cke_browser_gecko textarea
 {
-	cursor: text;
+  cursor: text;
 }
 
 .cke_skin_v2 .cke_browser_gecko textarea[disabled]
 {
-	cursor: default;
+  cursor: default;
 }
 
 .cke_skin_v2 input[type="text"],
 .cke_skin_v2 input[type="password"]
 {
-	cursor: text;
+  cursor: text;
 }
 
 .cke_skin_v2 input[type="text"][disabled],
 .cke_skin_v2 input[type="password"][disabled]
 {
-	cursor: default;
+  cursor: default;
 }
 
 .cke_skin_v2 fieldset
 {
-	padding: 10px;
-	border: 2px groove #E0DFE3;
+  padding: 10px;
+  border: 2px groove #E0DFE3;
 }

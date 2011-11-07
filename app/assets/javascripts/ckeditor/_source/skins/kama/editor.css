@@ -16,10 +16,10 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 /* Restore the container visibility */
 html .cke_skin_kama
 {
-	visibility: inherit;
+  visibility: inherit;
 }
 
 html.cke_skin_kama_container
 {
-	visibility: visible;
+  visibility: visible;
 }
