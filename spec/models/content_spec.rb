@@ -1,7 +1,10 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe Content do
-  it { should have_many :pages }
+  it { should normalize_attribute(:body).from('<script>alert("!");</script> ').to('alert("!");') }
+  it { should normalize_attribute(:body).from('&quot;Русский&quot;').to('&laquo;Русский&raquo;') }
 end
 
 # == Schema Information

@@ -1,6 +1,7 @@
 source :rubygems
 
 gem 'ancestry'
+gem 'attribute_normalizer'
 gem 'ckeditor',                                   :git => 'git://github.com/pshoukry/ckeditor.git'
 gem 'compass',                  '~> 0.12.alpha'
 gem 'configliere'
@@ -13,6 +14,7 @@ gem 'jquery-rails'
 gem 'nested_form',                                :git => 'git://github.com/kfprimm/nested_form'
 gem 'rails'
 gem 'russian'
+gem 'sanitize'
 gem 'simple-navigation'
 
 group :assets do

@@ -7,6 +7,7 @@ describe Node do
   it { should allow_value('test_node123').for(:slug) }
   it { should allow_value('русские-буковки').for(:slug) }
   it { should_not allow_value('test/').for(:slug) }
+  it { should normalize_attribute(:title).from('"English" "Русский"').to('“English” «Русский»') }
 end
 
 # == Schema Information

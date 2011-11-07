@@ -1,7 +1,6 @@
 class Content < ActiveRecord::Base
 
-  has_many :parts
-  has_many :pages, :through => :parts
+  normalize_attribute :body, :with => [:sanitize, :gilensize_as_html, :strip, :blank]
 
   def to_s
     title
