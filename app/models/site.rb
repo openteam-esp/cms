@@ -1,6 +1,9 @@
 class Site < Node
   has_many :templates
-  alias :locales :children
+
+  def locales
+    Locale.where(:ancestry => child_ancestry)
+  end
 end
 
 # == Schema Information

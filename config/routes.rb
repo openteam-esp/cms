@@ -12,15 +12,13 @@ Cms::Application.routes.draw do
 
   resources :pages
 
-  resources :locales do
-    #resources :pages, :only => [:index, :new, :create]
-  end
+  resources :locales, :only => [:show, :edit, :update, :destroy]
 
   resources :templates, :only => [:show, :edit, :update, :destroy]
 
   resources :sites do
+    resources :locales, :only => [:new, :create]
     resources :templates, :only => [:index, :new, :create]
-    resources :pages, :only => [:index, :new, :create]
   end
 
   root :to => 'sites#index'
