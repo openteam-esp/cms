@@ -44,6 +44,11 @@ ru:
       few:            шаблона
       many:           шаблонов
 
+    part:
+      one:            часть
+      few:            части
+      many:           частей
+
   activerecord:
     attributes:
       content:

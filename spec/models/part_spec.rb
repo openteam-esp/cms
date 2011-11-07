@@ -6,7 +6,6 @@ describe Part do
   it { should belong_to :content }
   it { should validate_presence_of :page }
   it { should validate_presence_of :region }
-  it { should validate_presence_of :content }
 end
 
 # == Schema Information

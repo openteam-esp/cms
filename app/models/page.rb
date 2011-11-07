@@ -10,7 +10,6 @@ class Page < Node
 
   alias :node :parent
 
-
   def locale
     ancestors.second
   end

@@ -6,3 +6,16 @@
   <% end %>
   <li><%= link_to action_title(:action => 'new', :controller => 'pages'), new_node_page_path(resource) %></li>
 </ul>
+
+<ul>
+  <% resource.template.regions.each do |region| %>
+    <li>
+      <%= region %>
+      <% if part = resource.parts.where(:region_id => region).first %>
+        <%= part.body %>
+        <%= link_to action_title(:action => 'edit', :controller => 'parts'), edit_part_path(part) %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+<%= link_to action_title(:action => 'new', :controller => 'parts'), new_page_part_path(resource) %>
