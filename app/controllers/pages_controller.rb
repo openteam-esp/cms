@@ -1,6 +1,8 @@
 class PagesController < InheritedResources::Base
-  belongs_to :site, :shallow => true do
-    belongs_to :locale, :shallow => true
-  end
+  belongs_to :site, :shallow => true #, :polymorphic => true
+  #do
+    #belongs_to :parent_page, :class_name => 'Page', :optional => true
+  #end
+
 
 end

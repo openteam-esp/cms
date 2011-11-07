@@ -1,11 +1,16 @@
 class Page < ActiveRecord::Base
   belongs_to :locale
   belongs_to :template
+  belongs_to :site
 
   has_many :parts
   has_many :contents, :through => :parts
 
   validates :template, :presence => true
+
+  has_ancestry
+
+  alias :pages :children
 
   def to_s
     slug

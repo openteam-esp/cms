@@ -1,6 +1,7 @@
 <ul>
   <% resource.locales.each do | locale | %>
-    <li><%= link_to locale, locale_pages_path(locale) %></li>
+    <li><%= locale %></li>
   <% end %>
   <li><%= link_to "Шаблоны", site_templates_path(resource) %></li>
+  <li><%= link_to "Страницы", site_pages_path(resource) %></li>
 </ul>
