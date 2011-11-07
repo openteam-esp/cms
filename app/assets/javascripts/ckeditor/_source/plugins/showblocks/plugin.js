@@ -11,142 +11,142 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 (function()
 {
-	var cssTemplate = '.%2 p,'+
-		'.%2 div,'+
-		'.%2 pre,'+
-		'.%2 address,'+
-		'.%2 blockquote,'+
-		'.%2 h1,'+
-		'.%2 h2,'+
-		'.%2 h3,'+
-		'.%2 h4,'+
-		'.%2 h5,'+
-		'.%2 h6'+
-		'{'+
-			'background-repeat: no-repeat;'+
-			'background-position: top %3;'+
-			'border: 1px dotted gray;'+
-			'padding-top: 8px;'+
-			'padding-%3: 8px;'+
-		'}'+
+  var cssTemplate = '.%2 p,'+
+    '.%2 div,'+
+    '.%2 pre,'+
+    '.%2 address,'+
+    '.%2 blockquote,'+
+    '.%2 h1,'+
+    '.%2 h2,'+
+    '.%2 h3,'+
+    '.%2 h4,'+
+    '.%2 h5,'+
+    '.%2 h6'+
+    '{'+
+      'background-repeat: no-repeat;'+
+      'background-position: top %3;'+
+      'border: 1px dotted gray;'+
+      'padding-top: 8px;'+
+      'padding-%3: 8px;'+
+    '}'+
 
-		'.%2 p'+
-		'{'+
-			'%1p.png);'+
-		'}'+
+    '.%2 p'+
+    '{'+
+      '%1p.png);'+
+    '}'+
 
-		'.%2 div'+
-		'{'+
-			'%1div.png);'+
-		'}'+
+    '.%2 div'+
+    '{'+
+      '%1div.png);'+
+    '}'+
 
-		'.%2 pre'+
-		'{'+
-			'%1pre.png);'+
-		'}'+
+    '.%2 pre'+
+    '{'+
+      '%1pre.png);'+
+    '}'+
 
-		'.%2 address'+
-		'{'+
-			'%1address.png);'+
-		'}'+
+    '.%2 address'+
+    '{'+
+      '%1address.png);'+
+    '}'+
 
-		'.%2 blockquote'+
-		'{'+
-			'%1blockquote.png);'+
-		'}'+
+    '.%2 blockquote'+
+    '{'+
+      '%1blockquote.png);'+
+    '}'+
 
-		'.%2 h1'+
-		'{'+
-			'%1h1.png);'+
-		'}'+
+    '.%2 h1'+
+    '{'+
+      '%1h1.png);'+
+    '}'+
 
-		'.%2 h2'+
-		'{'+
-			'%1h2.png);'+
-		'}'+
+    '.%2 h2'+
+    '{'+
+      '%1h2.png);'+
+    '}'+
 
-		'.%2 h3'+
-		'{'+
-			'%1h3.png);'+
-		'}'+
+    '.%2 h3'+
+    '{'+
+      '%1h3.png);'+
+    '}'+
 
-		'.%2 h4'+
-		'{'+
-			'%1h4.png);'+
-		'}'+
+    '.%2 h4'+
+    '{'+
+      '%1h4.png);'+
+    '}'+
 
-		'.%2 h5'+
-		'{'+
-			'%1h5.png);'+
-		'}'+
+    '.%2 h5'+
+    '{'+
+      '%1h5.png);'+
+    '}'+
 
-		'.%2 h6'+
-		'{'+
-			'%1h6.png);'+
-		'}';
+    '.%2 h6'+
+    '{'+
+      '%1h6.png);'+
+    '}';
 
-	var cssTemplateRegex = /%1/g, cssClassRegex = /%2/g, backgroundPositionRegex = /%3/g;
+  var cssTemplateRegex = /%1/g, cssClassRegex = /%2/g, backgroundPositionRegex = /%3/g;
 
-	var commandDefinition =
-	{
-		readOnly : 1,
-		preserveState : true,
-		editorFocus : false,
+  var commandDefinition =
+  {
+    readOnly : 1,
+    preserveState : true,
+    editorFocus : false,
 
-		exec : function ( editor )
-		{
-			this.toggleState();
-			this.refresh( editor );
-		},
+    exec : function ( editor )
+    {
+      this.toggleState();
+      this.refresh( editor );
+    },
 
-		refresh : function( editor )
-		{
-			if ( editor.document )
-			{
-				var funcName = ( this.state == CKEDITOR.TRISTATE_ON ) ? 'addClass' : 'removeClass';
-				editor.document.getBody()[ funcName ]( 'cke_show_blocks' );
-			}
-		}
-	};
+    refresh : function( editor )
+    {
+      if ( editor.document )
+      {
+        var funcName = ( this.state == CKEDITOR.TRISTATE_ON ) ? 'addClass' : 'removeClass';
+        editor.document.getBody()[ funcName ]( 'cke_show_blocks' );
+      }
+    }
+  };
 
-	CKEDITOR.plugins.add( 'showblocks',
-	{
-		requires : [ 'wysiwygarea' ],
+  CKEDITOR.plugins.add( 'showblocks',
+  {
+    requires : [ 'wysiwygarea' ],
 
-		init : function( editor )
-		{
-			var command = editor.addCommand( 'showblocks', commandDefinition );
-			command.canUndo = false;
+    init : function( editor )
+    {
+      var command = editor.addCommand( 'showblocks', commandDefinition );
+      command.canUndo = false;
 
-			if ( editor.config.startupOutlineBlocks )
-				command.setState( CKEDITOR.TRISTATE_ON );
+      if ( editor.config.startupOutlineBlocks )
+        command.setState( CKEDITOR.TRISTATE_ON );
 
-			editor.addCss( cssTemplate
-				.replace( cssTemplateRegex, 'background-image: url(' + CKEDITOR.getUrl( this.path ) + 'images/block_' )
-				.replace( cssClassRegex, 'cke_show_blocks ' )
-				.replace( backgroundPositionRegex, editor.lang.dir == 'rtl' ? 'right' : 'left' ) );
+      editor.addCss( cssTemplate
+        .replace( cssTemplateRegex, 'background-image: url(' + CKEDITOR.getUrl( this.path ) + 'images/block_' )
+        .replace( cssClassRegex, 'cke_show_blocks ' )
+        .replace( backgroundPositionRegex, editor.lang.dir == 'rtl' ? 'right' : 'left' ) );
 
-			editor.ui.addButton( 'ShowBlocks',
-				{
-					label : editor.lang.showBlocks,
-					command : 'showblocks'
-				});
+      editor.ui.addButton( 'ShowBlocks',
+        {
+          label : editor.lang.showBlocks,
+          command : 'showblocks'
+        });
 
-			// Refresh the command on setData.
-			editor.on( 'mode', function()
-				{
-					if ( command.state != CKEDITOR.TRISTATE_DISABLED )
-						command.refresh( editor );
-				});
+      // Refresh the command on setData.
+      editor.on( 'mode', function()
+        {
+          if ( command.state != CKEDITOR.TRISTATE_DISABLED )
+            command.refresh( editor );
+        });
 
-			// Refresh the command on setData.
-			editor.on( 'contentDom', function()
-				{
-					if ( command.state != CKEDITOR.TRISTATE_DISABLED )
-						command.refresh( editor );
-				});
-		}
-	});
+      // Refresh the command on setData.
+      editor.on( 'contentDom', function()
+        {
+          if ( command.state != CKEDITOR.TRISTATE_DISABLED )
+            command.refresh( editor );
+        });
+    }
+  });
 } )();
 
 /**

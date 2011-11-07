@@ -5,8 +5,8 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 /**
  * @fileOverview Defines the "virtual" {@link CKEDITOR.eventInfo} class, which
- *		contains the defintions of the event object passed to event listeners.
- *		This file is for documentation purposes only.
+ *    contains the defintions of the event object passed to event listeners.
+ *    This file is for documentation purposes only.
  */
 
 /**

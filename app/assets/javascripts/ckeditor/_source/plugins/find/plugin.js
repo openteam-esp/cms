@@ -5,31 +5,31 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 CKEDITOR.plugins.add( 'find',
 {
-	init : function( editor )
-	{
-		var forms = CKEDITOR.plugins.find;
-		editor.ui.addButton( 'Find',
-			{
-				label : editor.lang.findAndReplace.find,
-				command : 'find'
-			});
-		var findCommand = editor.addCommand( 'find', new CKEDITOR.dialogCommand( 'find' ) );
-		findCommand.canUndo = false;
-		findCommand.readOnly = 1;
+  init : function( editor )
+  {
+    var forms = CKEDITOR.plugins.find;
+    editor.ui.addButton( 'Find',
+      {
+        label : editor.lang.findAndReplace.find,
+        command : 'find'
+      });
+    var findCommand = editor.addCommand( 'find', new CKEDITOR.dialogCommand( 'find' ) );
+    findCommand.canUndo = false;
+    findCommand.readOnly = 1;
 
-		editor.ui.addButton( 'Replace',
-			{
-				label : editor.lang.findAndReplace.replace,
-				command : 'replace'
-			});
-		var replaceCommand = editor.addCommand( 'replace', new CKEDITOR.dialogCommand( 'replace' ) );
-		replaceCommand.canUndo = false;
+    editor.ui.addButton( 'Replace',
+      {
+        label : editor.lang.findAndReplace.replace,
+        command : 'replace'
+      });
+    var replaceCommand = editor.addCommand( 'replace', new CKEDITOR.dialogCommand( 'replace' ) );
+    replaceCommand.canUndo = false;
 
-		CKEDITOR.dialog.add( 'find',	this.path + 'dialogs/find.js' );
-		CKEDITOR.dialog.add( 'replace',	this.path + 'dialogs/find.js' );
-	},
+    CKEDITOR.dialog.add( 'find',  this.path + 'dialogs/find.js' );
+    CKEDITOR.dialog.add( 'replace',  this.path + 'dialogs/find.js' );
+  },
 
-	requires : [ 'styles' ]
+  requires : [ 'styles' ]
 } );
 
 /**

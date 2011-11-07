@@ -10,38 +10,38 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 (function()
 {
-	var pluginName = 'a11yhelp',
-		commandName = 'a11yHelp';
+  var pluginName = 'a11yhelp',
+    commandName = 'a11yHelp';
 
-	CKEDITOR.plugins.add( pluginName,
-	{
-		// List of available localizations.
-		availableLangs : { en:1, he:1 },
+  CKEDITOR.plugins.add( pluginName,
+  {
+    // List of available localizations.
+    availableLangs : { en:1, he:1 },
 
-		init : function( editor )
-		{
-			var plugin = this;
-			editor.addCommand( commandName,
-				{
-					exec : function()
-					{
-						var langCode = editor.langCode;
-						langCode = plugin.availableLangs[ langCode ] ? langCode : 'en';
+    init : function( editor )
+    {
+      var plugin = this;
+      editor.addCommand( commandName,
+        {
+          exec : function()
+          {
+            var langCode = editor.langCode;
+            langCode = plugin.availableLangs[ langCode ] ? langCode : 'en';
 
-						CKEDITOR.scriptLoader.load(
-								CKEDITOR.getUrl( plugin.path + 'lang/' + langCode + '.js' ),
-								function()
-								{
-									CKEDITOR.tools.extend( editor.lang, plugin.langEntries[ langCode ] );
-									editor.openDialog( commandName );
-								});
-					},
-					modes : { wysiwyg:1, source:1 },
-					readOnly : 1,
-					canUndo : false
-				});
+            CKEDITOR.scriptLoader.load(
+                CKEDITOR.getUrl( plugin.path + 'lang/' + langCode + '.js' ),
+                function()
+                {
+                  CKEDITOR.tools.extend( editor.lang, plugin.langEntries[ langCode ] );
+                  editor.openDialog( commandName );
+                });
+          },
+          modes : { wysiwyg:1, source:1 },
+          readOnly : 1,
+          canUndo : false
+        });
 
-			CKEDITOR.dialog.add( commandName, this.path + 'dialogs/a11yhelp.js' );
-		}
-	});
+      CKEDITOR.dialog.add( commandName, this.path + 'dialogs/a11yhelp.js' );
+    }
+  });
 })();

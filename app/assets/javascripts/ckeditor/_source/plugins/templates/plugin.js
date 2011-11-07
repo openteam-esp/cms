@@ -5,57 +5,57 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 (function()
 {
-	CKEDITOR.plugins.add( 'templates',
-		{
-			requires : [ 'dialog' ],
+  CKEDITOR.plugins.add( 'templates',
+    {
+      requires : [ 'dialog' ],
 
-			init : function( editor )
-			{
-				CKEDITOR.dialog.add( 'templates', CKEDITOR.getUrl( this.path + 'dialogs/templates.js' ) );
+      init : function( editor )
+      {
+        CKEDITOR.dialog.add( 'templates', CKEDITOR.getUrl( this.path + 'dialogs/templates.js' ) );
 
-				editor.addCommand( 'templates', new CKEDITOR.dialogCommand( 'templates' ) );
+        editor.addCommand( 'templates', new CKEDITOR.dialogCommand( 'templates' ) );
 
-				editor.ui.addButton( 'Templates',
-					{
-						label : editor.lang.templates.button,
-						command : 'templates'
-					});
-			}
-		});
+        editor.ui.addButton( 'Templates',
+          {
+            label : editor.lang.templates.button,
+            command : 'templates'
+          });
+      }
+    });
 
-	var templates = {},
-		loadedTemplatesFiles = {};
+  var templates = {},
+    loadedTemplatesFiles = {};
 
-	CKEDITOR.addTemplates = function( name, definition )
-	{
-		templates[ name ] = definition;
-	};
+  CKEDITOR.addTemplates = function( name, definition )
+  {
+    templates[ name ] = definition;
+  };
 
-	CKEDITOR.getTemplates = function( name )
-	{
-		return templates[ name ];
-	};
+  CKEDITOR.getTemplates = function( name )
+  {
+    return templates[ name ];
+  };
 
-	CKEDITOR.loadTemplates = function( templateFiles, callback )
-	{
-		// Holds the templates files to be loaded.
-		var toLoad = [];
+  CKEDITOR.loadTemplates = function( templateFiles, callback )
+  {
+    // Holds the templates files to be loaded.
+    var toLoad = [];
 
-		// Look for pending template files to get loaded.
-		for ( var i = 0, count = templateFiles.length ; i < count ; i++ )
-		{
-			if ( !loadedTemplatesFiles[ templateFiles[ i ] ] )
-			{
-				toLoad.push( templateFiles[ i ] );
-				loadedTemplatesFiles[ templateFiles[ i ] ] = 1;
-			}
-		}
+    // Look for pending template files to get loaded.
+    for ( var i = 0, count = templateFiles.length ; i < count ; i++ )
+    {
+      if ( !loadedTemplatesFiles[ templateFiles[ i ] ] )
+      {
+        toLoad.push( templateFiles[ i ] );
+        loadedTemplatesFiles[ templateFiles[ i ] ] = 1;
+      }
+    }
 
-		if ( toLoad.length )
-			CKEDITOR.scriptLoader.load( toLoad, callback );
-		else
-			setTimeout( callback, 0 );
-	};
+    if ( toLoad.length )
+      CKEDITOR.scriptLoader.load( toLoad, callback );
+    else
+      setTimeout( callback, 0 );
+  };
 })();
 
 
@@ -82,11 +82,11 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  *
  */
 CKEDITOR.config.templates_files =
-	[
-		CKEDITOR.getUrl(
-			'_source/' + // @Packager.RemoveLine
-			'plugins/templates/templates/default.js' )
-	];
+  [
+    CKEDITOR.getUrl(
+      '_source/' + // @Packager.RemoveLine
+      'plugins/templates/templates/default.js' )
+  ];
 
 /**
  * Whether the "Replace actual contents" checkbox is checked by default in the

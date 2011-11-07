@@ -9,34 +9,34 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 CKEDITOR.plugins.add( 'print',
 {
-	init : function( editor )
-	{
-		var pluginName = 'print';
+  init : function( editor )
+  {
+    var pluginName = 'print';
 
-		// Register the command.
-		var command = editor.addCommand( pluginName, CKEDITOR.plugins.print );
+    // Register the command.
+    var command = editor.addCommand( pluginName, CKEDITOR.plugins.print );
 
-		// Register the toolbar button.
-		editor.ui.addButton( 'Print',
-			{
-				label : editor.lang.print,
-				command : pluginName
-			});
-	}
+    // Register the toolbar button.
+    editor.ui.addButton( 'Print',
+      {
+        label : editor.lang.print,
+        command : pluginName
+      });
+  }
 } );
 
 CKEDITOR.plugins.print =
 {
-	exec : function( editor )
-	{
-		if ( CKEDITOR.env.opera )
-			return;
-		else if ( CKEDITOR.env.gecko )
-			editor.window.$.print();
-		else
-			editor.document.$.execCommand( "Print" );
-	},
-	canUndo : false,
-	readOnly : 1,
-	modes : { wysiwyg : !( CKEDITOR.env.opera ) }		// It is imposible to print the inner document in Opera.
+  exec : function( editor )
+  {
+    if ( CKEDITOR.env.opera )
+      return;
+    else if ( CKEDITOR.env.gecko )
+      editor.window.$.print();
+    else
+      editor.document.$.execCommand( "Print" );
+  },
+  canUndo : false,
+  readOnly : 1,
+  modes : { wysiwyg : !( CKEDITOR.env.opera ) }    // It is imposible to print the inner document in Opera.
 };

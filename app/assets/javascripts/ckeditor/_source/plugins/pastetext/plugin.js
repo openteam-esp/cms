@@ -9,78 +9,78 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 (function()
 {
-	// The pastetext command definition.
-	var pasteTextCmd =
-	{
-		exec : function( editor )
-		{
-			var clipboardText = CKEDITOR.tools.tryThese(
-				function()
-				{
-					var clipboardText = window.clipboardData.getData( 'Text' );
-					if ( !clipboardText )
-						throw 0;
-					return clipboardText;
-				}
-				// Any other approach that's working...
-				);
+  // The pastetext command definition.
+  var pasteTextCmd =
+  {
+    exec : function( editor )
+    {
+      var clipboardText = CKEDITOR.tools.tryThese(
+        function()
+        {
+          var clipboardText = window.clipboardData.getData( 'Text' );
+          if ( !clipboardText )
+            throw 0;
+          return clipboardText;
+        }
+        // Any other approach that's working...
+        );
 
-			if ( !clipboardText )   // Clipboard access privilege is not granted.
-			{
-				editor.openDialog( 'pastetext' );
-				return false;
-			}
-			else
-				editor.fire( 'paste', { 'text' : clipboardText } );
+      if ( !clipboardText )   // Clipboard access privilege is not granted.
+      {
+        editor.openDialog( 'pastetext' );
+        return false;
+      }
+      else
+        editor.fire( 'paste', { 'text' : clipboardText } );
 
-			return true;
-		}
-	};
+      return true;
+    }
+  };
 
-	// Register the plugin.
-	CKEDITOR.plugins.add( 'pastetext',
-	{
-		init : function( editor )
-		{
-			var commandName = 'pastetext',
-				command = editor.addCommand( commandName, pasteTextCmd );
+  // Register the plugin.
+  CKEDITOR.plugins.add( 'pastetext',
+  {
+    init : function( editor )
+    {
+      var commandName = 'pastetext',
+        command = editor.addCommand( commandName, pasteTextCmd );
 
-			editor.ui.addButton( 'PasteText',
-				{
-					label : editor.lang.pasteText.button,
-					command : commandName
-				});
+      editor.ui.addButton( 'PasteText',
+        {
+          label : editor.lang.pasteText.button,
+          command : commandName
+        });
 
-			CKEDITOR.dialog.add( commandName, CKEDITOR.getUrl( this.path + 'dialogs/pastetext.js' ) );
+      CKEDITOR.dialog.add( commandName, CKEDITOR.getUrl( this.path + 'dialogs/pastetext.js' ) );
 
-			if ( editor.config.forcePasteAsPlainText )
-			{
-				// Intercept the default pasting process.
-				editor.on( 'beforeCommandExec', function ( evt )
-				{
-					var mode = evt.data.commandData;
-					// Do NOT overwrite if HTML format is explicitly requested.
-					if ( evt.data.name == 'paste' && mode != 'html' )
-					{
-						editor.execCommand( 'pastetext' );
-						evt.cancel();
-					}
-				}, null, null, 0 );
+      if ( editor.config.forcePasteAsPlainText )
+      {
+        // Intercept the default pasting process.
+        editor.on( 'beforeCommandExec', function ( evt )
+        {
+          var mode = evt.data.commandData;
+          // Do NOT overwrite if HTML format is explicitly requested.
+          if ( evt.data.name == 'paste' && mode != 'html' )
+          {
+            editor.execCommand( 'pastetext' );
+            evt.cancel();
+          }
+        }, null, null, 0 );
 
-				editor.on( 'beforePaste', function( evt )
-				{
-					evt.data.mode = 'text';
-				});
-			}
+        editor.on( 'beforePaste', function( evt )
+        {
+          evt.data.mode = 'text';
+        });
+      }
 
-			editor.on( 'pasteState', function( evt )
-				{
-					editor.getCommand( 'pastetext' ).setState( evt.data );
-				});
-		},
+      editor.on( 'pasteState', function( evt )
+        {
+          editor.getCommand( 'pastetext' ).setState( evt.data );
+        });
+    },
 
-		requires : [ 'clipboard' ]
-	});
+    requires : [ 'clipboard' ]
+  });
 
 })();
 

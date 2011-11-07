@@ -5,7 +5,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 /**
  * @fileOverview Defines the {@link CKEDITOR.themes} object, which is used to
- *		manage themes registration and loading.
+ *    manage themes registration and loading.
  */
 
 /**
@@ -15,5 +15,5 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * @example
  */
 CKEDITOR.themes = new CKEDITOR.resourceManager(
-	'_source/'+		// @Packager.RemoveLine
-	'themes/', 'theme' );
+  '_source/'+    // @Packager.RemoveLine
+  'themes/', 'theme' );

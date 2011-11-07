@@ -5,7 +5,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 /**
  * @fileOverview Contains the third and last part of the {@link CKEDITOR} object
- *		definition.
+ *    definition.
  */
 
 // Remove the CKEDITOR.loadFullCore reference defined on ckeditor_basic.
@@ -37,25 +37,25 @@ CKEDITOR.document = new CKEDITOR.dom.document( document );
  */
 CKEDITOR.add = function( editor )
 {
-	CKEDITOR.instances[ editor.name ] = editor;
+  CKEDITOR.instances[ editor.name ] = editor;
 
-	editor.on( 'focus', function()
-		{
-			if ( CKEDITOR.currentInstance != editor )
-			{
-				CKEDITOR.currentInstance = editor;
-				CKEDITOR.fire( 'currentInstance' );
-			}
-		});
+  editor.on( 'focus', function()
+    {
+      if ( CKEDITOR.currentInstance != editor )
+      {
+        CKEDITOR.currentInstance = editor;
+        CKEDITOR.fire( 'currentInstance' );
+      }
+    });
 
-	editor.on( 'blur', function()
-		{
-			if ( CKEDITOR.currentInstance == editor )
-			{
-				CKEDITOR.currentInstance = null;
-				CKEDITOR.fire( 'currentInstance' );
-			}
-		});
+  editor.on( 'blur', function()
+    {
+      if ( CKEDITOR.currentInstance == editor )
+      {
+        CKEDITOR.currentInstance = null;
+        CKEDITOR.fire( 'currentInstance' );
+      }
+    });
 };
 
 /**
@@ -67,7 +67,7 @@ CKEDITOR.add = function( editor )
  */
 CKEDITOR.remove = function( editor )
 {
-	delete CKEDITOR.instances[ editor.name ];
+  delete CKEDITOR.instances[ editor.name ];
 };
 
 /**
@@ -75,13 +75,13 @@ CKEDITOR.remove = function( editor )
  * when there are no instances left
  */
 CKEDITOR.on( 'instanceDestroyed', function ()
-	{
-		if ( CKEDITOR.tools.isEmpty( this.instances ) )
-			CKEDITOR.fire( 'reset' );
-	});
+  {
+    if ( CKEDITOR.tools.isEmpty( this.instances ) )
+      CKEDITOR.fire( 'reset' );
+  });
 
 // Load the bootstrap script.
-CKEDITOR.loader.load( 'core/_bootstrap' );		// @Packager.RemoveLine
+CKEDITOR.loader.load( 'core/_bootstrap' );    // @Packager.RemoveLine
 
 // Tri-state constants.
 

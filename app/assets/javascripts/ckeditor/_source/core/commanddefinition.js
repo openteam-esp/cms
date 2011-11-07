@@ -5,8 +5,8 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 /**
  * @fileOverview Defines the "virtual" {@link CKEDITOR.commandDefinition} class,
- *		which contains the defintion of a command. This file is for
- *		documentation purposes only.
+ *    which contains the defintion of a command. This file is for
+ *    documentation purposes only.
  */
 
 /**
@@ -14,7 +14,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * of the API.
  * @name CKEDITOR.commandDefinition
  * @class Virtual class that illustrates the features of command objects to be
- *		passed to the {@link CKEDITOR.editor.prototype.addCommand} function.
+ *    passed to the {@link CKEDITOR.editor.prototype.addCommand} function.
  * @example
  */
 
@@ -25,7 +25,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * @param {CKEDITOR.editor} editor The editor within which run the command.
  * @param {Object} [data] Additional data to be used to execute the command.
  * @returns {Boolean} Whether the command has been successfully executed.
- *		Defaults to "true", if nothing is returned.
+ *    Defaults to "true", if nothing is returned.
  * @example
  * editorInstance.addCommand( 'sample',
  * {

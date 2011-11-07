@@ -6,33 +6,33 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 // Register a plugin named "sample".
 CKEDITOR.plugins.add( 'keystrokes',
 {
-	beforeInit : function( editor )
-	{
-		/**
-		 * Controls keystrokes typing in this editor instance.
-		 * @name CKEDITOR.editor.prototype.keystrokeHandler
-		 * @type CKEDITOR.keystrokeHandler
-		 * @example
-		 */
-		editor.keystrokeHandler = new CKEDITOR.keystrokeHandler( editor );
+  beforeInit : function( editor )
+  {
+    /**
+     * Controls keystrokes typing in this editor instance.
+     * @name CKEDITOR.editor.prototype.keystrokeHandler
+     * @type CKEDITOR.keystrokeHandler
+     * @example
+     */
+    editor.keystrokeHandler = new CKEDITOR.keystrokeHandler( editor );
 
-		editor.specialKeys = {};
-	},
+    editor.specialKeys = {};
+  },
 
-	init : function( editor )
-	{
-		var keystrokesConfig	= editor.config.keystrokes,
-			blockedConfig		= editor.config.blockedKeystrokes;
+  init : function( editor )
+  {
+    var keystrokesConfig  = editor.config.keystrokes,
+      blockedConfig    = editor.config.blockedKeystrokes;
 
-		var keystrokes			= editor.keystrokeHandler.keystrokes,
-			blockedKeystrokes	= editor.keystrokeHandler.blockedKeystrokes;
+    var keystrokes      = editor.keystrokeHandler.keystrokes,
+      blockedKeystrokes  = editor.keystrokeHandler.blockedKeystrokes;
 
-		for ( var i = 0 ; i < keystrokesConfig.length ; i++ )
-			keystrokes[ keystrokesConfig[i][0] ] = keystrokesConfig[i][1];
+    for ( var i = 0 ; i < keystrokesConfig.length ; i++ )
+      keystrokes[ keystrokesConfig[i][0] ] = keystrokesConfig[i][1];
 
-		for ( i = 0 ; i < blockedConfig.length ; i++ )
-			blockedKeystrokes[ blockedConfig[i] ] = 1;
-	}
+    for ( i = 0 ; i < blockedConfig.length ; i++ )
+      blockedKeystrokes[ blockedConfig[i] ] = 1;
+  }
 });
 
 /**
@@ -43,103 +43,103 @@ CKEDITOR.plugins.add( 'keystrokes',
  */
 CKEDITOR.keystrokeHandler = function( editor )
 {
-	if ( editor.keystrokeHandler )
-		return editor.keystrokeHandler;
+  if ( editor.keystrokeHandler )
+    return editor.keystrokeHandler;
 
-	/**
-	 * List of keystrokes associated to commands. Each entry points to the
-	 * command to be executed.
-	 * @type Object
-	 * @example
-	 */
-	this.keystrokes = {};
+  /**
+   * List of keystrokes associated to commands. Each entry points to the
+   * command to be executed.
+   * @type Object
+   * @example
+   */
+  this.keystrokes = {};
 
-	/**
-	 * List of keystrokes that should be blocked if not defined at
-	 * {@link keystrokes}. In this way it is possible to block the default
-	 * browser behavior for those keystrokes.
-	 * @type Object
-	 * @example
-	 */
-	this.blockedKeystrokes = {};
+  /**
+   * List of keystrokes that should be blocked if not defined at
+   * {@link keystrokes}. In this way it is possible to block the default
+   * browser behavior for those keystrokes.
+   * @type Object
+   * @example
+   */
+  this.blockedKeystrokes = {};
 
-	this._ =
-	{
-		editor : editor
-	};
+  this._ =
+  {
+    editor : editor
+  };
 
-	return this;
+  return this;
 };
 
 (function()
 {
-	var cancel;
+  var cancel;
 
-	var onKeyDown = function( event )
-	{
-		// The DOM event object is passed by the "data" property.
-		event = event.data;
+  var onKeyDown = function( event )
+  {
+    // The DOM event object is passed by the "data" property.
+    event = event.data;
 
-		var keyCombination = event.getKeystroke();
-		var command = this.keystrokes[ keyCombination ];
-		var editor = this._.editor;
+    var keyCombination = event.getKeystroke();
+    var command = this.keystrokes[ keyCombination ];
+    var editor = this._.editor;
 
-		cancel = ( editor.fire( 'key', { keyCode : keyCombination } ) === true );
+    cancel = ( editor.fire( 'key', { keyCode : keyCombination } ) === true );
 
-		if ( !cancel )
-		{
-			if ( command )
-			{
-				var data = { from : 'keystrokeHandler' };
-				cancel = ( editor.execCommand( command, data ) !== false );
-			}
+    if ( !cancel )
+    {
+      if ( command )
+      {
+        var data = { from : 'keystrokeHandler' };
+        cancel = ( editor.execCommand( command, data ) !== false );
+      }
 
-			if  ( !cancel )
-			{
-				var handler = editor.specialKeys[ keyCombination ];
-				cancel = ( handler && handler( editor ) === true );
+      if  ( !cancel )
+      {
+        var handler = editor.specialKeys[ keyCombination ];
+        cancel = ( handler && handler( editor ) === true );
 
-				if ( !cancel )
-					cancel = !!this.blockedKeystrokes[ keyCombination ];
-			}
-		}
+        if ( !cancel )
+          cancel = !!this.blockedKeystrokes[ keyCombination ];
+      }
+    }
 
-		if ( cancel )
-			event.preventDefault( true );
+    if ( cancel )
+      event.preventDefault( true );
 
-		return !cancel;
-	};
+    return !cancel;
+  };
 
-	var onKeyPress = function( event )
-	{
-		if ( cancel )
-		{
-			cancel = false;
-			event.data.preventDefault( true );
-		}
-	};
+  var onKeyPress = function( event )
+  {
+    if ( cancel )
+    {
+      cancel = false;
+      event.data.preventDefault( true );
+    }
+  };
 
-	CKEDITOR.keystrokeHandler.prototype =
-	{
-		/**
-		 * Attaches this keystroke handle to a DOM object. Keystrokes typed
-		 ** over this object will get handled by this keystrokeHandler.
-		 * @param {CKEDITOR.dom.domObject} domObject The DOM object to attach
-		 *		to.
-		 * @example
-		 */
-		attach : function( domObject )
-		{
-			// For most browsers, it is enough to listen to the keydown event
-			// only.
-			domObject.on( 'keydown', onKeyDown, this );
+  CKEDITOR.keystrokeHandler.prototype =
+  {
+    /**
+     * Attaches this keystroke handle to a DOM object. Keystrokes typed
+     ** over this object will get handled by this keystrokeHandler.
+     * @param {CKEDITOR.dom.domObject} domObject The DOM object to attach
+     *    to.
+     * @example
+     */
+    attach : function( domObject )
+    {
+      // For most browsers, it is enough to listen to the keydown event
+      // only.
+      domObject.on( 'keydown', onKeyDown, this );
 
-			// Some browsers instead, don't cancel key events in the keydown, but in the
-			// keypress. So we must do a longer trip in those cases.
-			if ( CKEDITOR.env.opera || ( CKEDITOR.env.gecko && CKEDITOR.env.mac ) )
-				domObject.on( 'keypress', onKeyPress, this );
-		}
-	};
+      // Some browsers instead, don't cancel key events in the keydown, but in the
+      // keypress. So we must do a longer trip in those cases.
+      if ( CKEDITOR.env.opera || ( CKEDITOR.env.gecko && CKEDITOR.env.mac ) )
+        domObject.on( 'keypress', onKeyPress, this );
+    }
+  };
 })();
 
 /**
@@ -159,9 +159,9 @@ CKEDITOR.keystrokeHandler = function( editor )
  */
 CKEDITOR.config.blockedKeystrokes =
 [
-	CKEDITOR.CTRL + 66 /*B*/,
-	CKEDITOR.CTRL + 73 /*I*/,
-	CKEDITOR.CTRL + 85 /*U*/
+  CKEDITOR.CTRL + 66 /*B*/,
+  CKEDITOR.CTRL + 73 /*I*/,
+  CKEDITOR.CTRL + 85 /*U*/
 ];
 
 /**
@@ -194,24 +194,24 @@ CKEDITOR.config.blockedKeystrokes =
  */
 CKEDITOR.config.keystrokes =
 [
-	[ CKEDITOR.ALT + 121 /*F10*/, 'toolbarFocus' ],
-	[ CKEDITOR.ALT + 122 /*F11*/, 'elementsPathFocus' ],
+  [ CKEDITOR.ALT + 121 /*F10*/, 'toolbarFocus' ],
+  [ CKEDITOR.ALT + 122 /*F11*/, 'elementsPathFocus' ],
 
-	[ CKEDITOR.SHIFT + 121 /*F10*/, 'contextMenu' ],
-	[ CKEDITOR.CTRL + CKEDITOR.SHIFT + 121 /*F10*/, 'contextMenu' ],
+  [ CKEDITOR.SHIFT + 121 /*F10*/, 'contextMenu' ],
+  [ CKEDITOR.CTRL + CKEDITOR.SHIFT + 121 /*F10*/, 'contextMenu' ],
 
-	[ CKEDITOR.CTRL + 90 /*Z*/, 'undo' ],
-	[ CKEDITOR.CTRL + 89 /*Y*/, 'redo' ],
-	[ CKEDITOR.CTRL + CKEDITOR.SHIFT + 90 /*Z*/, 'redo' ],
+  [ CKEDITOR.CTRL + 90 /*Z*/, 'undo' ],
+  [ CKEDITOR.CTRL + 89 /*Y*/, 'redo' ],
+  [ CKEDITOR.CTRL + CKEDITOR.SHIFT + 90 /*Z*/, 'redo' ],
 
-	[ CKEDITOR.CTRL + 76 /*L*/, 'link' ],
+  [ CKEDITOR.CTRL + 76 /*L*/, 'link' ],
 
-	[ CKEDITOR.CTRL + 66 /*B*/, 'bold' ],
-	[ CKEDITOR.CTRL + 73 /*I*/, 'italic' ],
-	[ CKEDITOR.CTRL + 85 /*U*/, 'underline' ],
+  [ CKEDITOR.CTRL + 66 /*B*/, 'bold' ],
+  [ CKEDITOR.CTRL + 73 /*I*/, 'italic' ],
+  [ CKEDITOR.CTRL + 85 /*U*/, 'underline' ],
 
-	[ CKEDITOR.ALT + ( CKEDITOR.env.ie || CKEDITOR.env.webkit ? 189 : 109 ) /*-*/, 'toolbarCollapse' ],
-	[ CKEDITOR.ALT + 48 /*0*/, 'a11yHelp' ]
+  [ CKEDITOR.ALT + ( CKEDITOR.env.ie || CKEDITOR.env.webkit ? 189 : 109 ) /*-*/, 'toolbarCollapse' ],
+  [ CKEDITOR.ALT + 48 /*0*/, 'a11yHelp' ]
 ];
 
 /**
@@ -219,7 +219,7 @@ CKEDITOR.config.keystrokes =
  * @name CKEDITOR.editor#key
  * @event
  * @param {Number} data.keyCode A number representing the key code (or
- *		combination). It is the sum of the current key code and the
- *		{@link CKEDITOR.CTRL}, {@link CKEDITOR.SHIFT} and {@link CKEDITOR.ALT}
- *		constants, if those are pressed.
+ *    combination). It is the sum of the current key code and the
+ *    {@link CKEDITOR.CTRL}, {@link CKEDITOR.SHIFT} and {@link CKEDITOR.ALT}
+ *    constants, if those are pressed.
  */

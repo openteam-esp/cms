@@ -5,108 +5,108 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 CKEDITOR.plugins.add( 'resize',
 {
-	init : function( editor )
-	{
-		var config = editor.config;
+  init : function( editor )
+  {
+    var config = editor.config;
 
-		// Resize in the same direction of chrome,
-		// which is identical to dir of editor element. (#6614)
-		var resizeDir = editor.element.getDirection( 1 );
+    // Resize in the same direction of chrome,
+    // which is identical to dir of editor element. (#6614)
+    var resizeDir = editor.element.getDirection( 1 );
 
-		!config.resize_dir && ( config.resize_dir = 'both' );
-		( config.resize_maxWidth == undefined ) && ( config.resize_maxWidth = 3000 );
-		( config.resize_maxHeight == undefined ) && ( config.resize_maxHeight = 3000 );
-		( config.resize_minWidth == undefined ) && ( config.resize_minWidth = 750 );
-		( config.resize_minHeight == undefined ) && ( config.resize_minHeight = 250 );
+    !config.resize_dir && ( config.resize_dir = 'both' );
+    ( config.resize_maxWidth == undefined ) && ( config.resize_maxWidth = 3000 );
+    ( config.resize_maxHeight == undefined ) && ( config.resize_maxHeight = 3000 );
+    ( config.resize_minWidth == undefined ) && ( config.resize_minWidth = 750 );
+    ( config.resize_minHeight == undefined ) && ( config.resize_minHeight = 250 );
 
-		if ( config.resize_enabled !== false )
-		{
-			var container = null,
-				origin,
-				startSize,
-				resizeHorizontal = ( config.resize_dir == 'both' || config.resize_dir == 'horizontal' ) &&
-					( config.resize_minWidth != config.resize_maxWidth ),
-				resizeVertical = ( config.resize_dir == 'both' || config.resize_dir == 'vertical' ) &&
-					( config.resize_minHeight != config.resize_maxHeight );
+    if ( config.resize_enabled !== false )
+    {
+      var container = null,
+        origin,
+        startSize,
+        resizeHorizontal = ( config.resize_dir == 'both' || config.resize_dir == 'horizontal' ) &&
+          ( config.resize_minWidth != config.resize_maxWidth ),
+        resizeVertical = ( config.resize_dir == 'both' || config.resize_dir == 'vertical' ) &&
+          ( config.resize_minHeight != config.resize_maxHeight );
 
-			function dragHandler( evt )
-			{
-				var dx = evt.data.$.screenX - origin.x,
-					dy = evt.data.$.screenY - origin.y,
-					width = startSize.width,
-					height = startSize.height,
-					internalWidth = width + dx * ( resizeDir == 'rtl' ? -1 : 1 ),
-					internalHeight = height + dy;
+      function dragHandler( evt )
+      {
+        var dx = evt.data.$.screenX - origin.x,
+          dy = evt.data.$.screenY - origin.y,
+          width = startSize.width,
+          height = startSize.height,
+          internalWidth = width + dx * ( resizeDir == 'rtl' ? -1 : 1 ),
+          internalHeight = height + dy;
 
-				if ( resizeHorizontal )
-					width =  Math.max( config.resize_minWidth, Math.min( internalWidth, config.resize_maxWidth ) );
+        if ( resizeHorizontal )
+          width =  Math.max( config.resize_minWidth, Math.min( internalWidth, config.resize_maxWidth ) );
 
-				if ( resizeVertical )
-					height =  Math.max( config.resize_minHeight, Math.min( internalHeight, config.resize_maxHeight ) );
+        if ( resizeVertical )
+          height =  Math.max( config.resize_minHeight, Math.min( internalHeight, config.resize_maxHeight ) );
 
-				editor.resize( width, height );
-			}
+        editor.resize( width, height );
+      }
 
-			function dragEndHandler ( evt )
-			{
-				CKEDITOR.document.removeListener( 'mousemove', dragHandler );
-				CKEDITOR.document.removeListener( 'mouseup', dragEndHandler );
+      function dragEndHandler ( evt )
+      {
+        CKEDITOR.document.removeListener( 'mousemove', dragHandler );
+        CKEDITOR.document.removeListener( 'mouseup', dragEndHandler );
 
-				if ( editor.document )
-				{
-					editor.document.removeListener( 'mousemove', dragHandler );
-					editor.document.removeListener( 'mouseup', dragEndHandler );
-				}
-			}
+        if ( editor.document )
+        {
+          editor.document.removeListener( 'mousemove', dragHandler );
+          editor.document.removeListener( 'mouseup', dragEndHandler );
+        }
+      }
 
-			var mouseDownFn = CKEDITOR.tools.addFunction( function( $event )
-				{
-					if ( !container )
-						container = editor.getResizable();
+      var mouseDownFn = CKEDITOR.tools.addFunction( function( $event )
+        {
+          if ( !container )
+            container = editor.getResizable();
 
-					startSize = { width : container.$.offsetWidth || 0, height : container.$.offsetHeight || 0 };
-					origin = { x : $event.screenX, y : $event.screenY };
+          startSize = { width : container.$.offsetWidth || 0, height : container.$.offsetHeight || 0 };
+          origin = { x : $event.screenX, y : $event.screenY };
 
-					config.resize_minWidth > startSize.width && ( config.resize_minWidth = startSize.width );
-					config.resize_minHeight > startSize.height && ( config.resize_minHeight = startSize.height );
+          config.resize_minWidth > startSize.width && ( config.resize_minWidth = startSize.width );
+          config.resize_minHeight > startSize.height && ( config.resize_minHeight = startSize.height );
 
-					CKEDITOR.document.on( 'mousemove', dragHandler );
-					CKEDITOR.document.on( 'mouseup', dragEndHandler );
+          CKEDITOR.document.on( 'mousemove', dragHandler );
+          CKEDITOR.document.on( 'mouseup', dragEndHandler );
 
-					if ( editor.document )
-					{
-						editor.document.on( 'mousemove', dragHandler );
-						editor.document.on( 'mouseup', dragEndHandler );
-					}
-				});
+          if ( editor.document )
+          {
+            editor.document.on( 'mousemove', dragHandler );
+            editor.document.on( 'mouseup', dragEndHandler );
+          }
+        });
 
-			editor.on( 'destroy', function() { CKEDITOR.tools.removeFunction( mouseDownFn ); } );
+      editor.on( 'destroy', function() { CKEDITOR.tools.removeFunction( mouseDownFn ); } );
 
-			editor.on( 'themeSpace', function( event )
-				{
-					if ( event.data.space == 'bottom' )
-					{
-						var direction = '';
-						if ( resizeHorizontal && !resizeVertical )
-							direction = ' cke_resizer_horizontal';
-						if ( !resizeHorizontal && resizeVertical )
-							direction = ' cke_resizer_vertical';
+      editor.on( 'themeSpace', function( event )
+        {
+          if ( event.data.space == 'bottom' )
+          {
+            var direction = '';
+            if ( resizeHorizontal && !resizeVertical )
+              direction = ' cke_resizer_horizontal';
+            if ( !resizeHorizontal && resizeVertical )
+              direction = ' cke_resizer_vertical';
 
-						var resizerHtml =
-							'<div' +
-							' class="cke_resizer' + direction + ' cke_resizer_' + resizeDir + '"' +
-							' title="' + CKEDITOR.tools.htmlEncode( editor.lang.resize ) + '"' +
-							' onmousedown="CKEDITOR.tools.callFunction(' + mouseDownFn + ', event)"' +
-							'></div>';
+            var resizerHtml =
+              '<div' +
+              ' class="cke_resizer' + direction + ' cke_resizer_' + resizeDir + '"' +
+              ' title="' + CKEDITOR.tools.htmlEncode( editor.lang.resize ) + '"' +
+              ' onmousedown="CKEDITOR.tools.callFunction(' + mouseDownFn + ', event)"' +
+              '></div>';
 
-						// Always sticks the corner of botttom space.
-						resizeDir == 'ltr' && direction == 'ltr' ?
-							event.data.html += resizerHtml :
-							event.data.html = resizerHtml + event.data.html;
-					}
-				}, editor, null, 100 );
-		}
-	}
+            // Always sticks the corner of botttom space.
+            resizeDir == 'ltr' && direction == 'ltr' ?
+              event.data.html += resizerHtml :
+              event.data.html = resizerHtml + event.data.html;
+          }
+        }, editor, null, 100 );
+    }
+  }
 } );
 
 /**

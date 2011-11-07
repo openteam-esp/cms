@@ -5,123 +5,123 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 (function()
 {
-	function addCombo( editor, comboName, styleType, lang, entries, defaultLabel, styleDefinition )
-	{
-		var config = editor.config;
+  function addCombo( editor, comboName, styleType, lang, entries, defaultLabel, styleDefinition )
+  {
+    var config = editor.config;
 
-		// Gets the list of fonts from the settings.
-		var names = entries.split( ';' ),
-			values = [];
+    // Gets the list of fonts from the settings.
+    var names = entries.split( ';' ),
+      values = [];
 
-		// Create style objects for all fonts.
-		var styles = {};
-		for ( var i = 0 ; i < names.length ; i++ )
-		{
-			var parts = names[ i ];
+    // Create style objects for all fonts.
+    var styles = {};
+    for ( var i = 0 ; i < names.length ; i++ )
+    {
+      var parts = names[ i ];
 
-			if ( parts )
-			{
-				parts = parts.split( '/' );
+      if ( parts )
+      {
+        parts = parts.split( '/' );
 
-				var vars = {},
-					name = names[ i ] = parts[ 0 ];
+        var vars = {},
+          name = names[ i ] = parts[ 0 ];
 
-				vars[ styleType ] = values[ i ] = parts[ 1 ] || name;
+        vars[ styleType ] = values[ i ] = parts[ 1 ] || name;
 
-				styles[ name ] = new CKEDITOR.style( styleDefinition, vars );
-				styles[ name ]._.definition.name = name;
-			}
-			else
-				names.splice( i--, 1 );
-		}
+        styles[ name ] = new CKEDITOR.style( styleDefinition, vars );
+        styles[ name ]._.definition.name = name;
+      }
+      else
+        names.splice( i--, 1 );
+    }
 
-		editor.ui.addRichCombo( comboName,
-			{
-				label : lang.label,
-				title : lang.panelTitle,
-				className : 'cke_' + ( styleType == 'size' ? 'fontSize' : 'font' ),
-				panel :
-				{
-					css : editor.skin.editor.css.concat( config.contentsCss ),
-					multiSelect : false,
-					attributes : { 'aria-label' : lang.panelTitle }
-				},
+    editor.ui.addRichCombo( comboName,
+      {
+        label : lang.label,
+        title : lang.panelTitle,
+        className : 'cke_' + ( styleType == 'size' ? 'fontSize' : 'font' ),
+        panel :
+        {
+          css : editor.skin.editor.css.concat( config.contentsCss ),
+          multiSelect : false,
+          attributes : { 'aria-label' : lang.panelTitle }
+        },
 
-				init : function()
-				{
-					this.startGroup( lang.panelTitle );
+        init : function()
+        {
+          this.startGroup( lang.panelTitle );
 
-					for ( var i = 0 ; i < names.length ; i++ )
-					{
-						var name = names[ i ];
+          for ( var i = 0 ; i < names.length ; i++ )
+          {
+            var name = names[ i ];
 
-						// Add the tag entry to the panel list.
-						this.add( name, styles[ name ].buildPreview(), name );
-					}
-				},
+            // Add the tag entry to the panel list.
+            this.add( name, styles[ name ].buildPreview(), name );
+          }
+        },
 
-				onClick : function( value )
-				{
-					editor.focus();
-					editor.fire( 'saveSnapshot' );
+        onClick : function( value )
+        {
+          editor.focus();
+          editor.fire( 'saveSnapshot' );
 
-					var style = styles[ value ];
+          var style = styles[ value ];
 
-					if ( this.getValue() == value )
-						style.remove( editor.document );
-					else
-						style.apply( editor.document );
+          if ( this.getValue() == value )
+            style.remove( editor.document );
+          else
+            style.apply( editor.document );
 
-					editor.fire( 'saveSnapshot' );
-				},
+          editor.fire( 'saveSnapshot' );
+        },
 
-				onRender : function()
-				{
-					editor.on( 'selectionChange', function( ev )
-						{
-							var currentValue = this.getValue();
+        onRender : function()
+        {
+          editor.on( 'selectionChange', function( ev )
+            {
+              var currentValue = this.getValue();
 
-							var elementPath = ev.data.path,
-								elements = elementPath.elements;
+              var elementPath = ev.data.path,
+                elements = elementPath.elements;
 
-							// For each element into the elements path.
-							for ( var i = 0, element ; i < elements.length ; i++ )
-							{
-								element = elements[i];
+              // For each element into the elements path.
+              for ( var i = 0, element ; i < elements.length ; i++ )
+              {
+                element = elements[i];
 
-								// Check if the element is removable by any of
-								// the styles.
-								for ( var value in styles )
-								{
-									if ( styles[ value ].checkElementRemovable( element, true ) )
-									{
-										if ( value != currentValue )
-											this.setValue( value );
-										return;
-									}
-								}
-							}
+                // Check if the element is removable by any of
+                // the styles.
+                for ( var value in styles )
+                {
+                  if ( styles[ value ].checkElementRemovable( element, true ) )
+                  {
+                    if ( value != currentValue )
+                      this.setValue( value );
+                    return;
+                  }
+                }
+              }
 
-							// If no styles match, just empty it.
-							this.setValue( '', defaultLabel );
-						},
-						this);
-				}
-			});
-	}
+              // If no styles match, just empty it.
+              this.setValue( '', defaultLabel );
+            },
+            this);
+        }
+      });
+  }
 
-	CKEDITOR.plugins.add( 'font',
-	{
-		requires : [ 'richcombo', 'styles' ],
+  CKEDITOR.plugins.add( 'font',
+  {
+    requires : [ 'richcombo', 'styles' ],
 
-		init : function( editor )
-		{
-			var config = editor.config;
+    init : function( editor )
+    {
+      var config = editor.config;
 
-			addCombo( editor, 'Font', 'family', editor.lang.font, config.font_names, config.font_defaultLabel, config.font_style );
-			addCombo( editor, 'FontSize', 'size', editor.lang.fontSize, config.fontSize_sizes, config.fontSize_defaultLabel, config.fontSize_style );
-		}
-	});
+      addCombo( editor, 'Font', 'family', editor.lang.font, config.font_names, config.font_defaultLabel, config.font_style );
+      addCombo( editor, 'FontSize', 'size', editor.lang.fontSize, config.fontSize_sizes, config.fontSize_defaultLabel, config.fontSize_style );
+    }
+  });
 })();
 
 /**
@@ -143,15 +143,15 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * config.font_names = 'Arial;Times New Roman;Verdana';
  */
 CKEDITOR.config.font_names =
-	'Arial/Arial, Helvetica, sans-serif;' +
-	'Comic Sans MS/Comic Sans MS, cursive;' +
-	'Courier New/Courier New, Courier, monospace;' +
-	'Georgia/Georgia, serif;' +
-	'Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;' +
-	'Tahoma/Tahoma, Geneva, sans-serif;' +
-	'Times New Roman/Times New Roman, Times, serif;' +
-	'Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;' +
-	'Verdana/Verdana, Geneva, sans-serif';
+  'Arial/Arial, Helvetica, sans-serif;' +
+  'Comic Sans MS/Comic Sans MS, cursive;' +
+  'Courier New/Courier New, Courier, monospace;' +
+  'Georgia/Georgia, serif;' +
+  'Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;' +
+  'Tahoma/Tahoma, Geneva, sans-serif;' +
+  'Times New Roman/Times New Roman, Times, serif;' +
+  'Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;' +
+  'Verdana/Verdana, Geneva, sans-serif';
 
 /**
  * The text to be displayed in the Font combo is none of the available values
@@ -170,17 +170,17 @@ CKEDITOR.config.font_defaultLabel = '';
  * // This is actually the default value for it.
  * config.font_style =
  *     {
- *         element		: 'span',
- *         styles		: { 'font-family' : '#(family)' },
- *         overrides	: [ { element : 'font', attributes : { 'face' : null } } ]
+ *         element    : 'span',
+ *         styles    : { 'font-family' : '#(family)' },
+ *         overrides  : [ { element : 'font', attributes : { 'face' : null } } ]
  *     };
  */
 CKEDITOR.config.font_style =
-	{
-		element		: 'span',
-		styles		: { 'font-family' : '#(family)' },
-		overrides	: [ { element : 'font', attributes : { 'face' : null } } ]
-	};
+  {
+    element    : 'span',
+    styles    : { 'font-family' : '#(family)' },
+    overrides  : [ { element : 'font', attributes : { 'face' : null } } ]
+  };
 
 /**
  * The list of fonts size to be displayed in the Font Size combo in the
@@ -202,7 +202,7 @@ CKEDITOR.config.font_style =
  * config.fontSize_sizes = '12 Pixels/12px;Big/2.3em;30 Percent More/130%;Bigger/larger;Very Small/x-small';
  */
 CKEDITOR.config.fontSize_sizes =
-	'8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px';
+  '8/8px;9/9px;10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px';
 
 /**
  * The text to be displayed in the Font Size combo is none of the available
@@ -221,14 +221,14 @@ CKEDITOR.config.fontSize_defaultLabel = '';
  * // This is actually the default value for it.
  * config.fontSize_style =
  *     {
- *         element		: 'span',
- *         styles		: { 'font-size' : '#(size)' },
- *         overrides	: [ { element : 'font', attributes : { 'size' : null } } ]
+ *         element    : 'span',
+ *         styles    : { 'font-size' : '#(size)' },
+ *         overrides  : [ { element : 'font', attributes : { 'size' : null } } ]
  *     };
  */
 CKEDITOR.config.fontSize_style =
-	{
-		element		: 'span',
-		styles		: { 'font-size' : '#(size)' },
-		overrides	: [ { element : 'font', attributes : { 'size' : null } } ]
-	};
+  {
+    element    : 'span',
+    styles    : { 'font-size' : '#(size)' },
+    overrides  : [ { element : 'font', attributes : { 'size' : null } } ]
+  };

@@ -5,14 +5,14 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 /**
  * @fileOverview Defines the "virtual" {@link CKEDITOR.pluginDefinition} class, which
- *		contains the defintion of a plugin. This file is for documentation
- *		purposes only.
+ *    contains the defintion of a plugin. This file is for documentation
+ *    purposes only.
  */
 
 /**
  * (Virtual Class) Do not call this constructor. This class is not really part
- *		of the API. It just illustrates the features of plugin objects to be
- *		passed to the {@link CKEDITOR.plugins.add} function.
+ *    of the API. It just illustrates the features of plugin objects to be
+ *    passed to the {@link CKEDITOR.plugins.add} function.
  * @name CKEDITOR.pluginDefinition
  * @constructor
  * @example

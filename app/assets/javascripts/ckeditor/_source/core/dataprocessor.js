@@ -5,8 +5,8 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 /**
  * @fileOverview Defines the "virtual" {@link CKEDITOR.dataProcessor} class, which
- *		defines the basic structure of data processor objects to be
- *		set to {@link CKEDITOR.editor.dataProcessor}.
+ *    defines the basic structure of data processor objects to be
+ *    set to {@link CKEDITOR.editor.dataProcessor}.
  */
 
 /**
@@ -38,8 +38,8 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * @function
  * @param {String} data The input data to be transformed.
  * @param {String} [fixForBody] The tag name to be used if the data must be
- *		fixed because it is supposed to be loaded direcly into the &lt;body&gt;
- *		tag. This is generally not used by non-HTML data processors.
+ *    fixed because it is supposed to be loaded direcly into the &lt;body&gt;
+ *    tag. This is generally not used by non-HTML data processors.
  * @example
  * // Tranforming BBCode data, having a custom BBCode data processor.
  * var data = 'This is [b]an example[/b].';
@@ -57,7 +57,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * @function
  * @param {String} html The HTML to be transformed.
  * @param {String} fixForBody The tag name to be used if the output data is
- *		coming from &lt;body&gt; and may be eventually fixed for it. This is
+ *    coming from &lt;body&gt; and may be eventually fixed for it. This is
  * generally not used by non-HTML data processors.
  * // Tranforming into BBCode data, having a custom BBCode data processor.
  * var html = '&lt;p&gt;This is &lt;b&gt;an example&lt;/b&gt;.&lt;/p&gt;';

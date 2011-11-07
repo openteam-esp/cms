@@ -9,57 +9,57 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 CKEDITOR.plugins.add( 'image',
 {
-	init : function( editor )
-	{
-		var pluginName = 'image';
+  init : function( editor )
+  {
+    var pluginName = 'image';
 
-		// Register the dialog.
-		CKEDITOR.dialog.add( pluginName, this.path + 'dialogs/image.js' );
+    // Register the dialog.
+    CKEDITOR.dialog.add( pluginName, this.path + 'dialogs/image.js' );
 
-		// Register the command.
-		editor.addCommand( pluginName, new CKEDITOR.dialogCommand( pluginName ) );
+    // Register the command.
+    editor.addCommand( pluginName, new CKEDITOR.dialogCommand( pluginName ) );
 
-		// Register the toolbar button.
-		editor.ui.addButton( 'Image',
-			{
-				label : editor.lang.common.image,
-				command : pluginName
-			});
+    // Register the toolbar button.
+    editor.ui.addButton( 'Image',
+      {
+        label : editor.lang.common.image,
+        command : pluginName
+      });
 
-		editor.on( 'doubleclick', function( evt )
-			{
-				var element = evt.data.element;
+    editor.on( 'doubleclick', function( evt )
+      {
+        var element = evt.data.element;
 
-				if ( element.is( 'img' ) && !element.data( 'cke-realelement' ) && !element.isReadOnly() )
-					evt.data.dialog = 'image';
-			});
+        if ( element.is( 'img' ) && !element.data( 'cke-realelement' ) && !element.isReadOnly() )
+          evt.data.dialog = 'image';
+      });
 
-		// If the "menu" plugin is loaded, register the menu items.
-		if ( editor.addMenuItems )
-		{
-			editor.addMenuItems(
-				{
-					image :
-					{
-						label : editor.lang.image.menu,
-						command : 'image',
-						group : 'image'
-					}
-				});
-		}
+    // If the "menu" plugin is loaded, register the menu items.
+    if ( editor.addMenuItems )
+    {
+      editor.addMenuItems(
+        {
+          image :
+          {
+            label : editor.lang.image.menu,
+            command : 'image',
+            group : 'image'
+          }
+        });
+    }
 
-		// If the "contextmenu" plugin is loaded, register the listeners.
-		if ( editor.contextMenu )
-		{
-			editor.contextMenu.addListener( function( element, selection )
-				{
-					if ( !element || !element.is( 'img' ) || element.data( 'cke-realelement' ) || element.isReadOnly() )
-						return null;
+    // If the "contextmenu" plugin is loaded, register the listeners.
+    if ( editor.contextMenu )
+    {
+      editor.contextMenu.addListener( function( element, selection )
+        {
+          if ( !element || !element.is( 'img' ) || element.data( 'cke-realelement' ) || element.isReadOnly() )
+            return null;
 
-					return { image : CKEDITOR.TRISTATE_OFF };
-				});
-		}
-	}
+          return { image : CKEDITOR.TRISTATE_OFF };
+        });
+    }
+  }
 } );
 
 /**

@@ -17,4 +17,4 @@ CKEDITOR._autoLoad = 'core/ckeditor_basic';
 
 // Include the loader script.
 document.write(
-	'<script type="text/javascript" src="' + CKEDITOR.getUrl( '_source/core/loader.js' ) + '"></script>' );
+  '<script type="text/javascript" src="' + CKEDITOR.getUrl( '_source/core/loader.js' ) + '"></script>' );

@@ -5,10 +5,10 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 CKEDITOR.editorConfig = function( config )
 {
-	// Define changes to default configuration here. For example:
-	// config.language = 'fr';
-	// config.uiColor = '#AADC6E';
-	
+  // Define changes to default configuration here. For example:
+  // config.language = 'fr';
+  // config.uiColor = '#AADC6E';
+  
   /* Filebrowser routes */
   // The location of an external file browser, that should be launched when "Browse Server" button is pressed.
   config.filebrowserBrowseUrl = "/ckeditor/attachment_files";

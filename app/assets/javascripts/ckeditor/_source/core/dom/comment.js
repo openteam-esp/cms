@@ -5,28 +5,28 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 /**
  * @fileOverview Defines the {@link CKEDITOR.dom.comment} class, which represents
- *		a DOM comment node.
+ *    a DOM comment node.
  */
 
 CKEDITOR.dom.comment = CKEDITOR.tools.createClass(
 {
-	base : CKEDITOR.dom.node,
+  base : CKEDITOR.dom.node,
 
-	$ : function( text, ownerDocument )
-	{
-		if ( typeof text == 'string' )
-			text = ( ownerDocument ? ownerDocument.$ : document ).createComment( text );
+  $ : function( text, ownerDocument )
+  {
+    if ( typeof text == 'string' )
+      text = ( ownerDocument ? ownerDocument.$ : document ).createComment( text );
 
-		this.base( text );
-	},
+    this.base( text );
+  },
 
-	proto :
-	{
-		type : CKEDITOR.NODE_COMMENT,
+  proto :
+  {
+    type : CKEDITOR.NODE_COMMENT,
 
-		getOuterHtml : function()
-		{
-			return '<!--' + this.$.nodeValue + '-->';
-		}
-	}
+    getOuterHtml : function()
+    {
+      return '<!--' + this.$.nodeValue + '-->';
+    }
+  }
 });

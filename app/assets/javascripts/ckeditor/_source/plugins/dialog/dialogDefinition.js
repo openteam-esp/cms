@@ -199,7 +199,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * @field
  * @type String
  * @example
- * contentDefinition.accessKey = 'Q';	// Switch to this page when CTRL-Q is pressed.
+ * contentDefinition.accessKey = 'Q';  // Switch to this page when CTRL-Q is pressed.
  */
 
 /**
@@ -331,25 +331,25 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  *
  * // Example:
  * {
- * 	<b>type : 'hbox',</b>
- * 	widths : [ '25%', '25%', '50%' ],
- * 	children :
- * 	[
- * 		{
- * 			type : 'text',
- * 			id : 'id1',
- * 			width : '40px',
- * 		},
- * 		{
- * 			type : 'text',
- * 			id : 'id2',
- * 			width : '40px',
- * 		},
- * 		{
- * 			type : 'text',
- * 			id : 'id3'
- * 		}
- * 	]
+ *   <b>type : 'hbox',</b>
+ *   widths : [ '25%', '25%', '50%' ],
+ *   children :
+ *   [
+ *     {
+ *       type : 'text',
+ *       id : 'id1',
+ *       width : '40px',
+ *     },
+ *     {
+ *       type : 'text',
+ *       id : 'id2',
+ *       width : '40px',
+ *     },
+ *     {
+ *       type : 'text',
+ *       id : 'id3'
+ *     }
+ *   ]
  * }
  */
 
@@ -420,27 +420,27 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  *
  * // Example:
  * {
- * 	<b>type : 'vbox',</b>
- * 	align : 'right',
- * 	width : '200px',
- * 	children :
- * 	[
- * 		{
- * 			type : 'text',
- * 			id : 'age',
- * 			label : 'Age'
- * 		},
- * 		{
- * 			type : 'text',
- * 			id : 'sex',
- * 			label : 'Sex'
- * 		},
- * 		{
- * 			type : 'text',
- * 			id : 'nationality',
- * 			label : 'Nationality'
- * 		}
- * 	]
+ *   <b>type : 'vbox',</b>
+ *   align : 'right',
+ *   width : '200px',
+ *   children :
+ *   [
+ *     {
+ *       type : 'text',
+ *       id : 'age',
+ *       label : 'Age'
+ *     },
+ *     {
+ *       type : 'text',
+ *       id : 'sex',
+ *       label : 'Sex'
+ *     },
+ *     {
+ *       type : 'text',
+ *       id : 'nationality',
+ *       label : 'Nationality'
+ *     }
+ *   ]
  * }
  */
 
@@ -522,8 +522,8 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * @field
  * @example
  * {
- * 		type : 'text',
- * 		label : 'My Label '
+ *     type : 'text',
+ *     label : 'My Label '
  * }
  */
 
@@ -535,24 +535,24 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * @field
  * @example
  * {
- * 		type : 'text',
- * 		label : 'My Label ',
- * 	<strong>	labelLayout : 'horizontal',</strong>
+ *     type : 'text',
+ *     label : 'My Label ',
+ *   <strong>  labelLayout : 'horizontal',</strong>
  * }
  */
 
 /**
  * (Optional) Applies only to horizontal layouts: a two elements array of lengths to specify the widths of the
-* 	label and the content element. See also {@link CKEDITOR.dialog.definition.labeledElement#labelLayout}.
+*   label and the content element. See also {@link CKEDITOR.dialog.definition.labeledElement#labelLayout}.
  * @name CKEDITOR.dialog.definition.labeledElement.prototype.widths
  * @type Array
  * @field
  * @example
  * {
- * 		type : 'text',
- * 		label : 'My Label ',
- * 		labelLayout : 'horizontal',
- * 	<strong>	widths : [100, 200],</strong>
+ *     type : 'text',
+ *     label : 'My Label ',
+ *     labelLayout : 'horizontal',
+ *   <strong>  widths : [100, 200],</strong>
  * }
  */
 
@@ -563,9 +563,9 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * @field
  * @example
  * {
- * 		type : 'text',
- * 		label : 'My Label ',
- * 	<strong>	labelStyle : 'color: red',</strong>
+ *     type : 'text',
+ *     label : 'My Label ',
+ *   <strong>  labelStyle : 'color: red',</strong>
  * }
  */
 
@@ -578,9 +578,9 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * @field
  * @example
  * {
- * 		type : 'text',
- * 		label : 'My Label ',
- * 	<strong>	inputStyle : 'text-align:center',</strong>
+ *     type : 'text',
+ *     label : 'My Label ',
+ *   <strong>  inputStyle : 'text-align:center',</strong>
  * }
  */
 
@@ -592,9 +592,9 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * @field
  * @example
  * {
- * 		type : 'text',
- * 		label : 'My Label ',
- * 	<strong>	controlStyle : 'width:3em',</strong>
+ *     type : 'text',
+ *     label : 'My Label ',
+ *   <strong>  controlStyle : 'width:3em',</strong>
  * }
  */
 
@@ -618,14 +618,14 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  *
  * // Example:
  * {
- * 	<b>type : 'button',</b>
- * 	id : 'buttonId',
- * 	label : 'Click me',
- * 	title : 'My title',
- * 	onClick : function() {
- * 		// this = CKEDITOR.ui.dialog.button
- * 		alert( 'Clicked: ' + this.id );
- * 	}
+ *   <b>type : 'button',</b>
+ *   id : 'buttonId',
+ *   label : 'Click me',
+ *   title : 'My title',
+ *   onClick : function() {
+ *     // this = CKEDITOR.ui.dialog.button
+ *     alert( 'Clicked: ' + this.id );
+ *   }
  * }
  */
 
@@ -664,14 +664,14 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  *
  * // Example:
  * {
- * 	<b>type : 'checkbox',</b>
- * 	id : 'agree',
- * 	label : 'I agree',
- * 	'default' : 'checked',
- * 	onClick : function() {
- * 		// this = CKEDITOR.ui.dialog.checkbox
- * 		alert( 'Checked: ' + this.getValue() );
- * 	}
+ *   <b>type : 'checkbox',</b>
+ *   id : 'agree',
+ *   label : 'I agree',
+ *   'default' : 'checked',
+ *   onClick : function() {
+ *     // this = CKEDITOR.ui.dialog.checkbox
+ *     alert( 'Checked: ' + this.getValue() );
+ *   }
  * }
  */
 
@@ -720,21 +720,21 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  *
  * // Example:
  * {
- * 	<b>type : 'file'</b>,
- * 	id : 'upload',
- * 	label : 'Select file from your computer',
- * 	size : 38
+ *   <b>type : 'file'</b>,
+ *   id : 'upload',
+ *   label : 'Select file from your computer',
+ *   size : 38
  * },
  * {
- * 	type : 'fileButton',
- * 	id : 'fileId',
- * 	label : 'Upload file',
- * 	'for' : [ 'tab1', 'upload' ]
- * 	filebrowser : {
- * 		onSelect : function( fileUrl, data ) {
- * 			alert( 'Successfully uploaded: ' + fileUrl );
- * 		}
- * 	}
+ *   type : 'fileButton',
+ *   id : 'fileId',
+ *   label : 'Upload file',
+ *   'for' : [ 'tab1', 'upload' ]
+ *   filebrowser : {
+ *     onSelect : function( fileUrl, data ) {
+ *       alert( 'Successfully uploaded: ' + fileUrl );
+ *     }
+ *   }
  * }
  */
 
@@ -782,21 +782,21 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  *
  * // Example:
  * {
- * 	type : 'file',
- * 	id : 'upload',
- * 	label : 'Select file from your computer',
- * 	size : 38
+ *   type : 'file',
+ *   id : 'upload',
+ *   label : 'Select file from your computer',
+ *   size : 38
  * },
  * {
- * 	<b>type : 'fileButton'</b>,
- * 	id : 'fileId',
- * 	label : 'Upload file',
- * 	'for' : [ 'tab1', 'upload' ]
- * 	filebrowser : {
- * 		onSelect : function( fileUrl, data ) {
- * 			alert( 'Successfully uploaded: ' + fileUrl );
- * 		}
- * 	}
+ *   <b>type : 'fileButton'</b>,
+ *   id : 'fileId',
+ *   label : 'Upload file',
+ *   'for' : [ 'tab1', 'upload' ]
+ *   filebrowser : {
+ *     onSelect : function( fileUrl, data ) {
+ *       alert( 'Successfully uploaded: ' + fileUrl );
+ *     }
+ *   }
  * }
  */
 
@@ -828,9 +828,9 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  *
  * // Call custom onSelect function when file is successfully uploaded.
  * filebrowser : {
- * 	onSelect : function( fileUrl, data ) {
- * 		alert( 'Successfully uploaded: ' + fileUrl );
- * 	}
+ *   onSelect : function( fileUrl, data ) {
+ *     alert( 'Successfully uploaded: ' + fileUrl );
+ *   }
  * }
  */
 
@@ -863,40 +863,40 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  *
  * // Example 1:
  * {
- * 	<b>type : 'html',</b>
- * 	html : '&lt;h3>This is some sample HTML content.&lt;/h3>'
+ *   <b>type : 'html',</b>
+ *   html : '&lt;h3>This is some sample HTML content.&lt;/h3>'
  * }
  * @example
  * // Example 2:
  * // Complete sample with document.getById() call when the "Ok" button is clicked.
  * var dialogDefinition =
  * {
- * 	title : 'Sample dialog',
- * 	minWidth : 300,
- * 	minHeight : 200,
- * 	onOk : function() {
- * 		// "this" is now a CKEDITOR.dialog object.
- * 		var document = this.getElement().getDocument();
- * 		// document = CKEDITOR.dom.document
- * 		var element = <b>document.getById( 'myDiv' );</b>
- * 		if ( element )
- * 			alert( element.getHtml() );
- * 	},
- * 	contents : [
- * 		{
- * 			id : 'tab1',
- * 			label : '',
- * 			title : '',
- * 			elements :
- * 			[
- * 				{
- * 					<b>type : 'html',</b>
- * 					html : '<b>&lt;div id="myDiv">Sample &lt;b>text&lt;/b>.&lt;/div></b>&lt;div id="otherId">Another div.&lt;/div>'
- * 				},
- * 			]
- * 		}
- * 	],
- * 	buttons : [ CKEDITOR.dialog.cancelButton, CKEDITOR.dialog.okButton ]
+ *   title : 'Sample dialog',
+ *   minWidth : 300,
+ *   minHeight : 200,
+ *   onOk : function() {
+ *     // "this" is now a CKEDITOR.dialog object.
+ *     var document = this.getElement().getDocument();
+ *     // document = CKEDITOR.dom.document
+ *     var element = <b>document.getById( 'myDiv' );</b>
+ *     if ( element )
+ *       alert( element.getHtml() );
+ *   },
+ *   contents : [
+ *     {
+ *       id : 'tab1',
+ *       label : '',
+ *       title : '',
+ *       elements :
+ *       [
+ *         {
+ *           <b>type : 'html',</b>
+ *           html : '<b>&lt;div id="myDiv">Sample &lt;b>text&lt;/b>.&lt;/div></b>&lt;div id="otherId">Another div.&lt;/div>'
+ *         },
+ *       ]
+ *     }
+ *   ],
+ *   buttons : [ CKEDITOR.dialog.cancelButton, CKEDITOR.dialog.okButton ]
  * };
  */
 
@@ -927,16 +927,16 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  *
  * // Example:
  * {
- * 	<b>type : 'radio',</b>
- * 	id : 'country',
- * 	label : 'Which country is bigger',
- * 	items : [ [ 'France', 'FR' ], [ 'Germany', 'DE' ] ] ,
- * 	style : 'color:green',
- * 	'default' : 'DE',
- * 	onClick : function() {
- * 		// this = CKEDITOR.ui.dialog.radio
- * 		alert( 'Current value: ' + this.getValue() );
- * 	}
+ *   <b>type : 'radio',</b>
+ *   id : 'country',
+ *   label : 'Which country is bigger',
+ *   items : [ [ 'France', 'FR' ], [ 'Germany', 'DE' ] ] ,
+ *   style : 'color:green',
+ *   'default' : 'DE',
+ *   onClick : function() {
+ *     // this = CKEDITOR.ui.dialog.radio
+ *     alert( 'Current value: ' + this.getValue() );
+ *   }
  * }
  */
 
@@ -983,15 +983,15 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  *
  * // Example:
  * {
- * 	<b>type : 'select',</b>
- * 	id : 'sport',
- * 	label : 'Select your favourite sport',
- * 	items : [ [ 'Basketball' ], [ 'Baseball' ], [ 'Hockey' ], [ 'Football' ] ],
- * 	'default' : 'Football',
- * 	onChange : function( api ) {
- * 		// this = CKEDITOR.ui.dialog.select
- * 		alert( 'Current value: ' + this.getValue() );
- * 	}
+ *   <b>type : 'select',</b>
+ *   id : 'sport',
+ *   label : 'Select your favourite sport',
+ *   items : [ [ 'Basketball' ], [ 'Baseball' ], [ 'Hockey' ], [ 'Football' ] ],
+ *   'default' : 'Football',
+ *   onChange : function( api ) {
+ *     // this = CKEDITOR.ui.dialog.select
+ *     alert( 'Current value: ' + this.getValue() );
+ *   }
  * }
  */
 
@@ -1054,17 +1054,17 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  * // object with the appropriate properties.
  *
  * {
- * 	<b>type : 'text',</b>
- * 	id : 'name',
- * 	label : 'Your name',
- * 	'default' : '',
- * 	validate : function() {
- * 		if ( !this.getValue() )
- * 		{
- * 			api.openMsgDialog( '', 'Name cannot be empty.' );
- * 			return false;
- * 		}
- * 	}
+ *   <b>type : 'text',</b>
+ *   id : 'name',
+ *   label : 'Your name',
+ *   'default' : '',
+ *   validate : function() {
+ *     if ( !this.getValue() )
+ *     {
+ *       api.openMsgDialog( '', 'Name cannot be empty.' );
+ *       return false;
+ *     }
+ *   }
  * }
  */
 
@@ -1119,17 +1119,17 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
  *
  * // Example:
  * {
- * 	<b>type : 'textarea',</b>
- * 	id : 'message',
- * 	label : 'Your comment',
- * 	'default' : '',
- * 	validate : function() {
- * 		if ( this.getValue().length < 5 )
- * 		{
- * 			api.openMsgDialog( 'The comment is too short.' );
- * 			return false;
- * 		}
- * 	}
+ *   <b>type : 'textarea',</b>
+ *   id : 'message',
+ *   label : 'Your comment',
+ *   'default' : '',
+ *   validate : function() {
+ *     if ( this.getValue().length < 5 )
+ *     {
+ *       api.openMsgDialog( 'The comment is too short.' );
+ *       return false;
+ *     }
+ *   }
  * }
  */
 
