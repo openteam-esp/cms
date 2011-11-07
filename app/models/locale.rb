@@ -1,8 +1,6 @@
 class Locale < Node
-
   has_enum :slug
-  belongs_to :site, :foreign_key => :ancestry  #:conditions => 'id = \'#{ancestry}\'', :inverse_of => :locales
-
+  validates_presence_of :parent
 end
 
 # == Schema Information

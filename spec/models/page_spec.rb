@@ -4,6 +4,7 @@ describe Page do
   it { should belong_to :template }
   it { should have_many :contents }
   it { should validate_presence_of :template }
+  it { should validate_presence_of :parent }
   it { Fabricate(:page).locale.slug.should == 'ru' }
   it { Fabricate(:page, :parent => Fabricate(:page)).locale.slug.should == 'ru' }
 end

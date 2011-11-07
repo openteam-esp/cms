@@ -4,7 +4,8 @@ class Page < Node
   has_many :parts
   has_many :contents, :through => :parts
 
-  validates :template, :presence => true
+  validates_presence_of :parent, :template
+
 
   def locale
     ancestors.second

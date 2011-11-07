@@ -1,6 +1,6 @@
 Fabricator(:page) do
   title "MyString"
   slug "name"
-  parent! { Fabricate(:site).locales.first }
-  template! { Fabricate(:template) }
+  parent! { Fabricate :locale }
+  template! { Fabricate :template }
 end

@@ -1,3 +1,4 @@
 Fabricator(:locale) do
-  title "MyString"
+  slug    'ru'
+  parent! { Fabricate :site }
 end
