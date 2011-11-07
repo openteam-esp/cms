@@ -1,0 +1,10 @@
+collection(@locales) do |collection|
+  collection.members(:root => resource_collection_name.to_s) do |member, object|
+    member.values do |value|
+      value.id      object[:id]
+      value.title   object[:title]
+      value.slug    object[:slug]
+    end
+    member.link object.title, resource_path(object.slug)
+  end
+end

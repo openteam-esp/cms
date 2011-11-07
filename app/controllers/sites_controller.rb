@@ -1,2 +1,2 @@
-class SitesController < InheritedResources::Base
+class SitesController < ApplicationController
 end

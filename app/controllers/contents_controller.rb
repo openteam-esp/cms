@@ -1,2 +1,2 @@
-class ContentsController < InheritedResources::Base
+class ContentsController < ApplicationController
 end

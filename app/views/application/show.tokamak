@@ -1,0 +1,3 @@
+member(resource) do |member|
+  member.link :self, resource_path
+end
