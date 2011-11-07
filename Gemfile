@@ -1,10 +1,12 @@
-source 'http://rubygems.org'
+source :rubygems
 
 gem 'ancestry'
+gem 'ckeditor',                                   :git => 'git://github.com/pshoukry/ckeditor.git'
 gem 'compass',                  '~> 0.12.alpha'
 gem 'configliere'
 gem 'default_value_for'
 gem 'formtastic'
+gem 'gilenson'
 gem 'has_enum'
 gem 'inherited_resources'
 gem 'jquery-rails'

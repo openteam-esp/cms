@@ -1,6 +1,12 @@
 class Content < ActiveRecord::Base
+
   has_many :parts
   has_many :pages, :through => :parts
+
+  def to_s
+    title
+  end
+
 end
 
 # == Schema Information
