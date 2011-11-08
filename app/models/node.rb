@@ -22,8 +22,7 @@ class Node < ActiveRecord::Base
 
   private
     def cache_route
-      self.route = '/'
-      self.route << Node.find(path_ids).map(&:slug).join('/')
+      self.route = Node.find(path_ids).map(&:slug).join('/')
       Node.skip_callback(:save, :after, :cache_route)
       save!
       Node.set_callback(:save, :after, :cache_route)

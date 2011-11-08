@@ -14,9 +14,9 @@ describe Node do
     let(:ru) { Fabricate(:node, :parent => root, :slug => 'ru') }
     let(:about) { Fabricate(:node, :parent => ru, :slug => 'about') }
 
-    it { root.route.should == '/site' }
-    it { ru.route.should == '/site/ru' }
-    it { about.route.should == '/site/ru/about' }
+    it { root.route.should == 'site' }
+    it { ru.route.should == 'site/ru' }
+    it { about.route.should == 'site/ru/about' }
   end
 end
 
