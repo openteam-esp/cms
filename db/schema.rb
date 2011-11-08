@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111107024713) do
+ActiveRecord::Schema.define(:version => 20111108021003) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -61,5 +61,15 @@ ActiveRecord::Schema.define(:version => 20111107024713) do
   end
 
   add_index "templates", ["site_id"], :name => "index_templates_on_site_id"
+
+  create_table "uploads", :force => true do |t|
+    t.string   "type"
+    t.string   "file_name"
+    t.string   "file_mime_type"
+    t.string   "file_size"
+    t.string   "file_uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

@@ -1,0 +1,3 @@
+class Attachment < Upload
+
+end
