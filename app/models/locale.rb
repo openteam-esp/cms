@@ -1,8 +1,10 @@
 class Locale < Node
+  belongs_to :template
+
   has_enum :slug
+
   validates_presence_of :parent, :slug, :template
   alias :site :parent
-
 end
 
 # == Schema Information

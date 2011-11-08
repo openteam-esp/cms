@@ -3,10 +3,14 @@ class Node < ActiveRecord::Base
   validates :slug, :presence => true, :format => { :with => %r{^[[:alnum:]_\.-]+$} }
   has_ancestry
 
+  has_many :parts
+  has_many :contents, :through => :parts
+
   normalize_attribute :title, :with => [:squish, :gilensize_as_text, :blank]
   after_save :cache_route
 
   alias :site :root
+  delegate :templates, :to => :site
 
   def to_s
     slug

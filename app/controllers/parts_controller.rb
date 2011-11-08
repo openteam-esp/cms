@@ -1,5 +1,5 @@
-class PartsController < InheritedResources::Base
-  belongs_to :page, :shallow => true
+class PartsController < ApplicationController
+  belongs_to :node, :shallow => true
   actions :new, :create, :edit, :update, :destroy
 
   protected
@@ -16,4 +16,7 @@ class PartsController < InheritedResources::Base
       [params[@part.class.name.underscore] || {}]
     end
 
+    def smart_resource_url
+      parent
+    end
 end

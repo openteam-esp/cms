@@ -5,7 +5,6 @@ class Content < ActiveRecord::Base
   def to_s
     title
   end
-
 end
 
 # == Schema Information

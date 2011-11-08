@@ -8,12 +8,11 @@ Cms::Application.routes.draw do
 
   resources :nodes, :only => :show do
     resources :pages, :only => [:new, :create]
-  end
-
-  resources :pages, :only => [:show, :edit, :update, :destroy] do
     resources :parts, :only => [:new, :create]
     resources :html_parts, :only => [:new, :create]
   end
+
+  resources :pages, :only => [:show, :edit, :update, :destroy]
 
   resources :locales, :only => [:show, :edit, :update, :destroy]
 
