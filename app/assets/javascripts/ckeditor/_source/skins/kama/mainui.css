@@ -31,9 +31,11 @@ span.cke_skin_kama
   -webkit-touch-callout: none;
   border-radius: 5px;
   background-color: #d3d3d3;
+  /*
   background-image: url(images/sprites.png);
   background-repeat: repeat-x;
   background-position: 0 -1950px;
+  */
   display: block;
   /* IE Quirks: editor chrome overflow horizontally without an explicit width. */
   _display: inline-block;
@@ -204,3 +206,4 @@ span.cke_skin_kama
   height: 0;
   overflow: hidden;
 }
+
