@@ -14,3 +14,4 @@ public/*.pdf
 solr/data/
 solr/pids/
 tmp/
+uploads/

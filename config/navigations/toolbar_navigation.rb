@@ -11,6 +11,8 @@ SimpleNavigation::Configuration.run do |navigation|
       :highlights_on => /^\/$|^\/sites|\/templates|\/pages/
     primary.item :contents, I18n.t('toolbar.contents'), contents_path,
       :highlights_on => /^\/contents/
+    primary.item :contents, I18n.t('toolbar.uploads'), uploads_path,
+      :highlights_on => /^\/uploads/
 
     primary.dom_id = 'toolbar'
   end

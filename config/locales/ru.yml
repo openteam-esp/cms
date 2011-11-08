@@ -6,6 +6,7 @@ ru:
   toolbar:
     sites:            Сайты
     contents:         Контент
+    uploads:          Файлы
 
   actions:
     index:            Список
@@ -48,6 +49,11 @@ ru:
       one:            часть
       few:            части
       many:           частей
+
+    upload:
+      one:            файл
+      few:            файла
+      many:           файлов
 
   activerecord:
     attributes:

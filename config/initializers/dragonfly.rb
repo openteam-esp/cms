@@ -2,6 +2,7 @@ require 'dragonfly'
 
 uploads_app = Dragonfly[:uploads]
 uploads_app.configure_with(:rails)
+uploads_app.configure_with(:imagemagick)
 uploads_app.define_macro(ActiveRecord::Base, :upload_accessor)
 uploads_app.content_filename = ->(job, request) { request[:file_name] }
 
@@ -23,7 +24,7 @@ if Settings[:s3]
 
   class Fog::Connection
     def request_with_openteam(params, &block)
-      request_without_openteam(params.merge(:path => "/news-demo/#{params[:path]}"), &block)
+      request_without_openteam(params.merge(:path => "/cms-demo/#{params[:path]}"), &block)
     end
     alias_method_chain :request, :openteam
   end
@@ -33,3 +34,12 @@ else
     datastore.store_meta = false
   end
 end
+
+require 'dragonfly/image_magick/utils'
+module Dragonfly::ImageMagick::Utils
+  def raw_identify(temp_object, args='')
+    @cache ||= {}
+    @cache["#{temp_object}#{args}"] ||= run "#{identify_command} #{args} \"#{temp_object.path}\" 2>/dev/null"
+  end
+end
+
