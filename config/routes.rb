@@ -6,7 +6,7 @@ Cms::Application.routes.draw do
 
   resources :uploads, :only => [:new, :create, :index, :destroy]
 
-  resources :node, :only => [] do
+  resources :nodes, :only => :show do
     resources :pages, :only => [:new, :create]
   end
 

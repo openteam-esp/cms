@@ -4,6 +4,7 @@ class Node < ActiveRecord::Base
   has_ancestry
 
   normalize_attribute :title, :with => [:squish, :gilensize_as_text, :blank]
+  after_save :cache_route
 
   alias :site :root
 
@@ -19,6 +20,14 @@ class Node < ActiveRecord::Base
     {'header' => 'navigation', 'content' => 'html', 'footer' => 'html' }
   end
 
+  private
+    def cache_route
+      self.route = '/'
+      self.route << Node.find(path_ids).map(&:slug).join('/')
+      Node.skip_callback(:save, :after, :cache_route)
+      save!
+      Node.set_callback(:save, :after, :cache_route)
+    end
 end
 
 # == Schema Information

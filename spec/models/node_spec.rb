@@ -8,6 +8,16 @@ describe Node do
   it { should allow_value('русские-буковки').for(:slug) }
   it { should_not allow_value('test/').for(:slug) }
   it { should normalize_attribute(:title).from('"English" "Русский"').to('“English” «Русский»') }
+
+  describe 'сохранение path' do
+    let(:root) { Fabricate(:node, :parent => nil, :slug => 'site') }
+    let(:ru) { Fabricate(:node, :parent => root, :slug => 'ru') }
+    let(:about) { Fabricate(:node, :parent => ru, :slug => 'about') }
+
+    it { root.route.should == '/site' }
+    it { ru.route.should == '/site/ru' }
+    it { about.route.should == '/site/ru/about' }
+  end
 end
 
 # == Schema Information

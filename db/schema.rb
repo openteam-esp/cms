@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20111109054454) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "route"
     t.string   "template"
   end
 
