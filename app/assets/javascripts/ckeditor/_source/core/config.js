@@ -277,63 +277,71 @@ CKEDITOR.config =
    * @example
    */
   plugins :
-    'about,' +
+//    'about,' +
     'a11yhelp,' +
     'basicstyles,' +
-    'bidi,' +
+//    'bidi,' +
     'blockquote,' +
     'button,' +
     'clipboard,' +
-    'colorbutton,' +
-    'colordialog,' +
+//    'colorbutton,' +
+//    'colordialog,' +
     'contextmenu,' +
     'dialogadvtab,' +
-    'div,' +
+//    'div,' +
     'elementspath,' +
     'enterkey,' +
     'entities,' +
+
+    'esp_attachment,' +
+    'esp_audio,' +
+    'esp_image,' +
+    'esp_link,' +
+    'esp_showblocks,' +
+    'esp_video,' +
+
     'filebrowser,' +
     'find,' +
-    'flash,' +
-    'font,' +
+//    'flash,' +
+//    'font,' +
     'format,' +
-    'forms,' +
-    'horizontalrule,' +
+//    'forms,' +
+//    'horizontalrule,' +
     'htmldataprocessor,' +
-    'iframe,' +
+//    'iframe,' +
     'image,' +
     'indent,' +
     'justify,' +
     'keystrokes,' +
-    'link,' +
+//    'link,' +
     'list,' +
     'liststyle,' +
     'maximize,' +
-    'newpage,' +
-    'pagebreak,' +
+//    'newpage,' +
+//    'pagebreak,' +
     'pastefromword,' +
     'pastetext,' +
     'popup,' +
-    'preview,' +
-    'print,' +
+//    'preview,' +
+//    'print,' +
     'removeformat,' +
     'resize,' +
-    'save,' +
-    'scayt,' +
-    'smiley,' +
-    'showblocks,' +
+//    'save,' +
+//    'scayt,' +
+//    'smiley,' +
+//    'showblocks,' +
     'showborders,' +
     'sourcearea,' +
-    'stylescombo,' +
+//    'stylescombo,' +
     'table,' +
     'tabletools,' +
-    'specialchar,' +
+//    'specialchar,' +
     'tab,' +
-    'templates,' +
+//    'templates,' +
     'toolbar,' +
     'undo,' +
-    'wysiwygarea,' +
-    'wsc',
+    'wysiwygarea,', // +
+//    'wsc',
 
   /**
    * A list of additional plugins to be loaded. This setting makes it easier

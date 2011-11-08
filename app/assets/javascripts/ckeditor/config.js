@@ -10,6 +10,7 @@ CKEDITOR.editorConfig = function( config )
   // config.uiColor = '#AADC6E';
 
   config.fillEmptyBlocks = false;
+
   config.disableNativeSpellChecker = false;
 
   /* Filebrowser routes */
@@ -49,22 +50,25 @@ CKEDITOR.editorConfig = function( config )
 
   /* Extra plugins */
   // works only with en, ru, uk locales
-  config.extraPlugins = "embed,attachment";
+  //config.extraPlugins = "embed,attachment";
 
   /* Toolbars */
-  config.toolbar = 'Easy';
+  config.toolbar = 'Full'; // Используются всё, что возможно, остальное впринципе отключено
 
-  config.toolbar_Easy =
-    [
-        ['Source','-','Preview'],
-        ['Cut','Copy','Paste','PasteText','PasteFromWord',],
-        ['Undo','Redo','-','SelectAll','RemoveFormat'],
-        ['Styles','Format'], ['Subscript', 'Superscript', 'TextColor'], ['Maximize','-','About'], '/',
-        ['Bold','Italic','Underline','Strike'], ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
-        ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-        ['Link','Unlink','Anchor'], ['Image', 'Attachment', 'Flash', 'Embed'],
-        ['Table','HorizontalRule','Smiley','SpecialChar','PageBreak']
-    ];
+  config.toolbar_Full = [
+    ['Source'],
+    ['Cut','Copy','Paste','PasteText','PasteFromWord'],
+    ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+    ['Esp_link','Esp_unlink','Esp_anchor'],
+    ['Esp_image', 'Esp_attachment', 'Esp_video', 'Esp_audio', 'Table'],
+    '/',
+    ['Format'],
+    ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+    ['JustifyLeft','JustifyCenter','JustifyRight'],
+    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+    ['Maximize', 'Esp_ShowBlocks']
+  ];
+
 };
 
 CKEDITOR.on('instanceReady', function(ev) {
