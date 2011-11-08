@@ -24,6 +24,10 @@ class Node < ActiveRecord::Base
     {'header' => 'navigation', 'content' => 'html', 'footer' => 'html' }
   end
 
+  def content_for(region)
+    parts.where(:region => region).first.try(:body)
+  end
+
   private
     def cache_route
       self.route = Node.find(path_ids).map(&:slug).join('/')

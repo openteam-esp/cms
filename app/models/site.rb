@@ -1,6 +1,15 @@
 class Site < Node
+  has_many :templates
+
+  delegate :parts, :to => :default_locale
+  delegate :template, :to => :default_locale
+
   def locales
     Locale.where(:ancestry => child_ancestry)
+  end
+
+  def default_locale
+    locales.where(:slug => 'ru').first
   end
 end
 

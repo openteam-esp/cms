@@ -1,3 +1,10 @@
-member(resource) do |member|
-  member.link :self, resource.route
-end
+page{
+  link resource.title, resource.route
+  template resource.template.slug
+  resource.template.regions.each do |reg|
+    regions {
+      region reg.slug
+      content resource.content_for(reg)
+    }
+  end
+}
