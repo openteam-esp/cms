@@ -6,7 +6,7 @@ Cms::Application.routes.draw do
 
   resources :uploads, :only => [:new, :create, :index, :destroy]
 
-  resources :nodes, :only => :show do
+  resources :nodes, :only => [] do
     resources :pages, :only => [:new, :create]
     resources :parts, :only => [:new, :create]
     resources :html_parts, :only => [:new, :create]
@@ -41,5 +41,7 @@ Cms::Application.routes.draw do
 
 
   root :to => 'sites#index'
+
+  get '/nodes/(*id)', :to => "nodes#show", :format => true
 
 end
