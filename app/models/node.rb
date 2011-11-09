@@ -20,11 +20,11 @@ class Node < ActiveRecord::Base
   end
 
   def templates
-    Restfulie.at("#{site.client_url}/templates").throw_error.get.resource['templates'].keys rescue [:application]
+    templates_hash.keys
   end
 
   def template_regions
-    Restfulie.at("#{site.client_url}/templates").throw_error.get.resource['templates'][template] rescue { :content => :html }
+    templates_hash[template]
   end
 
   def content_for(region)
@@ -41,6 +41,10 @@ class Node < ActiveRecord::Base
       Node.skip_callback(:save, :after, :cache_route)
       save!
       Node.set_callback(:save, :after, :cache_route)
+    end
+
+    def templates_hash
+      Restfulie.at("#{site.client_url}/templates").throw_error.get.resource['templates'] rescue [{ :application => { :content => :html} }]
     end
 end
 
