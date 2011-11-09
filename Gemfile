@@ -17,10 +17,10 @@ gem 'nested_form',                                :git => 'git://github.com/kfpr
 gem 'rails'
 gem 'russian'
 gem 'sanitize'
+gem 'sass-rails'
 gem 'simple-navigation'
 
 group :assets do
-  gem 'sass-rails'
   gem 'therubyracer'
   gem 'uglifier'
 end
