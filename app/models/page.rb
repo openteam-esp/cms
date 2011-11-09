@@ -9,14 +9,11 @@ class Page < Node
   def locale
     ancestors.second
   end
-<<<<<<< HEAD
 
   def part_for(region)
     parts.where(:region => region).first
   end
 
-=======
->>>>>>> #8679. К locale привязать контент
 end
 
 # == Schema Information
