@@ -16,7 +16,7 @@ class Node < ActiveRecord::Base
   end
 
   def template_regions
-    ['header', 'content', 'footer']
+    {'header' => 'html', 'content' => 'html', 'footer' => 'html' }
   end
 
 end

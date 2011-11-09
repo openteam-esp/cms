@@ -1,8 +1,7 @@
-class Part < ActiveRecord::Base
+class HtmlPart < Part
   belongs_to :content
-  belongs_to :page
-  belongs_to :region
-  validates_presence_of :content, :page, :region
+
+  validates_presence_of :content
 
   before_validation :create_or_update_content
 
@@ -28,5 +27,6 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #  region     :string(255)
+#  type       :string(255)
 #
 

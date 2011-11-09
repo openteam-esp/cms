@@ -10,6 +10,10 @@ class Page < Node
     ancestors.second
   end
 
+  def part_for(region)
+    parts.where(:region => region).first
+  end
+
 end
 
 # == Schema Information

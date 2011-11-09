@@ -1,9 +1,7 @@
-require 'spec_helper'
+class Part < ActiveRecord::Base
+  belongs_to :page
 
-describe Part do
-  it { should belong_to :page }
-  it { should validate_presence_of :page }
-  it { should validate_presence_of :region }
+  validates_presence_of :page, :region
 end
 
 # == Schema Information

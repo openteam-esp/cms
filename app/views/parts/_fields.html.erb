@@ -1,4 +1,2 @@
-<%= form.inputs do %>
-  <%= javascript_include_tag "ckeditor/ckeditor" %>
-  <%= form.input :body, :as => :ckeditor %>
-<% end %>
+<%= render :partial => "#{@part.class.name.tableize}/fields", :locals => { :form => form } %>
+<%= hidden_field_tag :region, @part.region %>

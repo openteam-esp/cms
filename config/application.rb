@@ -22,7 +22,10 @@ module Cms
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    config.autoload_paths += %W[#{config.root}/app/models/uploads]
+    config.autoload_paths += %W[
+                                #{config.root}/app/models/parts
+                                #{config.root}/app/models/uploads
+                               ]
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.

@@ -8,14 +8,16 @@
 </ul>
 
 <ul>
-  <% resource.template_regions.each do |region| %>
+  <% resource.template_regions.each do |region, part| %>
     <li>
       <%= region %>
-      <% if part = resource.parts.where(:region => region).first %>
-        <%= raw part.body %>
+      <% if part = resource.part_for(region) %>
+        <%= render part %>
         <%= link_to action_title(:action => 'edit', :controller => 'parts'), edit_part_path(part) %>
+        <%= link_to action_title(:action => 'destroy', :controller => 'parts'), part_path(part), confirm: t('Are you sure?'), method: :delete  %>
+      <% else %>
+        <%= link_to action_title(:action => 'new', :controller => 'parts'), new_page_part_path(resource, :region => region) %>
       <% end %>
     </li>
   <% end %>
 </ul>
-<%= link_to action_title(:action => 'new', :controller => 'parts'), new_page_part_path(resource) %>
