@@ -12,15 +12,19 @@ class Node < ActiveRecord::Base
   delegate :templates, :to => :site
 
   def to_s
-    slug
+    title
   end
 
   def pages
     Page.where(:ancestry => child_ancestry)
   end
 
+  def templates
+    Restfulie.at("#{site.client_url}/templates").throw_error.get.resource['templates'].keys rescue [:application]
+  end
+
   def template_regions
-    {'header' => 'navigation', 'content' => 'html', 'footer' => 'html' }
+    Restfulie.at("#{site.client_url}/templates").throw_error.get.resource['templates'][template] rescue { :content => :html }
   end
 
   def content_for(region)
