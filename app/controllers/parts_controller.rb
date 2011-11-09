@@ -8,7 +8,7 @@ class PartsController < ApplicationController
       part_class = "#{parent.template_regions[region].capitalize}Part".constantize
       @part = part_class.new(params[part_class.name.underscore])
       @part.region = region
-      @part.page = parent
+      @part.node = parent
       @part
     end
 
@@ -17,6 +17,10 @@ class PartsController < ApplicationController
     end
 
     def smart_resource_url
+      parent
+    end
+
+    def smart_collection_url
       parent
     end
 end

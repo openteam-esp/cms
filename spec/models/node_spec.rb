@@ -32,5 +32,6 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #  template   :string(255)
+#  route      :text
 #
 

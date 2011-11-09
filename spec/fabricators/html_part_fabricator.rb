@@ -1,5 +1,5 @@
 Fabricator(:html_part) do
   body "MyText"
-  page! { Fabricate(:page) }
+  node! { Fabricate(:page) }
   region 'region'
 end

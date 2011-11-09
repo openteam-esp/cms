@@ -5,6 +5,7 @@ describe HtmlPart do
 
   describe "should update content body" do
     let (:part) { Fabricate(:html_part, :body => "text") }
+
     it "on create" do
       part.content.body.should == "text"
       part.body.should == "text"
@@ -20,15 +21,15 @@ end
 #
 # Table name: parts
 #
-#  id                         :integer         not null, primary key
-#  content_id                 :integer
-#  page_id                    :integer
-#  created_at                 :datetime
-#  updated_at                 :datetime
-#  region                     :string(255)
-#  type                       :string(255)
-#  node_id                    :integer
-#  descendants_level          :integer
-#  selected_descendants_level :integer
+#  id                        :integer         not null, primary key
+#  html_content_id           :integer
+#  created_at                :datetime
+#  updated_at                :datetime
+#  region                    :string(255)
+#  type                      :string(255)
+#  node_id                   :integer
+#  navigation_level          :integer
+#  navigation_selected_level :integer
+#  navigation_from_id        :integer
 #
 

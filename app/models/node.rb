@@ -4,7 +4,6 @@ class Node < ActiveRecord::Base
   has_ancestry
 
   has_many :parts
-  has_many :contents, :through => :parts
 
   normalize_attribute :title, :with => [:squish, :gilensize_as_text, :blank]
   after_save :cache_route
@@ -28,6 +27,10 @@ class Node < ActiveRecord::Base
     parts.where(:region => region).first.try(:body)
   end
 
+  def part_for(region)
+    parts.where(:region => region).first
+  end
+
   private
     def cache_route
       self.route = Node.find(path_ids).map(&:slug).join('/')
@@ -49,5 +52,6 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #  template   :string(255)
+#  route      :text
 #
 

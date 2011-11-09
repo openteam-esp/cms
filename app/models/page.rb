@@ -1,7 +1,4 @@
 class Page < Node
-  has_many :parts
-  has_many :contents, :through => :parts
-
   validates_presence_of :parent, :template
 
   alias :node :parent
@@ -9,11 +6,6 @@ class Page < Node
   def locale
     ancestors.second
   end
-
-  def part_for(region)
-    parts.where(:region => region).first
-  end
-
 end
 
 # == Schema Information
@@ -28,5 +20,6 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #  template   :string(255)
+#  route      :text
 #
 

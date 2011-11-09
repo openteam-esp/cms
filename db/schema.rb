@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111109054454) do
+ActiveRecord::Schema.define(:version => 20111109073221) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -27,24 +27,23 @@ ActiveRecord::Schema.define(:version => 20111109054454) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "route"
     t.string   "template"
+    t.text     "route"
   end
 
   create_table "parts", :force => true do |t|
-    t.integer  "content_id"
-    t.integer  "page_id"
+    t.integer  "html_content_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "region"
     t.string   "type"
     t.integer  "node_id"
-    t.integer  "descendants_level"
-    t.integer  "selected_descendants_level"
+    t.integer  "navigation_level"
+    t.integer  "navigation_selected_level"
+    t.integer  "navigation_from_id"
   end
 
-  add_index "parts", ["content_id"], :name => "index_parts_on_content_id"
-  add_index "parts", ["page_id"], :name => "index_parts_on_page_id"
+  add_index "parts", ["html_content_id"], :name => "index_parts_on_content_id"
 
   create_table "uploads", :force => true do |t|
     t.string   "type"

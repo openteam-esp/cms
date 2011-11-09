@@ -7,7 +7,7 @@
         <%= link_to action_title(:action => 'edit', :controller => 'parts'), edit_part_path(part) %>
         <%= link_to action_title(:action => 'destroy', :controller => 'parts'), part_path(part), confirm: t('Are you sure?'), method: :delete  %>
       <% else %>
-        <%= link_to action_title(:action => 'new', :controller => 'parts'), new_page_part_path(resource, :region => region) %>
+        <%= link_to action_title(:action => 'new', :controller => 'parts'), new_node_part_path(resource, :region => region) %>
       <% end %>
     </li>
   <% end %>
