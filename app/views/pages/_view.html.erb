@@ -8,10 +8,10 @@
 </ul>
 
 <ul>
-  <% resource.template.regions.each do |region| %>
+  <% resource.template_regions.each do |region| %>
     <li>
       <%= region %>
-      <% if part = resource.parts.where(:region_id => region).first %>
+      <% if part = resource.parts.where(:region => region).first %>
         <%= raw part.body %>
         <%= link_to action_title(:action => 'edit', :controller => 'parts'), edit_part_path(part) %>
       <% end %>

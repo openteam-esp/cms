@@ -1,5 +1,4 @@
 <%= form.inputs do %>
-  <%= form.input :region, :collection => resource.page.template.regions %>
   <%= javascript_include_tag "ckeditor/ckeditor" %>
   <%= form.input :body, :as => :ckeditor %>
 <% end %>

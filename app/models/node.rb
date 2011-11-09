@@ -15,6 +15,10 @@ class Node < ActiveRecord::Base
     Page.where(:ancestry => child_ancestry)
   end
 
+  def template_regions
+    ['header', 'content', 'footer']
+  end
+
 end
 
 # == Schema Information

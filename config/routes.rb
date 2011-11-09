@@ -6,8 +6,6 @@ Cms::Application.routes.draw do
 
   resources :uploads, :only => [:new, :create, :index, :destroy]
 
-  resources :regions
-
   resources :node, :only => [] do
     resources :pages, :only => [:new, :create]
   end
@@ -18,11 +16,9 @@ Cms::Application.routes.draw do
 
   resources :locales, :only => [:show, :edit, :update, :destroy]
 
-  resources :templates, :only => [:show, :edit, :update, :destroy]
 
   resources :sites do
     resources :locales, :only => [:new, :create]
-    resources :templates, :only => [:index, :new, :create]
   end
 
 

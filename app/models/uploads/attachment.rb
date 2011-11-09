@@ -1,6 +1,7 @@
 class Attachment < Upload
 
 end
+
 # == Schema Information
 #
 # Table name: uploads
