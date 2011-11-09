@@ -1,9 +1,9 @@
 page{
   link resource.title, resource.route
-  template resource.template.slug
+  template resource.template
   regions {
-    resource.template.regions.each do |reg|
-      insert_value(reg.slug, '', resource.content_for(reg))
+    resource.template_regions.keys.each do |reg|
+      insert_value(reg, '', resource.part_for(reg).to_json)
     end
   }
 }

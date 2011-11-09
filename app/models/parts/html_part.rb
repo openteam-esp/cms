@@ -11,6 +11,10 @@ class HtmlPart < Part
     @body = body
   end
 
+  def to_json
+    as_json(:only => [:type], :include => { :content => { :only => [:updated_at, :body] } })
+  end
+
   private
     def create_or_update_content
       self.content ? self.content.update_attribute(:body, @body) : self.content = Content.create!(:body => @body)
