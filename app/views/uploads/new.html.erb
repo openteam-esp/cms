@@ -1,0 +1,7 @@
+<%= semantic_form_for resource, :html => {:multipart => true} do |form| %>
+  <%= form.inputs do %>
+    <%= form.input :file, :as => :file %>
+  <% end %>
+  <%= form.buttons %>
+<% end %>
+
