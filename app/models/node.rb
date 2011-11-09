@@ -27,10 +27,6 @@ class Node < ActiveRecord::Base
     templates_hash[template]
   end
 
-  def content_for(region)
-    parts.where(:region => region).first.try(:body)
-  end
-
   def part_for(region)
     parts.where(:region => region).first
   end
@@ -44,7 +40,7 @@ class Node < ActiveRecord::Base
     end
 
     def templates_hash
-      Restfulie.at("#{site.client_url}/templates").throw_error.get.resource['templates'] rescue [{ :application => { :content => :html} }]
+      Restfulie.at("#{site.client_url}/templates").throw_error.get.resource['templates'] rescue { 'application' => { 'content' => 'html'} }
     end
 end
 

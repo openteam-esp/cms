@@ -1,8 +1,5 @@
 class Site < Node
-  has_many :templates
-
   delegate :parts, :to => :default_locale
-  delegate :template, :to => :default_locale
 
   def locales
     Locale.where(:ancestry => child_ancestry)

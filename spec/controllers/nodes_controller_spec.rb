@@ -16,13 +16,13 @@ describe NodesController do
       it { body[:link][0][:rel].should == page.title }
       it { body[:link][0][:href].should == page.route }
       it { body[:template].should == page.template }
-      it { body[:regions].keys.should == page.template_regions.keys }
     end
 
     it "HtmlPart content" do
-      html_part = Fabricate(:html_part, :node => page, :region => page.template_regions.keys.first, :body => "any html text")
+      html_part = Fabricate(:html_part, :node => page, :region => 'content', :body => "any html text")
       get :show, :id => page.route, :format => :json
-      body[:regions][html_part.region][:content][:body].should == html_part.body
+      body[:regions].keys.should == ['content']
+      body[:regions][html_part.region]['content']['body'].should == html_part.body
     end
 
   end
