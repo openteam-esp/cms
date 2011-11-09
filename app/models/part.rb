@@ -25,8 +25,8 @@ end
 #  id         :integer         not null, primary key
 #  content_id :integer
 #  page_id    :integer
-#  region_id  :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  region     :string(255)
 #
 
