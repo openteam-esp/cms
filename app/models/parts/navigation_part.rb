@@ -1,8 +1,9 @@
 class NavigationPart < Part
   belongs_to :node
 
-  validates_presence_of :node
+  validates_presence_of :node, :descendants_level, :selected_descendants_level
 end
+
 # == Schema Information
 #
 # Table name: parts

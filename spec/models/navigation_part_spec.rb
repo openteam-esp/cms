@@ -3,6 +3,8 @@ require 'spec_helper'
 describe NavigationPart do
   it { should belong_to :node }
   it { should validate_presence_of :node }
+  it { should validate_presence_of :descendants_level }
+  it { should validate_presence_of :selected_descendants_level }
 end
 
 # == Schema Information
