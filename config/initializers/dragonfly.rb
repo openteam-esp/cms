@@ -24,7 +24,7 @@ if Settings[:s3]
 
   class Fog::Connection
     def request_with_openteam(params, &block)
-      request_without_openteam(params.merge(:path => "/cms-demo/#{params[:path]}"), &block)
+      request_without_openteam(params.merge(:path => "/#{Settings[:s3][:bucket_name]}/#{params[:path]}"), &block)
     end
     alias_method_chain :request, :openteam
   end

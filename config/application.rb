@@ -51,6 +51,8 @@ module Cms
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    config.dev_tweaks.log_autoload_notice = false if config.respond_to? :dev_tweaks
+
     config.generators do |generators|
       generators.test_framework       :rspec, :fixture => true
       generators.fixture_replacement  :fabrication

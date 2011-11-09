@@ -1,3 +1,8 @@
-hoptoad:
-  api_key:            key
-  host:               host
+production:
+  hoptoad:
+    api_key:            key
+    host:               host
+
+  s3:
+    access_key_id:      key
+    secret_access_key:  secret

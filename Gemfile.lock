@@ -61,10 +61,22 @@ GEM
     dragonfly (0.9.8)
       rack
     erubis (2.7.0)
+    excon (0.7.6)
     execjs (1.2.9)
       multi_json (~> 1.0)
     fabrication (1.2.0)
     ffi (1.0.10)
+    fog (1.0.0)
+      builder
+      excon (~> 0.7.3)
+      formatador (~> 0.2.0)
+      mime-types
+      multi_json (~> 1.0.3)
+      net-scp (~> 1.0.4)
+      net-ssh (~> 2.1.4)
+      nokogiri (~> 1.5.0)
+      ruby-hmac
+    formatador (0.2.1)
     formtastic (2.0.2)
       rails (~> 3.0)
     fssm (0.2.7)
@@ -101,6 +113,9 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.17.2)
     multi_json (1.0.3)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-ssh (2.1.4)
     nokogiri (1.5.0)
     orm_adapter (0.0.5)
     pg (0.11.0)
@@ -150,6 +165,7 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.6.0)
+    ruby-hmac (0.4.0)
     russian (0.6.0)
       i18n (>= 0.5.0)
     sanitize (2.0.3)
@@ -195,6 +211,7 @@ DEPENDENCIES
   default_value_for
   dragonfly
   fabrication
+  fog
   formtastic
   gilenson
   guard-rspec
