@@ -1,20 +1,7 @@
-require 'spec_helper'
+class NavigationPart < Part
+  belongs_to :node
 
-describe HtmlPart do
-  it { should belong_to :content }
-
-  describe "should update content body" do
-    let (:part) { Fabricate(:html_part, :body => "text") }
-    it "on create" do
-      part.content.body.should == "text"
-      part.body.should == "text"
-    end
-    it "on update" do
-      part.update_attributes(:body => "othertext")
-      part.content.body.should == "othertext"
-      part.body.should == "othertext"
-    end
-  end
+  validates_presence_of :node
 end
 # == Schema Information
 #
