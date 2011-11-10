@@ -1,10 +1,10 @@
-class Video < Upload
+class Attachment < Upload
 
 end
 
 # == Schema Information
 #
-# Table name: uploads
+# Table name: inodes
 #
 #  id             :integer         not null, primary key
 #  type           :string(255)
@@ -14,5 +14,7 @@ end
 #  file_uid       :string(255)
 #  created_at     :datetime
 #  updated_at     :datetime
+#  folder_id      :string(255)
+#  ancestry       :string(255)
 #
 

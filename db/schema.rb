@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111110024719) do
+ActiveRecord::Schema.define(:version => 20111110052629) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -20,6 +20,22 @@ ActiveRecord::Schema.define(:version => 20111110024719) do
     t.datetime "updated_at"
   end
 
+  create_table "inodes", :force => true do |t|
+    t.string   "type"
+    t.string   "file_name"
+    t.string   "file_mime_type"
+    t.string   "file_size"
+    t.string   "file_uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "folder_id"
+    t.string   "ancestry"
+  end
+
+  add_index "inodes", ["ancestry"], :name => "index_inodes_on_ancestry"
+  add_index "inodes", ["folder_id"], :name => "index_inodes_on_folder_id"
+  add_index "inodes", ["type"], :name => "index_inodes_on_type"
+
   create_table "nodes", :force => true do |t|
     t.string   "slug"
     t.string   "title"
@@ -27,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20111110024719) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "route"
     t.string   "template"
+    t.text     "route"
     t.string   "client_url"
   end
 
@@ -47,15 +63,5 @@ ActiveRecord::Schema.define(:version => 20111110024719) do
   end
 
   add_index "parts", ["html_content_id"], :name => "index_parts_on_content_id"
-
-  create_table "uploads", :force => true do |t|
-    t.string   "type"
-    t.string   "file_name"
-    t.string   "file_mime_type"
-    t.string   "file_size"
-    t.string   "file_uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
 end
