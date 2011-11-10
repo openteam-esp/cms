@@ -31,6 +31,10 @@ class Node < ActiveRecord::Base
     parts.where(:region => region).first
   end
 
+  def path
+    route.gsub(/^#{site.slug}/, '')
+  end
+
   private
     def cache_route
       self.route = Node.find(path_ids).map(&:slug).join('/')

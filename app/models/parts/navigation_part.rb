@@ -12,7 +12,7 @@ class NavigationPart < Part
   end
 
   def build_navigation_tree(node)
-    hash = { node.slug => { 'title' => node.title, 'path' => node.route } }
+    hash = { node.slug => { 'title' => node.title, 'path' => node.path } }
     node.children.each do |child|
         hash[node.slug]['children'] ||= {}
         hash[node.slug]['children'].merge!(build_navigation_tree(child))
