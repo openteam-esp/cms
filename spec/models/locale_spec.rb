@@ -20,7 +20,8 @@ end
 #  type       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
-#  template   :string(255)
 #  route      :text
+#  template   :string(255)
+#  client_url :string(255)
 #
 

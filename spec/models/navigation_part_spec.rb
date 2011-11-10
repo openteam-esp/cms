@@ -1,10 +1,14 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe NavigationPart do
   it { should belong_to :from_node }
   it { should validate_presence_of :from_node }
-  it { should validate_presence_of :navigation_level }
-  it { should validate_presence_of :navigation_selected_level }
+  it { should validate_presence_of :start_level }
+  it { should validate_presence_of :end_level }
+  it { should validate_presence_of :extra_active }
+  it { should validate_presence_of :extra_inactive }
 
   describe 'json' do
     let(:site) { Fabricate(:site, :slug => 'site', :title => 'site') }
@@ -31,9 +35,62 @@ describe NavigationPart do
       build_site
     end
 
-    it {
+    it 'меню первого уровня для локали' do
+      navigation_part = Fabricate(:navigation_part,
+                                  :node => locale,
+                                  :region => 'region',
+                                  :from_node => locale,
+                                  :end_level => 1)
 
-    }
+      expected_hash = {
+        'type' => 'NavigationPart',
+        'content' => {
+          'section1' => { 'title' => 'section1' },
+          'section2' => { 'title' => 'section2' },
+          'section3' => { 'title' => 'section3' },
+          'page4' => { 'title' => 'page4' },
+          'page5' => { 'title' => 'page5' }
+        }
+      }
+
+      navigation_part.to_json.should == expected_hash
+    end
+
+    it 'sitemap' do
+      navigation_part = Fabricate(:navigation_part,
+                                  :node => locale,
+                                  :region => 'region',
+                                  :from_node => locale)
+
+      expected_hash = {
+        'type' => 'NavigationPart',
+        'content' => {
+          'section1' => { 'title' => 'section1', 'children' => {
+            'subsection11' => { 'title' => 'subsection11', 'children' => {
+              'page111' => { 'title' => 'page111' },
+              'page112' => { 'title' => 'page112' }
+            }},
+            'page11' => { 'title' => 'page11' }
+          }},
+          'section2' => { 'title' => 'section2' },
+          'section3' => { 'title' => 'section3', 'children' => {
+            'subsection31' => { 'title' => 'subsection31', 'children' => {
+              'page311' => { 'title' => 'page311' }
+            }},
+            'subsection32' => { 'title' => 'subsection32', 'children' => {
+              'page321' => { 'title' => 'page321' }
+            }},
+            'subsection33' => { 'title' => 'subsection33', 'children' => {
+              'page333' => { 'title' => 'page333' }
+            }},
+          }},
+          'page4' => { 'title' => 'page4' },
+          'page5' => { 'title' => 'page5' }
+        }
+      }
+
+      navigation_part.to_json.should == expected_hash
+    end
   end
 end
 
