@@ -41,56 +41,67 @@ describe NavigationPart do
                                   :region => 'region',
                                   :from_node => locale,
                                   :end_level => 1)
-
       expected_hash = {
         'type' => 'NavigationPart',
-        'content' => {
-          'section1' => { 'title' => 'section1' },
-          'section2' => { 'title' => 'section2' },
-          'section3' => { 'title' => 'section3' },
-          'page4' => { 'title' => 'page4' },
-          'page5' => { 'title' => 'page5' }
-        }
+        'content' => { 'ru' => {
+                              'title' => 'ru',
+                              'path' => 'site/ru',
+                              'children' => {
+                                        'section1' => { 'title' => 'section1', 'path' => 'site/ru/section1' },
+                                        'section2' => { 'title' => 'section2', 'path' => 'site/ru/section2' },
+                                        'section3' => { 'title' => 'section3', 'path' => 'site/ru/section3' },
+                                        'page4' => { 'title' => 'page4', 'path' => 'site/ru/page4' },
+                                        'page5' => { 'title' => 'page5', 'path' => 'site/ru/page5' }
+                                      }
+                            }
+                      }
       }
 
       navigation_part.to_json.should == expected_hash
     end
 
-    it 'sitemap' do
+    it '3 level' do
       navigation_part = Fabricate(:navigation_part,
                                   :node => locale,
                                   :region => 'region',
-                                  :from_node => locale)
+                                  :from_node => locale,
+                                  :end_level => 3)
 
       expected_hash = {
         'type' => 'NavigationPart',
-        'content' => {
-          'section1' => { 'title' => 'section1', 'children' => {
-            'subsection11' => { 'title' => 'subsection11', 'children' => {
-              'page111' => { 'title' => 'page111' },
-              'page112' => { 'title' => 'page112' }
-            }},
-            'page11' => { 'title' => 'page11' }
-          }},
-          'section2' => { 'title' => 'section2' },
-          'section3' => { 'title' => 'section3', 'children' => {
-            'subsection31' => { 'title' => 'subsection31', 'children' => {
-              'page311' => { 'title' => 'page311' }
-            }},
-            'subsection32' => { 'title' => 'subsection32', 'children' => {
-              'page321' => { 'title' => 'page321' }
-            }},
-            'subsection33' => { 'title' => 'subsection33', 'children' => {
-              'page333' => { 'title' => 'page333' }
-            }},
-          }},
-          'page4' => { 'title' => 'page4' },
-          'page5' => { 'title' => 'page5' }
-        }
+        'content' => { 'ru' => {
+                          'title' => 'ru',
+                          'path' => 'site/ru',
+                          'children' => {
+                                'section1' => { 'title' => 'section1', 'path' => 'site/ru/section1', 'children' => {
+                                  'subsection11' => { 'title' => 'subsection11', 'path' => 'site/ru/section1/subsection11', 'children' => {
+                                    'page111' => { 'title' => 'page111', 'path' => 'site/ru/section1/subsection11/page111' },
+                                    'page112' => { 'title' => 'page112', 'path' => 'site/ru/section1/subsection11/page112' }
+                                  }},
+                                  'page11' => { 'title' => 'page11', 'path' => 'site/ru/section1/page11' }
+                                }},
+                                'section2' => { 'title' => 'section2', 'path' => 'site/ru/section2' },
+                                'section3' => { 'title' => 'section3', 'path' => 'site/ru/section3', 'children' => {
+                                  'subsection31' => { 'title' => 'subsection31', 'path' => 'site/ru/section3/subsection31', 'children' => {
+                                    'page311' => {'title' => 'page311', 'path' => 'site/ru/section3/subsection31/page311'}
+                                }},
+                                  'subsection32' => { 'title' => 'subsection32', 'path' => 'site/ru/section3/subsection32', 'children' => {
+                                    'page321' => { 'title' => 'page321', 'path' => 'site/ru/section3/subsection32/page321'}
+                                }},
+                                  'subsection33' => { 'title' => 'subsection33', 'path' => 'site/ru/section3/subsection33', 'children' => {
+                                    'page331' => {'title' => 'page331', 'path' => 'site/ru/section3/subsection33/page331'}
+                                }},
+                                }},
+                                'page4' => { 'title' => 'page4', 'path' => 'site/ru/page4' },
+                                'page5' => { 'title' => 'page5', 'path' => 'site/ru/page5' }
+                              }
+                            }
+                        }
       }
 
       navigation_part.to_json.should == expected_hash
     end
+
   end
 end
 

@@ -8,20 +8,18 @@ class NavigationPart < Part
   end
 
   def content
-    super_puper_function(from_node)
+    build_navigation_tree(from_node)
   end
 
-  def super_puper_function(node_obj, res = {})
-    node_obj.children.each do |child|
-      res.merge!('title' => child.title)
-      res.merge!('children' => super_puper_function(child, res)) if child.children.any?
-      #res.merge!(child.slug => hash)
-    end
-    res
+  def build_navigation_tree(node)
+    hash = { node.slug => { 'title' => node.title, 'path' => node.route } }
+    node.children.each do |child|
+        hash[node.slug]['children'] ||= {}
+        hash[node.slug]['children'].merge!(build_navigation_tree(child))
+    end if node.depth - from_node.depth < end_level
+    hash
   end
 
-  def ololo(node)
-  end
 end
 
 # == Schema Information

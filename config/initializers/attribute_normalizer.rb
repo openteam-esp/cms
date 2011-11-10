@@ -18,7 +18,7 @@ AttributeNormalizer.configure do |config|
   html_formatter.glyph[:nob_close] = Gilenson::GLYPHS[:nob_close]
 
   config.normalizers[:gilensize_as_text] = ->(value, options) do
-    Sanitize.clean(value.to_s.gilensize(:html => false, :raw_output => true)).squish
+    Sanitize.clean(value.to_s.gilensize(:html => false, :raw_output => true)).gsub(/^[[:space:]]+/, '').squish
   end
 
   config.normalizers[:gilensize_as_html] = ->(value, options) do

@@ -5,7 +5,7 @@ class Node < ActiveRecord::Base
 
   has_many :parts
 
-  normalize_attribute :title, :with => [:squish, :gilensize_as_text, :blank]
+  normalize_attribute :title, :with => [:gilensize_as_text, :squish]
   after_save :cache_route
 
   alias :site :root
