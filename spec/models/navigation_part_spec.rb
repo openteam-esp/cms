@@ -5,10 +5,7 @@ require 'spec_helper'
 describe NavigationPart do
   it { should belong_to :from_node }
   it { should validate_presence_of :from_node }
-  it { should validate_presence_of :start_level }
-  it { should validate_presence_of :end_level }
-  it { should validate_presence_of :extra_active }
-  it { should validate_presence_of :extra_inactive }
+  it { should validate_presence_of :navigation_end_level }
 
   describe 'json' do
     let(:site) { Fabricate(:site, :slug => 'site', :title => 'site') }
@@ -40,7 +37,7 @@ describe NavigationPart do
                                   :node => locale,
                                   :region => 'region',
                                   :from_node => locale,
-                                  :end_level => 1)
+                                  :navigation_end_level => 1)
       expected_hash = {
         'type' => 'NavigationPart',
         'content' => { 'ru' => {
@@ -65,7 +62,7 @@ describe NavigationPart do
                                   :node => locale,
                                   :region => 'region',
                                   :from_node => locale,
-                                  :end_level => 3)
+                                  :navigation_end_level => 3)
 
       expected_hash = {
         'type' => 'NavigationPart',
@@ -109,15 +106,14 @@ end
 #
 # Table name: parts
 #
-#  id                        :integer         not null, primary key
-#  html_content_id           :integer
-#  created_at                :datetime
-#  updated_at                :datetime
-#  region                    :string(255)
-#  type                      :string(255)
-#  node_id                   :integer
-#  navigation_level          :integer
-#  navigation_selected_level :integer
-#  navigation_from_id        :integer
+#  id                   :integer         not null, primary key
+#  html_content_id      :integer
+#  created_at           :datetime
+#  updated_at           :datetime
+#  region               :string(255)
+#  type                 :string(255)
+#  node_id              :integer
+#  navigation_end_level :integer
+#  navigation_from_id   :integer
 #
 

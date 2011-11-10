@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111110052629) do
+ActiveRecord::Schema.define(:version => 20111110083936) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -55,11 +55,8 @@ ActiveRecord::Schema.define(:version => 20111110052629) do
     t.string   "region"
     t.string   "type"
     t.integer  "node_id"
-    t.integer  "start_level"
-    t.integer  "end_level"
+    t.integer  "navigation_end_level"
     t.integer  "navigation_from_id"
-    t.integer  "extra_active"
-    t.integer  "extra_inactive"
   end
 
   add_index "parts", ["html_content_id"], :name => "index_parts_on_content_id"
