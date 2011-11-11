@@ -23,14 +23,14 @@ describe Node do
     it { history.route.should == 'site/ru/about/history' }
   end
 
-  describe "должна отдавать шаблоны и парты" do
-    let(:locale) { Fabricate(:locale, :template => 'main_page')}
-    let(:page) { Fabricate(:page, :template => 'inner_page')}
+  describe "должна" do
     let(:site) { Fabricate(:site) }
+    let(:locale) { Fabricate(:locale, :template => 'main_page', :parent => site)}
+    let(:page) { Fabricate(:page, :template => 'inner_page', :parent => locale)}
     before do
-      site.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][site.slug]['templates'])
-      locale.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][site.slug]['templates'])
-      page.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][site.slug]['templates'])
+      Site.any_instance.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][site.slug]['templates'])
+      Locale.any_instance.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][site.slug]['templates'])
+      Page.any_instance.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][site.slug]['templates'])
     end
     it  { site.templates.should == ['main_page', 'inner_page'] }
     it  { locale.configurable_regions.should == { 'navigation' => 'navigation', 'content' => 'html', 'footer' => 'html' }}
@@ -38,6 +38,19 @@ describe Node do
     it  { page.required_regions.should == ['navigation', 'content'] }
     it  { page.configurable_regions.should == {'content' => 'html' } }
 
+    describe 'возвращать обязательные partы от родителей' do
+      before do
+        @page_content = Fabricate(:html_part, :body => "text", :node => page, :region => 'content')
+        @locale_content = Fabricate(:html_part, :body => "text", :node => locale, :region => 'content')
+        @navigation_part = Fabricate(:navigation_part,
+                                     :node => locale,
+                                     :region => 'navigation',
+                                     :from_node => locale,
+                                     :navigation_end_level => 1)
+      end
+      it { page.part_for('navigation').should == @navigation_part }
+      it { page.part_for('content').should == @page_content }
+    end
   end
 end
 

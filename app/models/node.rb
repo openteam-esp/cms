@@ -36,7 +36,8 @@ class Node < ActiveRecord::Base
   end
 
   def part_for(region)
-    parts.where(:region => region).first
+    part = parts.where(:region => region).first
+    part ||= Part.where(:region => region, :node_id => path_ids).first
   end
 
   def path
