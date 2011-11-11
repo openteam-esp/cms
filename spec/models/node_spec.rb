@@ -15,10 +15,12 @@ describe Node do
     let(:root) { Fabricate(:node, :parent => nil, :slug => 'site') }
     let(:ru) { Fabricate(:node, :parent => root, :slug => 'ru') }
     let(:about) { Fabricate(:node, :parent => ru, :slug => 'about') }
+    let(:history) { Fabricate(:node, :parent => about, :slug => 'history') }
 
     it { root.route.should == 'site' }
     it { ru.route.should == 'site/ru' }
     it { about.route.should == 'site/ru/about' }
+    it { history.route.should == 'site/ru/about/history' }
   end
 end
 
