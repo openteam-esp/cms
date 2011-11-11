@@ -1,5 +1,5 @@
 <ul>
-  <% resource.template_regions.each do |region, part| %>
+  <% resource.configurable_regions.each do |region, part| %>
     <li>
       <%= region %>
       <% if part = resource.part_for(region) %>

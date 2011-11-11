@@ -23,8 +23,16 @@ class Node < ActiveRecord::Base
     templates_hash.keys
   end
 
-  def template_regions
-    templates_hash[template]
+  def required_regions
+    templates_hash[template].select { | region, options | options['required'] }.keys
+  end
+
+  def configurable_regions
+    hash = {}
+    templates_hash[template].select { | region, options | options['configurable'] }.keys.each do |region|
+      hash[region] = templates_hash[template][region]['type']
+    end
+    hash
   end
 
   def part_for(region)
@@ -44,7 +52,7 @@ class Node < ActiveRecord::Base
     end
 
     def templates_hash
-      Restfulie.at("#{site.client_url}/templates").throw_error.get.resource['templates'] rescue { 'application' => { 'content' => 'html'} }
+      YAML.load_file(Rails.root.join 'config/sites.yml').to_hash['sites'][site.slug]['templates']
     end
 end
 

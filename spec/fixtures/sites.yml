@@ -1,0 +1,29 @@
+sites:
+  www.tgr.ru:
+    templates:
+      main_page:
+        navigation:
+          type: navigation
+          required: true
+          configurable: true
+        content:
+          type: html
+          required: true
+          configurable: true
+        footer:
+          type: html
+          required: true
+          configurable: true
+      inner_page:
+        navigation:
+          type: navigation
+          required: true
+          configurable: false
+        content:
+          type: html
+          required: true
+          configurable: true
+        footer:
+          type: html
+          required: false
+          configurable: false
