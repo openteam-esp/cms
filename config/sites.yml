@@ -1,5 +1,5 @@
 sites:
-  tomsk_gov_ru:
+  gsn:
     templates:
       main_page:
         navigation:
@@ -11,6 +11,26 @@ sites:
           required: true
           configurable: true
         content:
+          type: html
+          required: true
+          configurable: true
+        subnavigation_first:
+          type: navigation
+          required: true
+          configurable: true
+        subnavigation_second:
+          type: navigation
+          required: true
+          configurable: true
+        subnavigation_third:
+          type: navigation
+          required: true
+          configurable: true
+        subnavigation_fourth:
+          type: navigation
+          required: true
+          configurable: true
+        contacts:
           type: html
           required: true
           configurable: true
@@ -31,6 +51,26 @@ sites:
           type: html
           required: true
           configurable: true
+        subnavigation_first:
+          type: navigation
+          required: true
+          configurable: false
+        subnavigation_second:
+          type: navigation
+          required: true
+          configurable: false
+        subnavigation_third:
+          type: navigation
+          required: true
+          configurable: false
+        subnavigation_fourth:
+          type: navigation
+          required: true
+          configurable: false
+        contacts:
+          type: html
+          required: true
+          configurable: false
         footer:
           type: html
           required: true

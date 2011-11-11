@@ -52,6 +52,7 @@ class Node < ActiveRecord::Base
       Node.skip_callback(:save, :after, :cache_route)
       save!
       Node.set_callback(:save, :after, :cache_route)
+      descendants.map(&:save)
     end
 
     def templates_hash
