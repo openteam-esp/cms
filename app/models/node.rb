@@ -38,6 +38,8 @@ class Node < ActiveRecord::Base
   def part_for(region)
     part = parts.where(:region => region).first
     part ||= Part.where(:region => region, :node_id => path_ids).first
+    part.current_node = self if part
+    part
   end
 
   def path
@@ -53,7 +55,7 @@ class Node < ActiveRecord::Base
     end
 
     def templates_hash
-      YAML.load_file(Rails.root.join 'config/sites.yml').to_hash['sites'][site.slug]['templates']
+      @templates_hash ||= YAML.load_file(Rails.root.join 'config/sites.yml').to_hash['sites'][site.slug]['templates']
     end
 end
 

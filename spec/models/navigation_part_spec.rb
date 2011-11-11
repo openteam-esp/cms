@@ -8,7 +8,7 @@ describe NavigationPart do
   it { should validate_presence_of :navigation_end_level }
 
   describe 'json' do
-    let(:site) { Fabricate(:site, :slug => 'site', :title => 'site') }
+    let(:site) { Fabricate(:site, :slug => 'www.tgr.ru', :title => 'site') }
       let(:locale) { Fabricate(:locale, :parent => site, :slug => 'ru', :title => 'ru') }
         let(:section1) { Fabricate(:page, :parent => locale, :slug => 'section1', :title => 'section1') }
           let(:subsection11) { Fabricate(:page, :parent => section1, :slug => 'subsection11', :title => 'subsection11') }
@@ -29,6 +29,7 @@ describe NavigationPart do
         let(:build_site) { page111; page112; page11; section2; page311; page321; page331; page4; page5 }
 
     before do
+
       build_site
     end
 
@@ -37,7 +38,7 @@ describe NavigationPart do
                                   :node => locale,
                                   :region => 'region',
                                   :from_node => locale,
-                                  :navigation_end_level => 1)
+                                  :navigation_default_level => 1)
       expected_hash = {
         'type' => 'NavigationPart',
         'content' => { 'ru' => {
@@ -54,7 +55,7 @@ describe NavigationPart do
                       }
       }
 
-      navigation_part.to_json.should == expected_hash
+      locale.part_for('region').to_json.should == expected_hash
     end
 
     it '3 level' do
@@ -62,7 +63,7 @@ describe NavigationPart do
                                   :node => locale,
                                   :region => 'region',
                                   :from_node => locale,
-                                  :navigation_end_level => 3)
+                                  :navigation_default_level => 3)
 
       expected_hash = {
         'type' => 'NavigationPart',
@@ -96,8 +97,44 @@ describe NavigationPart do
                         }
       }
 
-      navigation_part.to_json.should == expected_hash
+      locale.part_for('region').to_json.should == expected_hash
     end
+
+
+    it "показывать раскрытую часть навигации для текущей страницы" do
+      page111.update_attribute(:template, :inner_pagei)
+      page111.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][site.slug]['templates'])
+      navigation_part = Fabricate(:navigation_part,
+                                  :node => locale,
+                                  :region => 'navigation',
+                                  :from_node => locale,
+                                  :navigation_default_level => 1,
+                                  :navigation_end_level => 2)
+
+      expected_hash = {
+        'type' => 'NavigationPart',
+        'content' => { 'ru' => {
+                          'title' => 'ru',
+                          'path' => '/ru',
+                          'children' => {
+                                'section1' => { 'title' => 'section1', 'path' => '/ru/section1', 'selected' => true, 'children' => {
+                                  'subsection11' => { 'title' => 'subsection11', 'path' => '/ru/section1/subsection11', 'selected' => true },
+                                  'page11' => { 'title' => 'page11', 'path' => '/ru/section1/page11' }
+                                }},
+                                'section2' => { 'title' => 'section2', 'path' => '/ru/section2' },
+                                'section3' => { 'title' => 'section3', 'path' => '/ru/section3' },
+                                'page4' => { 'title' => 'page4', 'path' => '/ru/page4' },
+                                'page5' => { 'title' => 'page5', 'path' => '/ru/page5' }
+                              }
+                            }
+                        }
+      }
+      page111.part_for('navigation').to_json.should == expected_hash
+    end
+
+
+
+
 
   end
 end

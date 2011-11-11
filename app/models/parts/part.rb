@@ -2,6 +2,9 @@ class Part < ActiveRecord::Base
   belongs_to :node
 
   validates_presence_of :node, :region
+
+  attr_accessor :current_node
+
 end
 
 # == Schema Information
