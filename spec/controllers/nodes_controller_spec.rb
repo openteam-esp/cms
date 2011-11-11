@@ -23,7 +23,6 @@ describe NodesController do
       get :show, :id => page.route, :format => :json
       body[:regions].keys.should == ['content']
       body[:regions][html_part.region]['content']['body'].should == html_part.body
-      puts response.body
     end
 
   end
