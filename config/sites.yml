@@ -2,6 +2,10 @@ sites:
   gsn:
     templates:
       main_page:
+        breadcrumbs:
+          type: breadcrumbs
+          required: true
+          configurable: true
         navigation:
           type: navigation
           required: true
@@ -39,6 +43,10 @@ sites:
           required: true
           configurable: true
       inner_page:
+        breadcrumbs:
+          type: breadcrumbs
+          required: true
+          configurable: false
         navigation:
           type: navigation
           required: true
