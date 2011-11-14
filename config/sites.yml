@@ -7,7 +7,7 @@ sites:
           required: true
           configurable: true
         site_name:
-          type: text
+          type: html
           required: true
           configurable: true
         content:
@@ -44,7 +44,7 @@ sites:
           required: true
           configurable: false
         site_name:
-          type: text
+          type: html
           required: true
           configurable: false
         content:
