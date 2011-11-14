@@ -42,7 +42,7 @@ class Node < ActiveRecord::Base
     part
   end
 
-  def path
+  def route_without_site
     route.gsub(/^#{site.slug}/, '')
   end
 
