@@ -9,7 +9,7 @@ describe BreadcrumbsPart do
         let(:subsection) { Fabricate(:page, :parent => section, :slug => 'subsection', :title => 'subsection') }
           let(:page) { Fabricate(:page, :parent => subsection, :slug => 'page', :title => 'page') }
 
-  it "должен стоить крошки" do
+  it "должен строить крошки" do
     breadcrumbs_part = BreadcrumbsPart.create(:node => locale, :region => 'region')
 
     expected_hash = {

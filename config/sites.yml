@@ -6,6 +6,10 @@ sites:
           type: breadcrumbs
           required: true
           configurable: true
+        news:
+          type: news
+          required: true
+          configurable: true
         navigation:
           type: navigation
           required: true
@@ -45,6 +49,10 @@ sites:
       inner_page:
         breadcrumbs:
           type: breadcrumbs
+          required: true
+          configurable: false
+        news:
+          type: news
           required: true
           configurable: false
         navigation:

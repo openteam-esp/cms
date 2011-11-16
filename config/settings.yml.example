@@ -6,3 +6,8 @@ production:
   s3:
     access_key_id:      key
     secret_access_key:  secret
+
+news:
+  protocol:             http
+  host:                 localhost
+  port:                 3000
