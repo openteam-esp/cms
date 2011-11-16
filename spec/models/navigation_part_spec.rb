@@ -156,6 +156,7 @@ end
 #  news_channel             :string(255)
 #  news_count               :integer
 #  news_order_by            :string(255)
-#  news_until               :datetime
+#  news_until               :date
+#  news_per_page            :integer
 #
 

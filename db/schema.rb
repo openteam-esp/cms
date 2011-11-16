@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111116024516) do
+ActiveRecord::Schema.define(:version => 20111116041359) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20111116024516) do
     t.integer  "news_count"
     t.string   "news_order_by"
     t.date     "news_until"
+    t.integer  "news_per_page"
   end
 
   add_index "parts", ["html_content_id"], :name => "index_parts_on_content_id"
