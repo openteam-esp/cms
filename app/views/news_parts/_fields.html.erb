@@ -1,5 +1,7 @@
 <%= form.inputs do %>
   <%= form.input :news_channel %>
   <%= form.input :news_count %>
+  <%= form.input :news_order_by, :as => :select, :collection => form.object.class.values_for_select_tag(:news_order_by) %>
+  <%= form.input :news_until %>
 <% end %>
 

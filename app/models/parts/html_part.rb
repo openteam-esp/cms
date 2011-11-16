@@ -35,5 +35,9 @@ end
 #  navigation_end_level     :integer
 #  navigation_from_id       :integer
 #  navigation_default_level :integer
+#  news_channel             :string(255)
+#  news_count               :integer
+#  news_order_by            :string(255)
+#  news_until               :datetime
 #
 

@@ -57,12 +57,19 @@ ru:
 
   activerecord:
     attributes:
+
       content:
         title:        Заголовок
         body:         Текст
+
       locale:
         slug_enum:
           ru:         русский
           en:         английский
           de:         немецкий
           fr:         французский
+
+      news_part:
+        news_order_by_enum:
+          since_desc: по дате публикации
+          unitl_asc: по дате актуальности
