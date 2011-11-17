@@ -10,10 +10,6 @@ sites:
           type: news_list
           required: true
           configurable: true
-        news_item:
-          type: news_item
-          required: true
-          configurable: true
         navigation:
           type: navigation
           required: true
@@ -57,11 +53,11 @@ sites:
           configurable: false
         news_list:
           type: news_list
-          required: true
-          configurable: false
+          required: false
+          configurable: true
         news_item:
           type: news_item
-          required: true
+          required: false
           configurable: true
         navigation:
           type: navigation
