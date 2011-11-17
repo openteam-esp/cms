@@ -91,10 +91,6 @@ sites:
           type: html
           required: true
           configurable: false
-        news_list:
-          type: news_list
-          requires: false
-          configurable: true
         footer:
           type: html
           required: true

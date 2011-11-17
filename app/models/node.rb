@@ -29,6 +29,12 @@ class Node < ActiveRecord::Base
     templates_hash[template].select { | region, options | options['required'] }.keys
   end
 
+  def regions
+    result = required_regions
+    result << parts.map(&:region)
+    result.flatten.uniq
+  end
+
   def configurable_regions
     hash = {}
     templates_hash[template].select { | region, options | options['configurable'] }.keys.each do |region|
