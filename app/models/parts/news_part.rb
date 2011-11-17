@@ -19,6 +19,10 @@ class NewsPart < Part
     @request ||= Restfulie.at("#{news_url}/public/entries?#{search_path}").accepts("application/json").get
   end
 
+  def request_headers
+    request.headers.merge(request.headers){ |k,v| v.join }
+  end
+
   def request_body
     ActiveSupport::JSON.decode request.body
   end
@@ -26,8 +30,8 @@ class NewsPart < Part
   def pagination
     hash = { 'pagination' => [] }
 
-    (1..request.headers['x-total-pages'].to_i).each do |page|
-      hash['pagination'] << { 'link' => "page#{page}", 'current' => request.headers['x-current-page'].to_i == page ? 'true' : 'false' }
+    (1..request_headers['x-total-pages'].to_i).each do |page|
+      hash['pagination'] << { 'link' => "?parts_params[news][page]=#{page}", 'current' => request_headers['x-current-page'].to_i == page ? 'true' : 'false' }
     end
 
     hash
@@ -40,7 +44,7 @@ class NewsPart < Part
 
     def search_path
       news_until = ::I18n.l(news_until) if news_until
-      URI.escape "utf8=✓&entry_search[channel_slugs][]=#{news_channel}&entry_search[order_by]=#{news_order_by.gsub(/_/,'+')}&entry_search[until_lt]=#{news_until}&per_page=#{news_per_page}&page=#{node.parts_params[:news][:page]}"
+      URI.escape "utf8=✓&entry_search[channel_slugs][]=#{news_channel}&entry_search[order_by]=#{news_order_by.gsub(/_/,'+')}&entry_search[until_lt]=#{news_until}&per_page=#{news_per_page}&page=#{node.parts_params.present? ? node.parts_params[:news][:page] : '1'}"
     end
 end
 

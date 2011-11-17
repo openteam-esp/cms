@@ -8,7 +8,7 @@ describe NewsPart do
                                 :news_order_by => 'since_desc',
                                 :news_channel => 'news')
 
-    request_hash = { 'x-total-pages' => 3, 'x-current-page' => 1 }
+    request_hash = { 'x-total-pages' => ['3'], 'x-current-page' => ['1'] }
     news_part.stub(:request).and_return(request_hash)
     request_hash.stub(:headers).and_return(request_hash)
 
@@ -29,9 +29,9 @@ describe NewsPart do
         ],
 
         'pagination' => [
-          { 'link' => 'page1', 'current' => 'true' },
-          { 'link' => 'page2', 'current' => 'false' },
-          { 'link' => 'page3', 'current' => 'false' }
+          { 'link' => '?parts_params[news][page]=1', 'current' => 'true' },
+          { 'link' => '?parts_params[news][page]=2', 'current' => 'false' },
+          { 'link' => '?parts_params[news][page]=3', 'current' => 'false' }
         ]
       }
     }
