@@ -8,11 +8,7 @@ class Node < ActiveRecord::Base
   normalize_attribute :title, :with => [:gilensize_as_text, :squish]
   after_save :cache_route
 
-  attr_writer :parts_params
-
-  def parts_params
-    Rack::Utils.parse_nested_query(@parts_params).symbolize_keys[:parts_params]
-  end
+  attr_accessor :parts_params
 
   alias :site :root
   delegate :templates, :to => :site
@@ -44,7 +40,10 @@ class Node < ActiveRecord::Base
   def part_for(region)
     part = parts.where(:region => region).first
     part ||= Part.where(:region => region, :node_id => path_ids).first
-    part.current_node = self if part
+    if part
+      part.current_node = self
+      part.params = parts_params[part.type.underscore.gsub('_part','')] if parts_params
+    end
     part
   end
 

@@ -38,11 +38,11 @@ describe NodesController do
       before do
         page.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][page.site.slug]['templates'])
 
-        get :show, :id => "#{page.route}?parts_params[news][page]=2", :format => :json
+        get :show, :id => "#{news_part.node.route}", :parts_params => {"news"=>{"page"=>"2"}}, :format => :json
       end
 
       it { assigns(:node).should == page }
-      it { assigns(:node).parts_params.should == { 'news' => { 'page' => '2' } } }
+      it { assigns(:node).part_for('content').params.should == { 'page' => '2' }}
     end
   end
 end

@@ -52,12 +52,6 @@ describe Node do
       it { page.part_for('content').should == @page_content }
     end
 
-    describe 'возвращать параметры для parts' do
-       it "в hash" do
-          page.parts_params = 'parts_params[news][page]=2'
-          page.parts_params['news'].should == { 'page' => '2' }
-       end
-    end
   end
 end
 

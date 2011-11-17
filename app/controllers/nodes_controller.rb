@@ -1,20 +1,11 @@
 class NodesController < ApplicationController
   def show
-    @node = Node.find_by_route(route)
-    @node.parts_params = parts_params
+    @node = Node.find_by_route(params[:id])
+    @node.parts_params = params[:parts_params]
 
     respond_to do |format|
       format.html
       format.json
     end
   end
-
-  private
-    def route
-      params[:id].split('?').first
-    end
-
-    def parts_params
-      params[:id].split('?').last
-    end
 end
