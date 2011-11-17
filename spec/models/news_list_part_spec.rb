@@ -3,40 +3,49 @@
 require 'spec_helper'
 
 describe NewsListPart do
-  it "плагин должен правильно строить json" do
-    news_part = NewsListPart.create(:news_per_page => 2,
-                                :news_order_by => 'since_desc',
-                                :news_channel => 'news')
 
-    request_hash = { 'x-total-pages' => ['3'], 'x-current-page' => ['1'] }
-    news_part.stub(:request).and_return(request_hash)
-    request_hash.stub(:headers).and_return(request_hash)
+  describe "должен правильно строить json" do
+    before do
+      @news_part = NewsListPart.create(:news_per_page => 2,
+                                      :news_order_by => 'since_desc',
+                                      :news_channel => 'news')
 
-    answer_from_news = {
-      'entries' => [
-        {'title' => 'title1', 'annotation' => 'annotation1', 'link' => 'link1'},
-        {'title' => 'title2', 'annotation' => 'annotation2', 'link' => 'link2'}
-      ]
-    }
-    news_part.stub(:request_body).and_return(answer_from_news)
+      request_hash = { 'x-total-pages' => ['3'], 'x-current-page' => ['1'] }
+      @news_part.stub(:request).and_return(request_hash)
+      request_hash.stub(:headers).and_return(request_hash)
 
-    expected_hash = {
-      'type' => 'NewsListPart',
-      'content' => {
+      answer_from_news = {
         'entries' => [
           {'title' => 'title1', 'annotation' => 'annotation1', 'link' => 'link1'},
           {'title' => 'title2', 'annotation' => 'annotation2', 'link' => 'link2'}
-        ],
-
-        'pagination' => [
-          { 'link' => '?parts_params[news][page]=1', 'current' => 'true' },
-          { 'link' => '?parts_params[news][page]=2', 'current' => 'false' },
-          { 'link' => '?parts_params[news][page]=3', 'current' => 'false' }
-        ]
+      ]
       }
-    }
+      @news_part.stub(:request_body).and_return(answer_from_news)
+      @expected_hash = {
+        'type' => 'NewsListPart',
+        'content' => {
+          'entries' => [
+            {'title' => 'title1', 'annotation' => 'annotation1', 'link' => 'link1'},
+            {'title' => 'title2', 'annotation' => 'annotation2', 'link' => 'link2'}
+          ]
+        }
+      }
+    end
 
-    news_part.to_json.should == expected_hash
+    it "без пагинации" do
+      @news_part.to_json.should == @expected_hash
+    end
+
+    it "с пагинацией" do
+      @news_part.update_attribute(:news_paginated, true)
+      @expected_hash['content'].merge!('pagination' => [
+            { 'link' => '?parts_params[news][page]=1', 'current' => 'true' },
+            { 'link' => '?parts_params[news][page]=2', 'current' => 'false' },
+            { 'link' => '?parts_params[news][page]=3', 'current' => 'false' }
+          ])
+      @news_part.to_json.should == @expected_hash
+    end
+
   end
 end
 # == Schema Information
@@ -57,5 +66,6 @@ end
 #  news_order_by            :string(255)
 #  news_until               :date
 #  news_per_page            :integer
+#  news_paginated           :boolean
 #
 

@@ -157,5 +157,6 @@ end
 #  news_order_by            :string(255)
 #  news_until               :date
 #  news_per_page            :integer
+#  news_paginated           :boolean
 #
 

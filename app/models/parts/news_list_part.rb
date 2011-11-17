@@ -11,8 +11,8 @@ class NewsListPart < Part
 
   def content
     hash = request_body
-
-    hash.merge!(pagination)
+    hash.merge!(pagination) if news_paginated?
+    hash
   end
 
   def request
@@ -67,5 +67,6 @@ end
 #  news_order_by            :string(255)
 #  news_until               :date
 #  news_per_page            :integer
+#  news_paginated           :boolean
 #
 
