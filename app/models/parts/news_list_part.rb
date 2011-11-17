@@ -10,7 +10,7 @@ class NewsListPart < Part
   end
 
   def content
-    hash = request_body
+    hash = request_body.update(request_body) {|v,k| k.each{|l| l['link']="?parts_params[news_item][slug]=#{l['link']}"}}
     hash.merge!(pagination) if news_paginated?
     hash
   end
@@ -31,7 +31,7 @@ class NewsListPart < Part
     hash = { 'pagination' => [] }
 
     (1..request_headers['x-total-pages'].to_i).each do |page|
-      hash['pagination'] << { 'link' => "?parts_params[news][page]=#{page}", 'current' => request_headers['x-current-page'].to_i == page ? 'true' : 'false' }
+      hash['pagination'] << { 'link' => "?parts_params[news_list][page]=#{page}", 'current' => request_headers['x-current-page'].to_i == page ? 'true' : 'false' }
     end
 
     hash

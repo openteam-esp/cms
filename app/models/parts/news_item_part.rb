@@ -11,7 +11,7 @@ class NewsItemPart < Part
   end
 
   def content
-    ActiveSupport::JSON.decode(request.body)
+    params ? ActiveSupport::JSON.decode(request.body) : ''
   end
 
   private

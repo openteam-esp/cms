@@ -6,7 +6,7 @@ sites:
           type: breadcrumbs
           required: true
           configurable: true
-        news:
+        news_list:
           type: news
           required: true
           configurable: true
@@ -55,7 +55,7 @@ sites:
           type: breadcrumbs
           required: true
           configurable: false
-        news:
+        news_list:
           type: news
           required: true
           configurable: false
