@@ -1,9 +1,9 @@
 page{
-  link resource.title, resource.route
-  template resource.template
+  link @node.title, @node.route
+  template @node.template
   regions {
-    resource.required_regions.each do |region|
-      insert_value(region, '', resource.part_for(region).to_json)
+    @node.required_regions.each do |region|
+      insert_value(region, '', @node.part_for(region).to_json)
     end
   }
 }

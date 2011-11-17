@@ -29,5 +29,20 @@ describe NodesController do
       body[:regions][html_part.region]['content']['body'].should == html_part.body
     end
 
+    describe 'routes' do
+      render_views false
+
+      let(:page) { Fabricate(:page, :template => 'inner_page', :slug => 'page') }
+      let(:news_part) { Fabricate(:news_part, :node => page, :region => 'content') }
+
+      before do
+        page.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][page.site.slug]['templates'])
+
+        get :show, :id => "#{page.route}?parts_params[news][page]=2", :format => :json
+      end
+
+      it { assigns(:node).should == page }
+      it { assigns(:node).parts_params.should == { 'news' => { 'page' => '2' } } }
+    end
   end
 end

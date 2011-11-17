@@ -8,6 +8,12 @@ class Node < ActiveRecord::Base
   normalize_attribute :title, :with => [:gilensize_as_text, :squish]
   after_save :cache_route
 
+  attr_writer :parts_params
+
+  def parts_params
+    Rack::Utils.parse_nested_query(@parts_params).symbolize_keys[:parts_params]
+  end
+
   alias :site :root
   delegate :templates, :to => :site
 
