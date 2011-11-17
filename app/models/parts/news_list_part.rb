@@ -11,7 +11,7 @@ class NewsListPart < Part
   end
 
   def content
-    hash = request_body.update(request_body) {|v,k| k.each{|l| l['link']="?parts_params[news_item][slug]=#{l['link']}"}}
+    hash = request_body.update(request_body) {|v,k| k.each{|l| l['link']="#{item_page.route_without_site}?parts_params[news_item][slug]=#{l['link']}"}}
     hash.merge!(pagination) if news_paginated?
     hash
   end
