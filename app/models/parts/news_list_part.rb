@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class NewsPart < Part
+class NewsListPart < Part
   validates_presence_of :news_order_by
 
   has_enums

@@ -2,9 +2,9 @@
 
 require 'spec_helper'
 
-describe NewsPart do
+describe NewsListPart do
   it "плагин должен правильно строить json" do
-    news_part = NewsPart.create(:news_per_page => 2,
+    news_part = NewsListPart.create(:news_per_page => 2,
                                 :news_order_by => 'since_desc',
                                 :news_channel => 'news')
 
@@ -21,7 +21,7 @@ describe NewsPart do
     news_part.stub(:request_body).and_return(answer_from_news)
 
     expected_hash = {
-      'type' => 'NewsPart',
+      'type' => 'NewsListPart',
       'content' => {
         'entries' => [
           {'title' => 'title1', 'annotation' => 'annotation1', 'link' => 'link1'},
