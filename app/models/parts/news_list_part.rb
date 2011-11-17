@@ -24,7 +24,7 @@ class NewsListPart < Part
   end
 
   def request_body
-    ActiveSupport::JSON.decode request.body
+    ActiveSupport::JSON.decode(request.body)
   end
 
   def pagination
