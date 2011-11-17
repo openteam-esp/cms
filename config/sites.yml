@@ -7,7 +7,7 @@ sites:
           required: true
           configurable: true
         news_list:
-          type: news
+          type: news_list
           required: true
           configurable: true
         news_item:
@@ -56,7 +56,7 @@ sites:
           required: true
           configurable: false
         news_list:
-          type: news
+          type: news_list
           required: true
           configurable: false
         news_item:

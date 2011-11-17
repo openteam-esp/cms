@@ -25,8 +25,8 @@ describe NewsListPart do
         'type' => 'NewsListPart',
         'content' => {
           'entries' => [
-            {'title' => 'title1', 'annotation' => 'annotation1', 'link' => 'link1'},
-            {'title' => 'title2', 'annotation' => 'annotation2', 'link' => 'link2'}
+            {'title' => 'title1', 'annotation' => 'annotation1', 'link' => '?parts_params[news_item][slug]=link1'},
+            {'title' => 'title2', 'annotation' => 'annotation2', 'link' => '?parts_params[news_item][slug]=link2'}
           ]
         }
       }
@@ -39,9 +39,9 @@ describe NewsListPart do
     it "с пагинацией" do
       @news_part.update_attribute(:news_paginated, true)
       @expected_hash['content'].merge!('pagination' => [
-            { 'link' => '?parts_params[news][page]=1', 'current' => 'true' },
-            { 'link' => '?parts_params[news][page]=2', 'current' => 'false' },
-            { 'link' => '?parts_params[news][page]=3', 'current' => 'false' }
+            { 'link' => '?parts_params[news_list][page]=1', 'current' => 'true' },
+            { 'link' => '?parts_params[news_list][page]=2', 'current' => 'false' },
+            { 'link' => '?parts_params[news_list][page]=3', 'current' => 'false' }
           ])
       @news_part.to_json.should == @expected_hash
     end

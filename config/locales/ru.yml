@@ -72,4 +72,4 @@ ru:
       news_list_part:
         news_order_by_enum:
           since_desc: по дате публикации
-          unitl_asc: по дате актуальности
+          until_asc: по дате актуальности
