@@ -3,10 +3,19 @@
 class NewsItemPart < Part
 
   def request
-    @request ||= Restfulie.at("#{news_url}/public/entries/#{params.slug}").accepts("application/json").get
+    @request ||= Restfulie.at("#{news_url}/public/entries/#{params['slug']}").accepts("application/json").get
   end
 
-  def request_body
-    ActiveSupport::JSON.decode request.resource
+  def to_json
+    as_json(:only => :type, :methods => 'content')
   end
+
+  def content
+    ActiveSupport::JSON.decode(request.body)
+  end
+
+  private
+    def news_url
+      "#{Settings['news.protocol']}://#{Settings['news.host']}:#{Settings['news.port']}"
+    end
 end
