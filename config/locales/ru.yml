@@ -73,3 +73,6 @@ ru:
         news_order_by_enum:
           since_desc: по дате публикации
           until_asc: по дате актуальности
+
+      news_item_part:
+        news_channel: Канал
