@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 class NewsListPart < Part
+  belongs_to :item_page, :class_name => 'Node', :foreign_key => :news_item_page_id
   validates_presence_of :news_order_by
 
   has_enums
@@ -68,5 +69,6 @@ end
 #  news_until               :date
 #  news_per_page            :integer
 #  news_paginated           :boolean
+#  news_item_page_id        :integer
 #
 

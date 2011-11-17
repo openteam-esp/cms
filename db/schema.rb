@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111117055336) do
+ActiveRecord::Schema.define(:version => 20111117073552) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(:version => 20111117055336) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "route"
     t.string   "template"
+    t.text     "route"
     t.string   "client_url"
   end
 
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20111117055336) do
     t.date     "news_until"
     t.integer  "news_per_page"
     t.boolean  "news_paginated"
+    t.integer  "news_item_page_id"
   end
 
   add_index "parts", ["html_content_id"], :name => "index_parts_on_content_id"

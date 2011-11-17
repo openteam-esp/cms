@@ -4,6 +4,8 @@ require 'spec_helper'
 
 describe NewsListPart do
 
+  it { should belong_to :item_page }
+
   describe "должен правильно строить json" do
     before do
       @news_part = NewsListPart.create(:news_per_page => 2,
@@ -67,5 +69,6 @@ end
 #  news_until               :date
 #  news_per_page            :integer
 #  news_paginated           :boolean
+#  news_item_page_id        :integer
 #
 

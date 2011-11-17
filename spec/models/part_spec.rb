@@ -25,5 +25,6 @@ end
 #  news_until               :date
 #  news_per_page            :integer
 #  news_paginated           :boolean
+#  news_item_page_id        :integer
 #
 
