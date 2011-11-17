@@ -37,9 +37,9 @@ class Node < ActiveRecord::Base
     hash
   end
 
-  def part_for(region)
+  def part_for(region, select_from_parents = nil)
     part = parts.where(:region => region).first
-    part ||= Part.where(:region => region, :node_id => path_ids).first
+    part ||= Part.where(:region => region, :node_id => path_ids).first if select_from_parents
     if part
       part.current_node = self
       part.params = parts_params[part.type.underscore.gsub('_part','')] if parts_params

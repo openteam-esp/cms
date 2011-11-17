@@ -22,7 +22,7 @@ describe BreadcrumbsPart do
       }
     }
 
-    page.part_for('region').to_json.should == expected_hash
+    page.part_for('region', true).to_json.should == expected_hash
   end
 end
 

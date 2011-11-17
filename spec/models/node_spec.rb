@@ -38,7 +38,7 @@ describe Node do
     it  { page.required_regions.should == ['navigation', 'content'] }
     it  { page.configurable_regions.should == {'content' => 'html' } }
 
-    describe 'возвращать обязательные partы от родителей' do
+    describe 'возвращать partы' do
       before do
         @page_content = Fabricate(:html_part, :body => "text", :node => page, :region => 'content')
         @locale_content = Fabricate(:html_part, :body => "text", :node => locale, :region => 'content')
@@ -48,10 +48,10 @@ describe Node do
                                      :from_node => locale,
                                      :navigation_end_level => 1)
       end
-      it { page.part_for('navigation').should == @navigation_part }
-      it { page.part_for('content').should == @page_content }
+      it { page.part_for('navigation', true).should == @navigation_part }
+      it { page.part_for('navigation').should be nil }
+      it { page.part_for('content', true).should == @page_content }
     end
-
   end
 end
 

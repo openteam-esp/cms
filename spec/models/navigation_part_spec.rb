@@ -129,7 +129,7 @@ describe NavigationPart do
                             }
                         }
       }
-      page111.part_for('navigation').to_json.should == expected_hash
+      page111.part_for('navigation', true).to_json.should == expected_hash
     end
 
 
