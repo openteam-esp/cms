@@ -1,7 +1,7 @@
 AttributeNormalizer.configure do |config|
 
   SANITIZE_CONFIG  = Sanitize::Config::RELAXED
-  SANITIZE_CONFIG[:elements] += %w[audio video]
+  SANITIZE_CONFIG[:elements] += %w[audio video div]
   SANITIZE_CONFIG[:attributes]['a'] << 'target'
   SANITIZE_CONFIG[:attributes]['audio'] = %w[controls src]
   SANITIZE_CONFIG[:attributes]['video'] = %w[controls src width height]
