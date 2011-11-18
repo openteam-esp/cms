@@ -1,3 +1,5 @@
-<%= form.inputs :news_channel %>
-<%= form.input :region, :as => :hidden %>
-<%= form.input :type, :as => :hidden %>
+<%= form.inputs do %>
+  <%= form.input :news_channel %>
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
+<% end %>

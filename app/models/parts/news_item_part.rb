@@ -15,6 +15,14 @@ class NewsItemPart < Part
     params ? ActiveSupport::JSON.decode(request.body) : ''
   end
 
+  def page_title
+    content['title']
+  end
+
+  def parts_params
+    "?parts_params[news_item][slug]=#{params['slug']}"
+  end
+
   private
     def news_url
       "#{Settings['news.protocol']}://#{Settings['news.host']}:#{Settings['news.port']}"

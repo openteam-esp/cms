@@ -16,8 +16,7 @@ describe NodesController do
       before do
         get :show, :id => page.route, :format => :json
       end
-      it { body[:link][0][:rel].should == page.title }
-      it { body[:link][0][:href].should == page.route }
+      it { body[:title].should == page.title }
       it { body[:template].should == page.template }
     end
 

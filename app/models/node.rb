@@ -43,12 +43,26 @@ class Node < ActiveRecord::Base
     templates_hash[template].select { | region, options | options['configurable'] }.keys
   end
 
+  def page_title
+    return title unless content_part.respond_to?(:page_title)
+    content_part.page_title
+  end
+
+  def page_route
+    return route_without_site unless content_part.respond_to?(:parts_params)
+    "#{route_without_site}#{content_part.parts_params}"
+  end
+
+  def content_part
+    part_for('content')
+  end
+
   def part_for(region, select_from_parents = nil)
     part = parts.where(:region => region).first
     part ||= Part.where(:region => region, :node_id => path_ids).first if select_from_parents
     if part
       part.current_node = self
-      part.params = parts_params[part.type.underscore.gsub('_part','')] if parts_params
+      part.params = parts_params[part.type.underscore.gsub('_part','')] || {} if parts_params
     end
     part
   end

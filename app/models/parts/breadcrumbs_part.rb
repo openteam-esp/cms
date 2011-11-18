@@ -7,7 +7,8 @@ class BreadcrumbsPart < Part
     hash = {}
     return hash if current_node.is_a? Locale
     current_node.path[1..-1].each do |n|
-      hash.merge!(n.title => n.route_without_site)
+      n.parts_params = current_node.parts_params
+      hash.merge!(n.page_title => n.page_route)
     end
     hash
   end

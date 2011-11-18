@@ -6,6 +6,7 @@ class Page < Node
   def locale
     ancestors.second
   end
+
 end
 
 # == Schema Information

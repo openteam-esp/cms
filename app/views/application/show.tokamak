@@ -1,5 +1,5 @@
 page{
-  link @node.title, @node.route
+  title @node.page_title
   template @node.template
   regions {
     @node.regions.each do |region|
