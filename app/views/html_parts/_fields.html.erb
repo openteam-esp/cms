@@ -1,4 +1,6 @@
 <%= form.inputs do %>
   <%= javascript_include_tag "ckeditor/ckeditor" %>
   <%= form.input :body, :as => :ckeditor %>
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
 <% end %>

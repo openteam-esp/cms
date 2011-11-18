@@ -4,9 +4,9 @@ class PartsController < ApplicationController
 
   protected
     def build_resource
+      p resource_instance_name
       part_class = params[:part][:type].constantize
-      @part = part_class.new(params[part_class.name.underscore])
-      @part.region = params[:part][:region]
+      @part = part_class.new(params[:part])
       @part.node = parent
       @part
     end
