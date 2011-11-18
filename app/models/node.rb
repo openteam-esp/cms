@@ -60,13 +60,15 @@ class Node < ActiveRecord::Base
   end
 
   def part_for(region, select_from_parents = nil)
+    @parts ||= {}
+    return @parts[region] if @parts.key?(region)
     part = parts.where(:region => region).first
     part ||= Part.where(:region => region, :node_id => path_ids).first if select_from_parents
     if part
       part.current_node = self
-      part.params = parts_params[part.type.underscore.gsub('_part','')] || {}
+      part.params = parts_params ? (parts_params[part.type.underscore.gsub('_part','')] || {}) : {}
     end
-    part
+    @parts[region] = part
   end
 
   def route_without_site

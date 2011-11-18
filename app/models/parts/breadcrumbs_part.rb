@@ -6,11 +6,11 @@ class BreadcrumbsPart < Part
   def content
     hash = {}
     return hash if current_node.is_a? Locale
-    current_node.path[1..-1].each do |n|
+    current_node.path[1..-2].each do |n|
       n.parts_params = current_node.parts_params
       hash.merge!(n.page_title => n.page_route)
     end
-    hash
+    hash.merge!(current_node.page_title => current_node.page_route)
   end
 end
 
