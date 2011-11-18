@@ -8,6 +8,10 @@ class Node < ActiveRecord::Base
   normalize_attribute :title, :with => [:gilensize_as_text, :squish]
   after_save :cache_route
 
+  default_value_for :in_navigation, true
+
+  scope :navigable, where(:in_navigation => true)
+
   attr_accessor :parts_params
 
   alias :site :root

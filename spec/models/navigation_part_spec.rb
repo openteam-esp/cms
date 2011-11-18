@@ -14,6 +14,7 @@ describe NavigationPart do
           let(:subsection11) { Fabricate(:page, :parent => section1, :slug => 'subsection11', :title => 'subsection11') }
             let(:page111) { Fabricate(:page, :parent => subsection11, :slug => 'page111', :title => 'page111') }
             let(:page112) { Fabricate(:page, :parent => subsection11, :slug => 'page112', :title => 'page112') }
+            let(:page113) { Fabricate(:page, :parent => subsection11, :slug => 'page113', :title => 'page113', :in_navigation => false) }
           let(:page11) { Fabricate(:page, :parent => section1, :slug => 'page11', :title => 'page11') }
         let(:section2) { Fabricate(:page, :parent => locale, :slug => 'section2', :title => 'section2') }
         let(:section3) { Fabricate(:page, :parent => locale, :slug => 'section3', :title => 'section3') }
@@ -25,8 +26,9 @@ describe NavigationPart do
             let(:page331) { Fabricate(:page, :parent => subsection33, :slug => 'page331', :title => 'page331') }
         let(:page4) { Fabricate(:page, :parent => locale, :slug => 'page4', :title => 'page4')}
         let(:page5) { Fabricate(:page, :parent => locale, :slug => 'page5', :title => 'page5')}
+        let(:page_not_in_navigation) { Fabricate(:page, :parent => locale, :slug => 'not_in_navigation', :title => 'not in navigation', :in_navigation => false)}
 
-        let(:build_site) { page111; page112; page11; section2; page311; page321; page331; page4; page5 }
+        let(:build_site) { page111; page112; page113; page11; section2; page311; page321; page331; page4; page5; page_not_in_navigation }
 
     before do
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111117073552) do
+ActiveRecord::Schema.define(:version => 20111118030209) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20111117073552) do
     t.string   "template"
     t.text     "route"
     t.string   "client_url"
+    t.boolean  "in_navigation"
   end
 
   create_table "parts", :force => true do |t|

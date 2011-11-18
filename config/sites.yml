@@ -32,6 +32,7 @@ sites:
         footer:
           required: true
           configurable: true
+
       inner_page:
         breadcrumbs:
           required: true
