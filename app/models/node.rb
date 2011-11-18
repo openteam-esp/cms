@@ -36,11 +36,7 @@ class Node < ActiveRecord::Base
   end
 
   def configurable_regions
-    hash = {}
-    templates_hash[template].select { | region, options | options['configurable'] }.keys.each do |region|
-      hash[region] = templates_hash[template][region]['type']
-    end
-    hash
+    templates_hash[template].select { | region, options | options['configurable'] }.keys
   end
 
   def part_for(region, select_from_parents = nil)

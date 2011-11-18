@@ -33,10 +33,10 @@ describe Node do
       Page.any_instance.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][site.slug]['templates'])
     end
     it  { site.templates.should == ['main_page', 'inner_page'] }
-    it  { locale.configurable_regions.should == { 'navigation' => 'navigation', 'content' => 'html', 'footer' => 'html' }}
+    it  { locale.configurable_regions.should == ['navigation', 'content', 'footer'] }
     it  { locale.required_regions.should == ['navigation', 'content', 'footer'] }
     it  { page.required_regions.should == ['navigation', 'content'] }
-    it  { page.configurable_regions.should == {'content' => 'html' } }
+    it  { page.configurable_regions.should == ['content'] }
 
     describe 'возвращать partы' do
       before do

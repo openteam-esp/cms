@@ -3,95 +3,63 @@ sites:
     templates:
       main_page:
         breadcrumbs:
-          type: breadcrumbs
-          required: true
-          configurable: true
-        news_list:
-          type: news_list
           required: true
           configurable: true
         navigation:
-          type: navigation
           required: true
           configurable: true
         site_name:
-          type: html
           required: true
           configurable: true
         content:
-          type: html
           required: true
           configurable: true
         subnavigation_first:
-          type: navigation
           required: true
           configurable: true
         subnavigation_second:
-          type: navigation
           required: true
           configurable: true
         subnavigation_third:
-          type: navigation
           required: true
           configurable: true
         subnavigation_fourth:
-          type: navigation
           required: true
           configurable: true
         contacts:
-          type: html
           required: true
           configurable: true
         footer:
-          type: html
           required: true
           configurable: true
       inner_page:
         breadcrumbs:
-          type: breadcrumbs
           required: true
           configurable: false
-        news_list:
-          type: news_list
-          required: false
-          configurable: true
-        news_item:
-          type: news_item
-          required: false
-          configurable: true
         navigation:
-          type: navigation
           required: true
           configurable: false
         site_name:
-          type: html
           required: true
           configurable: false
         content:
-          type: html
           required: true
           configurable: true
         subnavigation_first:
-          type: navigation
           required: true
           configurable: false
         subnavigation_second:
-          type: navigation
           required: true
           configurable: false
         subnavigation_third:
-          type: navigation
           required: true
           configurable: false
         subnavigation_fourth:
-          type: navigation
           required: true
           configurable: false
         contacts:
-          type: html
           required: true
           configurable: false
         footer:
-          type: html
           required: true
           configurable: false

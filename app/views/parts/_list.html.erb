@@ -1,5 +1,5 @@
 <ul>
-  <% resource.configurable_regions.each do |region, part| %>
+  <% resource.configurable_regions.each do |region| %>
     <li>
       <%= region %>
       <% if part = resource.part_for(region) %>
@@ -7,7 +7,15 @@
         <%= link_to action_title(:action => 'edit', :controller => 'parts'), edit_part_path(part) %>
         <%= link_to action_title(:action => 'destroy', :controller => 'parts'), part_path(part), confirm: t('Are you sure?'), method: :delete  %>
       <% else %>
-        <%= link_to action_title(:action => 'new', :controller => 'parts'), new_node_part_path(resource, :region => region) %>
+        <%= semantic_form_for :part, :url => new_node_part_path(resource), :html => {:method => :get }  do | form | %>
+          <%= form.inputs do %>
+            <%= form.input :type, :as => :select, :collection => Part.descendants %>
+            <%= form.input :region, :as => :hidden, :input_html => { :value => region } %>
+          <% end %>
+          <%= form.buttons do %>
+            <%= form.commit_button action_title(:action => 'new', :controller => 'parts') %>
+          <% end %>
+        <% end %>
       <% end %>
     </li>
   <% end %>
