@@ -12,7 +12,7 @@ class NewsItemPart < Part
   end
 
   def content
-    params ? ActiveSupport::JSON.decode(request.body) : ''
+    params['slug'] ? ActiveSupport::JSON.decode(request.body) : ''
   end
 
   def page_title

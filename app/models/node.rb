@@ -14,6 +14,8 @@ class Node < ActiveRecord::Base
 
   attr_accessor :parts_params
 
+  default_value_for :parts_params, {}
+
   alias :site :root
   delegate :templates, :to => :site
 
@@ -62,7 +64,7 @@ class Node < ActiveRecord::Base
     part ||= Part.where(:region => region, :node_id => path_ids).first if select_from_parents
     if part
       part.current_node = self
-      part.params = parts_params[part.type.underscore.gsub('_part','')] || {} if parts_params
+      part.params = parts_params[part.type.underscore.gsub('_part','')] || {}
     end
     part
   end

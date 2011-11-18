@@ -4,6 +4,8 @@ class Part < ActiveRecord::Base
   validates_presence_of :node, :region
 
   attr_accessor :current_node, :params
+
+  default_value_for :params, {}
 end
 
 # == Schema Information
