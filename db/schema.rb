@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111122084535) do
+ActiveRecord::Schema.define(:version => 20111123032929) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(:version => 20111122084535) do
     t.integer  "news_per_page"
     t.boolean  "news_paginated"
     t.integer  "news_item_page_id"
+    t.integer  "blue_pages_category_id"
+    t.boolean  "blue_pages_expand"
     t.string   "appeal_section_slug"
   end
 
