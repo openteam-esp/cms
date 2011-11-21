@@ -64,3 +64,15 @@ sites:
         footer:
           required: true
           configurable: false
+  tgr:
+    templates:
+      main_page:
+        site_name:
+          required: true
+          configurable: true
+        content:
+          required: true
+          configurable: true
+        footer:
+          required: true
+          configurable: true
