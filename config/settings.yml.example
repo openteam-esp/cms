@@ -7,9 +7,14 @@ production:
     access_key_id:      key
     secret_access_key:  secret
 
+blue_pages:
+  protocol:             http
+  host:                 esp-blue-pages.openteam.ru
+  port:                 80
+
 news:
   protocol:             http
-  host:                 localhost
+  host:                 esp-news.openteam.ru
   port:                 3000
 
 appeals:
