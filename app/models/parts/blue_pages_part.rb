@@ -1,0 +1,50 @@
+# encoding: utf-8
+
+class BluePagesPart < Part
+  validates_presence_of :blue_pages_category_id
+
+  def to_json
+    as_json(:only => :type, :methods => 'content')
+  end
+
+  def content
+    ActiveSupport::JSON.decode request.body
+  end
+
+  def request
+    @request ||= Restfulie.at("#{blue_pages_url}/#{blue_pages_category_id}").accepts("application/json").get
+  end
+
+  def categories_options_for_select
+    { 'Губернатор' => '3' }
+  end
+
+  private
+    def blue_pages_url
+      "http://localhost:3000/categories"
+    end
+end
+
+# == Schema Information
+#
+# Table name: parts
+#
+#  id                       :integer         not null, primary key
+#  html_content_id          :integer
+#  created_at               :datetime
+#  updated_at               :datetime
+#  region                   :string(255)
+#  type                     :string(255)
+#  node_id                  :integer
+#  navigation_end_level     :integer
+#  navigation_from_id       :integer
+#  navigation_default_level :integer
+#  news_channel             :string(255)
+#  news_order_by            :string(255)
+#  news_until               :date
+#  news_per_page            :integer
+#  news_paginated           :boolean
+#  news_item_page_id        :integer
+#  appeals_category_id      :integer
+#
+
