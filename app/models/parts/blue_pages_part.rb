@@ -15,13 +15,22 @@ class BluePagesPart < Part
     @request ||= Restfulie.at("#{blue_pages_url}/#{blue_pages_category_id}").accepts("application/json").get
   end
 
+  def categories
+    @categories ||= Restfulie.at(blue_pages_url).accepts("application/json").get
+  end
+
   def categories_options_for_select
-    { 'Губернатор' => '3' }
+    options_for_select = {}
+    ActiveSupport::JSON.decode(categories.body)['categories'].each do |e|
+      options_for_select[e['title']] = e['id']
+    end
+
+    options_for_select
   end
 
   private
     def blue_pages_url
-      "http://localhost:3000/categories"
+      "#{Settings['blue_pages.protocol']}://#{Settings['blue_pages.host']}:#{Settings['blue_pages.port']}/categories"
     end
 end
 
