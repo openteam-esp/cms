@@ -49,6 +49,7 @@ end
 #  news_per_page            :integer
 #  news_paginated           :boolean
 #  news_item_page_id        :integer
-#  appeals_category_id      :integer
+#  blue_pages_category_id   :integer
+#  blue_pages_expand        :boolean
 #
 

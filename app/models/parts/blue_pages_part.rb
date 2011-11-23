@@ -12,7 +12,11 @@ class BluePagesPart < Part
   end
 
   def request
-    @request ||= Restfulie.at("#{blue_pages_url}/#{blue_pages_category_id}").accepts("application/json").get
+    @request ||= Restfulie.at("#{blue_pages_url}/#{blue_pages_category_id}#{expand_parameter}").accepts("application/json").get
+  end
+
+  def expand_parameter
+    '?expand=true' if blue_pages_expand
   end
 
   def categories
@@ -54,6 +58,7 @@ end
 #  news_per_page            :integer
 #  news_paginated           :boolean
 #  news_item_page_id        :integer
-#  appeals_category_id      :integer
+#  blue_pages_category_id   :integer
+#  blue_pages_expand        :boolean
 #
 
