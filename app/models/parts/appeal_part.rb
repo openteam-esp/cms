@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 class AppealPart < Part
+  validates_presence_of :appeal_section_slug
+
   def to_json
     as_json(:only => :type, :methods => 'content')
   end
@@ -18,6 +20,6 @@ class AppealPart < Part
 
   private
     def appeals_url
-      "#{Settings['appeals.protocol']}://#{Settings['appeals.host']}:#{Settings['appeals.port']}/public/appeals"
+      "#{Settings['appeals.protocol']}://#{Settings['appeals.host']}:#{Settings['appeals.port']}/public/sections/#{appeal_section_slug}/appeals"
     end
 end
