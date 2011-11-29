@@ -4,6 +4,7 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  *= require reset
+ *= require el_vfs/el_vfs
  *= require text
  *= require form
  *= require errors

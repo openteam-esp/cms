@@ -20,7 +20,6 @@ Cms::Application.routes.draw do
     resources :locales, :only => [:new, :create]
   end
 
-
   get '/uploads/:id/:width-:height/*file_name' => Dragonfly[:uploads].endpoint { |params, app|
     image = Image.find(params[:id])
     width = [params[:width].to_i, image.file_width].min
@@ -37,10 +36,10 @@ Cms::Application.routes.draw do
     app.fetch(Upload.find(params[:id]).file_uid)
   }, :as => :upload, :format => false
 
-
-
   root :to => 'sites#index'
 
   get '/nodes/(*id)', :to => "nodes#show", :format => true
+
+  mount ElVfsClient::Engine => '/'
 
 end

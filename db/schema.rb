@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(:version => 20111123032929) do
     t.boolean  "news_paginated"
     t.integer  "news_item_page_id"
     t.integer  "blue_pages_category_id"
-    t.boolean  "blue_pages_expand"
     t.string   "appeal_section_slug"
+    t.boolean  "blue_pages_expand"
   end
 
   add_index "parts", ["html_content_id"], :name => "index_parts_on_content_id"
