@@ -15,7 +15,6 @@ Cms::Application.routes.draw do
 
   resources :locales, :only => [:show, :edit, :update, :destroy]
 
-
   resources :sites do
     resources :locales, :only => [:new, :create]
   end
