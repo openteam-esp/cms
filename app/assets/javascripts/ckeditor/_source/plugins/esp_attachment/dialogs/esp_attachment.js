@@ -93,7 +93,7 @@
           editor = this.getParentEditor();
         this.commitContent(data);
         var url = data.url || '';
-        attributes.href = (url.indexOf('/') === 0) ? url : "http://" + url;
+        attributes.href = (url.indexOf('/') === 0 || url.indexOf('http://') === 0) ? url : "http://" + url;
         var file = parseUrl(url);
         var title = data.title || '';
         attributes.title = (data.title.length == 0) ? file.filename : data.title;
