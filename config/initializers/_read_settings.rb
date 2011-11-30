@@ -22,4 +22,8 @@ Settings.define 'news.host',                  :env_var => 'NEWS_HOST'
 Settings.define 'news.protocol',              :env_var => 'NEWS_PROTOCOL'
 Settings.define 'news.port',                  :env_var => 'NEWS_PORT'
 
+Settings.define 'el_vfs.host',                :env_var => 'EL_VFS_HOST'
+Settings.define 'el_vfs.protocol',            :env_var => 'EL_VFS_PROTOCOL'
+Settings.define 'el_vfs.port',                :env_var => 'EL_VFS_PORT'
+
 Settings.resolve!

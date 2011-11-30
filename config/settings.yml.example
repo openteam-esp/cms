@@ -21,3 +21,8 @@ appeals:
   protocol:             http
   host:                 localhost
   port:                 3001
+
+el_vfs:
+  protocol:             http
+  host:                 pool.openteam.ru
+  port:                 80
