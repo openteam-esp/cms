@@ -10,3 +10,5 @@
  *= require jquery_ujs.js
  *= require nested_form.js
  */
+
+var CKEDITOR_BASEPATH = '/assets/ckeditor/';
