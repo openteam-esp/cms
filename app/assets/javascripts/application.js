@@ -9,6 +9,20 @@
  *= require jquery-ui.min.js
  *= require jquery_ujs.js
  *= require nested_form.js
+ *= require treeview/jquery.treeview.js
+ *= require treeview/jquery.cookie.js
  */
 
-var CKEDITOR_BASEPATH = '/assets/ckeditor/';
+var CKEDITOR_BASEPATH = "/assets/ckeditor/";
+
+$(function() {
+  if ($.fn.treeview) {
+    $(".collection_tree").treeview({
+      url: "/treeview",
+      unique: false,
+      collapsed: true,
+      persist: "cookie",
+      cookieId: "navigation_tree"
+    });
+  };
+});
