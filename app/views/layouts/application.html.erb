@@ -18,8 +18,15 @@
   <div id="content_wrapper">
     <%= yield %>
   </div>
-  <div id="footer_wrapper">
-    <%= request.remote_ip %>
+  <div id="footer">
+    <div class="client">
+      <%= request.remote_ip %>,
+      <%= request.env['HTTP_USER_AGENT'] %>
+    </div>
+    <div class="copyright">
+      <%= Time.now.year.eql?(2011) ? "2011" : raw("2011&ndash;#{Time.now.year}") %>,
+      <%= link_to "OpenTeam", "http://openteam.ru/" %>
+    </div>
   </div>
 </body>
 </html>
