@@ -3,18 +3,23 @@
 <head>
   <title><%= title %> | <%= I18n.t('application') %></title>
   <%= favicon_link_tag %>
-  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render_navigation :context => :toolbar %>
+  <div id="toolbar_wrapper">
+    <%= render_navigation :context => :toolbar %>
+  </div>
   <div id="title_wrapper">
     <%= content_tag :div, yield(:actions), :class => "actions" if content_for?(:actions) %>
     <h1><%= title %></h1>
   </div>
   <div id="content_wrapper">
     <%= yield %>
+  </div>
+  <div id="footer_wrapper">
+    <%= request.remote_ip %>
   </div>
 </body>
 </html>

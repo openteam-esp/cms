@@ -1,0 +1,205 @@
+/* ------------------------------------------
+ * CSS3 GITHUB BUTTONS (Nicolas Gallagher)
+ * Licensed under Unlicense
+ * http://github.com/necolas/css3-github-buttons
+ * ------------------------------------------
+ */
+
+@import "compass/css3"
+
+=iconize($position)
+  &:before
+    background-position: 0 $position
+  &:hover:before, &:focus:before, &:active:before
+    background-position: -12px $position
+
+button,
+a.button,
+input.button
+  position: relative
+  overflow: visible
+  +inline-block
+  padding: 0.3em 0.8em 0.5em
+  border: 1px solid #d4d4d4
+  margin: 0
+  text-decoration: none
+  text-shadow: 1px 1px 0 #fff
+  font: 11px / normal sans-serif
+  color: #333
+  white-space: nowrap
+  cursor: pointer
+  outline: none
+  background-color: #ececec
+  +background-image(linear-gradient(#f4f4f4, #ececec))
+  +background-clip(padding-box)
+  +border-radius
+  &:hover, &:focus, &:active, &.active
+    border-color: #3072b3
+    border-bottom-color: #2a65a0
+    text-decoration: none
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3)
+    color: #fff
+    background-color: #3C8DDE
+    +background-image(linear-gradient(#599bdc, #3072b3))
+  &:active, &.active
+    border-color: #2a65a0
+    border-bottom-color: #3884CF
+    background-color: #3072b3
+    +background-image(linear-gradient(#3072b3, #599bdc))
+  &::-moz-focus-inner
+    padding: 0
+    border: 0
+  &.icon:before
+    content: ""
+    position: relative
+    top: 1px
+    float: left
+    width: 12px
+    height: 12px
+    margin: 0 0.75em 0 -0.25em
+    background: url("buttons_icons.png") 0 99px no-repeat
+  &.icon
+    &.arrowup
+      +iconize(0)
+    &.arrowdown
+      +iconize(-12px)
+    &.arrowleft
+      +iconize(-24px)
+    &.arrowright
+      &:before
+        float: right
+        margin: 0 -0.25em 0 0.5em
+      +iconize(-36px)
+    &.approve
+      +iconize(-48px)
+    &.add
+      +iconize(-288px)
+    &.remove
+      +iconize(-60px)
+    &.log
+      +iconize(-72px)
+    &.calendar
+      +iconize(-84px)
+    &.chat
+      +iconize(-96px)
+    &.clock
+      +iconize(-108px)
+    &.settings
+      +iconize(-120px)
+    &.comment
+      +iconize(-132px)
+    &.fork
+      +iconize(-144px)
+    &.like
+      +iconize(-156px)
+    &.favorite
+      +iconize(-348px)
+    &.home
+      +iconize(-168px)
+    &.key
+      +iconize(-180px)
+    &.lock
+      +iconize(-192px)
+    &.unlock
+      +iconize(-204px)
+    &.loop
+      +iconize(-216px)
+    &.search
+      +iconize(-228px)
+    &.mail
+      +iconize(-240px)
+    &.move
+      +iconize(-252px)
+    &.edit
+      +iconize(-264px)
+    &.pin
+      +iconize(-276px)
+    &.reload
+      +iconize(-300px)
+    &.rss
+      +iconize(-312px)
+    &.tag
+      +iconize(-324px)
+    &.trash
+      +iconize(-336px)
+    &.user
+      +iconize(-360px)
+  &.primary
+    font-weight: bold
+  &.danger
+    color: #900
+    &:hover, &:focus
+      border-color: #b53f3a
+      border-bottom-color: #a0302a
+      color: #fff
+      background-color: #dc5f59
+      +background-image(linear-gradient(#dc5f59, #b33630))
+    &:active
+      border-color: #b53f3a
+      border-bottom-color: #a0302a
+      color: #fff
+      background-color: #dc5f59
+      +background-image(linear-gradient(#dc5f59, #b33630))
+      border-color: #a0302a
+      border-bottom-color: #bf4843
+      background-color: #b33630
+      +background-image(linear-gradient(#b33630, #dc5f59))
+    &.active
+      border-color: #a0302a
+      border-bottom-color: #bf4843
+      background-color: #b33630
+      +background-image(linear-gradient(#b33630, #dc5f59))
+  &.pill
+    +border-radius(50em)
+  &.disable
+    +opacity(0.5)
+  &.big
+    font-size: 14px
+    &.icon:before
+      top: 0
+
+.button-group
+  +inline-block
+  list-style: none
+  padding: 0
+  margin: 0
+
+.button +
+  .button, .button-group
+    margin-left: 15px
+
+.button-group
+  +
+    .button, .button-group
+      margin-left: 15px
+  li
+    float: left
+    padding: 0
+    margin: 0
+  .button
+    float: left
+    margin-left: -1px
+  > .button:not(:first-child):not(:last-child), li:not(:first-child):not(:last-child) .button
+    +border-radius(none)
+  > .button:first-child, li:first-child .button
+    margin-left: 0
+    +border-top-right-radius(none)
+    +border-bottom-right-radius(none)
+  > .button:last-child, li:last-child > .button
+    +border-top-left-radius(none)
+    +border-bottom-left-radius(none)
+  &.minor-group .button
+    border: 1px solid #d4d4d4
+    text-shadow: none
+    background-image: none
+    background-color: #fff
+    &:hover, &:focus
+      background-color: #599bdc
+    &:active, &.active
+      background-color: #3072b3
+    &.icon:before
+      +opacity(0.8)
+
+.button-container
+  .button, .button-group
+    vertical-align: top

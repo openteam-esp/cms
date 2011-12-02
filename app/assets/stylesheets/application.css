@@ -6,6 +6,7 @@
  *= require reset
  *= require text
  *= require form
+ *= require buttons
  *= require errors
  *= require layout
  *= require toolbar

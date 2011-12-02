@@ -2,5 +2,5 @@
   <% resource.locales.each do | locale | %>
     <li><%= link_to locale, locale %></li>
   <% end %>
-  <li><%= link_to action_title(:action => 'new', :controller => 'locales'), new_site_locale_path(resource) %></li>
+  <li><%= link_to action_title(:action => 'new', :controller => 'locales'), new_site_locale_path(resource), :class => 'button' %></li>
 </ul>
