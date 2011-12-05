@@ -25,10 +25,10 @@ end
 #
 # Table name: parts
 #
-#  id                       :integer         not null, primary key
+#  id                       :integer         primary key
 #  html_content_id          :integer
-#  created_at               :datetime
-#  updated_at               :datetime
+#  created_at               :timestamp
+#  updated_at               :timestamp
 #  region                   :string(255)
 #  type                     :string(255)
 #  node_id                  :integer
@@ -42,6 +42,8 @@ end
 #  news_paginated           :boolean
 #  news_item_page_id        :integer
 #  blue_pages_category_id   :integer
+#  appeal_section_slug      :string(255)
 #  blue_pages_expand        :boolean
+#  navigation_group         :string(255)
 #
 

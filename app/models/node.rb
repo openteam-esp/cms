@@ -8,6 +8,8 @@ class Node < ActiveRecord::Base
   normalize_attribute :title, :with => [:gilensize_as_text, :squish]
   after_save :cache_route
 
+  after_save :update_children_navigarion_group
+
   default_value_for :in_navigation, true
 
   scope :navigable, where(:in_navigation => true)
@@ -87,22 +89,31 @@ class Node < ActiveRecord::Base
     def templates_hash
       @templates_hash ||= YAML.load_file(Rails.root.join 'config/sites.yml').to_hash['sites'][site.slug]['templates']
     end
+
+    def update_children_navigarion_group
+      children.each do |child|
+        child.update_attribute(:navigation_group, navigation_group)
+      end
+    end
 end
 
 # == Schema Information
 #
 # Table name: nodes
 #
-#  id            :integer         not null, primary key
-#  slug          :string(255)
-#  title         :string(255)
-#  ancestry      :string(255)
-#  type          :string(255)
-#  created_at    :datetime
-#  updated_at    :datetime
-#  route         :text
-#  template      :string(255)
-#  client_url    :string(255)
-#  in_navigation :boolean
+#  id                  :integer         primary key
+#  slug                :string(255)
+#  title               :string(255)
+#  ancestry            :string(255)
+#  type                :string(255)
+#  created_at          :timestamp
+#  updated_at          :timestamp
+#  route               :text
+#  template            :string(255)
+#  client_url          :string(255)
+#  in_navigation       :boolean
+#  navigation_group    :string(255)
+#  navigation_position :integer
+#  navigation_title    :string(255)
 #
 

@@ -12,25 +12,31 @@ class NavigationPart < Part
   end
 
   def build_navigation_tree(node)
-    hash = { node.slug => { 'title' => node.title, 'path' => node.route_without_site } }
+    hash = { node.slug => { 'title' => node.navigation_title.blank? ? node.title : node.navigation_title, 'path' => node.route_without_site } }
     hash[node.slug].merge!('selected' => true) if current_node.path_ids.include?(node.id) && node != from_node
-    node.children.navigable.each do |child|
-        hash[node.slug]['children'] ||= {}
-        hash[node.slug]['children'].merge!(build_navigation_tree(child))
+
+    selected_children(node).navigable.each do |child|
+      hash[node.slug]['children'] ||= {}
+      hash[node.slug]['children'].merge!(build_navigation_tree(child))
     end if node.depth - from_node.depth < navigation_default_level || (node.depth - from_node.depth < navigation_end_level && current_node.path_ids.include?(node.id))
     hash
   end
 
+  private
+    def selected_children(node)
+      return node.children.where(:navigation_group => navigation_group).order('navigation_position') if navigation_group
+      node.children.order('navigation_position')
+    end
 end
 
 # == Schema Information
 #
 # Table name: parts
 #
-#  id                       :integer         not null, primary key
+#  id                       :integer         primary key
 #  html_content_id          :integer
-#  created_at               :datetime
-#  updated_at               :datetime
+#  created_at               :timestamp
+#  updated_at               :timestamp
 #  region                   :string(255)
 #  type                     :string(255)
 #  node_id                  :integer
@@ -44,6 +50,8 @@ end
 #  news_paginated           :boolean
 #  news_item_page_id        :integer
 #  blue_pages_category_id   :integer
+#  appeal_section_slug      :string(255)
 #  blue_pages_expand        :boolean
+#  navigation_group         :string(255)
 #
 

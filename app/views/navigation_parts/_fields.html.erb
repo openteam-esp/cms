@@ -1,9 +1,8 @@
 <%= form.inputs do %>
-  <%= form.input :from_node %>
+  <%= form.input :from_node, :as => :select, :collection => form.object.node.site.descendants %>
   <%= form.input :navigation_default_level %>
   <%= form.input :navigation_end_level %>
   <%= form.input :navigation_group %>
   <%= form.input :region, :as => :hidden %>
   <%= form.input :type, :as => :hidden %>
-  <%= form.input :navigation_group %>
 <% end %>

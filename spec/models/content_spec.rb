@@ -11,10 +11,10 @@ end
 #
 # Table name: contents
 #
-#  id         :integer         not null, primary key
+#  id         :integer         primary key
 #  title      :string(255)
 #  body       :text
-#  created_at :datetime
-#  updated_at :datetime
+#  created_at :timestamp
+#  updated_at :timestamp
 #
 

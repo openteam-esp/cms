@@ -73,6 +73,34 @@ sites:
         content:
           required: true
           configurable: true
+        main_navigation:
+          required: true
+          configurable: true
+        main_bottom_navigation:
+          required: true
+          configurable: true
+        secondary_navigation:
+          required: true
+          configurable: true
         footer:
           required: true
           configurable: true
+      inner_page:
+        site_name:
+          required: true
+          configurable: false
+        content:
+          required: true
+          configurable: true
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        secondary_navigation:
+          required: true
+          configurable: false
+        footer:
+          required: true
+          configurable: false
