@@ -7,7 +7,6 @@
  *= require text
  *= require form
  *= require buttons
- *= require treeview
  *= require errors
  *= require layout
  *= require toolbar
