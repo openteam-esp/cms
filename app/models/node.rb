@@ -95,6 +95,7 @@ class Node < ActiveRecord::Base
         child.update_attribute(:navigation_group, navigation_group)
       end
     end
+
 end
 
 # == Schema Information

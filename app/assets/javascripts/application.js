@@ -19,7 +19,7 @@ var CKEDITOR_BASEPATH = '/assets/ckeditor/';
 
 $(function() {
   if ($.fn.treeview) {
-    $('.collection_tree').treeview({
+    $('.nodes_tree').treeview({
       url: '/treeview'
     });
   };

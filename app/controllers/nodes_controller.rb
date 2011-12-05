@@ -10,7 +10,6 @@ class NodesController < ApplicationController
     end
   end
 
-
   def treeview
     return if params[:root].empty?
     result = []
