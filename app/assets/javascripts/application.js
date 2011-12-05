@@ -9,9 +9,18 @@
  *= require jquery-ui.min.js
  *= require jquery_ujs.js
  *= require nested_form.js
+ *= require treeview/jquery.cookie.js
+ *= require treeview/jquery.treeview.js
+ *= require treeview/jquery.treeview.edit.js
+ *= require treeview/jquery.treeview.async.js
  */
 
-var CKEDITOR_BASEPATH = "/assets/ckeditor/";
+var CKEDITOR_BASEPATH = '/assets/ckeditor/';
 
 $(function() {
+  if ($.fn.treeview) {
+    $('.collection_tree').treeview({
+      url: '/treeview'
+    });
+  };
 });

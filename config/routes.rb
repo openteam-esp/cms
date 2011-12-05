@@ -11,6 +11,8 @@ Cms::Application.routes.draw do
     resources :parts, :only => [:new, :create]
   end
 
+  match '/treeview' => 'nodes#treeview', :via => :get
+
   resources :pages, :only => [:show, :edit, :update, :destroy]
 
   resources :locales, :only => [:show, :edit, :update, :destroy]

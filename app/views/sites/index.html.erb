@@ -1,19 +1,5 @@
 <% if collection.any? %>
   <ul class="collection_tree">
-    <% collection.each do | site | %>
-      <li>
-        <%= content_tag :span, link_to(site.slug, site) %>
-        <% if site.locales.any? %>
-          <ul>
-            <% site.locales.each do | locale | %>
-              <li>
-                <%= content_tag :span, link_to(locale.slug, locale) %>
-              </li>
-            <% end %>
-          </ul>
-        <% end %>
-      </li>
-    <% end %>
   </ul>
 <% else %>
   Список <%= t(pluralized_model, :count => 10) %> пуст
