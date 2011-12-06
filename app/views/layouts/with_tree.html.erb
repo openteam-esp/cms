@@ -1,6 +1,6 @@
 <% content_for :content do %>
   <nav>
-    <h1><%= resource.site.slug %></h1>
+    <h1><%= link_to resource.site.slug, resource.site %></h1>
     <ul class='nodes_tree'>
       <%= expanded_ancestors(resource.is_a?(Site) ? [] : resource.ancestors.from_depth(1).all << resource) %>
     </ul>

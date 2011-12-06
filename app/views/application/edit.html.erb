@@ -2,7 +2,7 @@
   <%= form.semantic_errors %>
   <%= render :partial => "fields", :locals => { :form => form } %>
   <%= form.buttons do %>
-    <%= form.commit_button %>
+    <%= form.commit_button :button_html => { :class => 'button' } %>
     <li class="cancel"><%= link_to t("cancel"), smart_resource_url %></li>
   <% end %>
 <% end %>

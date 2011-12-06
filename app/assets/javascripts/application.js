@@ -7,6 +7,7 @@
  *
  *= require jquery.min.js
  *= require jquery-ui.min.js
+ *= require jquery.ui.datepicker-ru.js
  *= require jquery_ujs.js
  *= require nested_form.js
  *= require treeview/jquery.cookie.js
@@ -17,10 +18,26 @@
 
 var CKEDITOR_BASEPATH = '/assets/ckeditor/';
 
-$(function() {
+function init_tree() {
   if ($.fn.treeview) {
     $('.nodes_tree').treeview({
       url: '/treeview'
     });
   };
+};
+
+function init_date_picker() {
+  if ($.fn.datepicker) {
+    $('.formtastic .inputs .date_picker').datepicker({
+      changeMonth: true,
+      changeYear: true,
+      showOn: "button",
+      showOtherMonths: true
+    });
+  };
+};
+
+$(function() {
+  init_tree();
+  init_date_picker();
 });

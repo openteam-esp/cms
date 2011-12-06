@@ -6,6 +6,7 @@
  *= require reset
  *= require text
  *= require form
+ *= require jquery_ui
  *= require buttons
  *= require treeview
  *= require errors

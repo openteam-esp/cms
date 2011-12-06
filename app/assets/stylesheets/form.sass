@@ -1,9 +1,81 @@
+@import 'compass/utilities'
+@import 'compass/css3'
+
+=input_style
+  color: #333
+  font-family: Arial, Verdana, sans-serif
+  font-size: 12px
+  background-color: #fff
+  border: 1px solid #999
+  +border-radius
+  padding: 3px
+  &:focus
+    background-color: #fcf1e0
+
 .formtastic
   .inputs
+    margin-bottom: 10px
     .string,
+    .password,
+    .number,
+    .date_picker,
+    .url,
     .text,
     .ckeditor,
-    .select,
-    .url
+    .select
       label
         display: block
+        abbr
+          color: #800000
+          font-size: 16px
+          margin-left: 1px
+    .string,
+    .password,
+    .number,
+    .url
+      input
+        width: 250px
+        +input_style
+    .number
+      input
+        width: 100px
+        +input_style
+    .date_picker
+      input
+        width: 80px
+        +input_style
+      button
+        +inline-block
+        width: 16px
+        height: 16px
+        cursor: pointer
+        outline: none
+        background: transparent url('ui/calendar.png') no-repeat
+        text-indent: -9999em
+        border: none
+        margin: 0 0 1px 5px
+        &:active
+          margin: 0 0 0 6px
+    .select
+      select
+        width: 258px
+        +input_style
+    .text,
+    .ckeditor
+      textarea
+        +input_style
+  .buttons
+    +clearfix
+    li
+      float: left
+      margin-right: 10px
+
+.regions_list
+  .formtastic
+    +clearfix
+    fieldset
+      float: left
+      &.inputs
+        margin-bottom: 0
+      &.buttons
+        margin: 25px 0 0 10px

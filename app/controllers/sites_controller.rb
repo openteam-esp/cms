@@ -4,7 +4,7 @@ class SitesController < ApplicationController
 
   def show
     show! do
-      render :layout => 'common' and return
+      render :layout => 'with_tree' and return
     end
   end
 

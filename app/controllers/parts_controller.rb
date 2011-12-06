@@ -2,6 +2,8 @@ class PartsController < ApplicationController
   belongs_to :node, :shallow => true
   actions :new, :create, :edit, :update, :destroy
 
+  layout 'application'
+
   protected
     def build_resource
       part_class = params[:part][:type].constantize
