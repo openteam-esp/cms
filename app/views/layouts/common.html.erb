@@ -1,14 +1,8 @@
 <% content_for :content do %>
   <nav>
     <h1><%= resource.site.slug %></h1>
-    <%= resource.ancestors.all %>
     <ul class='nodes_tree'>
-      <% resource.ancestors.each do | node | %>
-        <li id="<%= node.id %>"<%= " class='hasChildren'" if node.has_children? %>>
-          <%= content_tag :span, node.slug %>
-          <%= content_tag(:ul, content_tag(:li, content_tag(:span, raw('&nbsp;'), :class => 'placeholder'))) if node.has_children? %>
-        </li>
-      <% end %>
+      <%= expanded_ancestors(resource.is_a?(Site) ? [] : resource.ancestors.from_depth(1).all << resource) %>
     </ul>
   </nav>
   <article>

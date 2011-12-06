@@ -1,7 +1,7 @@
 class Node < ActiveRecord::Base
 
   validates :slug, :presence => true, :format => { :with => %r{^[[:alnum:]_\.-]+$} }
-  has_ancestry
+  has_ancestry :cache_depth => true
 
   has_many :parts
 
