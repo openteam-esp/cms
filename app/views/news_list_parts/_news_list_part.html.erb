@@ -1,2 +1,8 @@
-<%= news_list_part.news_channel %>
-<%= news_list_part.item_page %>
+<%= show_for news_list_part do |part| %>
+  <%= part.attributes :news_channel,
+                      :news_per_page,
+                      :news_paginated,
+                      :news_order_by,
+                      :item_page,
+                      :news_until %>
+<% end %>

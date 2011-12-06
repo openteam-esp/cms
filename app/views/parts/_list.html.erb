@@ -4,6 +4,7 @@
       <fieldset class='region'>
       <legend><%= region.humanize %></legend>
       <% if part = resource.part_for(region) %>
+        <h3><%= part.class.name %></h3>
         <%= render part %>
         <%= link_to action_title(:action => 'edit', :controller => 'parts'), edit_part_path(part) %>
         <%= link_to action_title(:action => 'destroy', :controller => 'parts'), part_path(part), confirm: t('Are you sure?'), method: :delete %>

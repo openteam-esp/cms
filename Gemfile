@@ -19,6 +19,7 @@ gem 'rails'
 gem 'restfulie',                                  :git => 'git://github.com/caelum/restfulie'
 gem 'russian'
 gem 'sanitize'
+gem 'show_for'
 gem 'sass-rails'
 gem 'simple-navigation'
 

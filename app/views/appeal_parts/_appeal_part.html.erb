@@ -1,1 +1,3 @@
-<%= appeal_part.appeal_section_slug %>
+<%= show_for appeal_part do |part| %>
+  <%= part.attribute :appeal_section_slug %>
+<% end %>

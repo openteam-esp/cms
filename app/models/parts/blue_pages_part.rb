@@ -23,6 +23,10 @@ class BluePagesPart < Part
     @categories ||= Restfulie.at(blue_pages_url).accepts("application/json").get
   end
 
+  def category_name
+    @name ||= ActiveSupport::JSON.decode(Restfulie.at("#{blue_pages_url}/#{blue_pages_category_id}").accepts("application/json").get.body)['title']
+  end
+
   def categories_options_for_select
     options_for_select = {}
     ActiveSupport::JSON.decode(categories.body)['categories'].each do |e|
