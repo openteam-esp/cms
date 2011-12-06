@@ -52,6 +52,7 @@ describe Node do
       it { page.part_for('navigation').should be nil }
       it { page.part_for('content', true).should == @page_content }
     end
+
   end
 end
 

@@ -24,8 +24,7 @@ class NodesController < ApplicationController
 
     def fill_node(node)
       hash = { 'text' => node.slug }
-      hash.merge!({ 'id' => node.id.to_s }) if node.has_children?
-      hash.merge!({ 'hasChildren' => true }) if node.has_children?
+      hash.merge!({ 'id' => node.id.to_s, 'hasChildren' => true }) if node.has_children?
       hash
     end
 
