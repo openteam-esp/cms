@@ -23,7 +23,7 @@ class NodesController < ApplicationController
   private
 
     def fill_node(node)
-      hash = { 'text' => node.slug }
+      hash = { 'text' => "<a href='/#{node.class.name.tableize}/#{node.id}'>#{node.slug}</a>" }
       hash.merge!({ 'id' => node.id.to_s, 'hasChildren' => true }) if node.has_children?
       hash
     end
