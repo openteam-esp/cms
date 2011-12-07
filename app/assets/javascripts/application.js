@@ -21,7 +21,8 @@ var CKEDITOR_BASEPATH = '/assets/ckeditor/';
 function init_tree() {
   if ($.fn.treeview) {
     $('.nodes_tree').treeview({
-      url: '/treeview'
+      url: '/treeview',
+      persist: 'location'
     });
   };
 };

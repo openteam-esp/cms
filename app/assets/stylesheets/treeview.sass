@@ -1,3 +1,5 @@
+@import 'compass/css3'
+
 .treeview
   padding: 0
   margin: 0
@@ -26,8 +28,13 @@
   li
     margin: 0
     padding-left: 16px
-  a.selected
-    background-color: #eee
+  a
+    padding: 0px 5px
+    +border-radius
+    &.selected
+      color: #fff
+      background-color: #6A6AEE
+      text-decoration: none
 
 #treecontrol
   margin: 1em 0

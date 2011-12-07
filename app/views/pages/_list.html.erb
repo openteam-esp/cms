@@ -1,0 +1,12 @@
+<div class="children">
+  <div class="actions">
+    <%= link_to "Сортировка", "#", :class => "button icon loop" %>
+    <%= link_to action_title(:action => 'new', :controller => 'pages'), new_node_page_path(resource), :class => "button icon add" %>
+  </div>
+
+  <ul>
+    <% resource.children.each do | child | %>
+      <li><%= link_to child, child %></li>
+    <% end %>
+  </ul>
+</div>
