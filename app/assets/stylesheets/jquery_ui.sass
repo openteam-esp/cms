@@ -1,3 +1,6 @@
+@import 'compass/utilities'
+@import 'compass/css3'
+
 /*
  * jQuery UI CSS Framework 1.8.16
  *
@@ -6,9 +9,11 @@
  * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Theming/API
+ */
 
 /* Layout helpers
  *----------------------------------
+ */
 
 .ui-helper-hidden
   display: none
@@ -29,23 +34,10 @@
   list-style: none
 
 .ui-helper-clearfix
-  &:after
-    content: "."
-    display: block
-    height: 0
-    clear: both
-    visibility: hidden
-  display: inline-block
-
-/* required comment for clearfix to work in Opera \
-
-* html .ui-helper-clearfix
-  height: 1%
-
-.ui-helper-clearfix
-  display: block
+  +clearfix
 
 /* end clearfix
+ */
 
 .ui-helper-zfix
   width: 100%
@@ -58,14 +50,17 @@
 
 /* Interaction Cues
  *----------------------------------
+ */
 
 .ui-state-disabled
   cursor: default !important
 
 /* Icons
  *----------------------------------
+ */
 
 /* states and images
+ */
 
 .ui-icon
   display: block
@@ -75,8 +70,10 @@
 
 /* Misc visuals
  *----------------------------------
+ */
 
 /* Overlays
+ */
 
 .ui-widget-overlay
   position: absolute
@@ -95,25 +92,22 @@
  * http://docs.jquery.com/UI/Theming/API
  *
  * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Verdana,Arial,sans-serif&fwDefault=normal&fsDefault=1.1em&cornerRadius=4px&bgColorHeader=cccccc&bgTextureHeader=03_highlight_soft.png&bgImgOpacityHeader=75&borderColorHeader=aaaaaa&fcHeader=222222&iconColorHeader=222222&bgColorContent=ffffff&bgTextureContent=01_flat.png&bgImgOpacityContent=75&borderColorContent=aaaaaa&fcContent=222222&iconColorContent=222222&bgColorDefault=e6e6e6&bgTextureDefault=02_glass.png&bgImgOpacityDefault=75&borderColorDefault=d3d3d3&fcDefault=555555&iconColorDefault=888888&bgColorHover=dadada&bgTextureHover=02_glass.png&bgImgOpacityHover=75&borderColorHover=999999&fcHover=212121&iconColorHover=454545&bgColorActive=ffffff&bgTextureActive=02_glass.png&bgImgOpacityActive=65&borderColorActive=aaaaaa&fcActive=212121&iconColorActive=454545&bgColorHighlight=fbf9ee&bgTextureHighlight=02_glass.png&bgImgOpacityHighlight=55&borderColorHighlight=fcefa1&fcHighlight=363636&iconColorHighlight=2e83ff&bgColorError=fef1ec&bgTextureError=02_glass.png&bgImgOpacityError=95&borderColorError=cd0a0a&fcError=cd0a0a&iconColorError=cd0a0a&bgColorOverlay=aaaaaa&bgTextureOverlay=01_flat.png&bgImgOpacityOverlay=0&opacityOverlay=30&bgColorShadow=aaaaaa&bgTextureShadow=01_flat.png&bgImgOpacityShadow=0&opacityShadow=30&thicknessShadow=8px&offsetTopShadow=-8px&offsetLeftShadow=-8px&cornerRadiusShadow=8px
+ */
 
 /* Component containers
  *----------------------------------
+ */
 
 .ui-widget
-  font-family: Arial, Verdana,sans-serif
-  font-size: 1em
   .ui-widget
     font-size: 1em
   input, select, textarea, button
-    font-family: Arial, Verdana,sans-serif
     font-size: 1em
 
 .ui-widget-content
   border: 1px solid #aaaaaa
   background: white url('ui/ui-bg_flat_75_ffffff_40x100.png') 50% 50% repeat-x
   color: #222222
-  a
-    color: #222222
 
 .ui-widget-header
   border: 1px solid #aaaaaa
@@ -125,6 +119,7 @@
 
 /* Interaction states
  *----------------------------------
+ */
 
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
   border: 1px solid #d3d3d3
@@ -170,6 +165,7 @@
 
 /* Interaction Cues
  *----------------------------------
+ */
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight
   border: 1px solid #fcefa1
@@ -202,8 +198,10 @@
 
 /* Icons
  *----------------------------------
+ */
 
 /* states and images
+ */
 
 .ui-icon
   width: 16px
@@ -226,6 +224,7 @@
   background-image: url('ui/ui-icons_cd0a0a_256x240.png')
 
 /* positioning
+ */
 
 .ui-icon-carat-1-n
   background-position: 0 0
@@ -636,6 +635,7 @@
   background-position: -80px -160px
 
 /* ui-icon-seek-first is deprecated, use ui-icon-seek-start instead
+ */
 
 .ui-icon-stop
   background-position: -96px -160px
@@ -750,34 +750,25 @@
 
 /* Misc visuals
  *----------------------------------
+ */
 
 /* Corner radius
+ */
 
 .ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl
-  -moz-border-radius-topleft: 4px
-  -webkit-border-top-left-radius: 4px
-  -khtml-border-top-left-radius: 4px
-  border-top-left-radius: 4px
+  +border-top-left-radius(4px)
 
 .ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr
-  -moz-border-radius-topright: 4px
-  -webkit-border-top-right-radius: 4px
-  -khtml-border-top-right-radius: 4px
-  border-top-right-radius: 4px
+  +border-top-right-radius(4px)
 
 .ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl
-  -moz-border-radius-bottomleft: 4px
-  -webkit-border-bottom-left-radius: 4px
-  -khtml-border-bottom-left-radius: 4px
-  border-bottom-left-radius: 4px
+  +border-bottom-left-radius(4px)
 
 .ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br
-  -moz-border-radius-bottomright: 4px
-  -webkit-border-bottom-right-radius: 4px
-  -khtml-border-bottom-right-radius: 4px
-  border-bottom-right-radius: 4px
+  +border-bottom-right-radius(4px)
 
 /* Overlays
+ */
 
 .ui-widget-overlay
   background: #aaaaaa url('ui/ui-bg_flat_0_aaaaaa_40x100.png') 50% 50% repeat-x
@@ -788,12 +779,8 @@
   margin: -8px 0 0 -8px
   padding: 8px
   background: #aaaaaa url('ui/ui-bg_flat_0_aaaaaa_40x100.png') 50% 50% repeat-x
-  opacity: .30
-  filter: Alpha(Opacity = 30)
-  -moz-border-radius: 8px
-  -khtml-border-radius: 8px
-  -webkit-border-radius: 8px
-  border-radius: 8px
+  +opacity(0.3)
+  +border-radius(8px)
 
 /*
  * * jQuery UI Resizable 1.8.16
@@ -803,6 +790,7 @@
  * * http://jquery.org/license
  * *
  * * http://docs.jquery.com/UI/Resizable#theming
+ */
 
 .ui-resizable
   position: relative
@@ -880,6 +868,7 @@
  * * http://jquery.org/license
  * *
  * * http://docs.jquery.com/UI/Selectable#theming
+ */
 
 .ui-selectable-helper
   position: absolute
@@ -894,7 +883,9 @@
  * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Accordion#theming
+ */
 /* IE/Win - Fix animation bug - #4615
+ */
 
 .ui-accordion
   width: 100%
@@ -942,12 +933,14 @@
  * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Autocomplete#theming
+ */
 
 .ui-autocomplete
   position: absolute
   cursor: default
 
 /* workarounds
+ */
 
 * html .ui-autocomplete
   width: 1px
@@ -962,6 +955,7 @@
  * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Menu#theming
+ */
 
 .ui-menu
   list-style: none
@@ -996,6 +990,7 @@
  * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Button#theming
+ */
 
 .ui-button
   display: inline-block
@@ -1009,16 +1004,19 @@
   overflow: visible
 
 /* the overflow property removes extra width in IE
+ */
 
 .ui-button-icon-only
   width: 2.2em
 
 /* to make room for the icon, a width needs to be set here
+ */
 
 button.ui-button-icon-only
   width: 2.4em
 
 /* button elements seem to need a little more width
+ */
 
 .ui-button-icons-only
   width: 3.4em
@@ -1026,7 +1024,8 @@ button.ui-button-icon-only
 button.ui-button-icons-only
   width: 3.7em
 
-/*button text element
+/* button text element
+ */
 
 .ui-button .ui-button-text
   display: block
@@ -1051,11 +1050,13 @@ button.ui-button-icons-only
   padding-right: 2.1em
 
 /* no icon support for input elements, provide padding by default
+ */
 
 input.ui-button
   padding: .4em 1em
 
-/*button icon element(s)
+/* button icon element(s)
+ */
 
 .ui-button-icon-only .ui-icon, .ui-button-text-icon-primary .ui-icon, .ui-button-text-icon-secondary .ui-icon, .ui-button-text-icons .ui-icon, .ui-button-icons-only .ui-icon
   position: absolute
@@ -1072,7 +1073,8 @@ input.ui-button
 .ui-button-text-icon-secondary .ui-button-icon-secondary, .ui-button-text-icons .ui-button-icon-secondary, .ui-button-icons-only .ui-button-icon-secondary, .ui-button-text-icons .ui-button-icon-secondary, .ui-button-icons-only .ui-button-icon-secondary
   right: .5em
 
-/*button sets
+/* button sets
+ */
 
 .ui-buttonset
   margin-right: 7px
@@ -1081,12 +1083,14 @@ input.ui-button
     margin-right: -0.3em
 
 /* workarounds
+ */
 
 button.ui-button::-moz-focus-inner
   border: 0
   padding: 0
 
 /* reset extra padding in Firefox
+ */
 /*
  * jQuery UI Dialog 1.8.16
  *
@@ -1095,6 +1099,7 @@ button.ui-button::-moz-focus-inner
  * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Dialog#theming
+ */
 
 .ui-dialog
   position: absolute
@@ -1155,6 +1160,7 @@ button.ui-button::-moz-focus-inner
  * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Slider#theming
+ */
 
 .ui-slider
   position: relative
@@ -1209,6 +1215,7 @@ button.ui-button::-moz-focus-inner
  * * http://jquery.org/license
  * *
  * * http://docs.jquery.com/UI/Tabs#theming
+ */
 
 .ui-tabs
   position: relative
@@ -1244,14 +1251,16 @@ button.ui-button::-moz-focus-inner
   .ui-tabs-panel
     display: block
     border-width: 0
-    padding: 1em 1.4em
+    padding: 10px
     background: none
   .ui-tabs-hide
     display: none !important
 
 /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed")
+ */
 
 /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere...
+ */
 
 /*
  * jQuery UI Datepicker 1.8.16
@@ -1261,9 +1270,11 @@ button.ui-button::-moz-focus-inner
  * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Datepicker#theming
+ */
 
 .ui-datepicker
   width: 17em
+  font-family: Arial, Verdana, sans-serif
   padding: .2em .2em 0
   display: none
   .ui-datepicker-header
@@ -1303,6 +1314,7 @@ button.ui-button::-moz-focus-inner
       width: 100%
     &.ui-datepicker-month, &.ui-datepicker-year
       width: 49%
+      font-family: Arial, Verdana, sans-serif
   table
     width: 100%
     font-size: .9em
@@ -1341,6 +1353,7 @@ button.ui-button::-moz-focus-inner
     width: auto
 
 /* with multiple calendars
+ */
 
 .ui-datepicker-multi .ui-datepicker-group
   float: left
@@ -1369,6 +1382,7 @@ button.ui-button::-moz-focus-inner
   font-size: 0em
 
 /* RTL support
+ */
 
 .ui-datepicker-rtl
   direction: rtl
@@ -1397,6 +1411,7 @@ button.ui-button::-moz-focus-inner
     border-left-width: 1px
 
 /* IE6 IFRAME FIX (taken from datepicker 1.5.3
+ */
 
 .ui-datepicker-cover
   display: none
@@ -1426,6 +1441,7 @@ button.ui-button::-moz-focus-inner
  ** http://jquery.org/license
  **
  ** http://docs.jquery.com/UI/Progressbar#theming
+ */
 
 .ui-progressbar
   height: 2em
