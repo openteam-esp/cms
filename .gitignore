@@ -1,6 +1,7 @@
 *.swp
 .bundle/
 .rake_tasks~
+.rvmrc
 .sass-cache/
 bin/
 config/database.yml
@@ -9,6 +10,7 @@ config/sunspot.yml
 db/*.sqlite3
 log/*.log
 log/*.log.lck
+log/*.log.gz
 public/assets/
 public/*.pdf
 solr/data/
