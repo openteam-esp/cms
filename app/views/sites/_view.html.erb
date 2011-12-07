@@ -1,6 +1,12 @@
-<ul>
-  <% resource.locales.each do | locale | %>
-    <li><%= link_to locale, locale %></li>
-  <% end %>
-  <li><%= link_to action_title(:action => 'new', :controller => 'locales'), new_site_locale_path(resource), :class => 'button' %></li>
-</ul>
+<div class="nodes_list">
+  <div class="actions">
+    <%= link_to "Сортировка", "#", :class => "button icon loop" %>
+    <%= link_to action_title(:action => 'new', :controller => 'locales'), new_site_locale_path(resource), :class => 'button icon add' %>
+  </div>
+
+  <%= content_tag :ul do %>
+    <% resource.locales.each do | locale | %>
+      <li><%= link_to locale, locale %></li>
+    <% end %>
+  <% end if resource.locales.any? %>
+</div>
