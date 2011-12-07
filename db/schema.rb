@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111206030441) do
+ActiveRecord::Schema.define(:version => 20111207094231) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -19,22 +19,6 @@ ActiveRecord::Schema.define(:version => 20111206030441) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "inodes", :force => true do |t|
-    t.string   "type"
-    t.string   "file_name"
-    t.string   "file_mime_type"
-    t.string   "file_size"
-    t.string   "file_uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "folder_id"
-    t.string   "ancestry"
-  end
-
-  add_index "inodes", ["ancestry"], :name => "index_inodes_on_ancestry"
-  add_index "inodes", ["folder_id"], :name => "index_inodes_on_folder_id"
-  add_index "inodes", ["type"], :name => "index_inodes_on_type"
 
   create_table "nodes", :force => true do |t|
     t.string   "slug"
@@ -48,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20111206030441) do
     t.string   "client_url"
     t.boolean  "in_navigation"
     t.string   "navigation_group"
-    t.integer  "navigation_position"
+    t.float    "navigation_position"
     t.string   "navigation_title"
     t.integer  "ancestry_depth",      :default => 0
   end

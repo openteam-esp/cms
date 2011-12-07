@@ -44,6 +44,18 @@ function init_tabs() {
   };
 };
 
+function serializeBlock(parent_block) {
+  var ids = $.makeArray(
+    $(".sortable li", parent_block).map(function() {
+      return $(this).data("id");
+    }));
+  var csrf_token = $("head meta[name='csrf-token']").attr("content");
+  return {
+    "ids": ids,
+    "authenticity_token" : csrf_token
+  };
+};
+
 function init_sortable() {
   $(".sort_link").click(function() {
     var it_off = $(this).hasClass("off"),
@@ -60,7 +72,7 @@ function init_sortable() {
           $.ajax({
             url: url,
             type: "post",
-            //data: serializeBlock(parent_block),
+            data: serializeBlock(parent_block),
             //beforeSend: function(jqXHR, settings) {
               //show_ajax_indicator();
             //},

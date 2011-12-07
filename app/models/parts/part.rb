@@ -12,10 +12,10 @@ end
 #
 # Table name: parts
 #
-#  id                       :integer         primary key
+#  id                       :integer         not null, primary key
 #  html_content_id          :integer
-#  created_at               :timestamp
-#  updated_at               :timestamp
+#  created_at               :datetime
+#  updated_at               :datetime
 #  region                   :string(255)
 #  type                     :string(255)
 #  node_id                  :integer

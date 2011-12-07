@@ -3,10 +3,6 @@ production:
     api_key:            key
     host:               host
 
-  s3:
-    access_key_id:      key
-    secret_access_key:  secret
-
 blue_pages:
   protocol:             http
   host:                 esp-blue-pages.openteam.ru

@@ -4,10 +4,10 @@ require 'spec_helper'
 
 describe BreadcrumbsPart do
   let(:site) { Fabricate(:site, :slug => 'www.tgr.ru', :title => 'site') }
-    let(:locale) { Fabricate(:locale, :parent => site, :slug => 'ru', :title => 'ru') }
-      let(:section) { Fabricate(:page, :parent => locale, :slug => 'section', :title => 'section') }
-        let(:subsection) { Fabricate(:page, :parent => section, :slug => 'subsection', :title => 'subsection') }
-          let(:page) { Fabricate(:page, :parent => subsection, :slug => 'page', :title => 'page') }
+  let(:locale) { Fabricate(:locale, :parent => site, :slug => 'ru', :title => 'ru') }
+  let(:section) { Fabricate(:page, :parent => locale, :slug => 'section', :title => 'section') }
+  let(:subsection) { Fabricate(:page, :parent => section, :slug => 'subsection', :title => 'subsection') }
+  let(:page) { Fabricate(:page, :parent => subsection, :slug => 'page', :title => 'page') }
 
   it "должен строить крошки" do
     breadcrumbs_part = BreadcrumbsPart.create(:node => locale, :region => 'region')
@@ -30,10 +30,10 @@ end
 #
 # Table name: parts
 #
-#  id                       :integer         primary key
+#  id                       :integer         not null, primary key
 #  html_content_id          :integer
-#  created_at               :timestamp
-#  updated_at               :timestamp
+#  created_at               :datetime
+#  updated_at               :datetime
 #  region                   :string(255)
 #  type                     :string(255)
 #  node_id                  :integer

@@ -6,7 +6,6 @@ gem 'ckeditor',                                   :git => 'git://github.com/psho
 gem 'compass',                  '~> 0.12.alpha'
 gem 'configliere'
 gem 'default_value_for'
-gem 'dragonfly'
 gem 'el_vfs_client'
 gem 'fog',                                        :require => false
 gem 'formtastic'
