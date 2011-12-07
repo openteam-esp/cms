@@ -27,3 +27,18 @@
     +clearfix
     .actions
       float: right
+    .sortable
+      li
+        margin-bottom: 3px
+      span
+        width: 16px
+        height: 16px
+        overflow: hidden
+        cursor: move
+        text-indent: -9999em
+        background: transparent url('sort.png') no-repeat
+        margin-right: 5px
+        &.hidden
+          display: none
+        &.inline-block
+          +inline-block

@@ -50,8 +50,8 @@ function init_sortable() {
         url = $(this).attr("href"),
         parent_block = $(this).parent().parent();
     if (it_off) {
-      $(this).removeClass("off").addClass("on");
-      $(".sortable span", parent_block).css("display", "inline-block");
+      $(this).removeClass("off").addClass("on").addClass("invert");
+      $(".sortable span", parent_block).removeClass("hidden").addClass("inline-block");
       $(".sortable", parent_block).sortable({
         axis: "y",
         handle: "span",
@@ -60,13 +60,13 @@ function init_sortable() {
           $.ajax({
             url: url,
             type: "post",
-            data: serializeBlock(parent_block),
-            beforeSend: function(jqXHR, settings) {
-              show_ajax_indicator();
-            },
-            complete: function(jqXHR, textStatus) {
-              hide_ajax_indicator();
-            },
+            //data: serializeBlock(parent_block),
+            //beforeSend: function(jqXHR, settings) {
+              //show_ajax_indicator();
+            //},
+            //complete: function(jqXHR, textStatus) {
+              //hide_ajax_indicator();
+            //},
             success: function(data, textStatus, jqXHR) {
               $(block).effect("highlight");
             },
@@ -90,8 +90,8 @@ function init_sortable() {
         }
       });
     } else {
-      $(".sortable span", parent_block).hide();
-      $(this).removeClass("on").addClass("off");
+      $(".sortable span", parent_block).removeClass("inline-block").addClass("hidden");
+      $(this).removeClass("on").addClass("off").removeClass("invert");
     };
     return false;
   });
@@ -101,5 +101,5 @@ $(function() {
   init_tree();
   init_date_picker();
   init_tabs();
-  //init_sortable();
+  init_sortable();
 });

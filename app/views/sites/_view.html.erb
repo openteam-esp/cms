@@ -1,12 +1,15 @@
 <div class="nodes_list">
   <div class="actions">
-    <%= link_to "Сортировка", "#", :class => "button icon loop" %>
+    <%= link_to "Сортировка", "#", :class => "button icon loop sort_link off" %>
     <%= link_to action_title(:action => 'new', :controller => 'locales'), new_site_locale_path(resource), :class => 'button icon add' %>
   </div>
 
-  <%= content_tag :ul do %>
-    <% resource.locales.each do | locale | %>
-      <li><%= link_to locale, locale %></li>
+  <%= content_tag :ul, :class => 'sortable' do %>
+    <% resource.children.each do | child | %>
+      <li data-id='<%= child.id %>'>
+        <span class='hidden'>хвать</span>
+        <%= link_to child, child %>
+      </li>
     <% end %>
-  <% end if resource.locales.any? %>
+  <% end if resource.children.any? %>
 </div>

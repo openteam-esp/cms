@@ -7,6 +7,30 @@
 
 @import "compass/css3"
 
+=hover_and_active_behaviour($inverted: false)
+  &:hover, &:focus, &:active, &.active
+    border-color: #3072b3
+    border-bottom-color: #2a65a0
+    text-decoration: none
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3)
+    color: #fff
+    background-color: #3C8DDE
+    @if $inverted
+      +background-image(linear-gradient(#3072b3, #599bdc))
+    @else
+      +background-image(linear-gradient(#599bdc, #3072b3))
+  &:active, &.active
+    border-color: #2a65a0
+    border-bottom-color: #3884CF
+    background-color: #3072b3
+    @if $inverted
+      +background-image(linear-gradient(#599bdc, #3072b3))
+    @else
+      +background-image(linear-gradient(#3072b3, #599bdc))
+  &::-moz-focus-inner
+    padding: 0
+    border: 0
+
 =iconize($position)
   &:before
     background-position: 0 $position
@@ -32,22 +56,10 @@ input.button
   +background-image(linear-gradient(#f4f4f4, #ececec))
   +background-clip(padding-box)
   +border-radius
-  &:hover, &:focus, &:active, &.active
-    border-color: #3072b3
-    border-bottom-color: #2a65a0
-    text-decoration: none
-    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3)
-    color: #fff
-    background-color: #3C8DDE
-    +background-image(linear-gradient(#599bdc, #3072b3))
-  &:active, &.active
-    border-color: #2a65a0
-    border-bottom-color: #3884CF
-    background-color: #3072b3
-    +background-image(linear-gradient(#3072b3, #599bdc))
-  &::-moz-focus-inner
-    padding: 0
-    border: 0
+  +hover_and_active_behaviour(false)
+  &.invert
+    +background-image(linear-gradient(#ececec, #f4f4f4))
+    +hover_and_active_behaviour(true)
   &.icon:before
     content: ""
     position: relative
