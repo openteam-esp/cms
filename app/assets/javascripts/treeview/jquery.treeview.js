@@ -205,7 +205,7 @@
         break;
       case "location":
         var current = this.find("a").filter(function() {
-          return this.href.toLowerCase() == location.href.toLowerCase();
+          return this.href.toLowerCase() == location.href.toLowerCase().replace(/#.+/, "");
         });
         if ( current.length ) {
           // TODO update the open/closed classes

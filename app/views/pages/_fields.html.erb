@@ -1,9 +1,9 @@
 <%= form.inputs do %>
   <%= form.input :title, :input_html => { :autofocus => true } %>
-  <%= form.input :slug %>
-  <%= form.input :in_navigation %>
-  <%= form.input :navigation_group %>
   <%= form.input :navigation_title %>
+  <%= form.input :slug %>
+  <%= form.input :navigation_group %>
   <%= form.input :navigation_position %>
   <%= form.input :template, :as => :select, :collection => resource.templates %>
+  <%= form.input :in_navigation %>
 <% end %>
