@@ -1,6 +1,8 @@
 class Page < Node
   validates_presence_of :parent, :template
 
+  after_initialize :set_navigation_group
+
   default_value_for :navigation_position, 100
 
   alias :node :parent
@@ -9,6 +11,10 @@ class Page < Node
     ancestors.second
   end
 
+  private
+    def set_navigation_group
+      self.navigation_group = self.navigation_group || (self.parent.respond_to?(:navigation_group) ? self.parent.navigation_group : nil)
+    end
 end
 
 # == Schema Information

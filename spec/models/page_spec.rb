@@ -8,6 +8,13 @@ describe Page do
   it { Fabricate(:page, :parent => Fabricate(:page)).locale.slug.should == 'ru' }
   it { Fabricate(:page).site.should be_is_root }
   it { Fabricate(:page, :parent => Fabricate(:page)).site.should be_is_root }
+
+  describe 'navigation_group' do
+    let(:page) { Fabricate(:page, :navigation_group => 'group') }
+    let(:child_page) { page.pages.build }
+
+    it { child_page.navigation_group.should == 'group' }
+  end
 end
 
 # == Schema Information
