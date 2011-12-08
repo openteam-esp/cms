@@ -11,7 +11,8 @@ describe NewsListPart do
       @news_part = NewsListPart.create(:news_per_page => 2,
                                       :news_order_by => 'since_desc',
                                       :news_channel => 'news',
-                                      :item_page => Fabricate(:page))
+                                      :item_page => Fabricate(:page),
+                                      :title => 'Новости')
 
       request_hash = { 'x-total-pages' => ['3'], 'x-current-page' => ['1'] }
       @news_part.stub(:request).and_return(request_hash)
@@ -27,6 +28,7 @@ describe NewsListPart do
       @expected_hash = {
         'type' => 'NewsListPart',
         'content' => {
+          'title' => 'Новости',
           'entries' => [
             {'title' => 'title1', 'annotation' => 'annotation1', 'link' => @news_part.item_page.route_without_site + '?parts_params[news_item][slug]=link1'},
             {'title' => 'title2', 'annotation' => 'annotation2', 'link' => @news_part.item_page.route_without_site + '?parts_params[news_item][slug]=link2'}

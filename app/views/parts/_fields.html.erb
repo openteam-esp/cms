@@ -1,2 +1,7 @@
+<%= form.inputs do %>
+  <%= form.input :title %>
+<% end %>
+
 <%= render :partial => "#{@part.class.name.tableize}/fields", :locals => { :form => form } %>
+
 <%= hidden_field_tag :region, @part.region %>
