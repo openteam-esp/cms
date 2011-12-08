@@ -1,5 +1,6 @@
 source :rubygems
 
+gem 'acts_as_list',                               :git => 'git://github.com/swanandp/acts_as_list'
 gem 'ancestry'
 gem 'attribute_normalizer'
 gem 'ckeditor',                                   :git => 'git://github.com/pshoukry/ckeditor.git'

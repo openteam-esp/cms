@@ -3,8 +3,6 @@ class Page < Node
 
   before_validation :generate_slug, :unless => :slug?
 
-  default_value_for :navigation_position, 100
-
   default_value_for :navigation_group do |object|
     object.parent.try(:navigation_group)
   end

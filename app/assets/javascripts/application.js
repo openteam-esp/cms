@@ -73,12 +73,6 @@ function init_sortable() {
             url: url,
             type: "post",
             data: serializeBlock(parent_block),
-            //beforeSend: function(jqXHR, settings) {
-              //show_ajax_indicator();
-            //},
-            //complete: function(jqXHR, textStatus) {
-              //hide_ajax_indicator();
-            //},
             success: function(data, textStatus, jqXHR) {
               $(block).effect("highlight");
             },
@@ -109,9 +103,33 @@ function init_sortable() {
   });
 };
 
+function toggle_position_fields(field) {
+  if ($(field).is(":checked")) {
+    $("#page_navigation_group").removeAttr("disabled");
+    $("#page_navigation_group").closest("li").removeClass("disabled");
+    $("#page_navigation_position_param").removeAttr("disabled");
+    $("#page_navigation_position_param").closest("li").removeClass("disabled");
+    console.log(field.closest("li"));
+  } else {
+    $("#page_navigation_group").attr("disabled", "disabled");
+    $("#page_navigation_group").closest("li").addClass("disabled");
+    $("#page_navigation_position_param").attr("disabled", "disabled");
+    $("#page_navigation_position_param").closest("li").addClass("disabled");
+  };
+};
+
+function manipulate_position_fields() {
+  var field = $("#page_in_navigation");
+  toggle_position_fields(field);
+  $(field).click(function() {
+    toggle_position_fields(field);
+  });
+};
+
 $(function() {
   init_tree();
   init_date_picker();
   init_tabs();
   init_sortable();
+  manipulate_position_fields();
 });

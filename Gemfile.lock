@@ -24,6 +24,12 @@ GIT
       mime-types (~> 1.16)
       orm_adapter (~> 0.0.5)
 
+GIT
+  remote: git://github.com/swanandp/acts_as_list
+  revision: 7fd29b74eec9327a3d2a3033e1ca249ba04fc7e5
+  specs:
+    acts_as_list (0.1.4)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -243,6 +249,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_list!
   ancestry
   annotate (~> 2.4.1.beta1)
   attribute_normalizer

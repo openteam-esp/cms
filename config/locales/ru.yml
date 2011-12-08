@@ -62,6 +62,15 @@ ru:
         title:        Заголовок
         body:         Текст
 
+      page:
+        title: Заголовок
+        navigation_title: Заголовок в навигации
+        slug: Слаг
+        template: Шаблон
+        navigation_group: Группа навигации
+        in_navigation: Добавить в навигацию
+        navigation_position_param: Вставить после
+
       locale:
         slug_enum:
           ru:         русский

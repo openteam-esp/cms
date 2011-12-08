@@ -52,6 +52,38 @@ describe Node do
       it { page.part_for('content', true).should == @page_content }
     end
 
+    describe 'проставлять нужную позицию' do
+      before do
+        @first_page = Fabricate(:page, :template => 'inner_page', :parent => locale, :slug => 'first_page')
+        @second_page = Fabricate(:page, :template => 'inner_page', :parent => locale, :slug => 'second_page')
+        @third_page = Fabricate(:page, :template => 'inner_page', :parent => locale, :slug => 'third_page')
+      end
+
+      it { @first_page.navigation_position.should == 1.0 }
+
+      it { @second_page.navigation_position.should == 2.0 }
+
+      it { @third_page.navigation_position.should == 3.0 }
+
+      it "when navigation_position_param => first" do
+        @third_page.update_attribute(:navigation_position_param, 'first')
+        @third_page.reload.navigation_position.should == 1.0
+        @first_page.reload.navigation_position.should == 2.0
+        @second_page.reload.navigation_position.should == 3.0
+      end
+
+      it "when navigation_position_param => last" do
+        @first_page.update_attribute(:navigation_position_param, 'last')
+        locale.reload.child_ids.should == [@second_page.id, @third_page.id, @first_page.id]
+      end
+
+      it "after navigation_position_param => some_position" do
+        @first_page.update_attribute(:navigation_position_param, '2')
+        locale.reload.child_ids.should == [@second_page.id, @first_page.id, @third_page.id]
+      end
+
+    end
+
   end
 
   describe 'navigation_group' do

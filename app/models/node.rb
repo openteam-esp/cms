@@ -13,12 +13,18 @@ class Node < ActiveRecord::Base
   scope :navigable, where(:in_navigation => true)
   default_scope :order => [:ancestry_depth, :navigation_position]
 
-  attr_accessor :parts_params
+  validates_uniqueness_of :slug, :scope => :ancestry
 
+  attr_accessor :parts_params
   default_value_for :parts_params, {}
+
+  attr_accessor :navigation_position_param
+  after_save :set_navigation_position
 
   alias :site :root
   delegate :templates, :to => :site
+
+  acts_as_list :column => :navigation_position
 
   def to_s
     title
@@ -34,6 +40,10 @@ class Node < ActiveRecord::Base
 
   def required_regions
     templates_hash[template].select { | region, options | options['required'] }.keys
+  end
+
+  def scope_condition
+    "ancestry = '#{self.ancestry}'"
   end
 
   def regions
@@ -89,6 +99,21 @@ class Node < ActiveRecord::Base
     def templates_hash
       @templates_hash ||= YAML.load_file(Rails.root.join 'config/sites.yml').to_hash['sites'][site.slug]['templates']
     end
+
+    def set_navigation_position
+      return if self.navigation_position_param.nil? || self.navigation_position_param == 'current'
+      Node.skip_callback(:save, :after, :set_navigation_position)
+      case self.navigation_position_param
+      when 'first'
+        self.move_to_top unless self.first?
+      when 'last'
+        self.move_to_bottom unless self.last?
+      else
+        self.insert_at(self.navigation_position_param)
+      end
+      Node.set_callback(:save, :after, :set_navigation_position)
+    end
+
 end
 
 # == Schema Information
@@ -111,4 +136,3 @@ end
 #  navigation_title    :string(255)
 #  ancestry_depth      :integer         default(0)
 #
-

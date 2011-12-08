@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111208035725) do
+ActiveRecord::Schema.define(:version => 20111208103600) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20111208035725) do
     t.string   "client_url"
     t.boolean  "in_navigation"
     t.string   "navigation_group"
-    t.float    "navigation_position"
+    t.integer  "navigation_position"
     t.string   "navigation_title"
     t.integer  "ancestry_depth",      :default => 0
   end

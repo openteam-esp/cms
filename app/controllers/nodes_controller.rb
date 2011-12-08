@@ -22,7 +22,7 @@ class NodesController < ApplicationController
   def sort
     params[:ids].each_with_index do |id, index|
       node = Node.find(id)
-      node.update_attribute(:navigation_position, (index + 1) * 10)
+      node.update_attribute(:navigation_position, index + 1)
     end
     render :nothing => true
   end
