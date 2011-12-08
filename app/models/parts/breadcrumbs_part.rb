@@ -38,5 +38,6 @@ end
 #  appeal_section_slug      :string(255)
 #  blue_pages_expand        :boolean
 #  navigation_group         :string(255)
+#  title                    :string(255)
 #
 
