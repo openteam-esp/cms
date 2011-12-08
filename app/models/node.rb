@@ -13,7 +13,7 @@ class Node < ActiveRecord::Base
   default_value_for :in_navigation, true
 
   scope :navigable, where(:in_navigation => true)
-  default_scope :order => :navigation_position
+  default_scope :order => [:ancestry_depth, :navigation_position]
 
   attr_accessor :parts_params
 
