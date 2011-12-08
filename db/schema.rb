@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111207094231) do
+ActiveRecord::Schema.define(:version => 20111208035725) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20111207094231) do
     t.string   "appeal_section_slug"
     t.boolean  "blue_pages_expand"
     t.string   "navigation_group"
+    t.string   "title"
   end
 
   add_index "parts", ["html_content_id"], :name => "index_parts_on_content_id"
