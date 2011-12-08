@@ -8,8 +8,6 @@ class Node < ActiveRecord::Base
   normalize_attribute :title, :with => [:gilensize_as_text, :squish]
   after_save :cache_route
 
-  after_save :update_children_navigarion_group
-
   default_value_for :in_navigation, true
 
   scope :navigable, where(:in_navigation => true)
@@ -80,6 +78,7 @@ class Node < ActiveRecord::Base
 
   private
     def cache_route
+      return unless self.slug_changed?
       self.route = parent ? "#{parent.route}/#{slug}" : slug
       Node.skip_callback(:save, :after, :cache_route)
       save!
@@ -91,11 +90,6 @@ class Node < ActiveRecord::Base
       @templates_hash ||= YAML.load_file(Rails.root.join 'config/sites.yml').to_hash['sites'][site.slug]['templates']
     end
 
-    def update_children_navigarion_group
-      children.each do |child|
-        child.update_attribute(:navigation_group, navigation_group)
-      end
-    end
 
 end
 

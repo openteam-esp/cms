@@ -6,6 +6,7 @@ class Page < Node
   default_value_for :navigation_group do |object|
     object.parent.try(:navigation_group)
   end
+
   alias :node :parent
 
   def locale

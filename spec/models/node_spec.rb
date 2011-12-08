@@ -54,6 +54,29 @@ describe Node do
     end
 
   end
+
+  describe 'navigation_group' do
+    let(:site) { Fabricate(:site) }
+    let(:en) { Fabricate(:locale, :parent => site, :slug => 'en') }
+    let(:ru) { Fabricate(:locale, :parent => en.site, :slug => 'ru') }
+    let(:organy_vlasti) { Fabricate(:page, :parent => ru, :navigation_group => 'main') }
+    let(:governer) { Fabricate(:page, :parent => organy_vlasti) }
+
+    let(:store_data) { governer }
+
+    before do
+      store_data
+    end
+
+    it "должна сохранять значение navigation_group" do
+      Node.where(:type => 'Locale').each_with_index do |locale, index|
+        locale.update_attribute(:navigation_position, index)
+      end
+
+      organy_vlasti.reload.navigation_group.should == 'main'
+    end
+
+  end
 end
 
 # == Schema Information
