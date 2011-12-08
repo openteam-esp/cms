@@ -80,7 +80,7 @@ class Node < ActiveRecord::Base
 
   private
     def cache_route
-      self.route = Node.where(:id => path_ids).order(:id).map(&:slug).join('/')
+      self.route = parent ? "#{parent.route}/#{slug}" : slug
       Node.skip_callback(:save, :after, :cache_route)
       save!
       Node.set_callback(:save, :after, :cache_route)

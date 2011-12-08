@@ -12,10 +12,10 @@ describe Node do
   it { should normalize_attribute(:title).from('ru').to('ru') }
 
   describe 'сохранение path' do
-    let(:root) { Fabricate(:node, :parent => nil, :slug => 'site') }
-    let(:ru) { Fabricate(:node, :parent => root, :slug => 'ru') }
-    let(:about) { Fabricate(:node, :parent => ru, :slug => 'about') }
-    let(:history) { Fabricate(:node, :parent => about, :slug => 'history') }
+    let(:root) { Fabricate(:node, :parent => nil, :slug => 'site', :navigation_position => 2) }
+    let(:ru) { Fabricate(:node, :parent => root, :slug => 'ru', :navigation_position => 1) }
+    let(:about) { Fabricate(:node, :parent => ru, :slug => 'about', :navigation_position => 2) }
+    let(:history) { Fabricate(:node, :parent => about, :slug => 'history', :navigation_position => 1) }
 
     it { root.route.should == 'site' }
     it { ru.route.should == 'site/ru' }
