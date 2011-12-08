@@ -1,4 +1,6 @@
 class Locale < Node
+  validates :slug, :presence => true
+
   has_enum :slug
 
   validates_presence_of :parent, :slug, :template

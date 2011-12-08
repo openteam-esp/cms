@@ -1,6 +1,8 @@
 class Page < Node
   validates_presence_of :parent, :template
 
+  before_validation :generate_slug, :unless => :slug?
+
   default_value_for :navigation_position, 100
 
   default_value_for :navigation_group do |object|
@@ -13,6 +15,10 @@ class Page < Node
     ancestors.second
   end
 
+  private
+    def generate_slug
+      self.slug = ActiveSupport::Inflector.transliterate(self.title).gsub(/\s/, '-').downcase
+    end
 end
 
 # == Schema Information

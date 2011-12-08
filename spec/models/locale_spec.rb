@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Locale do
+  it { should validate_presence_of :slug }
   it { should validate_presence_of :parent }
   it { should allow_value(:ru).for :slug }
   it { should allow_value(:en).for :slug }

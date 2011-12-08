@@ -1,4 +1,6 @@
 class Site < Node
+  validates :slug, :presence => true
+
   delegate :parts, :to => :default_locale
   delegate :template, :to => :default_locale
 

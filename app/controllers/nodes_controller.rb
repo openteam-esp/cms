@@ -1,5 +1,4 @@
 class NodesController < ApplicationController
-
   def show
     @node = Node.find_by_route(params[:id])
     @node.parts_params = params[:parts_params] || {}

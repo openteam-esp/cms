@@ -3,7 +3,6 @@
 require 'spec_helper'
 
 describe Node do
-  it { should validate_presence_of :slug }
   it { should allow_value('test_node123').for(:slug) }
   it { should allow_value('русские-буковки').for(:slug) }
   it { should_not allow_value('test/').for(:slug) }

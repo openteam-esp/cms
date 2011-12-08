@@ -1,6 +1,6 @@
 class Node < ActiveRecord::Base
+  validates :slug, :format => { :with => %r{^[[:alnum:]_\.-]+$} }
 
-  validates :slug, :presence => true, :format => { :with => %r{^[[:alnum:]_\.-]+$} }
   has_ancestry :cache_depth => true
 
   has_many :parts
@@ -89,8 +89,6 @@ class Node < ActiveRecord::Base
     def templates_hash
       @templates_hash ||= YAML.load_file(Rails.root.join 'config/sites.yml').to_hash['sites'][site.slug]['templates']
     end
-
-
 end
 
 # == Schema Information

@@ -1,6 +1,9 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe Page do
+  subject { Fabricate(:page) }
   it { should have_many :parts }
   it { should validate_presence_of :template }
   it { should validate_presence_of :parent }
@@ -14,6 +17,16 @@ describe Page do
     let(:child_page) { page.pages.build }
 
     it { child_page.navigation_group.should == 'group' }
+  end
+
+  describe 'slug' do
+    let(:page_without_slug) { Fabricate(:page, :title => 'Страница', :slug => '') }
+    let(:page_with_slug) { Fabricate(:page, :title => 'Страница', :slug => 'ololo') }
+    let(:page_with_complex_slug) { Fabricate(:page, :title => 'Название страницы', :slug => '') }
+
+    it { page_without_slug.slug.should == 'stranitsa' }
+    it { page_with_slug.slug.should == 'ololo' }
+    it { page_with_complex_slug.slug.should == 'nazvanie-stranitsy' }
   end
 end
 
