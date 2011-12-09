@@ -24,7 +24,6 @@ gem 'sass-rails'
 gem 'simple-navigation'
 
 group :assets do
-  gem 'therubyracer'
   gem 'uglifier'
 end
 
@@ -33,6 +32,7 @@ group :development do
   gem 'hirb',                                     :require => false
   gem 'itslog'
   gem 'rails-dev-tweaks'
+  gem 'therubyracer'
 end
 
 group :test do
