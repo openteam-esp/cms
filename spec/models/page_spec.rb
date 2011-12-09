@@ -22,11 +22,11 @@ describe Page do
   describe 'slug' do
     let(:page_without_slug) { Fabricate(:page, :title => 'Страница', :slug => '') }
     let(:page_with_slug) { Fabricate(:page, :title => 'Страница', :slug => 'ololo') }
-    let(:page_with_complex_slug) { Fabricate(:page, :title => 'Название страницы', :slug => '') }
+    let(:page_with_complex_slug) { Fabricate(:page, :title => 'Название страницы состоящее из нескольких слов', :slug => '') }
 
     it { page_without_slug.slug.should == 'stranitsa' }
     it { page_with_slug.slug.should == 'ololo' }
-    it { page_with_complex_slug.slug.should == 'nazvanie-stranitsy' }
+    it { page_with_complex_slug.slug.should == 'nazvanie-stranitsy-sostoyaschee-iz-neskolkih-slov' }
   end
 end
 
