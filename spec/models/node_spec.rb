@@ -59,17 +59,17 @@ describe Node do
         @third_page = Fabricate(:page, :template => 'inner_page', :parent => locale, :slug => 'third_page')
       end
 
-      it { @first_page.navigation_position.should == 1.0 }
+      it { @first_page.navigation_position.should == 1 }
 
-      it { @second_page.navigation_position.should == 2.0 }
+      it { @second_page.navigation_position.should == 2 }
 
-      it { @third_page.navigation_position.should == 3.0 }
+      it { @third_page.navigation_position.should == 3 }
 
       it "when navigation_position_param => first" do
         @third_page.update_attribute(:navigation_position_param, 'first')
-        @third_page.reload.navigation_position.should == 1.0
-        @first_page.reload.navigation_position.should == 2.0
-        @second_page.reload.navigation_position.should == 3.0
+        @third_page.reload.navigation_position.should == 1
+        @first_page.reload.navigation_position.should == 2
+        @second_page.reload.navigation_position.should == 3
       end
 
       it "when navigation_position_param => last" do
@@ -130,4 +130,3 @@ end
 #  navigation_title    :string(255)
 #  ancestry_depth      :integer         default(0)
 #
-
