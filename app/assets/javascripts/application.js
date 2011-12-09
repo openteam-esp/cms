@@ -109,7 +109,6 @@ function toggle_position_fields(field) {
     $("#page_navigation_group").closest("li").removeClass("disabled");
     $("#page_navigation_position_param").removeAttr("disabled");
     $("#page_navigation_position_param").closest("li").removeClass("disabled");
-    console.log(field.closest("li"));
   } else {
     $("#page_navigation_group").attr("disabled", "disabled");
     $("#page_navigation_group").closest("li").addClass("disabled");

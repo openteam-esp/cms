@@ -186,6 +186,18 @@
         }
       }
 
+      function clear_href(href) {
+        return href
+          // чистим якорь и параметры
+          .replace(/#.+/, "").replace(/\?.+/, "")
+          // меняем локали и ноды на пэйджы
+          .replace("locales", "nodes").replace("pages", "nodes")
+          // чистим урл создания узла
+          .replace(/\/nodes\/new$|\/nodes$/, "")
+          // чистим урл редактирования узла
+          .replace(/\/edit$/, "");
+      }
+
       // add treeview class to activate styles
       this.addClass("treeview");
 
@@ -205,7 +217,7 @@
         break;
       case "location":
         var current = this.find("a").filter(function() {
-          return this.href.toLowerCase() == location.href.toLowerCase().replace(/#.+/, "").replace(/\?.+/, "");
+          return clear_href(this.href.toLowerCase()) == clear_href(location.href.toLowerCase());
         });
         if ( current.length ) {
           // TODO update the open/closed classes
