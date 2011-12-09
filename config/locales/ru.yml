@@ -63,13 +63,13 @@ ru:
         body:         Текст
 
       page:
-        title: Заголовок
-        navigation_title: Заголовок в навигации
-        slug: Слаг
-        template: Шаблон
-        navigation_group: Группа навигации
-        in_navigation: Добавить в навигацию
-        navigation_position_param: Вставить после
+        title:                      Заголовок
+        navigation_title:           Заголовок в навигации
+        slug:                       Слаг
+        template:                   Шаблон
+        navigation_group:           Группа навигации
+        in_navigation:              Добавить в навигацию
+        navigation_position_param:  Вставить после
 
       locale:
         slug_enum:
@@ -78,10 +78,34 @@ ru:
           de:         немецкий
           fr:         французский
 
+      part:
+        title:        Заголовок
+
+      appeal_part:
+        appeal_section_slug: Слаг секции обращений
+
+      blue_pages_part:
+        blue_pages_category_id: Категория
+        blue_pages_expand: Включая вложенные
+
+      html_part:
+        body: Контент
+
+      navigation_part:
+        from_node: Начальный узел
+        navigation_default_level: Начальный уровень
+        navigation_end_level: Конечный уровень
+        navigation_group: Группа навигации
+
       news_list_part:
+        item_page: Страница просмотра
+        news_channel: Канал
+        news_order_by: Сортировка
         news_order_by_enum:
           since_desc: по дате публикации
           until_asc: по дате актуальности
+        news_paginated: Постраничный переход
+        news_per_page: Количество на странице
 
       news_item_part:
         news_channel: Канал
