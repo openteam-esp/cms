@@ -110,3 +110,14 @@ sites:
         footer:
           required: true
           configurable: false
+
+  kress:
+    templates:
+      main_page:
+        site_name:
+          required: true
+          configurable: true
+      inner_page:
+        site_name:
+          required: true
+          configurable: false
