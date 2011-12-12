@@ -27,6 +27,12 @@ class NodesController < ApplicationController
     render :nothing => true
   end
 
+  def search
+    node = Node.find_by_route(params[:change_route][:site_slug] + params[:change_route][:route])
+    redirect_to node and return if node
+    redirect_to :back
+  end
+
   private
 
     def fill_node(node)

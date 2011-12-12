@@ -10,6 +10,7 @@ Cms::Application.routes.draw do
     resources :pages, :only => [:new, :create]
     resources :parts, :only => [:new, :create]
     match 'sort', :on => :collection, :via => :post
+    match 'search', :on => :collection, :via => :post
   end
 
   match '/treeview' => 'nodes#treeview', :via => :get

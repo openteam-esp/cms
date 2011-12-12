@@ -6,6 +6,14 @@
     </ul>
   </nav>
   <article>
+    <div class="change_route_wrapper">
+      <%= semantic_form_for :change_route, :url => search_nodes_path do | form | %>
+        <%= form.inputs do %>
+          <%= form.input :site_slug, :as => :hidden, :input_html => { :value => resource.site.slug }%>
+          <%= form.input :route, :label => false, :input_html => { :value => resource.route_without_site } %>
+        <% end %>
+      <% end %>
+    </div>
     <%= yield %>
   </article>
 <% end %>
