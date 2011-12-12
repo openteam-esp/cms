@@ -83,8 +83,7 @@ class Node < ActiveRecord::Base
   end
 
   def route_without_site
-    return unless route
-    route.gsub(/^#{site.slug}/, '')
+    route.try :gsub, /^#{site.slug}/, ''
   end
 
   private
