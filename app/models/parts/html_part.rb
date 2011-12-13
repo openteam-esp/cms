@@ -4,12 +4,16 @@ class HtmlPart < Part
   validates_presence_of :html_info_path
 
   def to_json
-    as_json(:only => [:type], :include => { :content => { :only => [:updated_at, :body] } })
+    as_json(:only => :type, :methods => 'content')
   end
 
   def body
     c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(html_info_path.gsub(/^\//,''))}")
     JSON.parse(c.body_str)['content']
+  end
+
+  def content
+    {'body' => body}
   end
 
   private

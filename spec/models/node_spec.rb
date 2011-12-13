@@ -39,8 +39,8 @@ describe Node do
 
     describe 'возвращать partы' do
       before do
-        @page_content = Fabricate(:html_part, :body => "text", :node => page, :region => 'content')
-        @locale_content = Fabricate(:html_part, :body => "text", :node => locale, :region => 'content')
+        @page_content = Fabricate(:html_part, :node => page, :region => 'content')
+        @locale_content = Fabricate(:html_part, :node => locale, :region => 'content')
         @navigation_part = Fabricate(:navigation_part,
                                      :node => locale,
                                      :region => 'navigation',

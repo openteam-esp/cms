@@ -7,10 +7,11 @@ describe NodesController do
 
   describe "GET show" do
     let(:page) { Fabricate(:page, :template => 'inner_page') }
+    let(:body) { JSON.parse(response.body).with_indifferent_access[:page] }
+
     before do
       Page.any_instance.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][page.site.slug]['templates'])
     end
-    let(:body) { JSON.parse(response.body).with_indifferent_access[:page] }
 
     describe "page properties in json" do
       before do
@@ -22,8 +23,12 @@ describe NodesController do
 
     it "HtmlPart content" do
       page.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][page.site.slug]['templates'])
-      html_part = Fabricate(:html_part, :node => page, :region => 'content', :body => "any html text")
+      html_part = Fabricate(:html_part, :node => page, :region => 'content')
+
+      HtmlPart.any_instance.stub(:body).and_return('some body')
+
       get :show, :id => page.route, :format => :json
+
       body[:regions].keys.should == ['navigation', 'content']
       body[:regions][html_part.region]['content']['body'].should == html_part.body
     end
