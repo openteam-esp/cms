@@ -10,3 +10,7 @@
     <%= link_to "(#{t('choose_link')})", '#', :class => 'choose_link' %>
   </li>
 <% end %>
+
+<div class="show_info_path">
+  <%= raw resource.body if resource.html_info_path %>
+</div>

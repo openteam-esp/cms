@@ -84,6 +84,7 @@ $.fn.save_file_content = function(common_path, info_path){
   $.post(common_path+'&root_path='+path_object.info_path+'&cmd=put&target=r1_'+path_object.file_name_hash, { content: content })
     .success(function(){
       dialog.dialog('close');
+      show_content(content);
     })
     .error(function(){
       $('.ui-dialog-buttonset')
@@ -161,6 +162,10 @@ function service(params){
   });
 
   return result;
+};
+
+function show_content(content) {
+  $('.show_info_path').html(content);
 };
 
 // Вешаем обработку изменения поля info_path после callback из elFinder
