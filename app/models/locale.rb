@@ -23,7 +23,7 @@ end
 #  client_url          :string(255)
 #  in_navigation       :boolean
 #  navigation_group    :string(255)
-#  navigation_position :float
+#  navigation_position :integer
 #  navigation_title    :string(255)
 #  ancestry_depth      :integer         default(0)
 #

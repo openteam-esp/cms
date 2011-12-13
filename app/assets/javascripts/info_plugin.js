@@ -175,6 +175,7 @@ $.fn.watch_for_callback_from_elFinder = function(){
 
     // Записать в input
     info_path_input.val(info_path);
+    info_path_input.unbind('change');
 
     dialog.dialog('close');
   });

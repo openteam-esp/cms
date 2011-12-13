@@ -256,6 +256,7 @@ DEPENDENCIES
   ckeditor!
   compass (~> 0.12.alpha)
   configliere
+  curb
   default_value_for
   el_vfs_client
   fabrication

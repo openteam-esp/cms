@@ -1,23 +1,24 @@
+require 'base64'
+
 class HtmlPart < Part
-  belongs_to :content, :foreign_key => :html_content_id
-
-  validates_presence_of :content
-
-  before_validation :create_or_update_content
-
-  delegate :body, :to => :content, :allow_nil => true
-
-  def body=(body)
-    @body = body
-  end
+  validates_presence_of :html_info_path
 
   def to_json
     as_json(:only => [:type], :include => { :content => { :only => [:updated_at, :body] } })
   end
 
+  def body
+    c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(html_info_path.gsub(/^\//,''))}")
+    JSON.parse(c.body_str)['content']
+  end
+
   private
-    def create_or_update_content
-      self.content ? self.content.update_attribute(:body, @body) : self.content = Content.create!(:body => @body)
+    def str_to_hash(str)
+      Base64.urlsafe_encode64(str).strip.tr('=', '')
+    end
+
+    def remote_url
+      "#{Settings[:el_vfs][:protocol]}://#{Settings[:el_vfs][:host]}:#{Settings[:el_vfs][:port]}/api/el_finder/v2?format=json&cmd=get"
     end
 end
 
@@ -26,7 +27,6 @@ end
 # Table name: parts
 #
 #  id                       :integer         not null, primary key
-#  html_content_id          :integer
 #  created_at               :datetime
 #  updated_at               :datetime
 #  region                   :string(255)
@@ -46,5 +46,6 @@ end
 #  blue_pages_expand        :boolean
 #  navigation_group         :string(255)
 #  title                    :string(255)
+#  html_info_path           :string(255)
 #
 

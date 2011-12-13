@@ -56,7 +56,6 @@ end
 # Table name: parts
 #
 #  id                       :integer         not null, primary key
-#  html_content_id          :integer
 #  created_at               :datetime
 #  updated_at               :datetime
 #  region                   :string(255)
@@ -76,5 +75,6 @@ end
 #  blue_pages_expand        :boolean
 #  navigation_group         :string(255)
 #  title                    :string(255)
+#  html_info_path           :string(255)
 #
 

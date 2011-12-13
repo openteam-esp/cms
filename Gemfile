@@ -6,6 +6,7 @@ gem 'attribute_normalizer'
 gem 'ckeditor',                                   :git => 'git://github.com/pshoukry/ckeditor.git'
 gem 'compass',                  '~> 0.12.alpha'
 gem 'configliere'
+gem 'curb'
 gem 'default_value_for'
 gem 'el_vfs_client'
 gem 'fog',                                        :require => false
