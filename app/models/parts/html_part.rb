@@ -13,10 +13,11 @@ class HtmlPart < Part
   end
 
   def content
-    {'body' => body}
+    { 'body' => body, 'updated_at' => updated_at }
   end
 
   private
+
     def str_to_hash(str)
       Base64.urlsafe_encode64(str).strip.tr('=', '')
     end
