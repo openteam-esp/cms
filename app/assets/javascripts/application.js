@@ -125,10 +125,35 @@ function manipulate_position_fields() {
   });
 };
 
+function sync_changes_in_titles(title_id, navigation_title_id) {
+  var title = $(title_id),
+      title_val = title.val(),
+      navigation_title = $(navigation_title_id),
+      navigation_title_val = navigation_title.val();
+  if (title.length && navigation_title.length) {
+    if (title_val == navigation_title_val) {
+      title.blur(function() {
+        if ($(this).val() != navigation_title_val) {
+          navigation_title.val($(this).val());
+        };
+      });
+    };
+  };
+};
+
+function manipulate_titles() {
+  sync_changes_in_titles("#page_title", "#page_navigation_title");
+  $("#page_title").focus(function() {
+    $(this).unbind('blur');
+    sync_changes_in_titles("#page_title", "#page_navigation_title");
+  });
+};
+
 $(function() {
   init_tree();
   init_date_picker();
   init_tabs();
   init_sortable();
   manipulate_position_fields();
+  manipulate_titles();
 });
