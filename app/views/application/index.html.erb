@@ -5,7 +5,7 @@
 <% if collection.any? %>
   <ul class="collection_list">
     <% collection.each do | item | %>
-      <li><%= render item %></li>
+      <li><%= link_to item, item %></li>
     <% end %>
   </ul>
 <% else %>
