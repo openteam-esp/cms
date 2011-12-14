@@ -1,5 +1,5 @@
 <% content_for :actions do %>
-  <%= link_to action_title(:action => 'new'), new_resource_path, :class => 'button icon add' %>
+  <%= yield :extra_actions %>
 <% end %>
 
 <% if collection.any? %>
@@ -11,3 +11,6 @@
 <% else %>
   Список <%= t(pluralized_model, :count => 10) %> пуст
 <% end %>
+<div class="actions">
+  <%= link_to action_title(:action => 'new'), new_resource_path, :class => 'button icon add' %>
+</div>

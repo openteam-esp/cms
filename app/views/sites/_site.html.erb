@@ -1,1 +1,7 @@
-<%= link_to site, site %>
+<%= show_for resource do | site | %>
+  <%= site.attributes :title, :slug, :client_url %>
+<% end %>
+<div class="actions">
+  <%= link_to action_title(:action => 'edit'), edit_resource_path, :class => 'button icon edit' if controller.respond_to? :edit %>
+  <%= link_to action_title(:action => 'destroy'), resource_path, confirm: t('Are you sure?'), method: :delete, :class => 'button icon remove' %>
+</div>
