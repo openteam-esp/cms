@@ -34,17 +34,17 @@ $.fn.load_iframe = function(){
   var dialog = $(this);
   dialog.dialog({height: '445'});
   dialog.html(
-      $('<iframe/>',
-        {
-          height: '402',
-          scrolling: 'no',
-          src: '/el_finder?',
-          width: '825'
-        }
-      ).load(function(){
-        dialog.open_dialog();
-      })
-  )
+    $('<iframe/>',
+      {
+        height: '402',
+        scrolling: 'no',
+        src: '/el_finder?',
+        width: '825'
+      }
+    ).load(function(){
+      dialog.open_dialog();
+    });
+  );
 };
 
 // Показать диалог
@@ -59,15 +59,15 @@ $.fn.create_or_return_ckeditor = function(){
   var dialog_id = dialog.attr('id');
   var ckeditor_instance = CKEDITOR.instances['editor1'];
 
-  if (!ckeditor_instance){
+  if (!ckeditor_instance) {
     ckeditor_instance = CKEDITOR.appendTo(
-                          dialog_id,
-                          {
-                            height: '320',
-                            width: '830',
-                            resize_enabled: false
-                          }
-                        );
+      dialog_id,
+      {
+        height: '320',
+        width: '830',
+        resize_enabled: false
+      }
+    );
   };
 
   return ckeditor_instance;
@@ -124,7 +124,7 @@ $.fn.get_file_content = function(common_path, info_path, ckeditor){
 
     // Создать файл если его нет
     if (need_create_index_html){
-      $.get(common_path+'&root_path='+info_path+'&cmd=mkfile&name='+file_name+'&target='+folder.hash, function(file_data){
+      $.get(common_path+'&root_path='+info_path+'&cmd=mkfile&name='+file_name+'&target='+folder.hash, function(file_data) {
         dialog.open_dialog();
       });
     };
@@ -137,10 +137,10 @@ function get_file_name_and_hash(info_path){
   info_path = info_path.replace(file_name, '');
 
   return {
-           file_name: file_name,
-           file_name_hash: file_name_hash,
-           info_path: info_path
-         };
+    file_name: file_name,
+    file_name_hash: file_name_hash,
+    info_path: info_path
+  };
 };
 
 function remove_ajax_and_unblock_link(){
@@ -156,7 +156,7 @@ function service(params){
     async: false,
     type: 'GET',
     data: params,
-    success: function(data){
+    success: function(data) {
       result = data;
     }
   });
@@ -194,7 +194,7 @@ $(function(){
   var info_path        = info_path_input.val(); // Путь к файлу контента
   var common_path      = '/api/el_finder/v2?format=json';
 
-  create_edit_link.click(function(){
+  create_edit_link.click(function() {
     var parent_id = create_edit_link.attr('parent_data');
     var additional     = $('.for_info_path').val();
 
@@ -219,7 +219,6 @@ $(function(){
         'Сохранить': function(){
           dialog.save_file_content(common_path, info_path);
         },
-
         'Отмена': function(){
           dialog.dialog('close');
         }
