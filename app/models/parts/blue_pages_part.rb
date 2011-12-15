@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 class BluePagesPart < Part
+  belongs_to :item_page, :class_name => 'Node', :foreign_key => :blue_pages_item_page_id
+
   validates_presence_of :blue_pages_category_id
 
   def to_json
@@ -8,7 +10,17 @@ class BluePagesPart < Part
   end
 
   def content
-    ActiveSupport::JSON.decode request.body
+    hash = ActiveSupport::JSON.decode(request.body)
+
+    hash['items'] = update_items(hash['items'])
+
+    hash
+  end
+
+  def update_items(items)
+    items.each { |item| item['link'] = "#{item_page.route_without_site}?parts_params[blue_pages_item][link]=#{item['link']}" }
+
+    items
   end
 
   def request

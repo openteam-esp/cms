@@ -1,5 +1,6 @@
 <%= form.inputs do %>
   <%= form.input :blue_pages_category_id, :as => :select, :collection => form.object.categories_options_for_select %>
+  <%= form.input :item_page %>
   <%= form.input :blue_pages_expand %>
   <%= form.input :region, :as => :hidden %>
   <%= form.input :type, :as => :hidden %>

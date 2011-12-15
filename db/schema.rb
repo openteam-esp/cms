@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111213030614) do
+ActiveRecord::Schema.define(:version => 20111215023246) do
 
   create_table "nodes", :force => true do |t|
     t.string   "slug"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20111213030614) do
     t.string   "navigation_group"
     t.string   "title"
     t.string   "html_info_path"
+    t.integer  "blue_pages_item_page_id"
   end
 
 end
