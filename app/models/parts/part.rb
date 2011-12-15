@@ -33,5 +33,6 @@ end
 #  navigation_group         :string(255)
 #  title                    :string(255)
 #  html_info_path           :string(255)
+#  blue_pages_item_page_id  :integer
 #
 
