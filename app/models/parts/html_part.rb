@@ -4,7 +4,7 @@ class HtmlPart < Part
   validates_presence_of :html_info_path
 
   def to_json
-    as_json(:only => :type, :methods => 'content')
+    as_json(:only => [:type, :title], :methods => 'content')
   end
 
   def body

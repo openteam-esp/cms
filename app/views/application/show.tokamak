@@ -1,4 +1,4 @@
-page{
+page {
   title @node.page_title
   template @node.template
   regions {

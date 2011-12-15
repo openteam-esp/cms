@@ -43,7 +43,7 @@ $.fn.load_iframe = function(){
       }
     ).load(function(){
       dialog.open_dialog();
-    });
+    })
   );
 };
 
