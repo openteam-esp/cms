@@ -4,8 +4,6 @@ Cms::Application.routes.draw do
 
   resources :contents
 
-  resources :uploads, :only => [:new, :create, :index, :destroy]
-
   resources :nodes, :only => [] do
     resources :pages, :only => [:new, :create]
     resources :parts, :only => [:new, :create]
