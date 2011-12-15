@@ -10,17 +10,18 @@ class BluePagesPart < Part
   end
 
   def content
-    hash = ActiveSupport::JSON.decode(request.body)
-
-    hash['items'] = update_items(hash['items'])
-
-    hash
+    content_with_updated_item_links
   end
 
-  def update_items(items)
-    items.each { |item| item['link'] = "#{item_page.route_without_site}?parts_params[blue_pages_item][link]=#{item['link']}" }
+  def content_with_updated_item_links
+    update_item_links ActiveSupport::JSON.decode(request.body)
+  end
 
-    items
+  def update_item_links(subdivision)
+    subdivision['items'].each { |item| item['link'] = "#{item_page.route_without_site}?parts_params[blue_pages_item][link]=#{item['link']}" }
+    subdivision['subdivisions'].each { |subdivision| update_item_links(subdivision) } if subdivision['subdivisions']
+
+    subdivision
   end
 
   def request
