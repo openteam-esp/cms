@@ -9,7 +9,7 @@ $.fn.create_or_return_dialog = function(class_name){
   var clicked_link = $(this);
   var container = $('#'+class_name);
 
-  if (container.length == 0) {
+  if (container.length == 0){
     $('<div/>', { id: class_name }).appendTo('body').dialog({
       autoOpen: false,
       draggable: false,
@@ -32,7 +32,7 @@ $.fn.create_or_return_dialog = function(class_name){
 // Загрузка iframe в диалог
 $.fn.load_iframe = function(){
   var dialog = $(this);
-  dialog.dialog({height: '445'});
+  dialog.dialog({height: '455'});
   dialog.html(
     $('<iframe/>',
       {
@@ -44,7 +44,7 @@ $.fn.load_iframe = function(){
     ).load(function(){
       dialog.open_dialog();
     })
-  );
+  )
 };
 
 // Показать диалог
@@ -124,7 +124,7 @@ $.fn.get_file_content = function(common_path, info_path, ckeditor){
 
     // Создать файл если его нет
     if (need_create_index_html){
-      $.get(common_path+'&root_path='+info_path+'&cmd=mkfile&name='+file_name+'&target='+folder.hash, function(file_data) {
+      $.get(common_path+'&root_path='+info_path+'&cmd=mkfile&name='+file_name+'&target='+folder.hash, function(file_data){
         dialog.open_dialog();
       });
     };
@@ -156,7 +156,7 @@ function service(params){
     async: false,
     type: 'GET',
     data: params,
-    success: function(data) {
+    success: function(data){
       result = data;
     }
   });
@@ -164,7 +164,7 @@ function service(params){
   return result;
 };
 
-function show_content(content) {
+function show_content(content){
   $('.show_info_path').html(content);
 };
 
@@ -194,7 +194,7 @@ $(function(){
   var info_path        = info_path_input.val(); // Путь к файлу контента
   var common_path      = '/api/el_finder/v2?format=json';
 
-  create_edit_link.click(function() {
+  create_edit_link.click(function(){
     var parent_id = create_edit_link.attr('parent_data');
     var additional     = $('.for_info_path').val();
 
@@ -206,7 +206,7 @@ $(function(){
       return false;
     };
 
-    if ($(this).hasClass('clicked')) {
+    if ($(this).hasClass('clicked')){
       return false;
     };
     // Добавить loader и заблокировать ссылку
@@ -240,7 +240,7 @@ $(function(){
   });
 
   choose_link.click(function(){
-    if ($(this).hasClass('clicked')) {
+    if ($(this).hasClass('clicked')){
       return false;
     };
     // Добавить loader и заблокировать ссылку

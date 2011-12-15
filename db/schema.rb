@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111215023246) do
+ActiveRecord::Schema.define(:version => 20111215041552) do
+
+  create_table "gallery_pictures", :force => true do |t|
+    t.integer  "gallery_part_id"
+    t.string   "description"
+    t.string   "picture_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "nodes", :force => true do |t|
     t.string   "slug"

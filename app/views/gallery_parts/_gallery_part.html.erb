@@ -1,0 +1,10 @@
+<h3><%= gallery_part.title %></h3>
+
+<ul>
+  <% gallery_part.gallery_pictures.each do |picture| %>
+    <li>
+      <%= image_tag picture.picture_url, :title => picture.description, :alt => picture.description, :width => '200' %>
+      <%= picture.description %>
+    </li>
+  <% end %>
+</ul>

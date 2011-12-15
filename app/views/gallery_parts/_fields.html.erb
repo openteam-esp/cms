@@ -1,0 +1,12 @@
+<%= javascript_include_tag 'info_plugin.js' %>
+<%= form.inputs do %>
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
+  <%= form.semantic_fields_for :gallery_pictures do |f|%>
+    <%= f.input :picture_url, :as => :hidden, :input_html => { :class => 'picture_url' } %>
+    <%= f.input :description %>
+    <%= link_to t('choose_picture'), '#', :class => 'choose_picture', :id => Time.now.to_i %>
+    <%= f.link_to_remove t('remove') %>
+  <% end %>
+  <p><%= form.link_to_add t('add'), :gallery_pictures %></p>
+<% end %>

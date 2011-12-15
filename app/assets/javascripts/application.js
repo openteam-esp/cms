@@ -149,6 +149,21 @@ function manipulate_titles() {
   });
 };
 
+function choose_picture(){
+  $('.choose_picture').live('click', function(){
+    var link = $(this);
+    var origin_id = link.siblings('li').find('.picture_url').attr('id');
+
+    var dialog = link.create_or_return_dialog('elfinder_picture_dialog');
+
+    dialog.attr('id_data', origin_id);
+
+    dialog.load_iframe();
+
+    return false;
+  });
+};
+
 $(function() {
   init_tree();
   init_date_picker();
@@ -156,4 +171,5 @@ $(function() {
   init_sortable();
   manipulate_position_fields();
   manipulate_titles();
+  choose_picture();
 });
