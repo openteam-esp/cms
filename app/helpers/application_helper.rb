@@ -64,7 +64,12 @@ module ApplicationHelper
     result = {}
     result.merge!('-- на первой позиции --' => 'first')
     resource.siblings.each_with_index do | s, index |
-      s == resource ? result.merge!('-- текущая позиция --' => 'current') : result.merge!(s.title => resource.navigation_position? && resource.navigation_position > index ? index + 2 : index + 1)
+      position = index + 1
+      if resource.persisted?
+        s == resource ? result.merge!('-- текущая позиция --' => 'current') : result.merge!(s.title => resource.navigation_position? && resource.navigation_position > position ? position : index)
+      else
+        result.merge!(s.title => position)
+      end
     end
     result.merge!('-- на последней позиции --' => 'last')
     options_for_select(result, resource.navigation_position? ? 'current' : 'last')

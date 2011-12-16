@@ -79,7 +79,11 @@ describe Node do
 
       it "after navigation_position_param => some_position" do
         @first_page.update_attribute(:navigation_position_param, '2')
-        locale.reload.child_ids.should == [@second_page.id, @first_page.id, @third_page.id]
+        locale.reload.child_ids.should == [@second_page.id, @third_page.id, @first_page.id]
+        @some_page = Fabricate(:page, :template => 'inner_page', :parent => locale, :slug => 'some_page', :navigation_position_param => '2')
+        locale.reload.child_ids.should == [@second_page.id, @third_page.id, @some_page.id, @first_page.id]
+        @first_page.update_attribute(:navigation_position_param, '1')
+        locale.reload.child_ids.should == [@second_page.id, @first_page.id, @third_page.id, @some_page.id]
       end
 
     end

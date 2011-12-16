@@ -110,6 +110,7 @@ class Node < ActiveRecord::Base
         self.move_to_bottom unless self.last?
       else
         self.insert_at(self.navigation_position_param)
+        self.move_lower
       end
       Node.set_callback(:save, :after, :set_navigation_position)
     end
