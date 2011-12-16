@@ -9,7 +9,7 @@ class HtmlPart < Part
 
   def body
     c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(html_info_path.gsub(/^\//,''))}")
-    JSON.parse(c.body_str)['content'].gsub(/<p>\s*<\/p>/, "").gilensize
+    JSON.parse(c.body_str)['content'].gsub(/<p>\s*<\/p>/, "").gsub('&mdash;', '&ndash;').gilensize
   end
 
   def content
