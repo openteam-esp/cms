@@ -4,9 +4,12 @@
   <%= form.input :type, :as => :hidden %>
   <%= form.semantic_fields_for :gallery_pictures do |f|%>
     <%= f.input :picture_url, :as => :hidden, :input_html => { :class => 'picture_url' } %>
+    <li>
+      <%= image_tag f.object.picture_url, :width => '200' %>
+    </li>
     <%= f.input :description %>
-    <%= link_to t('choose_picture'), '#', :class => 'choose_picture', :id => Time.now.to_i %>
-    <%= f.link_to_remove t('remove') %>
+    <%= link_to t('choose_picture'), '#', :class => 'choose_picture button icon settings', :id => Time.now.to_i %>
+    <%= f.link_to_remove t('remove'), :class => 'button trash icon' %>
   <% end %>
-  <p><%= form.link_to_add t('add'), :gallery_pictures %></p>
+  <p><%= form.link_to_add t('add_picture'), :gallery_pictures, :class => 'button icon add' %></p>
 <% end %>

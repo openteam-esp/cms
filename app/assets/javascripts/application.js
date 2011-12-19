@@ -150,15 +150,27 @@ function manipulate_titles() {
 };
 
 function choose_picture(){
+  $('#gallery_pictures_fields_blueprint img').remove()
   $('.choose_picture').live('click', function(){
     var link = $(this);
     var origin_id = link.siblings('li').find('.picture_url').attr('id');
+    var input = $('#'+origin_id);
 
     var dialog = link.create_or_return_dialog('elfinder_picture_dialog');
 
     dialog.attr('id_data', origin_id);
 
     dialog.load_iframe();
+
+    input.change(function(){
+      var img = input.parent().parent().find('img');
+      if (img.length != 0 ){
+        img.attr('src', input.val());
+      }else{
+        input.parent().after('<img src="'+input.val()+'" width="200px" />');
+      };
+      input.unbind('change');
+    });
 
     return false;
   });
