@@ -73,6 +73,9 @@ sites:
         content:
           required: true
           configurable: true
+        gallery:
+          required: false
+          configurable: true
         main_navigation:
           required: true
           configurable: true
@@ -94,6 +97,9 @@ sites:
           configurable: false
         content:
           required: true
+          configurable: true
+        gallery:
+          required: false
           configurable: true
         main_navigation:
           required: true
