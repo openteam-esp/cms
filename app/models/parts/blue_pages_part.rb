@@ -51,7 +51,7 @@ class BluePagesPart < Part
 
   private
     def blue_pages_url
-      "#{Settings['blue_pages.protocol']}://#{Settings['blue_pages.host']}:#{Settings['blue_pages.port']}/categories"
+      "#{Settings['blue_pages.url']}/categories"
     end
 end
 

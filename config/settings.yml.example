@@ -4,19 +4,13 @@ production:
     host:               host
 
 blue_pages:
-  protocol:             http
-  host:                 esp-blue-pages.openteam.ru
-  port:                 80
+  url:                  http://esp-blue-pages.openteam.ru
 
 news:
-  protocol:             http
-  host:                 esp-news.openteam.ru
-  port:                 3000
+  url:                  http://esp-news.openteam.ru
 
 appeals:
-  protocol:             http
-  host:                 localhost
-  port:                 3001
+  url:                  http://esp-appeals.openteam.ru
 
 vfs:
   url:                  http://pool.openteam.ru

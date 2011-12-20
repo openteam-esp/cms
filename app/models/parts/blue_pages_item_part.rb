@@ -12,7 +12,7 @@ class BluePagesItemPart < Part
   end
 
   def blue_pages_url
-    "#{Settings['blue_pages.protocol']}://#{Settings['blue_pages.host']}:#{Settings['blue_pages.port']}"
+    Settings['blue_pages.url']
   end
 end
 # == Schema Information

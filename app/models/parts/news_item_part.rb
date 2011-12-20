@@ -25,7 +25,7 @@ class NewsItemPart < Part
 
   private
     def news_url
-      "#{Settings['news.protocol']}://#{Settings['news.host']}:#{Settings['news.port']}"
+      Settings['news.url']
     end
 end
 

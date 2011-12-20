@@ -20,7 +20,7 @@ class AppealPart < Part
 
   private
     def appeals_url
-      "#{Settings['appeals.protocol']}://#{Settings['appeals.host']}:#{Settings['appeals.port']}/public/sections/#{appeal_section_slug}/appeals"
+      "#{Settings['appeals.url']}/public/sections/#{appeal_section_slug}/appeals"
     end
 end
 # == Schema Information
