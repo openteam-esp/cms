@@ -11,7 +11,7 @@ class ServiceController < ApplicationController
     def generated_path
       node = Node.find(params[:parent_id])
       additional  = params[:additional].split('/').select{|a| !a.empty?}.join('/')
-      ActiveSupport::Inflector.transliterate("/#{node.path.map{|a| a.title}.join('/')}/#{additional}/#{additional}.xhtml").downcase.gsub(/[[:space:]]/,'_')
+      ActiveSupport::Inflector.transliterate("/#{node.path.map{|a| a.slug.underscore}.join('/')}/#{additional}/#{additional}.xhtml").downcase.gsub(/[[:space:]]/,'_')
     end
 
     def decode_hash_to_path
