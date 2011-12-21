@@ -3,6 +3,11 @@
 class GalleryPicture < ActiveRecord::Base
   belongs_to :gallery_part
   validates_presence_of :description, :picture_url
+
+  def resized_picture_url(width = 0)
+    return picture_url unless picture_url
+    width > 0 ? picture_url.insert(picture_url.rindex('/'), "/#{width}-#{width}") : picture_url
+  end
 end
 # == Schema Information
 #

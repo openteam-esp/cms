@@ -163,11 +163,12 @@ function choose_picture(){
     dialog.load_iframe();
 
     input.change(function(){
-      var img = input.parent().parent().find('img');
+      var img = input.parent().parent().find('img'),
+          src = [input.val().slice(0, input.val().lastIndexOf('/')), '/200-200', input.val().slice(input.val().lastIndexOf('/'))].join('');
       if (img.length != 0 ){
-        img.attr('src', input.val());
+        img.attr('src', src);
       }else{
-        input.parent().after('<img src="'+input.val()+'" width="200px" />');
+        input.parent().after('<img src="' + src + '" width="200px" />');
       };
       input.unbind('change');
     });

@@ -2,7 +2,7 @@
 
 class GalleryPart < Part
   has_many :gallery_pictures
-  accepts_nested_attributes_for :gallery_pictures
+  accepts_nested_attributes_for :gallery_pictures, :allow_destroy => true
 
   def to_json
     as_json(:only => :type, :methods => 'content')
