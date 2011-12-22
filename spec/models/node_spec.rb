@@ -20,6 +20,13 @@ describe Node do
     it { ru.route.should == 'site/ru' }
     it { about.route.should == 'site/ru/about' }
     it { history.route.should == 'site/ru/about/history' }
+
+    it "после изменения слага сайта" do
+      history
+      root.update_attribute(:slug, 'st')
+      root.reload.route.should == 'st'
+      history.reload.route.should == 'st/ru/about/history'
+    end
   end
 
   describe "должна" do

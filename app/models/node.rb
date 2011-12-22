@@ -86,14 +86,23 @@ class Node < ActiveRecord::Base
     route.try :gsub, /^#{site.slug}/, ''
   end
 
+  def update_route
+    prepare_route
+    save
+  end
+
+  def prepare_route
+    self.route = parent ? "#{parent.route}/#{slug}" : slug
+  end
+
   private
     def cache_route
       return unless self.slug_changed?
-      self.route = parent ? "#{parent.route}/#{slug}" : slug
+      prepare_route
       Node.skip_callback(:save, :after, :cache_route)
       save!
+      descendants.map(&:update_route)
       Node.set_callback(:save, :after, :cache_route)
-      descendants.map(&:save)
     end
 
     def templates_hash
