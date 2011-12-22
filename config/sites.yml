@@ -95,7 +95,13 @@ sites:
         site_name:
           required: true
           configurable: false
-        content:
+        content_first:
+          required: true
+          configurable: true
+        content_second:
+          required: true
+          configurable: true
+        content_third:
           required: true
           configurable: true
         gallery:
