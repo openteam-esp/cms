@@ -1,5 +1,9 @@
 <%= show_for resource do | locale | %>
-  <%= locale.attributes :title, :slug, :template, :navigation_position %>
+  <%= locale.attribute :title %>
+  <%= locale.attribute :slug do %>
+    <%= resource.slug %>
+  <% end %>
+  <%= locale.attributes :template, :navigation_position %>
 <% end %>
 <div class="actions">
   <%= link_to action_title(:action => 'edit'), edit_resource_path, :class => 'button icon edit' if controller.respond_to? :edit %>

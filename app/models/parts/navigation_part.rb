@@ -12,7 +12,7 @@ class NavigationPart < Part
   end
 
   def build_navigation_tree(node)
-    hash = { node.slug => { 'title' => node.navigation_title.blank? ? node.title : node.navigation_title, 'path' => node.route_without_site } }
+    hash = { node.slug => { 'title' => node.navigation_title.blank? ? node.title : node.navigation_title, 'path' => "#{node.route_without_site}/" } }
     hash[node.slug].merge!('selected' => true) if current_node.path_ids.include?(node.id) && node != from_node
 
     selected_children(node).navigable.each do |child|
