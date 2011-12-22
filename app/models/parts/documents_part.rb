@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'uri'
+
 class DocumentsPart < Part
   validates_presence_of :documents_kind
 
@@ -10,16 +12,36 @@ class DocumentsPart < Part
   end
 
   def content
-    { 'papers' => ActiveSupport::JSON.decode(request.body) }
+    {
+      'action' => action_for_search_form,
+      'keywords' => keywords,
+      'papers' => ActiveSupport::JSON.decode(request.body)
+    }
   end
 
   def request
-    @request ||= Restfulie.at("#{documents_url}/#{documents_kind}").accepts("application/json").get
+    @request ||= Restfulie.at(query).accepts("application/json").get
   end
 
   private
     def documents_url
       "#{Settings['documents.url']}"
+    end
+
+    def action_for_search_form
+      node.route_without_site
+    end
+
+    def keywords
+      params['keywords'] || ''
+    end
+
+    def query_params
+      "utf8=✓&#{documents_kind.singularize}_search[keywords]=#{keywords}"
+    end
+
+    def query
+      URI.encode("#{documents_url}/#{documents_kind}?#{query_params}")
     end
 end
 
