@@ -89,8 +89,7 @@ class Node < ActiveRecord::Base
   private
     def cache_route
       return unless self.slug_changed?
-      self.route = parent ? "#{parent.route}#{slug}" : slug
-      self.route += '/'
+      self.route = parent ? "#{parent.route}/#{slug}" : slug
       Node.skip_callback(:save, :after, :cache_route)
       save!
       Node.set_callback(:save, :after, :cache_route)

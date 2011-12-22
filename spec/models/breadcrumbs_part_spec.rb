@@ -15,10 +15,10 @@ describe BreadcrumbsPart do
     expected_hash = {
       'type' => 'BreadcrumbsPart',
       'content' => {
-        'ru' => '/ru/',
-        'section' => '/ru/section/',
-        'subsection' => '/ru/section/subsection/',
-        'page' => '/ru/section/subsection/page/'
+        'ru' => '/ru',
+        'section' => '/ru/section',
+        'subsection' => '/ru/section/subsection',
+        'page' => '/ru/section/subsection/page'
       }
     }
 
