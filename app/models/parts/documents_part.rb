@@ -1,6 +1,10 @@
 # encoding: utf-8
 
 class DocumentsPart < Part
+  validates_presence_of :documents_kind
+
+  has_enums
+
   def to_json
     as_json(:only => :type, :methods => 'content')
   end
@@ -9,12 +13,8 @@ class DocumentsPart < Part
     { 'papers' => ActiveSupport::JSON.decode(request.body) }
   end
 
-  def kind_of_papers
-    'documents'
-  end
-
   def request
-    @request ||= Restfulie.at("#{documents_url}/#{kind_of_papers}").accepts("application/json").get
+    @request ||= Restfulie.at("#{documents_url}/#{documents_kind}").accepts("application/json").get
   end
 
   private
@@ -22,3 +22,33 @@ class DocumentsPart < Part
       "#{Settings['documents.url']}"
     end
 end
+
+# == Schema Information
+#
+# Table name: parts
+#
+#  id                       :integer         not null, primary key
+#  created_at               :datetime
+#  updated_at               :datetime
+#  region                   :string(255)
+#  type                     :string(255)
+#  node_id                  :integer
+#  navigation_end_level     :integer
+#  navigation_from_id       :integer
+#  navigation_default_level :integer
+#  news_channel             :string(255)
+#  news_order_by            :string(255)
+#  news_until               :date
+#  news_per_page            :integer
+#  news_paginated           :boolean
+#  news_item_page_id        :integer
+#  blue_pages_category_id   :integer
+#  appeal_section_slug      :string(255)
+#  blue_pages_expand        :boolean
+#  navigation_group         :string(255)
+#  title                    :string(255)
+#  html_info_path           :string(255)
+#  blue_pages_item_page_id  :integer
+#  documents_kind           :string(255)
+#
+

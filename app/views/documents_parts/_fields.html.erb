@@ -1,4 +1,5 @@
 <%= form.inputs do %>
+  <%= form.input :documents_kind, :as => :select, :collection => form.object.class.values_for_select_tag(:documents_kind) %>
   <%= form.input :region, :as => :hidden %>
   <%= form.input :type, :as => :hidden %>
 <% end %>

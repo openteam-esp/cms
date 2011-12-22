@@ -118,3 +118,10 @@ ru:
 
       news_item_part:
         news_channel: Канал
+
+      documents_part:
+        documents_kind: Тип
+        documents_kind_enum:
+          documents: Нормативные документы
+          projects: Проекты документов
+

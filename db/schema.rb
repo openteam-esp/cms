@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111215041552) do
+ActiveRecord::Schema.define(:version => 20111222055044) do
 
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20111215041552) do
     t.string   "title"
     t.string   "html_info_path"
     t.integer  "blue_pages_item_page_id"
+    t.string   "documents_kind"
   end
 
 end
