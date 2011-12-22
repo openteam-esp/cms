@@ -3,14 +3,17 @@ production:
     api_key:            key
     host:               host
 
+appeals:
+  url:                  http://esp-appeals.openteam.ru
+
 blue_pages:
   url:                  http://esp-blue-pages.openteam.ru
 
+documents:
+  url:                  http://esp-papers.openteam.ru
+
 news:
   url:                  http://esp-news.openteam.ru
-
-appeals:
-  url:                  http://esp-appeals.openteam.ru
 
 vfs:
   url:                  http://pool.openteam.ru
