@@ -16,10 +16,10 @@ describe Node do
     let(:about) { Fabricate(:node, :parent => ru, :slug => 'about', :navigation_position => 2) }
     let(:history) { Fabricate(:node, :parent => about, :slug => 'history', :navigation_position => 1) }
 
-    it { root.route.should == 'site' }
-    it { ru.route.should == 'site/ru' }
-    it { about.route.should == 'site/ru/about' }
-    it { history.route.should == 'site/ru/about/history' }
+    it { root.route.should == 'site/' }
+    it { ru.route.should == 'site/ru/' }
+    it { about.route.should == 'site/ru/about/' }
+    it { history.route.should == 'site/ru/about/history/' }
   end
 
   describe "должна" do
