@@ -70,6 +70,9 @@ sites:
         site_name:
           required: true
           configurable: true
+        breadcrumbs:
+          required: true
+          configurable: true
         content:
           required: true
           configurable: true
@@ -93,6 +96,9 @@ sites:
           configurable: true
       inner_page:
         site_name:
+          required: true
+          configurable: false
+        breadcrumbs:
           required: true
           configurable: false
         content_first:
