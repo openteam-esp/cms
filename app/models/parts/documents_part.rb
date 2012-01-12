@@ -3,6 +3,8 @@
 require 'uri'
 
 class DocumentsPart < Part
+  belongs_to :item_page, :class_name => 'Node', :foreign_key => :documents_item_page_id
+
   validates_presence_of :documents_kind
 
   has_enums
@@ -15,17 +17,21 @@ class DocumentsPart < Part
     {
       'action' => action_for_search_form,
       'keywords' => keywords,
-      'papers' => ActiveSupport::JSON.decode(request.body)
+      'papers' => papers
     }
-  end
-
-  def request
-    @request ||= Restfulie.at(query).accepts("application/json").get
   end
 
   private
     def documents_url
       "#{Settings['documents.url']}"
+    end
+
+    def request
+      @request ||= Restfulie.at(query).accepts("application/json").get
+    end
+
+    def request_body
+      @request_body ||= ActiveSupport::JSON.decode(request.body)
     end
 
     def action_for_search_form
@@ -42,6 +48,10 @@ class DocumentsPart < Part
 
     def query
       URI.encode("#{documents_url}/#{documents_kind}?#{query_params}")
+    end
+
+    def papers
+      request_body.map { |p| p.merge!('link' => "#{item_page.route_without_site}?parts_params[documents_item][id]=#{p['link']}") }
     end
 end
 
