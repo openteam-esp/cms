@@ -51,7 +51,8 @@ class DocumentsPart < Part
     end
 
     def papers
-      request_body.map { |p| p.merge!('link' => "#{item_page.route_without_site}?parts_params[documents_item][id]=#{p['link']}") }
+      results = request_body.map { |p| p.merge!('link' => "#{item_page.route_without_site}?parts_params[documents_item][id]=#{p['id']}") }
+      results.each { |p| p.delete('id') }
     end
 end
 
