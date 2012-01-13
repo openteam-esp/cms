@@ -11,6 +11,10 @@ class DocumentsItemPart < Part
     end
   end
 
+  def page_title
+    content['title']
+  end
+
   private
     def documents_url
       "#{Settings['documents.url']}"

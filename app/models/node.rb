@@ -57,17 +57,15 @@ class Node < ActiveRecord::Base
   end
 
   def page_title
-    return title unless content_part.respond_to?(:page_title)
-    content_part.page_title
+    content_part.respond_to?(:page_title) ? content_part.page_title : title
   end
 
   def page_route
-    return route_without_site unless content_part.respond_to?(:parts_params)
-    "#{route_without_site}#{content_part.parts_params}"
+    content_part.respond_to?(:parts_params) ? "#{route_without_site}#{content_part.parts_params}" : route_without_site
   end
 
   def content_part
-    part_for('content')
+    part_for('content_first')
   end
 
   def part_for(region, select_from_parents = nil)
