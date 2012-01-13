@@ -61,8 +61,12 @@ class DocumentsPart < Part
     end
 
     def change_ids_to_links(papers)
-      papers.map { |p| p.merge!('link' => "#{item_page.route_without_site}?parts_params[documents_item][id]=#{p['id']}") }
-      papers.each { |p| p.delete('id') }
+      if papers
+        papers.map { |p| p.merge!('link' => "#{item_page.route_without_site}?parts_params[documents_item][id]=#{p['id']}") }
+        papers.each { |p| p.delete('id') }
+      else
+        []
+      end
     end
 end
 
