@@ -4,7 +4,11 @@ class DocumentsItemPart < Part
   end
 
   def content
-    request_body
+    request_body.tap do |paper|
+      paper['asserted_projects']  = change_ids_to_links(paper['asserted_projects'])
+      paper['canceled_documents'] = change_ids_to_links(paper['canceled_documents'])
+      paper['changed_documents']  = change_ids_to_links(paper['changed_documents'])
+    end
   end
 
   private
@@ -13,14 +17,19 @@ class DocumentsItemPart < Part
     end
 
     def request
-      @request ||= Restfulie.at("#{documents_url}/papers/#{id}").accepts("application/json").get
+      @request ||= Restfulie.at("#{documents_url}/papers/#{paper_id}").accepts("application/json").get
     end
 
     def request_body
       ActiveSupport::JSON.decode(request.body).tap { |hash| hash.delete('id') }
     end
 
-    def id
-      params['id']
+    def paper_id
+      params.try(:[], 'id')
+    end
+
+    def change_ids_to_links(papers)
+      papers.map { |p| p.merge!('link' => "#{node.route_without_site}?parts_params[documents_item][id]=#{p['id']}") }
+      papers.each { |p| p.delete('id') }
     end
 end

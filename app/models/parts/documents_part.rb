@@ -51,8 +51,18 @@ class DocumentsPart < Part
     end
 
     def papers
-      results = request_body.map { |p| p.merge!('link' => "#{item_page.route_without_site}?parts_params[documents_item][id]=#{p['id']}") }
-      results.each { |p| p.delete('id') }
+      change_ids_to_links(request_body).tap do |papers|
+        papers.each do |p|
+          p['asserted_projects']  = change_ids_to_links(p['asserted_projects'])
+          p['canceled_documents'] = change_ids_to_links(p['canceled_documents'])
+          p['changed_documents']  = change_ids_to_links(p['changed_documents'])
+        end
+      end
+    end
+
+    def change_ids_to_links(papers)
+      papers.map { |p| p.merge!('link' => "#{item_page.route_without_site}?parts_params[documents_item][id]=#{p['id']}") }
+      papers.each { |p| p.delete('id') }
     end
 end
 
