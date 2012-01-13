@@ -14,11 +14,9 @@ class DocumentsPart < Part
   end
 
   def content
-    {
-      'action' => action_for_search_form,
-      'keywords' => keywords,
-      'papers' => papers
-    }
+    { 'action' => action_for_search_form, 'keywords' => keywords, 'papers' => papers }.tap do |hash|
+      hash.merge!(pagination) if documents_paginated?
+    end
   end
 
   private
@@ -28,6 +26,10 @@ class DocumentsPart < Part
 
     def request
       @request ||= Restfulie.at(query).accepts("application/json").get
+    end
+
+    def request_headers
+      @request_headers ||= request.headers.merge(request.headers) { |k, v| v.join }
     end
 
     def request_body
@@ -43,7 +45,11 @@ class DocumentsPart < Part
     end
 
     def query_params
-      "utf8=✓&#{documents_kind.singularize}_search[keywords]=#{keywords}"
+      "utf8=✓&#{documents_kind.singularize}_search[keywords]=#{keywords}&page=#{page}&per_page=#{documents_per_page}"
+    end
+
+    def page
+      params['page'] || 1
     end
 
     def query
@@ -66,6 +72,26 @@ class DocumentsPart < Part
         papers.each { |p| p.delete('id') }
       else
         []
+      end
+    end
+
+    def total_pages
+      request_headers['x-total-pages'].to_i
+    end
+
+    def current_page
+      request_headers['x-current-page'].to_i
+    end
+
+    def pagination
+      result = { 'pagination' => [] }
+
+      return result if total_pages == 1
+
+      result.tap do |hash|
+        (1..total_pages).each do |page|
+          hash['pagination'] << { 'link' => "?parts_params[documents][page]=#{page}", 'current' => current_page == page ? 'true' : 'false' }
+        end
       end
     end
 end

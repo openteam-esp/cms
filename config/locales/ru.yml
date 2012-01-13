@@ -125,4 +125,6 @@ ru:
           documents: Нормативные документы
           projects: Проекты документов
         item_page: Страница просмотра
+        documents_paginated: Постраничный переход
+        documents_per_page: Количество на странице
 
