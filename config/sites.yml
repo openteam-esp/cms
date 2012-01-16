@@ -102,13 +102,13 @@ sites:
           required: true
           configurable: false
         content_first:
-          required: true
+          required: false
           configurable: true
         content_second:
-          required: true
+          required: false
           configurable: true
         content_third:
-          required: true
+          required: false
           configurable: true
         gallery:
           required: false
