@@ -2,8 +2,6 @@ Cms::Application.routes.draw do
 
   resources :parts, :only => [:edit, :update, :destroy]
 
-  resources :contents
-
   resources :nodes, :only => [] do
     resources :pages, :only => [:new, :create]
     resources :parts, :only => [:new, :create]
