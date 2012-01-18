@@ -1,2 +1,0 @@
-(function(){var c={exec:function(a){a.openDialog('esp_attachment');return}};CKEDITOR.plugins.add('esp_attachment',{lang:['en','ru','uk'],requires:['dialog'],init:function(a){var b='esp_attachment';a.addCommand(b,c);a.ui.addButton('Esp_attachment',{label:a.lang.esp_attachment.button,command:b,icon:this.path+"images/esp_attachment.png"});CKEDITOR.dialog.add(b,CKEDITOR.getUrl(this.path+'dialogs/esp_attachment.js'))}})})();
-

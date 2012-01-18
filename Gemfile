@@ -3,12 +3,12 @@ source :rubygems
 gem 'acts_as_list',                               :git => 'git://github.com/swanandp/acts_as_list'
 gem 'ancestry'
 gem 'attribute_normalizer'
-gem 'ckeditor',                                   :git => 'git://github.com/pshoukry/ckeditor.git'
 gem 'compass',                  '~> 0.12.alpha'
 gem 'configliere'
 gem 'curb'
 gem 'default_value_for'
 gem 'el_vfs_client'
+gem 'esp-ckeditor'
 gem 'fog',                                        :require => false
 gem 'formtastic'
 gem 'gilenson'
@@ -20,8 +20,8 @@ gem 'rails'
 gem 'restfulie',                                  :git => 'git://github.com/caelum/restfulie'
 gem 'russian'
 gem 'sanitize'
-gem 'show_for'
 gem 'sass-rails'
+gem 'show_for'
 gem 'simple-navigation'
 
 group :assets do
@@ -53,4 +53,3 @@ group :production do
   gem 'pg',                                       :require => false
   gem 'unicorn',                                  :require => false unless ENV['SHARED_DATABASE_URL']
 end
-

@@ -1,2 +1,0 @@
-Для регенерации пожатых файлов ckeditor.js и ckeditor_basic.js выполняем команду
-$ java -jar ckpackager.jar ckeditor.pack

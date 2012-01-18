@@ -17,14 +17,6 @@ GIT
     nested_form (0.1.1)
 
 GIT
-  remote: git://github.com/pshoukry/ckeditor.git
-  revision: 76a579fd389e8826a0b30b47530eeb7ff99cdb63
-  specs:
-    ckeditor (3.6.3)
-      mime-types (~> 1.16)
-      orm_adapter (~> 0.0.5)
-
-GIT
   remote: git://github.com/swanandp/acts_as_list
   revision: 7fd29b74eec9327a3d2a3033e1ca249ba04fc7e5
   specs:
@@ -82,6 +74,9 @@ GEM
       curb
       rails
     erubis (2.7.0)
+    esp-ckeditor (0.0.4)
+      formtastic
+      rails
     excon (0.9.5)
     execjs (1.2.13)
       multi_json (~> 1.0)
@@ -150,7 +145,6 @@ GEM
       net-ssh (>= 1.99.1)
     net-ssh (2.3.0)
     nokogiri (1.5.0)
-    orm_adapter (0.0.6)
     pg (0.12.2)
     polyglot (0.3.3)
     rack (1.3.6)
@@ -247,12 +241,12 @@ DEPENDENCIES
   ancestry
   annotate (~> 2.4.1.beta1)
   attribute_normalizer
-  ckeditor!
   compass (~> 0.12.alpha)
   configliere
   curb
   default_value_for
   el_vfs_client
+  esp-ckeditor
   fabrication
   fog
   formtastic
