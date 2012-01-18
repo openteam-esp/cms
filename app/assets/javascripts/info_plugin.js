@@ -12,7 +12,6 @@ $.fn.create_or_return_dialog = function(class_name){
   if (container.length == 0){
     $('<div/>', { id: class_name }).appendTo('body').dialog({
       autoOpen: false,
-      draggable: false,
       height: '525',
       modal: true,
       position: 'center',
@@ -63,7 +62,7 @@ $.fn.create_or_return_ckeditor = function(){
     ckeditor_instance = CKEDITOR.appendTo(
       dialog_id,
       {
-        height: '320',
+        height: '310',
         width: '830',
         resize_enabled: false
       }
