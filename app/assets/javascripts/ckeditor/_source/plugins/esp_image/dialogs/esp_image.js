@@ -536,6 +536,10 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
                       type : 'text',
                       label : editor.lang.common.url,
                       required: true,
+                      onLoad : function()
+                      {
+                        this.getInputElement().setAttribute( 'readOnly', true );
+                      },
                       onChange : function()
                       {
                         var dialog = this.getDialog(),

@@ -33,7 +33,7 @@ group :development do
   gem 'hirb',                                     :require => false
   gem 'itslog'
   gem 'rails-dev-tweaks'
-  gem 'therubyracer'
+  gem 'therubyracer'                              unless RUBY_PLATFORM =~ /freebsd/
 end
 
 group :test do
@@ -51,6 +51,6 @@ end
 group :production do
   gem 'hoptoad_notifier'
   gem 'pg',                                       :require => false
-  gem 'unicorn'
+  gem 'unicorn',                                  :require => false unless ENV['SHARED_DATABASE_URL']
 end
 

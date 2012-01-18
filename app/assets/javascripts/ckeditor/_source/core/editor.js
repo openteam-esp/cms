@@ -787,10 +787,7 @@ CKEDITOR.tools.extend( CKEDITOR.editor.prototype,
      */
     insertText : function( text )
     {
-      while (text.match(/\n\n/) != null) {
-        text = text.replace(/\n\n/g, '\n');
-      };
-      text = text.replace(/\n/g, '\n\n');
+      text = text.replace(/\n\s*/g, '\n\n');
       this.fire( 'insertText', text );
     },
 
