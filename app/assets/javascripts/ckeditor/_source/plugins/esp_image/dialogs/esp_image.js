@@ -538,7 +538,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
                       required: true,
                       onLoad : function()
                       {
-                        this.getInputElement().setAttribute( 'readOnly', true );
+                        this.getInputElement().setAttribute( 'readonly', 'readonly' );
                       },
                       onChange : function()
                       {
