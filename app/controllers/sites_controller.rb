@@ -1,4 +1,5 @@
 class SitesController < ApplicationController
+  inherit_resources
 
   layout 'application'
 

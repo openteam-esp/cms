@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  inherit_resources
   belongs_to :node, :shallow => true
 
   def destroy

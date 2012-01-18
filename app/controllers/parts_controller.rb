@@ -1,4 +1,5 @@
 class PartsController < ApplicationController
+  inherit_resources
   belongs_to :node, :shallow => true
   actions :new, :create, :edit, :update, :destroy
 
