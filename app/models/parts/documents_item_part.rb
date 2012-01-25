@@ -21,11 +21,11 @@ class DocumentsItemPart < Part
     end
 
     def request
-      @request ||= Restfulie.at("#{documents_url}/papers/#{paper_id}").accepts("application/json").get
+      @request ||= Curl::Easy.http_get("#{documents_url}/papers/#{paper_id}.json").body_str
     end
 
     def request_body
-      ActiveSupport::JSON.decode(request.body).tap { |hash| hash.delete('id') }
+      ActiveSupport::JSON.decode(request).tap { |hash| hash.delete('id') }
     end
 
     def paper_id
