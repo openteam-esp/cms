@@ -11,21 +11,23 @@ class NavigationPart < Part
     build_navigation_tree(from_node)
   end
 
-  def build_navigation_tree(node)
-    hash = { node.slug => { 'title' => node.navigation_title.blank? ? node.title : node.navigation_title, 'path' => "#{node.route_without_site}/" } }
-    hash[node.slug].merge!('selected' => true) if current_node.path_ids.include?(node.id) && node != from_node
-
-    selected_children(node).navigable.each do |child|
-      hash[node.slug]['children'] ||= {}
-      hash[node.slug]['children'].merge!(build_navigation_tree(child))
-    end if node.depth - from_node.depth < navigation_default_level || (node.depth - from_node.depth < navigation_end_level && current_node.path_ids.include?(node.id))
-    hash
-  end
-
   private
     def selected_children(node)
       return node.children.where(:navigation_group => navigation_group).order('navigation_position') if navigation_group
       node.children.order('navigation_position')
+    end
+
+    def build_navigation_tree(node)
+      hash = { node.slug => { 'title' => node.navigation_title.blank? ? node.title : node.navigation_title, 'path' => "#{node.route_without_site}/" } }
+
+      hash[node.slug].merge!('selected' => true) if current_node.path_ids.include?(node.id) && node != from_node
+
+      selected_children(node).navigable.each do |child|
+        hash[node.slug]['children'] ||= {}
+        hash[node.slug]['children'].merge!(build_navigation_tree(child))
+      end if node.depth - from_node.depth < navigation_default_level || (node.depth - from_node.depth < navigation_end_level && current_node.path_ids.include?(node.id))
+
+      hash
     end
 end
 

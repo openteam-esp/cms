@@ -2,6 +2,7 @@
 
 class GalleryPart < Part
   has_many :gallery_pictures
+
   accepts_nested_attributes_for :gallery_pictures, :allow_destroy => true
 
   def to_json
@@ -11,10 +12,13 @@ class GalleryPart < Part
   def content
     hash = { :title => title }
     gallery = []
+
     gallery_pictures.each do |picture|
       gallery << {:picture_url => picture.picture_url, :description => picture.description}
     end
+
     hash['gallery_pictures'] = gallery
+
     hash
   end
 end

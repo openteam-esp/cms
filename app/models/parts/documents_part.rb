@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-require 'uri'
-
 class DocumentsPart < Part
   belongs_to :item_page, :class_name => 'Node', :foreign_key => :documents_item_page_id
 
@@ -19,12 +17,9 @@ class DocumentsPart < Part
     end
   end
 
-  def contexts
-    @contexts ||= Curl::Easy.http_get("#{documents_url}/contexts.json").body_str
-  end
-
   def contexts_options_for_select
     options_for_select = {}
+
     ActiveSupport::JSON.decode(contexts).each do |e|
       options_for_select[e['title']] = e['id']
     end
@@ -49,6 +44,10 @@ class DocumentsPart < Part
 
     def request_body
       @request_body ||= ActiveSupport::JSON.decode(request.body_str)
+    end
+
+    def contexts
+      @contexts ||= Curl::Easy.http_get("#{documents_url}/contexts.json").body_str
     end
 
     def action_for_search_form

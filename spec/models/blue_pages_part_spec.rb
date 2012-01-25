@@ -44,7 +44,7 @@ describe BluePagesPart do
     let(:blue_pages_part) { BluePagesPart.create(:item_page => Fabricate(:page)) }
 
     before do
-      blue_pages_part.stub_chain(:request, :body_str).and_return(json)
+      blue_pages_part.stub(:request).and_return(json)
     end
 
     it { blue_pages_part.content['items'][0]['link'].should == "#{blue_pages_part.item_page.route_without_site}?parts_params[blue_pages_item][link]=/categories/3/items/1" }

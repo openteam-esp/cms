@@ -7,23 +7,23 @@ class HtmlPart < Part
     as_json(:only => :type, :methods => 'content')
   end
 
-  def body
-    c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(html_info_path.gsub(/^\//,''))}")
-    JSON.parse(c.body_str)['content'].gsub(/<p>\s*<\/p>/, "").gsub('&mdash;', '&ndash;').gilensize(:skip_attr => true)
-  end
 
   def content
     { 'title' => title, 'body' => body, 'updated_at' => updated_at }
   end
 
   private
+    def remote_url
+      "#{Settings[:vfs][:url]}/api/el_finder/v2?format=json&cmd=get"
+    end
+
+    def body
+      c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(html_info_path.gsub(/^\//,''))}")
+      JSON.parse(c.body_str)['content'].gsub(/<p>\s*<\/p>/, "").gsub('&mdash;', '&ndash;').gilensize(:skip_attr => true)
+    end
 
     def str_to_hash(str)
       Base64.urlsafe_encode64(str).strip.tr('=', '')
-    end
-
-    def remote_url
-      "#{Settings[:vfs][:url]}/api/el_finder/v2?format=json&cmd=get"
     end
 end
 

@@ -9,24 +9,20 @@ class AppealPart < Part
 
   def content
     res = '<div class="remote_wrapper">'
-    res << request_body.force_encoding('utf-8')
+    res << request.force_encoding('utf-8')
     res << '</div>'
     res
-  end
-
-  def request_body
-    request.body_str
-  end
-
-  def request
-    @request ||= Curl::Easy.perform("#{appeals_url}/new") do |curl|
-      curl.headers['Accept'] = 'text/vnd_html'
-    end
   end
 
   private
     def appeals_url
       "#{Settings['appeals.url']}/public/sections/#{appeal_section_slug}/appeals"
+    end
+
+    def request
+      @request ||= Curl::Easy.perform("#{appeals_url}/new") do |curl|
+        curl.headers['Accept'] = 'text/vnd_html'
+      end.body_str
     end
 end
 # == Schema Information

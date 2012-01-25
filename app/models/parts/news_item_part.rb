@@ -3,12 +3,6 @@
 class NewsItemPart < Part
   validates_presence_of :news_channel
 
-  def request
-    @request ||= Curl::Easy.perform("#{news_url}/public/channels/#{news_channel}/entries/#{params['slug']}") do |curl|
-      curl.headers['Accept'] = 'application/json'
-    end.body_str
-  end
-
   def to_json
     as_json(:only => :type, :methods => 'content')
   end
@@ -28,6 +22,12 @@ class NewsItemPart < Part
   private
     def news_url
       Settings['news.url']
+    end
+
+    def request
+      @request ||= Curl::Easy.perform("#{news_url}/public/channels/#{news_channel}/entries/#{params['slug']}") do |curl|
+        curl.headers['Accept'] = 'application/json'
+      end.body_str
     end
 end
 

@@ -2,6 +2,7 @@
 
 class GalleryPicture < ActiveRecord::Base
   belongs_to :gallery_part
+
   validates_presence_of :description, :picture_url
 
   def resized_picture_url(width = 0)

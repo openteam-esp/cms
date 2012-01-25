@@ -23,34 +23,44 @@ class NewsListPart < Part
       Settings['news.url']
     end
 
-    def search_path
-      news_until = ::I18n.l(news_until) if news_until
-
-      URI.escape "utf8=✓&entry_search[channel_slugs][]=#{news_channel}&entry_search[order_by]=#{news_order_by.gsub(/_/,'+')}&entry_search[until_lt]=#{news_until}&per_page=#{news_per_page}&page=#{params['page'] || '1'}"
-    end
-
     def request
       @request ||= Curl::Easy.perform("#{news_url}/public/entries?#{search_path}") do |curl|
         curl.headers['Accept'] = 'application/json'
       end
     end
 
-    def request_headers
-      @request_headers ||= Hash[request.header_str.split("\r\n").map { |s| s.split(':').map(&:strip) }]
-    end
-
     def request_body
       ActiveSupport::JSON.decode(request.body_str)
     end
 
-    def pagination
-      hash = { 'pagination' => [] }
+    def request_headers
+      @request_headers ||= Hash[request.header_str.split("\r\n").map { |s| s.split(':').map(&:strip) }]
+    end
 
-      (1..request_headers['X-Total-Pages'].to_i).each do |page|
-        hash['pagination'] << { 'link' => "?parts_params[news_list][page]=#{page}", 'current' => request_headers['X-Current-Page'].to_i == page ? 'true' : 'false' }
+    def search_path
+      news_until = ::I18n.l(news_until) if news_until
+
+      URI.escape "utf8=✓&entry_search[channel_slugs][]=#{news_channel}&entry_search[order_by]=#{news_order_by.gsub(/_/,'+')}&entry_search[until_lt]=#{news_until}&per_page=#{news_per_page}&page=#{params['page'] || '1'}"
+    end
+
+    def total_pages
+      request_headers['X-Total-Pages'].to_i
+    end
+
+    def current_page
+      request_headers['X-Current-Page'].to_i
+    end
+
+    def pagination
+      results = { 'pagination' => [] }
+
+      return results if total_pages == 1
+
+      (1..total_pages.to_i).each do |page|
+        results['pagination'] << { 'link' => "?parts_params[news_list][page]=#{page}", 'current' => current_page == page ? 'true' : 'false' }
       end
 
-      hash
+      results
     end
 end
 
