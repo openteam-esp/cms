@@ -9,13 +9,19 @@ class AppealPart < Part
 
   def content
     res = '<div class="remote_wrapper">'
-    res << request.body.force_encoding('utf-8')
+    res << request_body.force_encoding('utf-8')
     res << '</div>'
     res
   end
 
+  def request_body
+    request.body_str
+  end
+
   def request
-    @request ||= Restfulie.at("#{appeals_url}/new").accepts("text/vnd_html").get
+    @request ||= Curl::Easy.perform("#{appeals_url}/new") do |curl|
+      curl.headers['Accept'] = 'text/vnd_html'
+    end
   end
 
   private
