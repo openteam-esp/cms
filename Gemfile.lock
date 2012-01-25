@@ -74,9 +74,9 @@ GEM
       curb
       rails
     erubis (2.7.0)
-    esp-ckeditor (0.0.6)
+    esp-ckeditor (0.0.7)
       formtastic
-      rails (~> 3.1.0)
+      rails
     excon (0.9.5)
     execjs (1.2.13)
       multi_json (~> 1.0)
