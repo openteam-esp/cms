@@ -93,6 +93,7 @@ ru:
       blue_pages_part:
         blue_pages_category_id: Категория
         blue_pages_expand: Включая вложенные
+        category_name: Категория
 
       gallery_picture:
         description: Описание

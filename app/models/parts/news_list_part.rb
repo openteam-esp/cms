@@ -18,28 +18,6 @@ class NewsListPart < Part
     hash
   end
 
-  def request
-    @request ||= Restfulie.at("#{news_url}/public/entries?#{search_path}").accepts("application/json").get
-  end
-
-  def request_headers
-    request.headers.merge(request.headers){ |k,v| v.join }
-  end
-
-  def request_body
-    ActiveSupport::JSON.decode(request.body)
-  end
-
-  def pagination
-    hash = { 'pagination' => [] }
-
-    (1..request_headers['x-total-pages'].to_i).each do |page|
-      hash['pagination'] << { 'link' => "?parts_params[news_list][page]=#{page}", 'current' => request_headers['x-current-page'].to_i == page ? 'true' : 'false' }
-    end
-
-    hash
-  end
-
   private
     def news_url
       Settings['news.url']
@@ -47,7 +25,32 @@ class NewsListPart < Part
 
     def search_path
       news_until = ::I18n.l(news_until) if news_until
+
       URI.escape "utf8=✓&entry_search[channel_slugs][]=#{news_channel}&entry_search[order_by]=#{news_order_by.gsub(/_/,'+')}&entry_search[until_lt]=#{news_until}&per_page=#{news_per_page}&page=#{params['page'] || '1'}"
+    end
+
+    def request
+      @request ||= Curl::Easy.perform("#{news_url}/public/entries?#{search_path}") do |curl|
+        curl.headers['Accept'] = 'application/json'
+      end
+    end
+
+    def request_headers
+      @request_headers ||= Hash[request.header_str.split("\r\n").map { |s| s.split(':').map(&:strip) }]
+    end
+
+    def request_body
+      ActiveSupport::JSON.decode(request.body_str)
+    end
+
+    def pagination
+      hash = { 'pagination' => [] }
+
+      (1..request_headers['X-Total-Pages'].to_i).each do |page|
+        hash['pagination'] << { 'link' => "?parts_params[news_list][page]=#{page}", 'current' => request_headers['X-Current-Page'].to_i == page ? 'true' : 'false' }
+      end
+
+      hash
     end
 end
 
