@@ -14,18 +14,18 @@ class DocumentsPart < Part
   end
 
   def content
-    { 'action' => action_for_search_form, 'keywords' => keywords, 'context_id' => context_id,  'papers' => papers }.tap do |hash|
+    { 'action' => action_for_search_form, 'keywords' => keywords, 'context_id' => documents_context_id,  'papers' => papers }.tap do |hash|
       hash.merge!(pagination) if documents_paginated?
     end
   end
 
   def contexts
-    @contexts ||= Restfulie.at("#{documents_url}/contexts").accepts("application/json").get
+    @contexts ||= Curl::Easy.http_get("#{documents_url}/contexts.json").body_str
   end
 
   def contexts_options_for_select
     options_for_select = {}
-    ActiveSupport::JSON.decode(contexts.body).each do |e|
+    ActiveSupport::JSON.decode(contexts).each do |e|
       options_for_select[e['title']] = e['id']
     end
 
@@ -38,15 +38,17 @@ class DocumentsPart < Part
     end
 
     def request
-      @request ||= Restfulie.at(query).accepts("application/json").get
+      @request ||= Curl::Easy.perform(query) do |curl|
+        curl.headers['Accept'] = 'application/json'
+      end
     end
 
     def request_headers
-      @request_headers ||= request.headers.merge(request.headers) { |k, v| v.join }
+      @request_headers ||= Hash[request.header_str.split("\r\n").map { |s| s.split(':').map(&:strip) }]
     end
 
     def request_body
-      @request_body ||= ActiveSupport::JSON.decode(request.body)
+      @request_body ||= ActiveSupport::JSON.decode(request.body_str)
     end
 
     def action_for_search_form
@@ -89,11 +91,11 @@ class DocumentsPart < Part
     end
 
     def total_pages
-      request_headers['x-total-pages'].to_i
+      request_headers['X-Total-Pages'].to_i
     end
 
     def current_page
-      request_headers['x-current-page'].to_i
+      request_headers['X-Current-Page'].to_i
     end
 
     def pagination
