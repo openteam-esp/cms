@@ -4,7 +4,9 @@ class NewsItemPart < Part
   validates_presence_of :news_channel
 
   def request
-    @request ||= Restfulie.at("#{news_url}/public/channels/#{news_channel}/entries/#{params['slug']}").accepts("application/json").get
+    @request ||= Curl::Easy.perform("#{news_url}/public/channels/#{news_channel}/entries/#{params['slug']}") do |curl|
+      curl.headers['Accept'] = 'application/json'
+    end.body_str
   end
 
   def to_json
@@ -12,7 +14,7 @@ class NewsItemPart < Part
   end
 
   def content
-    params['slug'] ? ActiveSupport::JSON.decode(request.body) : ''
+    params['slug'] ? ActiveSupport::JSON.decode(request) : ''
   end
 
   def page_title
