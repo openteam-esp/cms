@@ -14,7 +14,7 @@ class DocumentsPart < Part
   end
 
   def content
-    { 'action' => action_for_search_form, 'keywords' => keywords, 'papers' => papers }.tap do |hash|
+    { 'action' => action_for_search_form, 'keywords' => keywords, 'context_id' => context_id,  'papers' => papers }.tap do |hash|
       hash.merge!(pagination) if documents_paginated?
     end
   end
