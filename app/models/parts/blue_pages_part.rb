@@ -14,18 +14,18 @@ class BluePagesPart < Part
   end
 
   def content_with_updated_item_links
-    update_item_links ActiveSupport::JSON.decode(request.body)
+    update_item_links ActiveSupport::JSON.decode(request)
   end
 
-  def update_item_links(subdivision)
-    subdivision['items'].each { |item| item['link'] = "#{item_page.route_without_site}?parts_params[blue_pages_item][link]=#{item['link']}" }
-    subdivision['subdivisions'].each { |subdivision| update_item_links(subdivision) } if subdivision['subdivisions']
+  def update_item_links(subdivisions)
+    subdivisions['items'].each { |item| item['link'] = "#{item_page.route_without_site}?parts_params[blue_pages_item][link]=#{item['link']}" } if subdivisions['items']
+    subdivisions['subdivisions'].each { |subdivision| update_item_links(subdivisions) } if subdivisions['subdivisions']
 
-    subdivision
+    subdivisions
   end
 
   def request
-    @request ||= Restfulie.at("#{blue_pages_url}/#{blue_pages_category_id}#{expand_parameter}").accepts("application/json").get
+    @request ||= Curl::Easy.http_get("#{blue_pages_url}/#{blue_pages_category_id}#{expand_parameter}.json").body_str
   end
 
   def expand_parameter
@@ -33,16 +33,16 @@ class BluePagesPart < Part
   end
 
   def categories
-    @categories ||= Restfulie.at(blue_pages_url).accepts("application/json").get
+    @categories ||= Curl::Easy.http_get("#{blue_pages_url}.json").body_str
   end
 
   def category_name
-    @name ||= ActiveSupport::JSON.decode(Restfulie.at("#{blue_pages_url}/#{blue_pages_category_id}").accepts("application/json").get.body)['title']
+    @name ||= ActiveSupport::JSON.decode(Curl::Easy.http_get("#{blue_pages_url}/#{blue_pages_category_id}.json").body_str)['title']
   end
 
   def categories_options_for_select
     options_for_select = {}
-    ActiveSupport::JSON.decode(categories.body)['categories'].each do |e|
+    ActiveSupport::JSON.decode(categories)['categories'].each do |e|
       options_for_select[e['title']] = e['id']
     end
 
