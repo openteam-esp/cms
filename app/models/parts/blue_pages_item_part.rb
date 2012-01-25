@@ -1,6 +1,6 @@
 class BluePagesItemPart < Part
   def request
-    @request ||= Restfulie.at("#{blue_pages_url}/#{params['link']}").accepts("application/json").get
+    @request ||= Curl::Easy.http_get("#{blue_pages_url}/#{params['link']}.json").body_str
   end
 
   def to_json
@@ -8,7 +8,7 @@ class BluePagesItemPart < Part
   end
 
   def content
-    params['link'] ? ActiveSupport::JSON.decode(request.body) : ''
+    params['link'] ? ActiveSupport::JSON.decode(request) : ''
   end
 
   def blue_pages_url
