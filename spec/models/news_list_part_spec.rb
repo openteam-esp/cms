@@ -14,9 +14,9 @@ describe NewsListPart do
                                       :item_page => Fabricate(:page),
                                       :title => 'Новости')
 
-      request_hash = { 'x-total-pages' => ['3'], 'x-current-page' => ['1'] }
-      @news_part.stub(:request).and_return(request_hash)
-      request_hash.stub(:headers).and_return(request_hash)
+      request_hash = { 'X-Total-Pages' => '3', 'X-Current-Page' => '1' }
+
+      @news_part.stub(:request_headers).and_return(request_hash)
 
       answer_from_news = {
         'entries' => [

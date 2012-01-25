@@ -14,18 +14,18 @@ class BluePagesPart < Part
   end
 
   def content_with_updated_item_links
-    update_item_links ActiveSupport::JSON.decode(request)
+    update_item_links ActiveSupport::JSON.decode(request.body_str)
   end
 
   def update_item_links(subdivisions)
     subdivisions['items'].each { |item| item['link'] = "#{item_page.route_without_site}?parts_params[blue_pages_item][link]=#{item['link']}" } if subdivisions['items']
-    subdivisions['subdivisions'].each { |subdivision| update_item_links(subdivisions) } if subdivisions['subdivisions']
+    subdivisions['subdivisions'].each { |subdivision| update_item_links(subdivision) } if subdivisions['subdivisions']
 
     subdivisions
   end
 
   def request
-    @request ||= Curl::Easy.http_get("#{blue_pages_url}/#{blue_pages_category_id}#{expand_parameter}.json").body_str
+    @request ||= Curl::Easy.http_get("#{blue_pages_url}/#{blue_pages_category_id}#{expand_parameter}.json")
   end
 
   def expand_parameter
