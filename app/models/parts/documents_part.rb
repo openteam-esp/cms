@@ -19,6 +19,19 @@ class DocumentsPart < Part
     end
   end
 
+  def contexts
+    @contexts ||= Restfulie.at("#{documents_url}/contexts").accepts("application/json").get
+  end
+
+  def contexts_options_for_select
+    options_for_select = {}
+    ActiveSupport::JSON.decode(contexts.body).each do |e|
+      options_for_select[e['title']] = e['id']
+    end
+
+    options_for_select
+  end
+
   private
     def documents_url
       "#{Settings['documents.url']}"
@@ -45,7 +58,7 @@ class DocumentsPart < Part
     end
 
     def query_params
-      "utf8=✓&#{documents_kind.singularize}_search[keywords]=#{keywords}&page=#{page}&per_page=#{documents_per_page}"
+      "utf8=✓&#{documents_kind.singularize}_search[keywords]=#{keywords}&#{documents_kind.singularize}_search[context_id]=#{documents_context_id}&page=#{page}&per_page=#{documents_per_page}"
     end
 
     def page
