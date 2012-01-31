@@ -1,9 +1,9 @@
 class Part < ActiveRecord::Base
+  attr_accessor :current_node, :params
+
   belongs_to :node
 
   validates_presence_of :node, :region
-
-  attr_accessor :current_node, :params
 
   default_value_for :params, {}
 end
