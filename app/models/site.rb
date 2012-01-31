@@ -11,6 +11,10 @@ class Site < Node
   def default_locale
     locales.where(:slug => 'ru').first
   end
+
+  def page_title
+    default_locale.title
+  end
 end
 
 # == Schema Information
