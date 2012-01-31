@@ -1,30 +1,40 @@
 class Node < ActiveRecord::Base
-  validates :slug, :format => { :with => %r{^[[:alnum:]_\.-]+$} }
-
-  has_ancestry :cache_depth => true
+  attr_accessor :navigation_position_param
+  attr_accessor :parts_params
 
   has_many :parts
 
-  normalize_attribute :title, :with => [:gilensize_as_text, :squish]
-  after_save :cache_route
-
-  default_value_for :in_navigation, true
-
-  scope :navigable, where(:in_navigation => true)
-  default_scope :order => [:ancestry_depth, :navigation_position]
-
+  validates :slug, :format => { :with => %r{^[[:alnum:]_\.-]+$} }
   validates_uniqueness_of :slug, :scope => :ancestry
 
-  attr_accessor :parts_params
-  default_value_for :parts_params, {}
+  default_scope :order => [:ancestry_depth, :navigation_position]
 
-  attr_accessor :navigation_position_param
-  after_save :set_navigation_position
+  scope :navigable, where(:in_navigation => true)
 
-  alias :site :root
   delegate :templates, :to => :site
 
+  default_value_for :in_navigation, true
+  default_value_for :parts_params,  {}
+
   acts_as_list :column => :navigation_position
+
+  has_ancestry :cache_depth => true
+  alias :site :root
+
+  normalize_attribute :title, :with => [:gilensize_as_text, :squish]
+
+  after_save :cache_route
+  after_save :set_navigation_position
+
+  def to_json
+    {
+      'page' => {
+        'title' => page_title,
+        'template' => template,
+        'regions' => regions.inject({}) { |h, r| h.merge(r => part_for(r, true).to_json) }
+      }
+    }
+  end
 
   def to_s
     title
@@ -121,7 +131,6 @@ class Node < ActiveRecord::Base
       end
       Node.set_callback(:save, :after, :set_navigation_position)
     end
-
 end
 
 # == Schema Information

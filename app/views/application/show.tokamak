@@ -1,9 +1,0 @@
-page {
-  title @node.page_title
-  template @node.template
-  regions {
-    @node.regions.each do |region|
-      insert_value(region, '', @node.part_for(region, true).to_json)
-    end
-  }
-}
