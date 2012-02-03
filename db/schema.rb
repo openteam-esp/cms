@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120202101006) do
+ActiveRecord::Schema.define(:version => 20120203022748) do
 
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(:version => 20120202101006) do
   end
 
   create_table "parts", :force => true do |t|
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "region"
     t.string   "type"
     t.integer  "node_id"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20120202101006) do
     t.integer  "documents_per_page"
     t.integer  "documents_context_id"
     t.string   "youtube_playlist_id"
+    t.integer  "youtube_playlist_item_page_id"
   end
 
 end

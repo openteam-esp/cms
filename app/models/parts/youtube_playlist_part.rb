@@ -1,4 +1,6 @@
 class YoutubePlaylistPart < Part
+  belongs_to :item_page, :class_name => 'Node', :foreign_key => :youtube_playlist_item_page_id
+
   validates_presence_of :youtube_playlist_id
 
   def to_json
@@ -47,14 +49,8 @@ class YoutubePlaylistPart < Part
       fragments[fragments.size - 2]
     end
 
-    def video_url(video_id)
-      params = 'autoplay=1&hd=1'
-
-      "http://www.youtube.com/v/#{video_id}?#{params}"
-    end
 
     def video_thumb(video_id)
-      #"http://img.youtube.com/vi/#{video_id}/default.jpg"
       "http://img.youtube.com/vi/#{video_id}/0.jpg"
     end
 
@@ -63,11 +59,12 @@ class YoutubePlaylistPart < Part
         video_id = video_id(e)
 
         {
-          :video => {
-            :title => video_title(e),
-            :url => video_url(video_id),
-            :thumb => video_thumb(video_id)
-          }
+          'link' => "#{item_page.route_without_site}?parts_params[youtube_video][id]=#{video_id}",
+
+          'video' => {
+            'title'  => video_title(e),
+            'thumb'  => video_thumb(video_id)
+          },
         }
       end
     end
