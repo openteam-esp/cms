@@ -12,24 +12,24 @@ class YoutubePlaylistPart < Part
   end
 
   private
-    def youtube_api_url
+    def api_url
       'http://gdata.youtube.com/feeds/api'
     end
 
-    def youtube_playlist_url
+    def api_playlist_url
       params = 'v=2&alt=json'
 
-      "#{youtube_api_url}/playlists/#{youtube_playlist_id}?#{params}"
+      "#{api_url}/playlists/#{youtube_playlist_id}?#{params}"
     end
 
     def request
-      @request ||= Curl::Easy.perform(youtube_playlist_url) do |curl|
+      @request ||= Curl::Easy.perform(api_playlist_url) do |curl|
         curl.headers['Accept'] = 'application/json'
       end
     end
 
     def request_json
-      @request_body ||= ActiveSupport::JSON.decode(request.body_str)
+      @request_json ||= ActiveSupport::JSON.decode(request.body_str)
     end
 
     def request_hashie
@@ -48,7 +48,6 @@ class YoutubePlaylistPart < Part
 
       fragments[fragments.size - 2]
     end
-
 
     def video_thumb(video_id)
       "http://img.youtube.com/vi/#{video_id}/0.jpg"
