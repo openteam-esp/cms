@@ -95,6 +95,7 @@ GEM
     has_enum (0.10.0)
       rails (> 3.0.0)
     has_scope (0.5.1)
+    hashie (1.2.0)
     hike (1.2.1)
     hirb (0.6.0)
     hoptoad_notifier (2.4.11)
@@ -224,6 +225,7 @@ DEPENDENCIES
   guard-rspec
   guard-spork
   has_enum
+  hashie
   hirb
   hoptoad_notifier
   inherited_resources

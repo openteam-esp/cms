@@ -13,6 +13,7 @@ gem 'fog',                                        :require => false
 gem 'formtastic'
 gem 'gilenson'
 gem 'has_enum'
+gem 'hashie'
 gem 'inherited_resources'
 gem 'jquery-rails'
 gem 'nested_form',                                :git => 'git://github.com/kfprimm/nested_form'

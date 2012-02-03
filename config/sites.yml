@@ -150,3 +150,6 @@ sites:
         site_name:
           required: true
           configurable: false
+        content_first:
+          required: false
+          configurable: true
