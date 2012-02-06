@@ -94,7 +94,11 @@ class YoutubeVideoPart < Part
       END
     end
 
+    def only_comments
+      params['only_comments']
+    end
+
     def comments_part
-      @comments_part ||= YoutubeCommentsPart.new
+      @comments_part ||= YoutubeCommentsPart.new(:node => node, :params => params)
     end
 end

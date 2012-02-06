@@ -1,17 +1,38 @@
 class YoutubeCommentsPart < Part
+  attr_accessor :node, :params
+
   def comments
-    request_hashie.feed.entry.map do |entry|
+    {}.tap do |hash|
+      entries = comments_hashie.feed.entry.map do |entry|
+        {
+          'content'   => comment_content(entry),
+          'published' => comment_published(entry),
+          'author'    => comment_author(entry)
+        }
+      end
+
+    hash['entries'] = entries
+
+    hash['pagination'] = [
       {
-        'content'   => content(entry),
-        'published' => published(entry),
-        'author'    => author(entry)
+        'number' => 1,
+        'url' => comments_page_path
       }
+    ]
     end
   end
 
   private
+    def start_index
+      params['start-index'] || 1
+    end
+
+    def max_results
+      params['max-results'] || 25
+    end
+
     def api_comments_url
-      params = 'alt=json&v=2'
+      params = "alt=json&v=2&start-index=#{start_index}&max-results=#{max_results}"
 
       "#{api_url}/videos/#{video_id}/comments?#{params}"
     end
@@ -49,5 +70,9 @@ class YoutubeCommentsPart < Part
         'username' => username,
         'profile_url' => user_url(username)
       }
+    end
+
+    def comments_page_path
+      "#{node.route_without_site}?parts_params[youtube_video][id]=#{video_id}&parts_params[youtube_video][only_comments]=true"
     end
 end
