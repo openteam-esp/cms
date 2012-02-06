@@ -3,32 +3,34 @@ class YoutubeCommentsPart < Part
 
   def comments
     {}.tap do |hash|
-      entries = comments_hashie.feed.entry.map do |entry|
+      entries = request_hashie.feed.entry.map do |entry|
         {
-          'content'   => comment_content(entry),
-          'published' => comment_published(entry),
-          'author'    => comment_author(entry)
+          'content'   => content(entry),
+          'published' => published(entry),
+          'author'    => author(entry)
         }
       end
 
-    hash['entries'] = entries
-
-    hash['pagination'] = [
-      {
-        'number' => 1,
-        'url' => comments_page_path
-      }
-    ]
+      hash['entries'] = entries
+      hash['pagination'] = pagination
     end
   end
 
   private
+    def video_id
+      params['id']
+    end
+
     def start_index
       params['start-index'] || 1
     end
 
     def max_results
-      params['max-results'] || 25
+      params['max-results'] || 10
+    end
+
+    def api_url
+      'http://gdata.youtube.com/feeds/api'
     end
 
     def api_comments_url
@@ -72,7 +74,30 @@ class YoutubeCommentsPart < Part
       }
     end
 
-    def comments_page_path
-      "#{node.route_without_site}?parts_params[youtube_video][id]=#{video_id}&parts_params[youtube_video][only_comments]=true"
+    def comments_page_path(start_index)
+      "#{node.route_without_site}?parts_params[youtube_video][id]=#{video_id}&parts_params[youtube_video][only_comments]=true&parts_params[youtube_video][start-index]=#{start_index}&parts_params[youtube_video][max-results]=#{max_results}"
+    end
+
+    def total_pages
+      request_hashie.feed.send('openSearch$totalResults'.to_sym).send(:$t).to_i
+    end
+
+    def current_page
+      start_index.to_i / max_results.to_i
+    end
+
+    def pagination
+      results = []
+
+      (0..10).each do |i|
+        start_index = (max_results.to_i * i) + 1
+
+        hash = { 'number' => (i + 1).to_s, 'url' => comments_page_path(start_index) }
+        hash.merge!('current' => true) if current_page == i
+
+        results << hash
+      end
+
+      results
     end
 end

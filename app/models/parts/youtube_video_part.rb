@@ -4,11 +4,13 @@ class YoutubeVideoPart < Part
   end
 
   def content
-    {
+    hash = {
       'video' => video_info,
       'embedded_code' => embedded_code,
       'comments' => comments
     }
+
+    only_comments? ? comments : hash
   end
 
   def page_title
@@ -94,7 +96,7 @@ class YoutubeVideoPart < Part
       END
     end
 
-    def only_comments
+    def only_comments?
       params['only_comments']
     end
 
