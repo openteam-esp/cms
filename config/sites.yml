@@ -146,8 +146,21 @@ sites:
         site_name:
           required: true
           configurable: true
+        main_top_navigation:
+          required: true
+          configurable: true
+        main_bottom_navigation:
+          required: true
+          configurable: true
+
       inner_page:
         site_name:
+          required: true
+          configurable: false
+        main_top_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
           required: true
           configurable: false
         content_first:
