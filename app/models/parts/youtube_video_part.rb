@@ -15,6 +15,8 @@ class YoutubeVideoPart < Part
     title
   end
 
+  delegate :comments, :to => :comments_part
+
   private
     def video_id
       params['id']
@@ -78,57 +80,6 @@ class YoutubeVideoPart < Part
       }
     end
 
-    def api_comments_url
-      params = 'alt=json&v=2'
-
-      "#{api_url}/videos/#{video_id}/comments?#{params}"
-    end
-
-    def comments_request
-      @comments_request ||= Curl::Easy.perform(api_comments_url) do |curl|
-        curl.headers['Accept'] = 'application/json'
-      end
-    end
-
-    def comments_json
-      @comments_json ||= ActiveSupport::JSON.decode(comments_request.body_str)
-    end
-
-    def comments_hashie
-      @comments_hashie ||= Hashie::Mash.new(comments_json)
-    end
-
-    def comment_content(entry)
-      entry.content.send(:$t)
-    end
-
-    def comment_published(entry)
-      entry.published.send(:$t).to_datetime
-    end
-
-    def user_url(username)
-      "http://www.youtube.com/user/#{username}"
-    end
-
-    def comment_author(entry)
-      username = entry.author.first.name.send(:$t)
-
-      {
-        'username' => username,
-        'profile_url' => user_url(username)
-      }
-    end
-
-    def comments
-      comments_hashie.feed.entry.map do |entry|
-        {
-          'content'   => comment_content(entry),
-          'published' => comment_published(entry),
-          'author'    => comment_author(entry)
-        }
-      end
-    end
-
     def video_url
       params = 'autoplay=1&hd=1'
 
@@ -143,4 +94,7 @@ class YoutubeVideoPart < Part
       END
     end
 
+    def comments_part
+      @comments_part ||= YoutubeCommentsPart.new
+    end
 end
