@@ -9,7 +9,7 @@ class Youtube::Comments < Youtube::Video
 
   def entries
     {}.tap do |hash|
-      entries = request_hashie.feed.entry.map do |entry|
+      entries = feed_entry.map do |entry|
         {
           'content'   => content(entry),
           'published' => published(entry),
@@ -51,6 +51,14 @@ class Youtube::Comments < Youtube::Video
       @request_hashie ||= Hashie::Mash.new(request_json)
     end
 
+    def feed
+      request_hashie.feed
+    end
+
+    def feed_entry
+      feed.entry || []
+    end
+
     def content(entry)
       entry.content.send(:$t)
     end
@@ -84,11 +92,11 @@ class Youtube::Comments < Youtube::Video
     end
 
     def total_pages
-      request_hashie.feed.send('openSearch$totalResults'.to_sym).send(:$t).to_i / max_results
+      (feed.send('openSearch$totalResults'.to_sym).send(:$t).to_f / max_results).ceil
     end
 
     def current_page
-      @current_page ||= start_index / max_results
+      [(start_index.to_f / max_results), 1].max.ceil
     end
 
     def page(label, start_index)
@@ -96,22 +104,24 @@ class Youtube::Comments < Youtube::Video
     end
 
     def pagination
+      return [] if total_pages.zero?
+
       start = current_page
       finish = [current_page + 6, total_pages].min
 
       [].tap do |array|
-        array << page('<<', max_results * (start - 1) + 1) if start > 0
+        #array << page('<<', max_results * (start - 1) + 1) if start > 1
 
         (start..finish).each do |i|
-          start_index = (max_results * i) + 1
+          s = (max_results * (i - 1)) + 1
 
-          hash = page(i + 1, start_index)
+          hash = page(i, s)
           hash.merge!('current' => true) if current_page == i
 
           array << hash
         end
 
-        array << page('>>', max_results * (start + 1) + 1)
+        #array << page('>>', max_results * start + 1) if start < total_pages
       end
     end
 end

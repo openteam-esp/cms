@@ -7,10 +7,10 @@ class YoutubePlaylistPart < Part
     as_json(:only => :type, :methods => 'content')
   end
 
-  delegate :entries, :to => :youtube_playlist
+  delegate :entries, :to => :youtube_playlist, :prefix => true
 
   def content
-    entries
+    youtube_playlist_entries
   end
 
   private

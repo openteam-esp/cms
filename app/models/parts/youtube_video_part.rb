@@ -5,14 +5,14 @@ class YoutubeVideoPart < Part
     as_json(:only => :type, :methods => 'content')
   end
 
-  delegate :info, :title, :to => :youtube_video
+  delegate :info, :title, :to => :youtube_video, :prefix => true
 
   def content
-    info
+    youtube_video_info
   end
 
   def page_title
-    title
+    youtube_video_title
   end
 
   private
