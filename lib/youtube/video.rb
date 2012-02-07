@@ -10,6 +10,8 @@ module Youtube
     end
 
     def info
+      return {} unless playlist.include?(id)
+
       return comments.entries if only_comments?
 
       {
@@ -28,6 +30,10 @@ module Youtube
         params = 'alt=json&v=2'
 
         "#{api_url}/videos/#{id}?#{params}"
+      end
+
+      def playlist
+        Playlist.new(:id => playlist_id)
       end
 
       def request

@@ -22,6 +22,10 @@ module Youtube
       end
     end
 
+    def include?(video_id)
+      request_hashie.feed.entry.map { |e| video_id(e) }.include?(video_id)
+    end
+
     private
       def api_url
         'http://gdata.youtube.com/feeds/api'
