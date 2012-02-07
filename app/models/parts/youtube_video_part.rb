@@ -3,23 +3,25 @@ class YoutubeVideoPart < Part
     as_json(:only => :type, :methods => 'content')
   end
 
-  def content
-    hash = {
-      'video' => video_info,
-      'embedded_code' => embedded_code,
-      'comments' => comments
-    }
+  delegate :comments, :to => :comments_part
 
-    only_comments? ? comments : hash
+  def content
+    only_comments? ? comments : video_info_with_comments
   end
 
   def page_title
     title
   end
 
-  delegate :comments, :to => :comments_part
-
   private
+    def video_info_with_comments
+      {
+        'video' => video_info,
+        'embedded_code' => embedded_code,
+        'comments' => comments
+      }
+    end
+
     def video_id
       params['id']
     end

@@ -1,4 +1,4 @@
-class YoutubeCommentsPart < Part
+class YoutubeCommentsPart < YoutubeVideoPart
   attr_accessor :node, :params
 
   def comments
@@ -17,20 +17,12 @@ class YoutubeCommentsPart < Part
   end
 
   private
-    def video_id
-      params['id']
-    end
-
     def start_index
-      params['start-index'] || 1
+      (params['start-index'] || 1).to_i
     end
 
     def max_results
-      params['max-results'] || 10
-    end
-
-    def api_url
-      'http://gdata.youtube.com/feeds/api'
+      (params['max-results'] || 10).to_i
     end
 
     def api_comments_url
@@ -74,30 +66,36 @@ class YoutubeCommentsPart < Part
       }
     end
 
-    def comments_page_path(start_index)
-      "#{node.route_without_site}?parts_params[youtube_video][id]=#{video_id}&parts_params[youtube_video][only_comments]=true&parts_params[youtube_video][start-index]=#{start_index}&parts_params[youtube_video][max-results]=#{max_results}"
+    def page_path(start_index)
+      params =  [
+        "parts_params[youtube_video][id]=#{video_id}",
+        "parts_params[youtube_video][only_comments]=true",
+        "parts_params[youtube_video][start-index]=#{start_index}",
+        "parts_params[youtube_video][max-results]=#{max_results}"
+      ].join('&')
+
+      "#{node.route_without_site}?#{params}"
     end
 
     def total_pages
-      request_hashie.feed.send('openSearch$totalResults'.to_sym).send(:$t).to_i
+      request_hashie.feed.send('openSearch$totalResults'.to_sym).send(:$t).to_i / max_results
     end
 
     def current_page
-      start_index.to_i / max_results.to_i
+      @current_page ||= start_index / max_results
     end
 
+    # TODO: обрабатывать количество страниц
     def pagination
-      results = []
+      [].tap do |array|
+        (0..10).each do |i|
+          start_index = (max_results * i) + 1
 
-      (0..10).each do |i|
-        start_index = (max_results.to_i * i) + 1
+          hash = { 'number' => i + 1, 'url' => page_path(start_index) }
+          hash.merge!('current' => true) if current_page == i
 
-        hash = { 'number' => (i + 1).to_s, 'url' => comments_page_path(start_index) }
-        hash.merge!('current' => true) if current_page == i
-
-        results << hash
+          array << hash
+        end
       end
-
-      results
     end
 end
