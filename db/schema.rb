@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120203022748) do
+ActiveRecord::Schema.define(:version => 20120207030708) do
 
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20120203022748) do
     t.integer  "documents_context_id"
     t.string   "youtube_playlist_id"
     t.integer  "youtube_playlist_item_page_id"
+    t.string   "youtube_video_playlist_id"
   end
 
 end
