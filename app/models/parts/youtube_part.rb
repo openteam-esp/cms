@@ -1,7 +1,9 @@
-class YoutubePlaylistPart < Part
-  belongs_to :item_page, :class_name => 'Node', :foreign_key => :youtube_playlist_item_page_id
+class YoutubePart < Part
+  belongs_to :item_page, :class_name => 'Node', :foreign_key => :youtube_item_page_id
 
-  validates_presence_of :youtube_playlist_id
+  validates_presence_of :youtube_kind, :youtube_object_id
+
+  has_enums
 
   def to_json
     as_json(:only => :type, :methods => 'content')

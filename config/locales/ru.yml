@@ -129,3 +129,11 @@ ru:
         documents_paginated: Постраничный переход
         documents_per_page: Количество на странице
 
+      youtube_part:
+        item_page: Страница просмотра
+        youtube_kind: Тип ресурса
+        youtube_kind_enum:
+          playlist: Плейлист
+          user: Пользователь
+        youtube_object_id: Идентификатор ресурса
+
