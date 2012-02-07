@@ -1,7 +1,13 @@
-class YoutubeCommentsPart < YoutubeVideoPart
-  attr_accessor :node, :params
+class Youtube::Comments < Youtube::Video
+  attr_reader :node, :params, :video_id
 
-  def comments
+  def initialize(attributes)
+    @node = attributes[:node]
+    @params = attributes[:params]
+    @video_id = attributes[:video_id]
+  end
+
+  def entries
     {}.tap do |hash|
       entries = request_hashie.feed.entry.map do |entry|
         {
@@ -53,7 +59,7 @@ class YoutubeCommentsPart < YoutubeVideoPart
       entry.published.send(:$t).to_datetime
     end
 
-    def user_url(username)
+    def profile_url(username)
       "http://www.youtube.com/user/#{username}"
     end
 
@@ -62,7 +68,7 @@ class YoutubeCommentsPart < YoutubeVideoPart
 
       {
         'username' => username,
-        'profile_url' => user_url(username)
+        'profile_url' => profile_url(username)
       }
     end
 
