@@ -1,6 +1,8 @@
 <%= form.inputs do %>
   <%= form.input :youtube_object_id %>
   <%= form.input :youtube_kind, :as => :radio, :collection => form.object.class.values_for_select_tag(:youtube_kind) %>
+  <%= form.input :youtube_per_page %>
+  <%= form.input :youtube_paginated %>
   <%= form.input :item_page %>
 
   <%= form.input :region, :as => :hidden %>

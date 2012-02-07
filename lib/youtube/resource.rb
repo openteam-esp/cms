@@ -1,25 +1,14 @@
 module Youtube
   class Resource
-    attr_reader :id, :item_page
+    attr_reader :id, :max_results
 
     def initialize(attributes)
       @id = attributes[:id]
-      @item_page = attributes[:item_page]
+      @max_results = attributes[:max_results]
     end
 
     def entries
-      request_hashie.feed.entry.map do |e|
-        video_id = video_id(e)
-
-        {
-          'link' => "#{item_page.route_without_site}?parts_params[youtube_video][id]=#{video_id}",
-
-          'video' => {
-            'title'  => video_title(e),
-            'thumb'  => video_thumb(video_id)
-          },
-        }
-      end
+      request_hashie.feed.entry
     end
 
     def include?(video_id)
@@ -31,8 +20,18 @@ module Youtube
         'http://gdata.youtube.com/feeds/api'
       end
 
+      def request_params
+        'v=2&alt=json'.tap do |string|
+          string << "&max-results=#{max_results}" if max_results
+        end
+      end
+
+      def request_url
+        "#{api_resource_url}?#{request_params}"
+      end
+
       def request
-        @request ||= Curl::Easy.perform(api_resource_url) do |curl|
+        @request ||= Curl::Easy.perform(request_url) do |curl|
           curl.headers['Accept'] = 'application/json'
         end
       end

@@ -136,4 +136,6 @@ ru:
           playlist: Плейлист
           user: Пользователь
         youtube_object_id: Идентификатор ресурса
+        youtube_per_page: Количество на странице
+        youtube_paginated: Постраничный переход
 
