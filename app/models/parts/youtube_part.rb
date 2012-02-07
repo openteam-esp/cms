@@ -9,14 +9,18 @@ class YoutubePart < Part
     as_json(:only => :type, :methods => 'content')
   end
 
-  delegate :entries, :to => :youtube_playlist, :prefix => true
+  delegate :entries, :to => :youtube_object, :prefix => true
 
   def content
-    youtube_playlist_entries
+    youtube_object_entries
   end
 
   private
-    def youtube_playlist
-      Youtube::Playlist.new(:id => youtube_playlist_id, :item_page => item_page)
+    def youtube_object
+      youtube_kind_playlist? ? Youtube::Playlist.new(object_attributes) : Youtube::User.new(object_attributes)
+    end
+
+    def object_attributes
+      { :id => youtube_object_id, :item_page => item_page }
     end
 end
