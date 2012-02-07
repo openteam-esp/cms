@@ -91,17 +91,27 @@ class Youtube::Comments < Youtube::Video
       @current_page ||= start_index / max_results
     end
 
-    # TODO: обрабатывать количество страниц
+    def page(label, start_index)
+      { 'label' => label, 'url' => page_path(start_index) }
+    end
+
     def pagination
+      start = current_page
+      finish = [current_page + 6, total_pages].min
+
       [].tap do |array|
-        (0..10).each do |i|
+        array << page('<<', max_results * (start - 1) + 1) if start > 0
+
+        (start..finish).each do |i|
           start_index = (max_results * i) + 1
 
-          hash = { 'number' => i + 1, 'url' => page_path(start_index) }
+          hash = page(i + 1, start_index)
           hash.merge!('current' => true) if current_page == i
 
           array << hash
         end
+
+        array << page('>>', max_results * (start + 1) + 1)
       end
     end
 end
