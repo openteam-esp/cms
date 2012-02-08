@@ -131,11 +131,19 @@ ru:
 
       youtube_part:
         item_page: Страница просмотра
-        youtube_kind: Тип ресурса
-        youtube_kind_enum:
+        youtube_resource_kind: Тип ресурса
+        youtube_resource_kind_enum:
           playlist: Плейлист
           user: Пользователь
-        youtube_object_id: Идентификатор ресурса
+        youtube_resource_id: Идентификатор ресурса
         youtube_per_page: Количество на странице
         youtube_paginated: Постраничный переход
+
+      youtube_video_part:
+        youtube_video_resource_kind: Тип ресурса
+        youtube_video_resource_kind_enum:
+          playlist: Плейлист
+          user: Пользователь
+        youtube_video_resource_id: Идентификатор ресурса
+
 

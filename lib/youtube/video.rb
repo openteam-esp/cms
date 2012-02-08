@@ -1,16 +1,17 @@
 module Youtube
   class Video
-    attr_reader :id, :node, :params, :playlist_id
+    attr_reader :id, :node, :params, :resource_id, :resource_kind
 
     def initialize(attributes)
       @id = attributes[:id]
       @node = attributes[:node],
       @params = attributes[:params],
-      @playlist_id = attributes[:playlist_id]
+      @resource_id = attributes[:resource_id]
+      @resource_kind = attributes[:resource_kind]
     end
 
     def info
-      return {} unless playlist.include?(id)
+      return {} unless resource.include?(id)
 
       return comments.entries if only_comments?
 
@@ -32,8 +33,12 @@ module Youtube
         "#{api_url}/videos/#{id}?#{params}"
       end
 
-      def playlist
-        Playlist.new(:id => playlist_id)
+      def resource_attributes
+        { :id => resource_id }
+      end
+
+      def resource
+        resource_kind == 'playlist' ? Youtube::Playlist.new(resource_attributes) : Youtube::User.new(resource_attributes)
       end
 
       def request

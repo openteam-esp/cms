@@ -1,5 +1,7 @@
 class YoutubeVideoPart < Part
-  validates_presence_of :youtube_video_playlist_id
+  validates_presence_of :youtube_video_resource_id, :youtube_video_resource_kind
+
+  has_enums
 
   def to_json
     as_json(:only => :type, :methods => 'content')
@@ -12,13 +14,14 @@ class YoutubeVideoPart < Part
   end
 
   def page_title
-    youtube_video_title
+    youtube_video_title unless youtube_video_info.empty?
   end
 
   private
     def youtube_video
       Youtube::Video.new(:id => params['id'],
-                         :playlist_id => youtube_video_playlist_id,
+                         :resource_id => youtube_video_resource_id,
+                         :resource_kind => youtube_video_resource_kind,
                          :params => params,
                          :node => node)
     end

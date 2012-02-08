@@ -1,7 +1,7 @@
 class YoutubePart < Part
   belongs_to :item_page, :class_name => 'Node', :foreign_key => :youtube_item_page_id
 
-  validates_presence_of :youtube_kind, :youtube_object_id
+  validates_presence_of :youtube_resource_id, :youtube_resource_kind
 
   default_value_for :youtube_per_page, 10
 
@@ -19,12 +19,12 @@ class YoutubePart < Part
   end
 
   private
-    def youtube_resource
-      youtube_kind_playlist? ? Youtube::Playlist.new(object_attributes) : Youtube::User.new(object_attributes)
+    def resource_attributes
+      { :id => youtube_resource_id, :item_page => item_page, :max_results => youtube_per_page }
     end
 
-    def object_attributes
-      { :id => youtube_object_id, :item_page => item_page, :max_results => youtube_per_page }
+    def youtube_resource
+      youtube_resource_kind_playlist? ? Youtube::Playlist.new(resource_attributes) : Youtube::User.new(resource_attributes)
     end
 
     def entries

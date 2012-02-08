@@ -1,5 +1,6 @@
 <%= form.inputs do %>
-  <%= form.input :youtube_video_playlist_id %>
+  <%= form.input :youtube_video_resource_id %>
+  <%= form.input :youtube_video_resource_kind, :as => :radio, :collection => form.object.class.values_for_select_tag(:youtube_video_resource_kind) %>
 
   <%= form.input :region, :as => :hidden %>
   <%= form.input :type, :as => :hidden %>
