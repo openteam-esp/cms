@@ -177,9 +177,12 @@ sites:
         main_bottom_navigation:
           required: true
           configurable: false
-        content_first:
+        navigation_top:
           required: false
           configurable: true
-        content_navigation:
+        navigation_right:
+          required: true
+          configurable: true
+        content_first:
           required: false
           configurable: true
