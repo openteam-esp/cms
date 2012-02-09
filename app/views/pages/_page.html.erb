@@ -1,5 +1,5 @@
 <%= show_for resource do | page | %>
-  <%= page.attributes :title, :navigation_title, :slug, :template, :in_navigation, :navigation_group, :navigation_position %>
+  <%= page.attributes :title, :navigation_title, :slug, :template, :in_navigation, :navigation_group, :navigation_position, :page_for_redirect %>
 <% end %>
 <div class="actions">
   <%= link_to action_title(:action => 'edit'), edit_resource_path, :class => 'button icon edit' if controller.respond_to? :edit %>

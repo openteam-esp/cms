@@ -90,8 +90,12 @@ class Node < ActiveRecord::Base
     @parts[region] = part
   end
 
+  def node_route
+    self.route
+  end
+
   def route_without_site
-    route.try :gsub, /^#{site.slug}/, ''
+    node_route.try :gsub, /^#{site.slug}/, ''
   end
 
   def update_route

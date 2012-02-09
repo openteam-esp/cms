@@ -1,4 +1,6 @@
 class Page < Node
+  belongs_to :page_for_redirect, :class_name => 'Node', :foreign_key => :page_for_redirect_id
+
   validates_presence_of :parent, :template
 
   before_validation :generate_slug, :unless => :slug?
@@ -11,6 +13,10 @@ class Page < Node
 
   def locale
     ancestors.second
+  end
+
+  def node_route
+    (page_for_redirect || self).route
   end
 
   private

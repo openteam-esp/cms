@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120208024132) do
+ActiveRecord::Schema.define(:version => 20120209091033) do
 
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(:version => 20120208024132) do
     t.string   "title"
     t.string   "ancestry"
     t.string   "type"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.text     "route"
     t.string   "template"
     t.string   "client_url"
@@ -35,7 +35,8 @@ ActiveRecord::Schema.define(:version => 20120208024132) do
     t.string   "navigation_group"
     t.integer  "navigation_position"
     t.string   "navigation_title"
-    t.integer  "ancestry_depth",      :default => 0
+    t.integer  "ancestry_depth",       :default => 0
+    t.integer  "page_for_redirect_id"
   end
 
   create_table "parts", :force => true do |t|

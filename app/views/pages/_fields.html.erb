@@ -6,4 +6,5 @@
   <%= form.input :in_navigation %>
   <%= form.input :navigation_group %>
   <%= form.input :navigation_position_param, :as => :select, :collection => page_position_collection(resource), :include_blank => false %>
+  <%= form.input :page_for_redirect %>
 <% end %>
