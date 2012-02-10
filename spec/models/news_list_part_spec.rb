@@ -43,11 +43,19 @@ describe NewsListPart do
 
     it "с пагинацией" do
       @news_part.update_attribute(:news_paginated, true)
-      @expected_hash['content'].merge!('pagination' => [
-            { 'link' => '?parts_params[news_list][page]=1', 'current' => 'true' },
-            { 'link' => '?parts_params[news_list][page]=2', 'current' => 'false' },
-            { 'link' => '?parts_params[news_list][page]=3', 'current' => 'false' }
-          ])
+
+      @news_part.stub(:total_count).and_return(100)
+      @news_part.stub(:total_pages).and_return(10)
+      @news_part.stub(:per_page).and_return(10)
+      @news_part.stub(:current_page).and_return(2)
+
+      @expected_hash['content'].merge!('pagination' => {
+        'total_count' => 100,
+        'current_page' => 2,
+        'per_page' => 2,
+        'param_name' => 'parts_params[news_list][page]'
+      })
+
       @news_part.to_json.should == @expected_hash
     end
 

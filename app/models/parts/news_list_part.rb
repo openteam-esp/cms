@@ -43,6 +43,11 @@ class NewsListPart < Part
       URI.escape "utf8=✓&entry_search[channel_slugs][]=#{news_channel}&entry_search[order_by]=#{news_order_by.gsub(/_/,'+')}&entry_search[until_lt]=#{news_until}&per_page=#{news_per_page}&page=#{params['page'] || '1'}"
     end
 
+    def total_count
+      #TODO: сделать по-настоящему
+      1000
+    end
+
     def total_pages
       request_headers['X-Total-Pages'].to_i
     end
@@ -52,15 +57,14 @@ class NewsListPart < Part
     end
 
     def pagination
-      results = { 'pagination' => [] }
-
-      return results if total_pages == 1
-
-      (1..total_pages.to_i).each do |page|
-        results['pagination'] << { 'link' => "?parts_params[news_list][page]=#{page}", 'current' => current_page == page ? 'true' : 'false' }
-      end
-
-      results
+      {
+        'pagination' => {
+          'total_count' => total_count,
+          'current_page' => current_page,
+          'per_page' => news_per_page,
+          'param_name' => 'parts_params[news_list][page]'
+        }
+      }
     end
 end
 
