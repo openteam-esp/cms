@@ -12,7 +12,7 @@ class NewsListPart < Part
   end
 
   def content
-    hash = request_body.update(request_body) {|v,k| k.each{|l| l['link']="#{item_page.route_without_site}?parts_params[news_item][slug]=#{l['link']}"}}
+    hash = request_body.update(request_body) {|v,k| k.each{|l| l['link']="#{item_page.route_without_site}?parts_params[news_item][slug]=#{l['slug']}"}}
     hash.merge!('title' => title) if title?
     hash.merge!(pagination) if news_paginated?
     hash
@@ -24,13 +24,13 @@ class NewsListPart < Part
     end
 
     def request
-      @request ||= Curl::Easy.perform("#{news_url}/public/entries?#{search_path}") do |curl|
+      @request ||= Curl::Easy.perform("#{news_url}/channels/#{news_channel}/entries?#{search_path}") do |curl|
         curl.headers['Accept'] = 'application/json'
       end
     end
 
     def request_body
-      ActiveSupport::JSON.decode(request.body_str)
+      { 'items' => ActiveSupport::JSON.decode(request.body_str) }
     end
 
     def request_headers
@@ -40,12 +40,12 @@ class NewsListPart < Part
     def search_path
       news_until = ::I18n.l(news_until) if news_until
 
-      URI.escape "utf8=✓&entry_search[channel_slugs][]=#{news_channel}&entry_search[order_by]=#{news_order_by.gsub(/_/,'+')}&entry_search[until_lt]=#{news_until}&per_page=#{news_per_page}&page=#{params['page'] || '1'}"
+      URI.escape "utf8=✓&entry_search[channel_ids][]=#{news_channel}&entry_search[order_by]=#{news_order_by.gsub(/_/,'+')}&per_page=#{news_per_page}&page=#{params['page'] || '1'}"
     end
 
     def total_count
       #TODO: сделать по-настоящему
-      1000
+      request_headers['X-Total-Count'].to_i
     end
 
     def total_pages
