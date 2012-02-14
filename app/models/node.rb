@@ -7,7 +7,9 @@ class Node < ActiveRecord::Base
   validates :slug, :format => { :with => %r{^[[:alnum:]_\.-]+$} }
   validates_uniqueness_of :slug, :scope => :ancestry
 
-  default_scope :order => [:ancestry_depth, :navigation_position]
+  default_scope :order => [:weight]
+
+  delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
 
   scope :navigable, where(:in_navigation => true)
 
@@ -24,7 +26,8 @@ class Node < ActiveRecord::Base
   normalize_attribute :title, :with => [:gilensize_as_text, :squish]
 
   after_save :cache_route
-  after_save :set_navigation_position
+
+  after_save :set_navigation_position_and_recalculate_weights
 
   def to_json
     {
@@ -107,6 +110,10 @@ class Node < ActiveRecord::Base
     self.route = parent ? "#{parent.route}/#{slug}" : slug
   end
 
+  def update_weight
+    self.update_attribute(:weight, weights.join('/'))
+  end
+
   def nodes_from_this_site
     site.descendants
   end
@@ -125,9 +132,18 @@ class Node < ActiveRecord::Base
       @templates_hash ||= YAML.load_file(Rails.root.join 'config/sites.yml').to_hash['sites'][site.slug]['templates']
     end
 
+    def set_navigation_position_and_recalculate_weights
+      Node.skip_callback(:save, :after, :set_navigation_position_and_recalculate_weights)
+      set_navigation_position
+      unless weight == weights.join('/')
+        self.update_weight
+        (parent || self).descendants.map(&:update_weight)
+      end
+      Node.set_callback(:save, :after, :set_navigation_position_and_recalculate_weights)
+    end
+
     def set_navigation_position
       return if self.navigation_position_param.nil? || self.navigation_position_param == 'current'
-      Node.skip_callback(:save, :after, :set_navigation_position)
       case self.navigation_position_param
       when 'first'
         self.move_to_top unless self.first?
@@ -137,7 +153,11 @@ class Node < ActiveRecord::Base
         self.insert_at(self.navigation_position_param)
         self.move_lower
       end
-      Node.set_callback(:save, :after, :set_navigation_position)
+    end
+
+    def weights
+      # NOTE: не больше 100
+      [parent_weight, sprintf('%02d', navigation_position)].keep_if(&:present?).join('/').split('/')
     end
 end
 

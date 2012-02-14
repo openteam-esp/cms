@@ -67,16 +67,22 @@ describe Node do
       end
 
       it { @first_page.navigation_position.should == 1 }
+      it { @first_page.reload.weight.should == '01/01/01' }
 
       it { @second_page.navigation_position.should == 2 }
+      it { @second_page.weight.should == '01/01/02' }
 
       it { @third_page.navigation_position.should == 3 }
+      it { @third_page.weight.should == '01/01/03' }
 
       it "when navigation_position_param => first" do
         @third_page.update_attribute(:navigation_position_param, 'first')
         @third_page.reload.navigation_position.should == 1
+        @third_page.weight.should == '01/01/01'
         @first_page.reload.navigation_position.should == 2
+        @first_page.weight.should == '01/01/02'
         @second_page.reload.navigation_position.should == 3
+        @second_page.weight.should == '01/01/03'
       end
 
       it "when navigation_position_param => last" do
@@ -116,6 +122,14 @@ describe Node do
       end
 
       organy_vlasti.reload.navigation_group.should == 'main'
+    end
+
+    context do 'weight'
+      it { site.weight.should == '01' }
+      it { en.weight.should == '01/01' }
+      it { ru.weight.should == '01/02' }
+      it { organy_vlasti.weight.should == '01/02/01' }
+      it { governer.weight.should == '01/02/01/01' }
     end
 
   end
