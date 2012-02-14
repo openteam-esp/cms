@@ -19,13 +19,17 @@ class NewsItemPart < Part
     "?parts_params[news_item][slug]=#{params['slug']}"
   end
 
+  def image_size_params
+    "entries_params[width]=#{news_width}&entries_params[height]=#{news_height}"
+  end
+
   private
     def news_url
       Settings['news.url']
     end
 
     def request
-      @request ||= Curl::Easy.perform("#{news_url}/public/channels/#{news_channel}/entries/#{params['slug']}") do |curl|
+      @request ||= Curl::Easy.perform("#{news_url}/channels/#{news_channel}/entries/#{params['slug']}?#{image_size_params}") do |curl|
         curl.headers['Accept'] = 'application/json'
       end.body_str
     end

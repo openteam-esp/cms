@@ -18,13 +18,17 @@ class NewsListPart < Part
     hash
   end
 
+  def image_size_params
+    "entries_params[width]=#{news_width}&entries_params[height]=#{news_height}"
+  end
+
   private
     def news_url
       Settings['news.url']
     end
 
     def request
-      @request ||= Curl::Easy.perform("#{news_url}/channels/#{news_channel}/entries?#{search_path}") do |curl|
+      @request ||= Curl::Easy.perform("#{news_url}/channels/#{news_channel}/entries?#{search_path}&#{image_size_params}") do |curl|
         curl.headers['Accept'] = 'application/json'
       end
     end
@@ -44,7 +48,6 @@ class NewsListPart < Part
     end
 
     def total_count
-      #TODO: сделать по-настоящему
       request_headers['X-Total-Count'].to_i
     end
 

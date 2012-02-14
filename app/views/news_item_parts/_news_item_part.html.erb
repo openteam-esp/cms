@@ -1,3 +1,5 @@
 <%= show_for news_item_part do |part| %>
-  <%= part.attribute :news_channel %>
+  <%= part.attributes :news_channel,
+                      :news_width,
+                      :news_height %>
 <% end %>

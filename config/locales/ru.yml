@@ -117,6 +117,8 @@ ru:
           until_asc: по дате актуальности
         news_paginated: Постраничный переход
         news_per_page: Количество на странице
+        news_height: Высота картинки
+        news_width: Ширина картинки
 
       news_item_part:
         news_channel: Канал
