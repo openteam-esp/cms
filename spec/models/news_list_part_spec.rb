@@ -31,8 +31,8 @@ describe NewsListPart do
         'type' => 'NewsListPart',
         'content' => {
           'items' => [
-            {'title' => 'title1', 'annotation' => 'annotation1', 'link' => @news_part.item_page.route_without_site + '?parts_params[news_item][slug]=link1'},
-            {'title' => 'title2', 'annotation' => 'annotation2', 'link' => @news_part.item_page.route_without_site + '?parts_params[news_item][slug]=link2'}
+            {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1', 'link' => @news_part.item_page.route_without_site + '?parts_params[news_item][slug]=link1'},
+            {'title' => 'title2', 'annotation' => 'annotation2', 'slug' => 'link2', 'link' => @news_part.item_page.route_without_site + '?parts_params[news_item][slug]=link2'}
           ],
 
           'title' => 'Новости'
