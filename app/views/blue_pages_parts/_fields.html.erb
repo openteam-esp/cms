@@ -1,7 +1,11 @@
 <%= form.inputs do %>
   <%= form.input :blue_pages_category_id, :as => :select, :collection => form.object.categories_options_for_select %>
-  <%= form.input :item_page %>
+  <%= form.input :item_page,
+                 :as => :select,
+                 :collection => form.object.node.nodes_from_this_site,
+                 :member_label => ->(n) { ('&nbsp;' * 2 * n.depth + n.title).html_safe } %>
   <%= form.input :blue_pages_expand %>
+
   <%= form.input :region, :as => :hidden %>
   <%= form.input :type, :as => :hidden %>
 <% end %>
