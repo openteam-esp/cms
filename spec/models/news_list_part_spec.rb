@@ -14,25 +14,28 @@ describe NewsListPart do
                                       :item_page => Fabricate(:page),
                                       :title => 'Новости')
 
-      request_hash = { 'X-Total-Pages' => '3', 'X-Current-Page' => '1' }
+      request_hash = { 'X-Total-Pages' => '3', 'X-Current-Page' => '1', 'X-Total-Count' => '10' }
 
       @news_part.stub(:request_headers).and_return(request_hash)
 
-      answer_from_news = {
-        'entries' => [
-          {'title' => 'title1', 'annotation' => 'annotation1', 'link' => 'link1'},
-          {'title' => 'title2', 'annotation' => 'annotation2', 'link' => 'link2'}
-      ]
+      request_body_results = {
+        'items' => [
+          {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1'},
+          {'title' => 'title2', 'annotation' => 'annotation2', 'slug' => 'link2'}
+        ]
       }
-      @news_part.stub(:request_body).and_return(answer_from_news)
+
+      @news_part.stub(:request_body).and_return(request_body_results)
+
       @expected_hash = {
         'type' => 'NewsListPart',
         'content' => {
-          'title' => 'Новости',
-          'entries' => [
+          'items' => [
             {'title' => 'title1', 'annotation' => 'annotation1', 'link' => @news_part.item_page.route_without_site + '?parts_params[news_item][slug]=link1'},
             {'title' => 'title2', 'annotation' => 'annotation2', 'link' => @news_part.item_page.route_without_site + '?parts_params[news_item][slug]=link2'}
-          ]
+          ],
+
+          'title' => 'Новости'
         }
       }
     end
