@@ -19,6 +19,10 @@ class Page < Node
     (page_for_redirect || self).route
   end
 
+  def nodes_from_this_site
+    locale.site.descendants
+  end
+
   private
     def generate_slug
       self.slug = ActiveSupport::Inflector.transliterate(self.title).gsub(/[^[:alnum:]]/, '-').downcase
