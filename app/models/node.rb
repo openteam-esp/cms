@@ -107,6 +107,10 @@ class Node < ActiveRecord::Base
     self.route = parent ? "#{parent.route}/#{slug}" : slug
   end
 
+  def nodes_from_this_site
+    site.descendants
+  end
+
   private
     def cache_route
       return unless self.slug_changed?

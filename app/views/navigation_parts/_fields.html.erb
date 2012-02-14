@@ -1,8 +1,13 @@
 <%= form.inputs do %>
-  <%= form.input :from_node, :as => :select, :collection => form.object.node.site.descendants %>
+  <%= form.input :from_node,
+                 :as => :select,
+                 :collection => form.object.node.nodes_from_this_site,
+                 :member_label => ->(n) { ('&nbsp;' * 2 * n.depth + n.title).html_safe } %>
+
   <%= form.input :navigation_default_level %>
   <%= form.input :navigation_end_level %>
   <%= form.input :navigation_group %>
+
   <%= form.input :region, :as => :hidden %>
   <%= form.input :type, :as => :hidden %>
 <% end %>
