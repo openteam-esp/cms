@@ -66,5 +66,8 @@ end
 #  youtube_video_resource_kind :string(255)
 #  news_height                 :integer
 #  news_width                  :integer
+#  news_mlt_count              :integer
+#  news_mlt_width              :integer
+#  news_mlt_height             :integer
 #
 

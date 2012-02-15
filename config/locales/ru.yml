@@ -122,6 +122,11 @@ ru:
 
       news_item_part:
         news_channel: Канал
+        news_height: Высота картинки
+        news_width: Ширина картинки
+        news_mlt_count: Количество похожих новостей (0 - если не нужны)
+        news_mlt_width: Ширина картинки для списка похожих новостей
+        news_mlt_height: Высота картинки для списка похожих новостей
 
       documents_part:
         documents_kind: Тип

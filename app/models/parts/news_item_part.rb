@@ -1,7 +1,8 @@
 # encoding: utf-8
 
 class NewsItemPart < Part
-  validates_presence_of :news_channel
+  validates_presence_of :news_channel, :news_mlt_count
+  default_value_for :news_mlt_count, 0
 
   def to_json
     as_json(:only => [:type, :title], :methods => 'content')
@@ -27,13 +28,17 @@ class NewsItemPart < Part
     "entries_params[width]=#{news_width}&entries_params[height]=#{news_height}"
   end
 
+  def news_mlt_params
+    "more_like_this[count]=#{news_mlt_count}&more_like_this[width]=#{news_mlt_width}&more_like_this[height]=#{news_mlt_height}"
+  end
+
   private
     def news_url
       Settings['news.url']
     end
 
     def request
-      @request ||= Curl::Easy.perform("#{news_url}/channels/#{news_channel}/entries/#{params['slug']}?#{image_size_params}") do |curl|
+      @request ||= Curl::Easy.perform("#{news_url}/channels/#{news_channel}/entries/#{params['slug']}?#{image_size_params}&#{news_mlt_params}") do |curl|
         curl.headers['Accept'] = 'application/json'
       end.body_str
     end
@@ -79,5 +84,8 @@ end
 #  youtube_video_resource_kind :string(255)
 #  news_height                 :integer
 #  news_width                  :integer
+#  news_mlt_count              :integer
+#  news_mlt_width              :integer
+#  news_mlt_height             :integer
 #
 
