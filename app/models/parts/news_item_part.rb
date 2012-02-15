@@ -4,11 +4,15 @@ class NewsItemPart < Part
   validates_presence_of :news_channel
 
   def to_json
-    as_json(:only => :type, :methods => 'content')
+    as_json(:only => [:type, :title], :methods => 'content')
   end
 
   def content
     params['slug'] ? ActiveSupport::JSON.decode(request) : ''
+  end
+
+  def title
+    page_title
   end
 
   def page_title

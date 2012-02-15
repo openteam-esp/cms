@@ -15,6 +15,16 @@ describe NewsItemPart do
     @part.node.page_title.should == "entry title | Заголовок страницы"
   end
 
+  it "должна ставить title своего парта" do
+    NewsItemPart.any_instance.stub(:content).and_return( { 'title' => 'entry title' } )
+    @expected_hash = {
+      'type' => 'NewsItemPart',
+      'title' => 'entry title',
+      'content' => { 'title' => 'entry title' }
+    }
+    @part.to_json.should ==  @expected_hash
+  end
+
   it "должна возвращать route для своей страницы" do
     NewsItemPart.any_instance.stub(:params).and_return( { 'slug' => 'entry_slug' } )
 
