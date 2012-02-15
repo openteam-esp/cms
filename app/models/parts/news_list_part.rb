@@ -8,7 +8,7 @@ class NewsListPart < Part
   has_enums
 
   def to_json
-    as_json(:only => :type, :methods => 'content')
+    as_json(:only => [:type, :title], :methods => 'content')
   end
 
   def content

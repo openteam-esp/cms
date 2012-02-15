@@ -29,6 +29,7 @@ describe NewsListPart do
 
       @expected_hash = {
         'type' => 'NewsListPart',
+        'title' => 'Новости',
         'content' => {
           'items' => [
             {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1', 'link' => @news_part.item_page.route_without_site + '?parts_params[news_item][slug]=link1'},

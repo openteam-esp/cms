@@ -70,7 +70,9 @@ class Node < ActiveRecord::Base
   end
 
   def page_title
-    content_part.respond_to?(:page_title) ? content_part.page_title : title
+    @page_title = [title]
+    @page_title << content_part.page_title if content_part.respond_to?(:page_title)
+    @page_title.reverse.join(" | ")
   end
 
   def page_route

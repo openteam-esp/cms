@@ -6,12 +6,13 @@ describe NewsItemPart do
 
   before do
     @part = Fabricate(:news_item_part)
+    @part.node.update_attribute(:title, "Заголовок страницы")
   end
 
   it "должна возвращять page_tite для своей страницы" do
     NewsItemPart.any_instance.stub(:content).and_return( { 'title' => 'entry title' } )
 
-    @part.node.page_title.should == "entry title"
+    @part.node.page_title.should == "entry title | Заголовок страницы"
   end
 
   it "должна возвращать route для своей страницы" do
