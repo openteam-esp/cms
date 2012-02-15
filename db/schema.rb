@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120214030435) do
+ActiveRecord::Schema.define(:version => 20120215024734) do
 
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
     t.string   "description"
     t.string   "picture_url"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "nodes", :force => true do |t|
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(:version => 20120214030435) do
     t.string   "title"
     t.string   "ancestry"
     t.string   "type"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "route"
     t.string   "template"
     t.string   "client_url"
@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(:version => 20120214030435) do
   end
 
   create_table "parts", :force => true do |t|
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "region"
     t.string   "type"
     t.integer  "node_id"
@@ -76,6 +76,9 @@ ActiveRecord::Schema.define(:version => 20120214030435) do
     t.string   "youtube_video_resource_kind"
     t.integer  "news_height"
     t.integer  "news_width"
+    t.integer  "news_mlt_count"
+    t.integer  "news_mlt_width"
+    t.integer  "news_mlt_height"
   end
 
 end
