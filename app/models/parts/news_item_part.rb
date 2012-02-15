@@ -9,7 +9,7 @@ class NewsItemPart < Part
   end
 
   def content
-    params['slug'] ? ActiveSupport::JSON.decode(request) : ''
+    params['slug'] ? request_hash : ''
   end
 
   def page_title
@@ -36,7 +36,31 @@ class NewsItemPart < Part
     def request
       @request ||= Curl::Easy.perform("#{news_url}/channels/#{news_channel}/entries/#{params['slug']}?#{image_size_params}&#{news_mlt_params}") do |curl|
         curl.headers['Accept'] = 'application/json'
-      end.body_str
+      end
+    end
+
+    def request_body
+      request.body_str
+    end
+
+    def response_status
+      request.response_code
+    end
+
+    def title_for_error
+      case response_status
+        when 404
+          I18n.t("external_system_errors.#{response_status}")
+        else
+          'Replace me in CMS:app/models/news_item_part.rb:50'
+      end
+
+    end
+
+    def request_hash
+      { 'response_status' => response_status, 'title' => title_for_error}.tap do |hash|
+        hash.merge!(response_status == 404 ? {} : ActiveSupport::JSON.decode(request_body))
+      end
     end
 end
 

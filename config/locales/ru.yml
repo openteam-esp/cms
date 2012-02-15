@@ -9,6 +9,9 @@ ru:
   add_picture:        Добавить картинку
   remove:             Удалить
 
+  external_system_errors:
+    '404': Ресурс не найден
+
   toolbar:
     sites:            Сайты
     contents:         Контент
