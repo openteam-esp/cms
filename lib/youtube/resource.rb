@@ -1,14 +1,15 @@
 module Youtube
   class Resource
-    attr_reader :id, :max_results
+    attr_reader :id, :max_results, :start_index
 
     def initialize(attributes)
       @id = attributes[:id]
       @max_results = attributes[:max_results]
+      @start_index = attributes[:start_index]
     end
 
     def entries
-      request_hashie.feed.entry
+      request_hashie.feed.entry || []
     end
 
     def include?(video_id)
@@ -23,6 +24,7 @@ module Youtube
       def request_params
         'v=2&alt=json'.tap do |string|
           string << "&max-results=#{max_results}" if max_results
+          string << "&start-index=#{start_index}" if start_index
         end
       end
 
@@ -42,6 +44,10 @@ module Youtube
 
       def request_hashie
         @request_hashie ||= Hashie::Mash.new(request_json)
+      end
+
+      def total_count
+        request_hashie.feed.send('openSearch$totalResults'.to_sym).send(:$t)
       end
 
       def video_id(entry)

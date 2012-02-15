@@ -11,16 +11,18 @@ class YoutubePart < Part
     as_json(:only => :type, :methods => 'content')
   end
 
-  delegate :entries,                              :to => :youtube_resource, :prefix => true
+  delegate :entries, :total_count,                :to => :youtube_resource, :prefix => true
   delegate :video_id, :video_title, :video_thumb, :to => :youtube_resource
 
   def content
-    entries
+    { 'items' => entries }.tap do |hash|
+      hash.merge!(pagination) if youtube_paginated?
+    end
   end
 
   private
     def resource_attributes
-      { :id => youtube_resource_id, :item_page => item_page, :max_results => youtube_per_page }
+      { :id => youtube_resource_id, :item_page => item_page, :max_results => max_results, :start_index => start_index }
     end
 
     def youtube_resource
@@ -40,6 +42,33 @@ class YoutubePart < Part
           },
         }
       end
+    end
+
+    def total_count
+      youtube_resource_total_count
+    end
+
+    def current_page
+      (params['page'] || 1).to_i
+    end
+
+    def max_results
+      youtube_per_page.to_i
+    end
+
+    def start_index
+      (current_page - 1) * max_results + 1
+    end
+
+    def pagination
+      {
+        'pagination' => {
+          'total_count' => total_count,
+          'current_page' => current_page,
+          'per_page' => youtube_per_page,
+          'param_name' => 'parts_params[youtube][page]'
+        }
+      }
     end
 end
 # == Schema Information
