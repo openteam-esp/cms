@@ -163,6 +163,9 @@ sites:
         main_bottom_navigation:
           required: true
           configurable: false
+        breadcrumbs:
+          required: false
+          configurable: true
         navigation_top:
           required: false
           configurable: true
