@@ -5,21 +5,16 @@ class NewsItemPart < Part
   default_value_for :news_mlt_count, 0
 
   def to_json
-    as_json(:only => [:type, :title], :methods => 'content')
+    as_json(:only => :type, :methods => ['page_title', 'content'])
   end
 
   def content
     params['slug'] ? ActiveSupport::JSON.decode(request) : ''
   end
 
-  # FIXME WTF переопределили аттрибут о_О!!!
-  #def title
-    #page_title
-  #end
-
-  #def page_title
-    #content['title']
-  #end
+  def page_title
+    content['title']
+  end
 
   def parts_params
     "?parts_params[news_item][slug]=#{params['slug']}"

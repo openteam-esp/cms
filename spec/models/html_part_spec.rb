@@ -1,6 +1,20 @@
+# encoding: utf-8
+
 require 'spec_helper'
 
 describe HtmlPart do
+
+  before do
+    @part = Fabricate(:html_part)
+    @part.node.update_attribute(:title, "Заголовок страницы")
+  end
+
+  it "должна возвращять page_tite для своей страницы" do
+    HtmlPart.any_instance.stub(:content).and_return( { 'title' => 'html title' } )
+
+    #@part.node.page_title.should == "html title | Заголовок страницы"
+  end
+
 end
 
 # == Schema Information
