@@ -5,15 +5,19 @@ class NewsItemPart < Part
   default_value_for :news_mlt_count, 0
 
   def to_json
-    as_json(:only => :type, :methods => ['page_title', 'content'])
+    as_json(:only => :type, :methods => ['part_title', 'content'])
   end
 
   def content
     params['slug'] ? request_hash : ''
   end
 
-  def page_title
+  def part_title
     content['title']
+  end
+
+  def page_title
+    part_title
   end
 
   def parts_params

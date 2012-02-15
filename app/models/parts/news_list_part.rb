@@ -8,7 +8,7 @@ class NewsListPart < Part
   has_enums
 
   def to_json
-    as_json(:only => [:type, :title], :methods => 'content')
+    as_json(:only => :type, :methods => ['part_title', 'content'])
   end
 
   def content
@@ -16,6 +16,10 @@ class NewsListPart < Part
     hash.merge!('title' => title) if title?
     hash.merge!(pagination) if news_paginated?
     hash
+  end
+
+  def part_title
+    title
   end
 
   def image_size_params

@@ -19,7 +19,7 @@ describe NewsItemPart do
     NewsItemPart.any_instance.stub(:content).and_return( { 'title' => 'entry title' } )
     @expected_hash = {
       'type' => 'NewsItemPart',
-      'page_title' => 'entry title',
+      'part_title' => 'entry title',
       'content' => { 'title' => 'entry title' }
     }
     @part.to_json.should ==  @expected_hash
