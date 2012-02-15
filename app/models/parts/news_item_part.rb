@@ -12,13 +12,14 @@ class NewsItemPart < Part
     params['slug'] ? ActiveSupport::JSON.decode(request) : ''
   end
 
-  def title
-    page_title
-  end
+  # FIXME WTF переопределили аттрибут о_О!!!
+  #def title
+    #page_title
+  #end
 
-  def page_title
-    content['title']
-  end
+  #def page_title
+    #content['title']
+  #end
 
   def parts_params
     "?parts_params[news_item][slug]=#{params['slug']}"
