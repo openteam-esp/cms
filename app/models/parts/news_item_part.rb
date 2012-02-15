@@ -64,6 +64,8 @@ class NewsItemPart < Part
     def request_hash
       { 'response_status' => response_status, 'title' => title_for_error}.tap do |hash|
         hash.merge!(response_status == 404 ? {} : ActiveSupport::JSON.decode(request_body))
+
+        hash['more_like_this'] = hash['more_like_this'].each { |e| e['link'] = "#{node.route_without_site}?parts_params[news_item][slug]=#{e['slug']}" } if hash['more_like_this']
       end
     end
 end
