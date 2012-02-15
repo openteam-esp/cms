@@ -9,10 +9,21 @@ describe HtmlPart do
     @part.node.update_attribute(:title, "Заголовок страницы")
   end
 
-  it "должна возвращять page_tite для своей страницы" do
-    HtmlPart.any_instance.stub(:content).and_return( { 'title' => 'html title' } )
+  it "должна возвращять part_title для своей страницы" do
+    HtmlPart.any_instance.stub(:content).and_return( { 'body' => 'html content' } )
+    HtmlPart.any_instance.stub(:title).and_return('Заголовок парта')
+    @part.node.page_title.should == "Заголовок страницы"
+  end
 
-    #@part.node.page_title.should == "html title | Заголовок страницы"
+  it "должна ставить part_title" do
+    HtmlPart.any_instance.stub(:content).and_return( { 'body' => 'html content' } )
+    HtmlPart.any_instance.stub(:title).and_return('Заголовок парта')
+    @expected_hash = {
+      'type' => 'HtmlPart',
+      'part_title' => 'Заголовок парта',
+      'content' => { 'body' => 'html content' }
+    }
+    @part.to_json.should ==  @expected_hash
   end
 
 end

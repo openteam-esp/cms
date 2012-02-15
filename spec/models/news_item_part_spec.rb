@@ -9,7 +9,7 @@ describe NewsItemPart do
     @part.node.update_attribute(:title, "Заголовок страницы")
   end
 
-  it "должна возвращять page_tite для своей страницы" do
+  it "должна возвращять page_title для своей страницы" do
     NewsItemPart.any_instance.stub(:content).and_return( { 'title' => 'entry title' } )
 
     @part.node.page_title.should == "entry title | Заголовок страницы"
