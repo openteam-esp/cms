@@ -24,13 +24,6 @@ describe NewsItemPart do
     }
     @part.to_json.should ==  @expected_hash
   end
-
-  it "должна возвращать route для своей страницы" do
-    NewsItemPart.any_instance.stub(:params).and_return( { 'slug' => 'entry_slug' } )
-
-    @part.node.page_route.should == "/ru/#{@part.node.slug}?parts_params[news_item][slug]=entry_slug"
-  end
-
 end
 # == Schema Information
 #

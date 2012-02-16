@@ -13,9 +13,7 @@ class Part < ActiveRecord::Base
 
   delegate :response_headers,
            :response_status,
-           :response_status,
-           :response_body,
-           :response_json, :to => :response
+           :response_hash, :to => :response
 end
 
 # == Schema Information

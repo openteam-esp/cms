@@ -2,6 +2,7 @@
 
 class NewsItemPart < Part
   validates_presence_of :news_channel, :news_mlt_count
+
   default_value_for :news_mlt_count, 0
 
   def to_json
@@ -9,7 +10,7 @@ class NewsItemPart < Part
   end
 
   def content
-    params['slug'] ? request_hash : ''
+    slug ? data_hash : ''
   end
 
   def part_title
@@ -20,35 +21,25 @@ class NewsItemPart < Part
     part_title
   end
 
-  def parts_params
-    "?parts_params[news_item][slug]=#{params['slug']}"
-  end
-
-  def image_size_params
-    "entries_params[width]=#{news_width}&entries_params[height]=#{news_height}"
-  end
-
-  def news_mlt_params
-    "more_like_this[count]=#{news_mlt_count}&more_like_this[width]=#{news_mlt_width}&more_like_this[height]=#{news_mlt_height}"
-  end
-
   private
     def news_url
       Settings['news.url']
     end
 
-    def request
-      @request ||= Curl::Easy.perform("#{news_url}/channels/#{news_channel}/entries/#{params['slug']}?#{image_size_params}&#{news_mlt_params}") do |curl|
-        curl.headers['Accept'] = 'application/json'
-      end
+    def image_size_params
+      "entries_params[width]=#{news_width}&entries_params[height]=#{news_height}"
     end
 
-    def request_body
-      request.body_str
+    def news_mlt_params
+      "more_like_this[count]=#{news_mlt_count}&more_like_this[width]=#{news_mlt_width}&more_like_this[height]=#{news_mlt_height}"
     end
 
-    def response_status
-      request.response_code
+    def slug
+      params['slug']
+    end
+
+    def url_for_request
+      "#{news_url}/channels/#{news_channel}/entries/#{slug}?#{image_size_params}&#{news_mlt_params}"
     end
 
     def title_for_error
@@ -58,12 +49,11 @@ class NewsItemPart < Part
         else
           'Replace me in CMS:app/models/news_item_part.rb:50'
       end
-
     end
 
-    def request_hash
+    def data_hash
       { 'response_status' => response_status, 'title' => title_for_error}.tap do |hash|
-        hash.merge!(response_status == 404 ? {} : ActiveSupport::JSON.decode(request_body))
+        hash.merge!(response_status == 404 ? {} : response_hash)
 
         hash['more_like_this'] = hash['more_like_this'].each { |e| e['link'] = "#{node.route_without_site}?parts_params[news_item][slug]=#{e['slug']}" } if hash['more_like_this']
       end

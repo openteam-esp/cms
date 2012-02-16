@@ -14,12 +14,12 @@ describe NewsListPart do
                                       :item_page => Fabricate(:page),
                                       :title => 'Новости')
 
-      response_json = [
+      response_hash = [
         {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1'},
         {'title' => 'title2', 'annotation' => 'annotation2', 'slug' => 'link2'}
       ]
 
-      @news_part.stub(:response_json).and_return(response_json)
+      @news_part.stub(:response_hash).and_return(response_hash)
 
       @expected_hash = {
         'type' => 'NewsListPart',

@@ -25,7 +25,7 @@ class NewsListPart < Part
   end
 
   def data_hash
-    { 'items' => response_json }
+    { 'items' => response_hash }
   end
 
   private

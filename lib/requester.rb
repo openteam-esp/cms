@@ -21,7 +21,7 @@ class Requester
     @response_body ||= response.body_str
   end
 
-  def response_json
+  def response_hash
     @response_json ||= ActiveSupport::JSON.decode(response_body)
   end
 end
