@@ -11,7 +11,7 @@ class YoutubePart < Part
     as_json(:only => :type, :methods => ['part_title', 'content'])
   end
 
-  delegate :entries, :total_count,                :to => :youtube_resource, :prefix => true
+  delegate :entries, :total_count, :to => :youtube_resource, :prefix => true
   delegate :video_id, :video_title, :video_description, :video_uploaded, :video_thumb_small, :video_thumb_normal, :to => :youtube_resource
 
   def part_title
