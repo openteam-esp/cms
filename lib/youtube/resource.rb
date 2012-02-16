@@ -59,7 +59,11 @@ module Youtube
       end
 
       def video_description(entry)
-        entry.description.send(:$t)
+        entry.send('media$group'.to_sym).send('media$description'.to_sym).send(:$t)
+      end
+
+      def video_uploaded(entry)
+        entry.send('media$group'.to_sym).send('yt$uploaded'.to_sym).send(:$t)
       end
 
       def video_thumb_small(video_id)

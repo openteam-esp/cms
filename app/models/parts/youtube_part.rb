@@ -12,7 +12,7 @@ class YoutubePart < Part
   end
 
   delegate :entries, :total_count,                :to => :youtube_resource, :prefix => true
-  delegate :video_id, :video_title, :video_description, :video_thumb_small, :video_thumb_normal, :to => :youtube_resource
+  delegate :video_id, :video_title, :video_description, :video_uploaded, :video_thumb_small, :video_thumb_normal, :to => :youtube_resource
 
   def content
     { 'items' => entries }.tap do |hash|
@@ -37,8 +37,9 @@ class YoutubePart < Part
           'link' => "#{item_page.route_without_site}?parts_params[youtube_video][id]=#{video_id}",
 
           'video' => {
-            'title'  => video_title(e),
-            'description'  => video_description(e),
+            'title' => video_title(e),
+            'description' => video_description(e),
+            'date' => video_uploaded(e),
             'thumb_small'  => video_thumb_small(video_id),
             'thumb_normal'  => video_thumb_normal(video_id)
           },
