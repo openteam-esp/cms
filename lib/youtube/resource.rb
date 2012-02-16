@@ -58,8 +58,12 @@ module Youtube
         entry.title.send(:$t)
       end
 
-      def video_thumb(video_id)
-        "http://img.youtube.com/vi/#{video_id}/0.jpg"
+      def video_thumb_default(video_id)
+        "http://img.youtube.com/vi/#{video_id}/default.jpg"
+      end
+
+      def video_thumb_normal(video_id)
+        "http://img.youtube.com/vi/#{video_id}/default.jpg"
       end
   end
 end
