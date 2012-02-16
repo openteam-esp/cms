@@ -38,7 +38,7 @@ class YoutubePart < Part
 
           'video' => {
             'title'  => video_title(e),
-            'thumb_default'  => video_thumb_small(video_id),
+            'thumb_small'  => video_thumb_small(video_id),
             'thumb_normal'  => video_thumb_normal(video_id)
           },
         }
