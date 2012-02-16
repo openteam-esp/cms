@@ -17,11 +17,15 @@ describe NewsItemPart do
 
   it "должна ставить title своего парта" do
     NewsItemPart.any_instance.stub(:content).and_return( { 'title' => 'entry title' } )
+    NewsItemPart.any_instance.stub(:response_status).and_return(200)
+
     @expected_hash = {
+      'response_status' => 200,
       'type' => 'NewsItemPart',
       'part_title' => 'entry title',
       'content' => { 'title' => 'entry title' }
     }
+
     @part.to_json.should ==  @expected_hash
   end
 end

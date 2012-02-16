@@ -6,7 +6,7 @@ class NewsItemPart < Part
   default_value_for :news_mlt_count, 0
 
   def to_json
-    as_json(:only => :type, :methods => ['part_title', 'content'])
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
 
   def content
@@ -42,18 +42,9 @@ class NewsItemPart < Part
       "#{news_url}/channels/#{news_channel}/entries/#{slug}?#{image_size_params}&#{news_mlt_params}"
     end
 
-    def title_for_error
-      case response_status
-        when 404
-          I18n.t("external_system_errors.#{response_status}")
-        else
-          'Replace me in CMS:app/models/news_item_part.rb:50'
-      end
-    end
-
     def data_hash
-      { 'response_status' => response_status, 'title' => title_for_error}.tap do |hash|
-        hash.merge!(response_status == 404 ? {} : response_hash)
+      {}.tap do |hash|
+        hash.merge!(response_hash)
 
         hash['more_like_this'] = hash['more_like_this'].each { |e| e['link'] = "#{node.route_without_site}?parts_params[news_item][slug]=#{e['slug']}" } if hash['more_like_this']
       end

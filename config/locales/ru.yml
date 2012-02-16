@@ -11,6 +11,7 @@ ru:
 
   external_system_errors:
     '404': Ресурс не найден
+    '500': Find me in CMS:config/locales/ru.yml at line 14
 
   toolbar:
     sites:            Сайты

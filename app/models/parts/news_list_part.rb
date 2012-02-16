@@ -8,7 +8,7 @@ class NewsListPart < Part
   has_enums
 
   def to_json
-    as_json(:only => :type, :methods => ['part_title', 'content'])
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
 
   def content

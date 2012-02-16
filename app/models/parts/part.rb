@@ -11,9 +11,38 @@ class Part < ActiveRecord::Base
     @response ||= Requester.new(url_for_request)
   end
 
-  delegate :response_headers,
-           :response_status,
-           :response_hash, :to => :response
+  delegate :response_headers, :response_status, :to => :response
+
+  def error_title
+    case response_status
+      when 404, 500
+        I18n.t("external_system_errors.#{response_status}")
+      else
+        'Replace me in CMS:app/models/part.rb:21'
+    end
+  end
+
+  def default_hash
+    { 'response_status' => response_status }.tap do |hash|
+      hash.merge!('title' => error_title) if bad_request?
+    end
+  end
+
+  def to_json
+    default_hash
+  end
+
+  def bad_response_statuses
+    [404, 500]
+  end
+
+  def bad_request?
+    bad_response_statuses.include? response_status
+  end
+
+  def response_hash
+    bad_request? ? default_hash : response.response_hash
+  end
 end
 
 # == Schema Information
