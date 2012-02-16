@@ -23,6 +23,7 @@ describe NewsListPart do
       @news_part.stub(:response_status).and_return(200)
 
       @expected_hash = {
+        'template' => 'news_list_part',
         'response_status' => 200,
         'type' => 'NewsListPart',
         'part_title' => 'Новости',

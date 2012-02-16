@@ -32,6 +32,8 @@ class Part < ActiveRecord::Base
 
   def default_hash
     { 'response_status' => response_status }.tap do |hash|
+      hash.merge!('template' => template)
+
       hash.merge!('title' => error_title) if bad_request?
     end
   end

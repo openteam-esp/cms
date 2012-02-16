@@ -20,6 +20,7 @@ describe NewsItemPart do
     NewsItemPart.any_instance.stub(:response_status).and_return(200)
 
     @expected_hash = {
+      'template' => 'news_item_part',
       'response_status' => 200,
       'type' => 'NewsItemPart',
       'part_title' => 'entry title',
