@@ -4,7 +4,7 @@ class YoutubeVideoPart < Part
   has_enums
 
   def to_json
-    as_json(:only => :type, :methods => 'content')
+    as_json(:only => :type, :methods => ['part_title', 'content'])
   end
 
   delegate :info, :title, :to => :youtube_video, :prefix => true
@@ -16,6 +16,8 @@ class YoutubeVideoPart < Part
   def page_title
     youtube_video_title unless youtube_video_info.empty?
   end
+
+  alias :part_title :page_title
 
   private
     def youtube_video
