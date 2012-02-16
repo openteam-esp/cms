@@ -8,11 +8,15 @@ class YoutubePart < Part
   has_enums
 
   def to_json
-    as_json(:only => :type, :methods => 'content')
+    as_json(:only => :type, :methods => ['part_title', 'content'])
   end
 
   delegate :entries, :total_count,                :to => :youtube_resource, :prefix => true
   delegate :video_id, :video_title, :video_description, :video_uploaded, :video_thumb_small, :video_thumb_normal, :to => :youtube_resource
+
+  def part_title
+    content['title']
+  end
 
   def content
     { 'items' => entries }.tap do |hash|
