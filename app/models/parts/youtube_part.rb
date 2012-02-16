@@ -12,7 +12,7 @@ class YoutubePart < Part
   end
 
   delegate :entries, :total_count,                :to => :youtube_resource, :prefix => true
-  delegate :video_id, :video_title, :video_thumb, :to => :youtube_resource
+  delegate :video_id, :video_title, :video_thumb_small, :video_thumb_normal, :to => :youtube_resource
 
   def content
     { 'items' => entries }.tap do |hash|
@@ -38,7 +38,7 @@ class YoutubePart < Part
 
           'video' => {
             'title'  => video_title(e),
-            'thumb_default'  => video_thumb_default(video_id),
+            'thumb_default'  => video_thumb_small(video_id),
             'thumb_normal'  => video_thumb_normal(video_id)
           },
         }
