@@ -13,12 +13,9 @@ module Youtube
     def info
       return {} unless resource.include?(id)
 
-      return comments.entries if only_comments?
-
       {
         'video' => video_info,
-        'embedded_code' => embedded_code,
-        'comments' => comments.entries
+        'embedded_code' => embedded_code
       }
     end
 
@@ -95,15 +92,6 @@ module Youtube
         code = <<-END
           <iframe width="560" height="315" src="http://www.youtube.com/embed/#{id}?#{params}" frameborder="0" allowfullscreen></iframe>
         END
-      end
-
-      def comments
-        # TODO: WTF??? node.first
-        Comments.new(:node => node.first, :params => params, :video_id => id)
-      end
-
-      def only_comments?
-        params['only_comments']
       end
   end
 end
