@@ -12,9 +12,11 @@ class NewsListPart < Part
   end
 
   def content
-    hash = request_body.update(request_body) {|v,k| k.each{|l| l['link']="#{item_page.route_without_site}?parts_params[news_item][slug]=#{l['slug']}"}}
+    hash = data_hash.update(data_hash) {|v,k| k.each{|l| l['link']="#{item_page.route_without_site}?parts_params[news_item][slug]=#{l['slug']}"}}
+
     hash.merge!('title' => title) if title?
     hash.merge!(pagination) if news_paginated?
+
     hash
   end
 
@@ -22,8 +24,8 @@ class NewsListPart < Part
     title
   end
 
-  def image_size_params
-    "entries_params[width]=#{news_width}&entries_params[height]=#{news_height}"
+  def data_hash
+    { 'items' => response_json }
   end
 
   private
@@ -31,36 +33,30 @@ class NewsListPart < Part
       Settings['news.url']
     end
 
-    def request
-      @request ||= Curl::Easy.perform("#{news_url}/channels/#{news_channel}/entries?#{search_path}&#{image_size_params}") do |curl|
-        curl.headers['Accept'] = 'application/json'
-      end
-    end
-
-    def request_body
-      { 'items' => ActiveSupport::JSON.decode(request.body_str) }
-    end
-
-    def request_headers
-      @request_headers ||= Hash[request.header_str.split("\r\n").map { |s| s.split(':').map(&:strip) }]
-    end
-
-    def search_path
+    def search_params
       news_until = ::I18n.l(news_until) if news_until
 
-      URI.escape "utf8=✓&entry_search[channel_ids][]=#{news_channel}&entry_search[order_by]=#{news_order_by.gsub(/_/,'+')}&per_page=#{news_per_page}&page=#{params['page'] || '1'}"
+      URI.escape("utf8=✓&entry_search[channel_ids][]=#{news_channel}&entry_search[order_by]=#{news_order_by.gsub(/_/,'+')}&per_page=#{news_per_page}&page=#{current_page}")
+    end
+
+    def image_size_params
+      "entries_params[width]=#{news_width}&entries_params[height]=#{news_height}"
+    end
+
+    def url_for_request
+      "#{news_url}/channels/#{news_channel}/entries?#{search_params}&#{image_size_params}"
     end
 
     def total_count
-      request_headers['X-Total-Count'].to_i
+      response_headers['X-Total-Count'].to_i
     end
 
     def total_pages
-      request_headers['X-Total-Pages'].to_i
+      response_headers['X-Total-Pages'].to_i
     end
 
     def current_page
-      request_headers['X-Current-Page'].to_i
+      (params['page'] || 1).to_i
     end
 
     def pagination

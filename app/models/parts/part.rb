@@ -6,6 +6,16 @@ class Part < ActiveRecord::Base
   validates_presence_of :node, :region
 
   default_value_for :params, {}
+
+  def response
+    @response ||= Requester.new(url_for_request)
+  end
+
+  delegate :response_headers,
+           :response_status,
+           :response_status,
+           :response_body,
+           :response_json, :to => :response
 end
 
 # == Schema Information

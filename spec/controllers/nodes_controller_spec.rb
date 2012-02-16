@@ -44,14 +44,14 @@ describe NodesController do
       before do
         page.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][page.site.slug]['templates'])
 
-        request_body_results = {
+        data_hash = {
           'items' => [
             {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1'},
             {'title' => 'title2', 'annotation' => 'annotation2', 'slug' => 'link2'}
           ]
         }
 
-        NewsListPart.any_instance.stub(:request_body).and_return(request_body_results)
+        NewsListPart.any_instance.stub(:data_hash).and_return(data_hash)
 
         get :show, :id => "#{news_list_part.node.route}", :parts_params => {"news_list"=>{"page"=>"2"}}, :format => :json
       end

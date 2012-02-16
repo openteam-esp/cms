@@ -14,18 +14,12 @@ describe NewsListPart do
                                       :item_page => Fabricate(:page),
                                       :title => 'Новости')
 
-      request_hash = { 'X-Total-Pages' => '3', 'X-Current-Page' => '1', 'X-Total-Count' => '10' }
+      response_json = [
+        {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1'},
+        {'title' => 'title2', 'annotation' => 'annotation2', 'slug' => 'link2'}
+      ]
 
-      @news_part.stub(:request_headers).and_return(request_hash)
-
-      request_body_results = {
-        'items' => [
-          {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1'},
-          {'title' => 'title2', 'annotation' => 'annotation2', 'slug' => 'link2'}
-        ]
-      }
-
-      @news_part.stub(:request_body).and_return(request_body_results)
+      @news_part.stub(:response_json).and_return(response_json)
 
       @expected_hash = {
         'type' => 'NewsListPart',
