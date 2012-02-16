@@ -15,7 +15,7 @@ class YoutubePart < Part
   delegate :video_id, :video_title, :video_description, :video_uploaded, :video_thumb_small, :video_thumb_normal, :to => :youtube_resource
 
   def part_title
-    content['title']
+    title
   end
 
   def content
