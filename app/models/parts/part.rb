@@ -3,15 +3,23 @@ class Part < ActiveRecord::Base
 
   belongs_to :node
 
-  validates_presence_of :node, :region
+  validates_presence_of :node, :region, :template
 
   default_value_for :params, {}
+
+  default_value_for :template do |part|
+    part.class.name.underscore
+  end
 
   def response
     @response ||= Requester.new(url_for_request)
   end
 
   delegate :response_headers, :response_status, :to => :response
+
+  def available_templates
+    [self.class.name.underscore] + node.site_settings['part_templates'].try(:[], self.class.name.underscore).try(:split, '|' )
+  end
 
   def error_title
     case response_status

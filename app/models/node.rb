@@ -120,6 +120,10 @@ class Node < ActiveRecord::Base
     site.descendants
   end
 
+  def site_settings
+    @site_settings ||= YAML.load_file(Rails.root.join 'config/sites.yml').to_hash['sites'][site.slug]
+  end
+
   private
     def cache_route
       return unless self.slug_changed?
@@ -131,7 +135,7 @@ class Node < ActiveRecord::Base
     end
 
     def templates_hash
-      @templates_hash ||= YAML.load_file(Rails.root.join 'config/sites.yml').to_hash['sites'][site.slug]['templates']
+      site_settings['templates']
     end
 
     def set_navigation_position_and_recalculate_weights

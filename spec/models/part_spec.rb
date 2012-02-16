@@ -4,6 +4,25 @@ describe Part do
   it { should belong_to :node }
   it { should validate_presence_of :node }
   it { should validate_presence_of :region }
+  it { should validate_presence_of :template }
+
+  describe 'template' do
+    let(:part) { Fabricate(:html_part) }
+
+    describe 'default' do
+      it { part.template.should == 'html_part' }
+    end
+
+    describe 'available' do
+      let(:site_settings) { { 'part_templates' => { 'html_part' => 'template1|template2' } } }
+
+      before do
+        Page.any_instance.stub(:site_settings).and_return(site_settings)
+      end
+
+      it { part.available_templates.should == %w[html_part template1 template2] }
+    end
+  end
 end
 
 # == Schema Information

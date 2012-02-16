@@ -1,5 +1,6 @@
 <%= form.inputs do %>
   <%= form.input :title, :input_html => { :autofocus => true, :class => 'for_info_path' } %>
+  <%= form.input :template, :as => :select, :collection => form.object.available_templates, :include_blank => false %>
 <% end %>
 
 <%= render :partial => "#{@part.class.name.tableize}/fields", :locals => { :form => form } %>

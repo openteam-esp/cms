@@ -141,6 +141,9 @@ sites:
           configurable: false
 
   inotomsk:
+    part_templates:
+      news_list_part: interview_list_part
+
     templates:
       main_page:
         site_name:

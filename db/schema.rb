@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120215024734) do
+ActiveRecord::Schema.define(:version => 20120216093413) do
 
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20120215024734) do
     t.integer  "news_mlt_count"
     t.integer  "news_mlt_width"
     t.integer  "news_mlt_height"
+    t.string   "template"
   end
 
 end
