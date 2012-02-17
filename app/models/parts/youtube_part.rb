@@ -8,7 +8,11 @@ class YoutubePart < Part
   has_enums
 
   def to_json
-    as_json(:only => :type, :methods => ['part_title', 'content'])
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
+  end
+
+  def response_status
+    200
   end
 
   delegate :entries, :total_count, :to => :youtube_resource, :prefix => true

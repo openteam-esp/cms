@@ -18,7 +18,7 @@ class Part < ActiveRecord::Base
   delegate :response_headers, :response_status, :to => :response
 
   def available_templates
-    [self.class.name.underscore] + node.site_settings['part_templates'].try(:[], self.class.name.underscore).try(:split, '|' )
+    [self.class.name.underscore] + (node.site_settings['part_templates'].try(:[], self.class.name.underscore).try(:split, '|' ) || [])
   end
 
   def error_title

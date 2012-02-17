@@ -4,11 +4,15 @@ class NavigationPart < Part
   validates_presence_of :from_node, :navigation_end_level
 
   def to_json
-    as_json(:only => :type, :methods => 'content')
+    super.merge!(as_json(:only => :type, :methods => 'content'))
   end
 
   def content
     build_navigation_tree(from_node)
+  end
+
+  def response_status
+    200
   end
 
   private

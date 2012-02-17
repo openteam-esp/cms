@@ -4,7 +4,7 @@ class HtmlPart < Part
   validates_presence_of :html_info_path
 
   def to_json
-    as_json(:only => :type, :methods => ['part_title', 'content'])
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
 
   def part_title
@@ -18,6 +18,10 @@ class HtmlPart < Part
   def body
     c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(html_info_path.gsub(/^\//,''))}")
     JSON.parse(c.body_str)['content'].gsub(/<p>\s*<\/p>/, "").gsub('&mdash;', '&ndash;').gilensize(:skip_attr => true)
+  end
+
+  def response_status
+    200
   end
 
   private
