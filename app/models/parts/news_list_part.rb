@@ -30,6 +30,12 @@ class NewsListPart < Part
     { 'items' => response_hash }
   end
 
+  def channels_collection
+    @channel_response = Requester.new("#{news_url}/channels")
+    @channel_response.response_hash.map{ |a| [ "#{'&nbsp;'*a['ancestry_depth']*2}#{a['title']}".html_safe, a['id'] ] }
+  end
+
+
   private
     def news_url
       Settings['news.url']
