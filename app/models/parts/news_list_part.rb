@@ -18,6 +18,7 @@ class NewsListPart < Part
 
     hash.merge!('title' => title) if title?
     hash.merge!(pagination) if news_paginated?
+    hash.merge!('rss_link' => rss_link) if news_channel?
 
     hash
   end
@@ -35,10 +36,13 @@ class NewsListPart < Part
     @channel_response.response_hash.map{ |a| [ "#{'&nbsp;'*a['ancestry_depth']*2}#{a['title']}".html_safe, a['id'] ] }
   end
 
-
   private
     def news_url
       Settings['news.url']
+    end
+
+    def rss_link
+      "#{news_url}/channels/#{news_channel}/entries.rss"
     end
 
     def search_params
