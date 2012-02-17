@@ -3,7 +3,8 @@
   <%= form.input :youtube_resource_kind, :as => :radio, :collection => form.object.class.values_for_select_tag(:youtube_resource_kind) %>
   <%= form.input :youtube_per_page %>
   <%= form.input :youtube_paginated %>
-  <%= form.input :item_page %>
+
+  <%= render :partial => 'parts/item_page', :locals => { :form => form } %>
 
   <%= form.input :region, :as => :hidden %>
   <%= form.input :type, :as => :hidden %>

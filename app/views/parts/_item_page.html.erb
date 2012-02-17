@@ -1,0 +1,5 @@
+<%= form.input :item_page,
+               :as => :select,
+               :collection => form.object.node.nodes_from_this_site,
+               :member_label => ->(n) { ('&nbsp;' * 2 * n.depth + n.title).html_safe } %>
+

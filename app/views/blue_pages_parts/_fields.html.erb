@@ -1,9 +1,8 @@
 <%= form.inputs do %>
   <%= form.input :blue_pages_category_id, :as => :select, :collection => form.object.categories_options_for_select %>
-  <%= form.input :item_page,
-                 :as => :select,
-                 :collection => form.object.node.nodes_from_this_site,
-                 :member_label => ->(n) { ('&nbsp;' * 2 * n.depth + n.title).html_safe } %>
+
+  <%= render :partial => 'parts/item_page', :locals => { :form => form } %>
+
   <%= form.input :blue_pages_expand %>
 
   <%= form.input :region, :as => :hidden %>
