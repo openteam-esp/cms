@@ -2,12 +2,39 @@ module Youtube
   class Video
     attr_reader :id, :node, :params, :resource_id, :resource_kind
 
+    delegate :video_id,
+             :video_description,
+             :video_title,
+             :video_uploaded,
+             :video_thumb_small,
+             :video_thumb_normal, :to => :resource
+
     def initialize(attributes)
       @id = attributes[:id]
       @node = attributes[:node],
       @params = attributes[:params],
       @resource_id = attributes[:resource_id]
       @resource_kind = attributes[:resource_kind]
+    end
+
+    def author
+      entry.send(:author).first.send(:name).send(:$t)
+    end
+
+    def description
+      entry.send('media$group'.to_sym).send('media$description'.to_sym).send(:$t)
+    end
+
+    def dislikes_count
+      entry.send('yt$rating'.to_sym).try(:numDislikes)
+    end
+
+    def embedded_code
+      params = 'autoplay=1'
+
+      code = <<-END
+          <iframe width="560" height="315" src="http://www.youtube.com/embed/#{id}?#{params}" frameborder="0" allowfullscreen></iframe>
+      END
     end
 
     def info
@@ -19,8 +46,24 @@ module Youtube
       }
     end
 
+    def likes_count
+      entry.send('yt$rating'.to_sym).try(:numLikes)
+    end
+
+    def related_video_entries
+      RelatedVideos.new(self).entries
+    end
+
     def response_status
       request.response_code
+    end
+
+    def title
+      entry.title.send(:$t)
+    end
+
+    def views_count
+      entry.send('yt$statistics'.to_sym).try(:viewCount)
     end
 
     private
@@ -28,9 +71,11 @@ module Youtube
         'http://gdata.youtube.com/feeds/api'
       end
 
-      def api_video_url
-        params = 'alt=json&v=2'
+      def params
+        'alt=json&v=2'
+      end
 
+      def api_video_url
         "#{api_url}/videos/#{id}?#{params}"
       end
 
@@ -60,26 +105,6 @@ module Youtube
         request_hashie.entry
       end
 
-      def title
-        entry.title.send(:$t)
-      end
-
-      def description
-        entry.send('media$group'.to_sym).send('media$description'.to_sym).send(:$t)
-      end
-
-      def views_count
-        entry.send('yt$statistics'.to_sym).try(:viewCount)
-      end
-
-      def likes_count
-        entry.send('yt$rating'.to_sym).try(:numLikes)
-      end
-
-      def dislikes_count
-        entry.send('yt$rating'.to_sym).try(:numDislikes)
-      end
-
       def video_info
         {
           'title'         => title,
@@ -88,14 +113,6 @@ module Youtube
           'likes'         => likes_count,
           'dislikes'      => dislikes_count
         }
-      end
-
-      def embedded_code
-        params = 'autoplay=1'
-
-        code = <<-END
-          <iframe width="560" height="315" src="http://www.youtube.com/embed/#{id}?#{params}" frameborder="0" allowfullscreen></iframe>
-        END
       end
   end
 end

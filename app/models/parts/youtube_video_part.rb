@@ -1,4 +1,6 @@
 class YoutubeVideoPart < Part
+  attr_accessor :with_related
+
   validates_presence_of :youtube_video_resource_id, :youtube_video_resource_kind
 
   has_enums
@@ -8,12 +10,22 @@ class YoutubeVideoPart < Part
   end
 
   delegate :info,
-           :title, :to => :youtube_video, :prefix => true
+           :title,
+           :related_video_entries, :to => :youtube_video, :prefix => true
 
-  delegate :response_status, :to => :youtube_video
+  delegate :response_status,
+           :video_id,
+           :video_description,
+           :video_title,
+           :video_uploaded,
+           :video_thumb_small,
+           :video_thumb_normal, :to => :youtube_video
 
   def content
-    youtube_video_info
+    youtube_video_info.tap do |hash|
+      hash. merge!('related_videos' => related_videos)
+
+    end
   end
 
   def page_title
@@ -29,6 +41,22 @@ class YoutubeVideoPart < Part
                          :resource_kind => youtube_video_resource_kind,
                          :params => params,
                          :node => node)
+    end
+
+    def related_videos
+      youtube_video_related_video_entries.map do |e|
+        video_id = video_id(e)
+        params = "parts_params[youtube_video][id]=#{video_id}"
+
+        {
+          'link' => "#{node.route_without_site}?#{params}",
+          'title' => video_title(e),
+          'description' => video_description(e),
+          'date' => video_uploaded(e),
+          'thumb_small'  => video_thumb_small(video_id),
+          'thumb_normal'  => video_thumb_normal(video_id)
+        }
+      end
     end
 end
 # == Schema Information
