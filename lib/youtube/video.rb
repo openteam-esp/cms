@@ -19,6 +19,10 @@ module Youtube
       }
     end
 
+    def response_status
+      request.response_code
+    end
+
     private
       def api_url
         'http://gdata.youtube.com/feeds/api'

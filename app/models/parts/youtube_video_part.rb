@@ -7,11 +7,10 @@ class YoutubeVideoPart < Part
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
 
-  def response_status
-    200
-  end
+  delegate :info,
+           :title, :to => :youtube_video, :prefix => true
 
-  delegate :info, :title, :to => :youtube_video, :prefix => true
+  delegate :response_status, :to => :youtube_video
 
   def content
     youtube_video_info
