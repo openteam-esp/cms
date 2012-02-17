@@ -51,6 +51,7 @@ describe NodesController do
           ]
         }
 
+        NewsListPart.any_instance.stub(:response_status).and_return(200)
         NewsListPart.any_instance.stub(:data_hash).and_return(data_hash)
 
         get :show, :id => "#{news_list_part.node.route}", :parts_params => {"news_list"=>{"page"=>"2"}}, :format => :json
