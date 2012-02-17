@@ -15,7 +15,7 @@ class Part < ActiveRecord::Base
     @response ||= Requester.new(url_for_request)
   end
 
-  delegate :response_headers, :response_status, :to => :response
+  delegate :response_body, :response_headers, :response_status, :to => :response
 
   def available_templates
     [self.class.name.underscore] + (node.site_settings['part_templates'].try(:[], self.class.name.underscore).try(:split, '|' ) || [])
