@@ -15,25 +15,19 @@ class Part < ActiveRecord::Base
     @response ||= Requester.new(url_for_request)
   end
 
-  delegate :response_body, :response_headers, :response_status, :to => :response
+  delegate :response_body,
+           :response_headers,
+           :response_status, :to => :response
 
   def available_templates
-    [self.class.name.underscore] + (node.site_settings['part_templates'].try(:[], self.class.name.underscore).try(:split, '|' ) || [])
-  end
-
-  def error_title
-    case response_status
-      when 404, 500
-        I18n.t("external_system_errors.#{response_status}")
-      else
-        'Replace me in CMS:app/models/part.rb:21'
-    end
+    [self.class.name.underscore] + templates_from_settings
   end
 
   def default_hash
-    { 'response_status' => response_status }.tap do |hash|
+    {}.tap do |hash|
       hash.merge!('template' => template)
 
+      hash.merge!('response_status' => response_status) if response_status
       hash.merge!('title' => error_title) if bad_request?
     end
   end
@@ -42,17 +36,33 @@ class Part < ActiveRecord::Base
     default_hash
   end
 
-  def bad_response_statuses
-    [404, 500]
-  end
-
-  def bad_request?
-    bad_response_statuses.include? response_status
-  end
-
   def response_hash
     bad_request? ? default_hash : response.response_hash
   end
+
+  protected
+    def error_title
+      case response_status
+        when 404, 500
+          I18n.t("external_system_errors.#{response_status}")
+        when nil
+          ''
+        else
+          'Replace me in CMS:app/models/part.rb:51'
+      end
+    end
+
+    def bad_response_statuses
+      [404, 500]
+    end
+
+    def bad_request?
+      bad_response_statuses.include? response_status
+    end
+
+    def templates_from_settings
+      node.site_settings['part_templates'].try(:[], self.class.name.underscore).try(:split, '|' ) || []
+    end
 end
 
 # == Schema Information

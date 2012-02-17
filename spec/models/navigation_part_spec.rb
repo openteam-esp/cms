@@ -42,6 +42,7 @@ describe NavigationPart do
                                   :from_node => locale,
                                   :navigation_default_level => 1)
       expected_hash = {
+        'template' => 'navigation_part',
         'type' => 'NavigationPart',
         'content' => { 'ru' => {
                               'title' => 'ru',
@@ -68,6 +69,7 @@ describe NavigationPart do
                                   :navigation_default_level => 3)
 
       expected_hash = {
+        'template' => 'navigation_part',
         'type' => 'NavigationPart',
         'content' => { 'ru' => {
                           'title' => 'ru',
@@ -113,6 +115,7 @@ describe NavigationPart do
                                   :navigation_end_level => 2)
 
       expected_hash = {
+        'template' => 'navigation_part',
         'type' => 'NavigationPart',
         'content' => { 'ru' => {
                           'title' => 'ru',

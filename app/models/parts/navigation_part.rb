@@ -12,7 +12,7 @@ class NavigationPart < Part
   end
 
   def response_status
-    200
+    nil
   end
 
   private
