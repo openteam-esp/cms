@@ -11,12 +11,17 @@ class YoutubePart < Part
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
 
-  def response_status
-    200
-  end
+  delegate :entries,
+           :total_count,
+           :to => :youtube_resource, :prefix => true
 
-  delegate :entries, :total_count, :to => :youtube_resource, :prefix => true
-  delegate :video_id, :video_title, :video_description, :video_uploaded, :video_thumb_small, :video_thumb_normal, :to => :youtube_resource
+  delegate :video_id,
+           :video_title,
+           :video_description,
+           :video_uploaded,
+           :video_thumb_small,
+           :video_thumb_normal,
+           :response_status, :to => :youtube_resource
 
   def part_title
     title
