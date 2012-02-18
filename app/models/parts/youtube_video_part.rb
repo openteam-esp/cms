@@ -1,6 +1,4 @@
 class YoutubeVideoPart < Part
-  attr_accessor :with_related
-
   validates_presence_of :youtube_video_resource_id, :youtube_video_resource_kind
 
   has_enums
@@ -23,8 +21,7 @@ class YoutubeVideoPart < Part
 
   def content
     youtube_video_info.tap do |hash|
-      hash. merge!('related_videos' => related_videos)
-
+      hash. merge!('related_videos' => related_videos) if youtube_video_with_related?
     end
   end
 

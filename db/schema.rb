@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216093413) do
+ActiveRecord::Schema.define(:version => 20120217101531) do
 
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20120216093413) do
     t.integer  "news_mlt_width"
     t.integer  "news_mlt_height"
     t.string   "template"
+    t.boolean  "youtube_video_with_related"
   end
 
 end
