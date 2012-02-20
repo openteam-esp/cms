@@ -156,6 +156,9 @@ sites:
         main_bottom_navigation:
           required: true
           configurable: true
+        interviews:
+          required: true
+          configurable: true
 
       inner_page:
         site_name:
