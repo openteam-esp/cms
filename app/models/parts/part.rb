@@ -53,7 +53,7 @@ class Part < ActiveRecord::Base
     end
 
     def bad_response_statuses
-      [404, 500]
+      [400, 404, 500]
     end
 
     def bad_request?

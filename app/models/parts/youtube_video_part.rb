@@ -24,6 +24,8 @@ class YoutubeVideoPart < Part
            :video_thumb_normal, :to => :youtube_video
 
   def content
+    return {} if bad_request?
+
     youtube_video_info.tap do |hash|
       hash. merge!('related_videos' => related_videos) if youtube_video_with_related?
     end
