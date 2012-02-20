@@ -182,5 +182,10 @@ end
 #  news_mlt_count              :integer
 #  news_mlt_width              :integer
 #  news_mlt_height             :integer
+#  template                    :string(255)
+#  youtube_video_with_related  :boolean
+#  youtube_video_related_count :integer
+#  youtube_video_width         :integer
+#  youtube_video_height        :integer
 #
 
