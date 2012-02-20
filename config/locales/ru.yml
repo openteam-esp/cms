@@ -157,5 +157,10 @@ ru:
           playlist: Плейлист
           user: Пользователь
         youtube_video_resource_id: Идентификатор ресурса
+        youtube_video_height: Высота
+        youtube_video_width: Ширина
+        youtube_video_with_related: Включать похожие видео (для пользователя)
+        youtube_video_related_count: Количество похожих видео
+
 
 

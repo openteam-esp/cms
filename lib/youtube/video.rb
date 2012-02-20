@@ -54,7 +54,7 @@ module Youtube
     end
 
     def related_video_entries
-      RelatedVideos.new(self).entries
+      resource_kind == 'user' ? RelatedVideos.new(self).entries : []
     end
 
     def response_status

@@ -27,7 +27,7 @@ class YoutubeVideoPart < Part
     return {} if bad_request?
 
     youtube_video_info.tap do |hash|
-      hash. merge!('related_videos' => related_videos) if youtube_video_with_related?
+      hash.merge!('related_videos' => related_videos) if youtube_video_with_related?
     end
   end
 
