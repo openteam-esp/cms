@@ -156,7 +156,10 @@ sites:
         main_bottom_navigation:
           required: true
           configurable: true
-        interviews:
+        news_list:
+          required: true
+          configurable: true
+        interview_list:
           required: true
           configurable: true
 
