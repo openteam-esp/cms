@@ -14,9 +14,7 @@ class Youtube::RelatedVideos < Youtube::Resource
     end
 
     def api_resource_url
-      p '============================='
-      p "#{api_url}/videos/#{video.id}/related?#{request_params}"
-      #p "#{api_url}/videos/#{video.id}/related"
+      "#{api_url}/videos/#{video.id}/related"
     end
 end
 
