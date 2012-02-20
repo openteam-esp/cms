@@ -156,9 +156,6 @@ sites:
         main_bottom_navigation:
           required: true
           configurable: true
-        link_to_interviews_list:
-          required: true
-          configurable: true
         interviews:
           required: true
           configurable: true
