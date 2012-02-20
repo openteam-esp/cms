@@ -1,6 +1,6 @@
 module Youtube
   class Video
-    attr_reader :id, :node, :params, :resource_id, :resource_kind
+    attr_reader :id, :node, :params, :resource_id, :resource_kind, :height, :width
 
     delegate :video_id,
              :video_description,
@@ -15,6 +15,8 @@ module Youtube
       @params = attributes[:params],
       @resource_id = attributes[:resource_id]
       @resource_kind = attributes[:resource_kind]
+      @height = attributes[:height]
+      @width = attributes[:width]
     end
 
     def author
@@ -31,9 +33,8 @@ module Youtube
 
     def embedded_code
       params = 'autoplay=1'
-
       code = <<-END
-          <iframe width="560" height="315" src="http://www.youtube.com/embed/#{id}?#{params}" frameborder="0" allowfullscreen></iframe>
+          <iframe width="#{width}" height="#{height}" src="http://www.youtube.com/embed/#{id}?#{params}" frameborder="0" allowfullscreen></iframe>
       END
     end
 

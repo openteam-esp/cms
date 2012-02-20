@@ -3,6 +3,10 @@ class YoutubeVideoPart < Part
 
   has_enums
 
+  default_value_for :youtube_video_related_count, 5
+  default_value_for :youtube_video_width, 560
+  default_value_for :youtube_video_height, 315
+
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
@@ -37,7 +41,9 @@ class YoutubeVideoPart < Part
                          :resource_id => youtube_video_resource_id,
                          :resource_kind => youtube_video_resource_kind,
                          :params => params,
-                         :node => node)
+                         :node => node,
+                         :height => youtube_video_height,
+                         :width => youtube_video_width)
     end
 
     def related_videos
