@@ -32,7 +32,8 @@ module Youtube
     end
 
     def embedded_code
-      params = 'autoplay=1'
+      params = 'autoplay=1&wmode=transparent'
+
       code = <<-END
           <iframe width="#{width}" height="#{height}" src="http://www.youtube.com/embed/#{id}?#{params}" frameborder="0" allowfullscreen></iframe>
       END
