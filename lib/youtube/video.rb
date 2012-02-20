@@ -1,6 +1,6 @@
 module Youtube
   class Video
-    attr_reader :id, :node, :params, :resource_id, :resource_kind, :height, :width
+    attr_reader :id, :node, :params, :resource_id, :resource_kind, :height, :width, :related_videos_max_results
 
     delegate :video_id,
              :video_description,
@@ -17,6 +17,7 @@ module Youtube
       @resource_kind = attributes[:resource_kind]
       @height = attributes[:height]
       @width = attributes[:width]
+      @related_videos_max_results = attributes[:related_videos_max_results]
     end
 
     def author

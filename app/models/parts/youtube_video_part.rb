@@ -45,7 +45,8 @@ class YoutubeVideoPart < Part
                          :params => params,
                          :node => node,
                          :height => youtube_video_height,
-                         :width => youtube_video_width)
+                         :width => youtube_video_width,
+                         :related_videos_max_results => youtube_video_related_count)
     end
 
     def related_videos
