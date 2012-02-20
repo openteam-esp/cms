@@ -47,7 +47,7 @@ class YoutubePart < Part
         video_id = video_id(e)
 
         {
-          'link' => "#{item_page.route_without_site}?parts_params[youtube_video][id]=#{video_id}",
+          'link' => "#{item_page.route_without_site}/-/#{video_id}",
 
           'video' => {
             'title' => video_title(e),

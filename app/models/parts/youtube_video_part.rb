@@ -37,7 +37,7 @@ class YoutubeVideoPart < Part
 
   private
     def youtube_video
-      Youtube::Video.new(:id => params['id'],
+      Youtube::Video.new(:id => resource_id,
                          :resource_id => youtube_video_resource_id,
                          :resource_kind => youtube_video_resource_kind,
                          :params => params,
@@ -49,10 +49,9 @@ class YoutubeVideoPart < Part
     def related_videos
       youtube_video_related_video_entries.map do |e|
         video_id = video_id(e)
-        params = "parts_params[youtube_video][id]=#{video_id}"
 
         {
-          'link' => "#{node.route_without_site}?#{params}",
+          'link' => "#{node.route_without_site}/-/#{video_id}",
           'title' => video_title(e),
           'description' => video_description(e),
           'date' => video_uploaded(e),
