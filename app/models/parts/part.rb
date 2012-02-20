@@ -1,5 +1,5 @@
 class Part < ActiveRecord::Base
-  attr_accessor :current_node, :params
+  attr_accessor :current_node, :params, :resource_id
 
   belongs_to :node
 

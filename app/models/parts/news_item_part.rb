@@ -35,7 +35,7 @@ class NewsItemPart < Part
     end
 
     def slug
-      params['slug']
+      resource_id
     end
 
     def url_for_request
@@ -46,7 +46,7 @@ class NewsItemPart < Part
       {}.tap do |hash|
         hash.merge!(response_hash)
 
-        hash['more_like_this'] = hash['more_like_this'].each { |e| e['link'] = "#{node.route_without_site}?parts_params[news_item][slug]=#{e['slug']}" } if hash['more_like_this']
+        hash['more_like_this'] = hash['more_like_this'].each { |e| e['link'] = "#{node.route_without_site}/-/#{e['slug']}" } if hash['more_like_this']
       end
     end
 end

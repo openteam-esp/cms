@@ -21,7 +21,8 @@ Cms::Application.routes.draw do
 
   root :to => 'sites#index'
 
-  get '/nodes/(*id)', :to => "nodes#show", :format => true
+  get '/nodes/*id/-/:resource_id', :to => "nodes#show", :format => true
+  get '/nodes/*id', :to => "nodes#show", :format => true
 
   mount ElVfsClient::Engine => '/'
   match "/build_info_path" => 'service#build_info_path'

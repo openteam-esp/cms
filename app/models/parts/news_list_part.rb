@@ -14,7 +14,7 @@ class NewsListPart < Part
   def content
     return response_hash if bad_request?
 
-    hash = data_hash.update(data_hash) {|v,k| k.each{|l| l['link']="#{item_page.route_without_site}?parts_params[news_item][slug]=#{l['slug']}"}}
+    hash = data_hash.update(data_hash) {|v,k| k.each{|l| l['link']="#{item_page.route_without_site}/-/#{l['slug']}"}}
 
     hash.merge!('title' => title) if title?
     hash.merge!(pagination) if news_paginated?

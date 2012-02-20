@@ -1,6 +1,5 @@
 class Node < ActiveRecord::Base
-  attr_accessor :navigation_position_param
-  attr_accessor :parts_params
+  attr_accessor :navigation_position_param, :parts_params, :resource_id
 
   has_many :parts
 
@@ -91,6 +90,7 @@ class Node < ActiveRecord::Base
     if part
       part.current_node = self
       part.params = parts_params ? (parts_params[part.type.underscore.gsub('_part','')] || {}) : {}
+      part.resource_id = self.resource_id
     end
     @parts[region] = part
   end
