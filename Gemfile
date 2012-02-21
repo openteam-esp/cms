@@ -8,7 +8,9 @@ gem 'configliere'
 gem 'curb'
 gem 'default_value_for'
 gem 'el_vfs_client'
+gem 'esp-auth'
 gem 'esp-ckeditor'
+gem 'esp-commons'
 gem 'fog',                                        :require => false
 gem 'formtastic'
 gem 'gilenson'
@@ -32,6 +34,7 @@ group :development do
   gem 'annotate',               '~> 2.4.1.beta1', :require => false
   gem 'hirb',                                     :require => false
   gem 'itslog'
+  gem 'sunspot_solr'
   gem 'therubyracer'                              unless RUBY_PLATFORM =~ /freebsd/
 end
 

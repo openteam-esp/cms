@@ -7,11 +7,14 @@ Spork.prefork do
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'fabrication'
+  require "cancan/matchers"
+  require 'esp_auth/spec_helper'
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
   RSpec.configure do |config|
     config.include AttributeNormalizer::RSpecMatcher
+    config.include EspAuth::SpecHelper
 
     config.mock_with :rspec
     config.use_transactional_fixtures = true

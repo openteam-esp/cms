@@ -8,6 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= render :partial => "esp_auth/shared/header" %>
   <div id="toolbar_wrapper">
     <%= render_navigation :context => :toolbar %>
   </div>
@@ -28,5 +29,6 @@
       <%= link_to "OpenTeam", "http://openteam.ru/" %>
     </div>
   </div>
+  <%= render :partial => "esp_auth/shared/footer" %>
 </body>
 </html>
