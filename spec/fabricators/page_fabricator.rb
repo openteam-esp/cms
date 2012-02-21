@@ -3,4 +3,5 @@ Fabricator(:page) do
   slug "name"
   parent! { Fabricate :locale }
   template 'inner_page'
+  context!
 end

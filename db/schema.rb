@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221085346) do
+ActiveRecord::Schema.define(:version => 20120221085347) do
 
   create_table "contexts", :force => true do |t|
     t.string   "title"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20120221085346) do
     t.integer  "ancestry_depth",       :default => 0
     t.integer  "page_for_redirect_id"
     t.string   "weight"
+    t.integer  "context_id"
   end
 
   create_table "parts", :force => true do |t|

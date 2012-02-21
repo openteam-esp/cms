@@ -10,6 +10,9 @@ describe Node do
   it { should normalize_attribute(:title).from('  ru   ddd ').to('ru ddd') }
   it { should normalize_attribute(:title).from('ru').to('ru') }
 
+  it { should belong_to :context }
+  it { should validate_presence_of :context }
+
   describe 'сохранение path' do
     let(:root) { Fabricate(:node, :parent => nil, :slug => 'site', :navigation_position => 2) }
     let(:ru) { Fabricate(:node, :parent => root, :slug => 'ru', :navigation_position => 1) }

@@ -1,7 +1,11 @@
 class Node < ActiveRecord::Base
   attr_accessor :navigation_position_param, :parts_params, :resource_id
 
+  belongs_to :context
+
   has_many :parts
+
+  validates_presence_of :context
 
   validates :slug, :format => { :with => %r{^[[:alnum:]_\.-]+$} }
   validates_uniqueness_of :slug, :scope => :ancestry
