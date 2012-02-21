@@ -134,7 +134,15 @@ describe Node do
       it { organy_vlasti.weight.should == '01/02/01' }
       it { governer.weight.should == '01/02/01/01' }
     end
+  end
 
+  describe 'контекст' do
+    let(:site) { Fabricate(:site) }
+    let(:locale) { Fabricate(:locale, :parent => site, :slug => 'ru') }
+    let(:page) { Fabricate(:page, :parent => locale) }
+
+    it { locale.context.should == site.context }
+    it { page.context.should == site.context }
   end
 end
 

@@ -18,6 +18,8 @@ class Node < ActiveRecord::Base
 
   delegate :templates, :to => :site
 
+  before_validation :set_context, :unless => :is_root?
+
   default_value_for :in_navigation, true
   default_value_for :parts_params,  {}
 
@@ -168,6 +170,10 @@ class Node < ActiveRecord::Base
     def weights
       # NOTE: не больше 100
       [parent_weight, sprintf('%02d', navigation_position)].keep_if(&:present?).join('/').split('/')
+    end
+
+    def set_context
+      self.context = parent.context
     end
 end
 
