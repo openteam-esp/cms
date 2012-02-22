@@ -14,14 +14,12 @@
  *= require treeview/jquery.treeview.js
  *= require treeview/jquery.treeview.edit.js
  *= require treeview/jquery.treeview.async.js
- *= require esp_auth/shared
- *= require custom_esp_auth
  */
 
 function init_tree() {
   if ($.fn.treeview && $('.nodes_tree').length) {
     $('.nodes_tree').treeview({
-      url: '/treeview',
+      url: '/manage/treeview',
       persist: 'location'
     });
   };

@@ -30,7 +30,6 @@ class Ability
     end
 
     # app specific
-    # TODO: добавление сайта
     can :manage, Node do |node|
       user.manager_of? node.context
     end
@@ -40,7 +39,7 @@ class Ability
     end
 
     # TODO
-    can :manage, Part do |part|
+    can :manage, [Site, Locale, Page, Part] do |part|
       true
     end
   end

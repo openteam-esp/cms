@@ -30,35 +30,47 @@ ru:
       few:            страницы
       many:           страниц
 
-    locale:
+    locale: &pluralize_locale
       one:            язык
       few:            языка
       many:           языков
 
-    page:
+    manage/locale:
+      <<: *pluralize_locale
+
+    page: &pluralize_page
       one:            страница
       few:            страницы
       many:           страниц
+
+    manage/page:
+      <<: *pluralize_page
 
     region:
       one:            область
       few:            области
       many:           областей
 
-    manage/site:
+    site: &pluralize_site
       one:            сайт
       few:            cайта
       many:           сайтов
+
+    manage/site:
+      <<: *pluralize_site
 
     template:
       one:            шаблон
       few:            шаблона
       many:           шаблонов
 
-    part:
+    part: &pluralize_part
       one:            часть
       few:            части
       many:           частей
+
+    manage/part:
+      <<: *pluralize_part
 
     upload:
       one:            файл

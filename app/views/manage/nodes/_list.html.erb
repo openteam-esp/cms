@@ -9,6 +9,6 @@
   <% end if resource.children.any? %>
   <div class="actions">
     <%= link_to action_title(:action => 'new', :controller => controller), path, :class => 'button icon add' %>
-    <%= link_to "Сортировка", sort_nodes_path, :class => "button icon loop sort_link off" if resource.children.many? %>
+    <%= link_to "Сортировка", sort_manage_nodes_path, :class => "button icon loop sort_link off" if resource.children.many? %>
   </div>
 </div>
