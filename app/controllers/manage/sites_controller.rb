@@ -1,4 +1,4 @@
-class SitesController < ApplicationController
+class Manage::SitesController < Manage::ApplicationController
   inherit_resources
 
   layout 'application'

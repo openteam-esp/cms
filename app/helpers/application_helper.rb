@@ -36,7 +36,7 @@ module ApplicationHelper
         li_options.merge!(:class => 'hasChildren') if child.has_children?
         result += content_tag :li, li_options do
           res = ""
-          res += content_tag(:span, link_to(child.slug, child))
+          res += content_tag(:span, link_to(child.slug, [:manage, child]))
           res += content_tag(:ul, content_tag(:li, content_tag(:span, raw('&nbsp;'), :class => 'placeholder'))) if child.has_children?
           raw res
         end
@@ -50,7 +50,7 @@ module ApplicationHelper
       li_options[:class] += " open" if node == sibling && sibling.has_children?
       result += content_tag :li, li_options do
         res = ""
-        res += content_tag(:span, link_to(sibling.slug, sibling))
+        res += content_tag(:span, link_to(sibling.slug, [:manage, sibling]))
         res += content_tag :ul do
           node == sibling ? expanded_ancestors(ancestors) : content_tag(:li, content_tag(:span, raw('&nbsp;'), :class => 'placeholder'))
         end if sibling.has_children?

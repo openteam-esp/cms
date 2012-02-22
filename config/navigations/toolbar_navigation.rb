@@ -7,7 +7,7 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.active_leaf_class = 'leaf'
 
   navigation.items do |primary|
-    primary.item :sites, I18n.t('toolbar.sites'), sites_path,
+    primary.item :sites, I18n.t('toolbar.sites'), manage_sites_path,
       :highlights_on => /^\/$|^\/sites|\/templates|\/pages/
 
     primary.dom_id = 'toolbar'

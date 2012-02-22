@@ -30,12 +30,18 @@ class Ability
     end
 
     # app specific
+    # TODO: добавление сайта
     can :manage, Node do |node|
       user.manager_of? node.context
     end
 
     can :manage, Node do |node|
       user.manager_of? node
+    end
+
+    # TODO
+    can :manage, Part do |part|
+      true
     end
   end
 end

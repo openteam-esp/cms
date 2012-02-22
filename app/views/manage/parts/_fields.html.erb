@@ -3,6 +3,6 @@
   <%= form.input :template, :as => :select, :collection => form.object.available_templates, :include_blank => false %>
 <% end %>
 
-<%= render :partial => "#{@part.class.name.tableize}/fields", :locals => { :form => form } %>
+<%= render :partial => "manage/#{@part.class.name.tableize}/fields", :locals => { :form => form } %>
 
 <%= hidden_field_tag :region, @part.region %>

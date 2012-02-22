@@ -3,7 +3,7 @@
 
 require 'spec_helper'
 
-describe PartsController do
+describe Manage::PartsController do
 
   let(:page) { Fabricate(:page, :template => 'inner_page', :slug => 'page') }
 

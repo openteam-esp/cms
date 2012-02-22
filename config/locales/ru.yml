@@ -45,7 +45,7 @@ ru:
       few:            области
       many:           областей
 
-    site:
+    manage/site:
       one:            сайт
       few:            cайта
       many:           сайтов

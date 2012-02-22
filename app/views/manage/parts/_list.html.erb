@@ -7,11 +7,11 @@
         <h3><%= part.class.name %></h3>
         <%=content_tag :div, render(part), :class => part.class.name.underscore %>
         <div class="actions">
-          <%= link_to action_title(:action => 'edit', :controller => 'parts'), edit_part_path(part), :class => 'button icon edit' %>
-          <%= link_to action_title(:action => 'destroy', :controller => 'parts'), part_path(part), :confirm => t('Are you sure?'), :method => :delete, :class => 'button icon remove' %>
+          <%= link_to action_title(:action => 'edit', :controller => 'parts'), edit_manage_part_path(part), :class => 'button icon edit' %>
+          <%= link_to action_title(:action => 'destroy', :controller => 'parts'), manage_part_path(part), :confirm => t('Are you sure?'), :method => :delete, :class => 'button icon remove' %>
         </div>
       <% else %>
-        <%= semantic_form_for :part, :url => new_node_part_path(resource), :html => {:method => :get }  do | form | %>
+        <%= semantic_form_for :part, :url => new_manage_node_part_path(resource), :html => {:method => :get }  do | form | %>
           <%= form.inputs do %>
             <%= form.input :type, :as => :select, :collection => Part.descendants %>
             <%= form.input :region, :as => :hidden, :input_html => { :value => region } %>

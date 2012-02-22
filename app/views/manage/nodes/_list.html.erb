@@ -3,7 +3,7 @@
     <% resource.children.each do | child | %>
       <li data-id='<%= child.id %>'>
         <span class='hidden'>хвать</span>
-        <%= link_to child, child %>
+        <%= link_to child, [:manage, child] %>
       </li>
     <% end %>
   <% end if resource.children.any? %>

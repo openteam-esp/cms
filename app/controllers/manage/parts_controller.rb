@@ -1,4 +1,4 @@
-class PartsController < ApplicationController
+class Manage::PartsController < Manage::ApplicationController
   inherit_resources
   belongs_to :node, :shallow => true
   actions :new, :create, :edit, :update, :destroy
@@ -18,10 +18,10 @@ class PartsController < ApplicationController
     end
 
     def smart_resource_url
-      parent
+      [:manage, parent]
     end
 
     def smart_collection_url
-      parent
+      [:manage, parent]
     end
 end
