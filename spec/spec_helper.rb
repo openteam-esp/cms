@@ -15,6 +15,7 @@ Spork.prefork do
   RSpec.configure do |config|
     config.include AttributeNormalizer::RSpecMatcher
     config.include EspAuth::SpecHelper
+    config.include EspCmsSpecHelper
 
     config.mock_with :rspec
     config.use_transactional_fixtures = true

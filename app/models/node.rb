@@ -173,7 +173,7 @@ class Node < ActiveRecord::Base
     end
 
     def set_context
-      self.context = parent.context
+      self.context = parent.context unless context
     end
 end
 

@@ -1,5 +1,5 @@
 <%= form.inputs do %>
-  <%= form.input :context %>
+  <%= form.input :context, :as => :select, :collection => ::Context.all, :member_label => ->(c) { ('&nbsp;' * 2 * c.depth + c.title).html_safe } %>
   <%= form.input :title %>
   <%= form.input :slug %>
   <%= form.input :client_url %>

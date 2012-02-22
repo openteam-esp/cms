@@ -1,6 +1,5 @@
 Fabricator(:node) do
-  slug "MyString"
   title "MyString"
-  ancestry "MyString"
+  slug { SecureRandom.base64.gsub(/[^[:alpha:]]/, '') }
   context!
 end

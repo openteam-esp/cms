@@ -29,13 +29,13 @@ class Ability
       user.manager?
     end
 
-    ## app specific
-    #can :manage, Subcontext do | subcontext |
-      #user.manager_of? subcontext.context
-    #end
+    # app specific
+    can :manage, Node do |node|
+      user.manager_of? node.context
+    end
 
-    #can :manage, Subcontext do | subcontext |
-      #user.manager_of? subcontext
-    #end
+    can :manage, Node do |node|
+      user.manager_of? node
+    end
   end
 end
