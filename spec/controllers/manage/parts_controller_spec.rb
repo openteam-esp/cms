@@ -9,6 +9,8 @@ describe Manage::PartsController do
 
   before do
     Page.any_instance.stub(:configurable_regions).and_return(['content'])
+
+    sign_in manager_of(root)
   end
 
   describe "GET new content" do

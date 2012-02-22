@@ -14,6 +14,7 @@ Spork.prefork do
 
   RSpec.configure do |config|
     config.include AttributeNormalizer::RSpecMatcher
+    config.include Devise::TestHelpers, :type => :controller
     config.include EspAuth::SpecHelper
     config.include EspCmsSpecHelper
 
