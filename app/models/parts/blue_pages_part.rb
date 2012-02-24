@@ -6,53 +6,39 @@ class BluePagesPart < Part
   validates_presence_of :blue_pages_category_id
 
   def to_json
-    as_json(:only => :type, :methods => 'content')
+    super.merge!(as_json(:only => :type, :methods => 'content'))
   end
 
   def content
-    content_with_updated_item_links
+    update_item_links
+  end
+
+  def categories
+    @categories ||= Requester.new("#{blue_pages_url}.json").response_hash['categories'].map { |c| [c['title'], c['id']] }
   end
 
   def category_name
-    @name ||= ActiveSupport::JSON.decode(Curl::Easy.http_get("#{blue_pages_url}/#{blue_pages_category_id}.json").body_str)['title']
-  end
-
-  def categories_options_for_select
-    options_for_select = {}
-
-    ActiveSupport::JSON.decode(categories)['categories'].each do |e|
-      options_for_select[e['title']] = e['id']
-    end
-
-    options_for_select
+    @category_name ||= Requester.new("#{blue_pages_url}/#{blue_pages_category_id}").response_hash['title']
   end
 
   private
     def blue_pages_url
-      "#{Settings['blue_pages.url']}/categories"
+      "#{Settings['blue-pages.url']}/categories"
     end
 
     def expand_parameter
       '?expand=true' if blue_pages_expand
     end
 
-    def request
-      @request ||= Curl::Easy.http_get("#{blue_pages_url}/#{blue_pages_category_id}#{expand_parameter}.json").body_str
+    def url_for_request
+      "#{blue_pages_url}/#{blue_pages_category_id}#{expand_parameter}"
     end
 
-    def content_with_updated_item_links
-      update_item_links ActiveSupport::JSON.decode(request)
-    end
-
-    def update_item_links(subdivisions)
+    def update_item_links(subdivisions = response_hash)
       subdivisions['items'].each { |item| item['link'] = "#{item_page.route_without_site}?parts_params[blue_pages_item][link]=#{item['link']}" } if subdivisions['items']
       subdivisions['subdivisions'].each { |subdivision| update_item_links(subdivision) } if subdivisions['subdivisions']
 
       subdivisions
-    end
-
-    def categories
-      @categories ||= Curl::Easy.http_get("#{blue_pages_url}.json").body_str
     end
 end
 

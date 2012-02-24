@@ -22,6 +22,6 @@ class Requester
   end
 
   def response_hash
-    @response_json ||= ActiveSupport::JSON.decode(response_body)
+    @response_hash ||= ActiveSupport::JSON.decode(response_body)
   end
 end

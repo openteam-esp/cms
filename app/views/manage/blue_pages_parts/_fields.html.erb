@@ -1,7 +1,7 @@
 <%= form.inputs do %>
-  <%= form.input :blue_pages_category_id, :as => :select, :collection => form.object.categories_options_for_select %>
+  <%= form.input :blue_pages_category_id, :as => :select, :collection => form.object.categories %>
 
-  <%= render :partial => 'parts/item_page', :locals => { :form => form } %>
+  <%= render :partial => 'manage/parts/item_page', :locals => { :form => form } %>
 
   <%= form.input :blue_pages_expand %>
 
