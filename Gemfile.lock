@@ -75,7 +75,7 @@ GEM
       rails
     erubis (2.7.0)
     escape (0.0.4)
-    esp-auth (1.0.4)
+    esp-auth (1.0.7)
       ancestry
       cancan
       compass (>= 0.12.alpha.4)

@@ -31,16 +31,19 @@ class Ability
 
     # app specific
     can :manage, Node do |node|
-      user.manager_of? node.context
+      [node] + node.ancestors.each do |n|
+        return true if can?(:manage, n)
+      end
+
+      false
     end
 
     can :manage, Node do |node|
-      user.manager_of? node
+      user.manager_of?(node.context) || user.manager_of?(node) || user.operator_of?(node)
     end
 
-    # TODO
-    can :manage, [Site, Locale, Page, Part] do |part|
-      true
+    can :manage, Part do |part|
+      can? :manage, part.node
     end
   end
 end

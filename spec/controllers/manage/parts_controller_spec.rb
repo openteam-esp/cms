@@ -5,7 +5,7 @@ require 'spec_helper'
 
 describe Manage::PartsController do
 
-  let(:page) { Fabricate(:page, :template => 'inner_page', :slug => 'page') }
+  let(:page) { Fabricate(:page, :template => 'inner_page', :slug => 'page', :context => root) }
 
   before do
     Page.any_instance.stub(:configurable_regions).and_return(['content'])

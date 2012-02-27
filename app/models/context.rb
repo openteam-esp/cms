@@ -1,7 +1,5 @@
 class Context < ActiveRecord::Base
-  esp_auth_context
-
-  has_many :subcontexts, :class_name => 'Node'
+  esp_auth_context :class_name => 'Node'
 end
 
 # == Schema Information

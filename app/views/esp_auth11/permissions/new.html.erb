@@ -1,0 +1,20 @@
+<h3>
+  <%= "#{t('permissions.You are adding role to')}  #{@user.try(:name)}" %>
+</h3>
+
+<%= semantic_form_for resource,
+                      :url => (@user ? esp_auth.user_permissions_path(@user) : esp_auth.permissions_path) do |form| %>
+  <%= form.inputs do  %>
+    <%= form.input :user_uid, :as => :hidden %>
+    <%= form.input :user_name, :as => :hidden %>
+    <%= form.input :user_email, :as => :hidden %>
+    <%= form.input :user_search, :as => :string unless @user %>
+    <%= form.input :context, :as => :select, :collection => ::Context.all, :member_label => ->(c) { ('&nbsp;' * 2 * c.depth + c.title).html_safe } %>
+    <%= form.input :role, :as => :select, :collection => Permission.human_enums[:role].invert, :include_blank => t('commons.not_selected') %>
+  <% end %>
+  <%= form.buttons :class => 'button-group' do %>
+    <li><%= button_tag t('permissions.create'), :class => 'button icon approve' %></li>
+    <li><%= link_to t('permissions.cancel'), esp_auth.users_path, :class => 'button icon arrowleft'  %></li>
+  <% end %>
+<% end %>
+

@@ -16,7 +16,6 @@ Spork.prefork do
     config.include AttributeNormalizer::RSpecMatcher
     config.include Devise::TestHelpers, :type => :controller
     config.include EspAuth::SpecHelper
-    config.include EspCmsSpecHelper
 
     config.mock_with :rspec
     config.use_transactional_fixtures = true
