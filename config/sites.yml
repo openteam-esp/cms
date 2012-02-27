@@ -143,7 +143,7 @@ sites:
   inotomsk:
     part_templates:
       news_list_part: interview_list_part|belief_list_part
-      news_item_part: interview_item_part|belief_view_part
+      news_item_part: interview_item_part|belief_item_part
 
     templates:
       main_page:
