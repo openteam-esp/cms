@@ -162,6 +162,9 @@ sites:
         interview_list:
           required: true
           configurable: true
+        belief_list:
+          required: true
+          configurable: true
 
       inner_page:
         site_name:
