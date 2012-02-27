@@ -65,6 +65,10 @@ sites:
           required: true
           configurable: false
   tgr:
+    part_templates:
+      blue_pages_item_part: department_chief
+      gallery_part: files_list
+
     templates:
       main_page:
         site_name:
