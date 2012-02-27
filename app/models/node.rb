@@ -20,6 +20,10 @@ class Node < ActiveRecord::Base
 
   before_validation :set_context, :unless => :is_root?
 
+  default_value_for :context do |node|
+    node.parent.context if node.parent
+  end
+
   default_value_for :in_navigation, true
   default_value_for :parts_params,  {}
 
