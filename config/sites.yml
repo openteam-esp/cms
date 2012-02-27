@@ -165,6 +165,9 @@ sites:
         belief_list:
           required: true
           configurable: true
+        last_video:
+          required: true
+          configurable: true
 
       inner_page:
         site_name:
