@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Locale do
+  subject { Fabricate(:locale) }
+
   it { should validate_presence_of :slug }
   it { should validate_presence_of :parent }
   it { should allow_value(:ru).for :slug }

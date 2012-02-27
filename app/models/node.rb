@@ -34,11 +34,9 @@ class Node < ActiveRecord::Base
 
   after_save :set_navigation_position_and_recalculate_weights
 
-  # TODO: разобраться с этим методом
-  # используется при добавлении полномочий для постоения select
-  #def depth
-    #ancestry_depth + context.depth + 1
-  #end
+  def absolute_depth
+    ancestry_depth + context.depth + 1
+  end
 
   def to_json
     {

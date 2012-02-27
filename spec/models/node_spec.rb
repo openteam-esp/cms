@@ -3,6 +3,8 @@
 require 'spec_helper'
 
 describe Node do
+  subject { Fabricate(:node) }
+
   it { should allow_value('test_node123').for(:slug) }
   it { should allow_value('русские-буковки').for(:slug) }
   it { should_not allow_value('test/').for(:slug) }
@@ -138,8 +140,8 @@ describe Node do
 
   describe 'контекст' do
     let(:site) { Fabricate(:site) }
-    let(:locale) { Fabricate(:locale, :parent => site, :slug => 'ru') }
-    let(:page) { Fabricate(:page, :parent => locale) }
+    let(:locale) { Fabricate(:locale, :parent => site, :slug => 'ru', :context => nil) }
+    let(:page) { Fabricate(:page, :parent => locale, :context => nil) }
 
     it { locale.context.should == site.context }
     it { page.context.should == site.context }
