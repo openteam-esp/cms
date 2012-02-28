@@ -4,25 +4,19 @@ class AppealPart < Part
   validates_presence_of :appeal_section_slug
 
   def to_json
-    as_json(:only => :type, :methods => 'content')
+    super.merge!(as_json(:only => :type, :methods => 'content'))
   end
 
   def content
     res = '<div class="remote_wrapper">'
-    res << request.force_encoding('utf-8')
+    res << response_body.force_encoding('utf-8')
     res << '</div>'
     res
   end
 
   private
-    def appeals_url
+    def url_for_request
       "#{Settings['appeals.url']}/public/sections/#{appeal_section_slug}/appeals"
-    end
-
-    def request
-      @request ||= Curl::Easy.perform("#{appeals_url}/new") do |curl|
-        curl.headers['Accept'] = 'text/vnd_html'
-      end.body_str
     end
 end
 # == Schema Information
