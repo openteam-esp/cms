@@ -17,7 +17,7 @@ class NavigationPart < Part
 
   private
     def selected_children(node)
-      return node.children.where(:navigation_group => navigation_group).order('navigation_position') if navigation_group
+      return node.children.where(:navigation_group => navigation_group).order('navigation_position') if navigation_group?
       node.children.order('navigation_position')
     end
 
