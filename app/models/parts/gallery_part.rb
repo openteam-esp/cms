@@ -6,7 +6,11 @@ class GalleryPart < Part
   accepts_nested_attributes_for :gallery_pictures, :allow_destroy => true
 
   def to_json
-    as_json(:only => :type, :methods => 'content')
+    super.merge!(as_json(:only => :type, :methods => 'content'))
+  end
+
+  def response_status
+    200
   end
 
   def content
