@@ -1,19 +1,19 @@
 class BluePagesItemPart < Part
   def to_json
-    as_json(:only => :type, :methods => 'content')
+    super.merge!(as_json(:only => :type, :methods => 'content'))
   end
 
   def content
-    params['link'] ? ActiveSupport::JSON.decode(request) : ''
+    params['link'] ? response_hash : ''
   end
 
   private
     def blue_pages_url
-      Settings['blue_pages.url']
+      Settings['blue-pages.url']
     end
 
-    def request
-      @request ||= Curl::Easy.http_get("#{blue_pages_url}/#{params['link']}.json").body_str
+    def url_for_request
+      "#{blue_pages_url}/#{params['link']}"
     end
 end
 # == Schema Information
