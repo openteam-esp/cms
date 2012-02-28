@@ -159,9 +159,6 @@ sites:
         dependent_subdivisions:
           required: false
           configurable: true
-        chief:
-          required: false
-          configurable: true
         links:
           required: false
           configurable: true
