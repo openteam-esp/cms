@@ -33,7 +33,7 @@ class NewsListPart < Part
 
   def channels_collection
     @channel_response = Requester.new("#{news_url}/channels")
-    @channel_response.response_hash.map{ |a| [ "#{'&nbsp;'*a['ancestry_depth']*2}#{a['title']}".html_safe, a['id'] ] }
+    @channel_response.response_hash.map { |a| [ "#{'&nbsp;'*a['depth']*2}#{a['title']}".html_safe, a['id'] ] }
   end
 
   private
