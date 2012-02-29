@@ -36,6 +36,7 @@ class BluePagesPart < Part
 
     def update_item_links(subdivisions = response_hash)
       subdivisions['items'].each { |item| item['link'] = "#{item_page.route_without_site}?parts_params[blue_pages_item][link]=#{item['link']}" } if subdivisions['items']
+      subdivisions['categories'].each { |subdivision| update_item_links(subdivision) } if subdivisions['categories']
       subdivisions['subdivisions'].each { |subdivision| update_item_links(subdivision) } if subdivisions['subdivisions']
 
       subdivisions
