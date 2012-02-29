@@ -41,6 +41,10 @@ describe Ability do
         it { should     be_able_to(:manage, another_manager_of(child_1_1).permissions.first) }
         it { should     be_able_to(:manage, another_manager_of(child_2).permissions.first) }
       end
+
+      context 'управление сайтами' do
+        it { should     be_able_to(:create, Site.new) }
+      end
     end
 
     context 'вложенного контекста' do
@@ -172,6 +176,10 @@ describe Ability do
         it { should_not be_able_to(:manage, another_operator_of(child_1).permissions.first) }
         it { should_not be_able_to(:manage, another_operator_of(child_1_1).permissions.first) }
         it { should_not be_able_to(:manage, another_operator_of(child_2).permissions.first) }
+      end
+
+      context 'управление сайтами' do
+        it { should_not be_able_to(:create, Site.new) }
       end
     end
 

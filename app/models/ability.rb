@@ -39,7 +39,15 @@ class Ability
     end
 
     can :manage, Node do |node|
-      user.manager_of?(node.context) || user.manager_of?(node) || user.operator_of?(node)
+      user.manager_of?(node) || user.operator_of?(node)
+    end
+
+    can :manage, Node do |node|
+      user.manager_of?(node.context) if node.context
+    end
+
+    can :create, Site do
+      user.manager?
     end
 
     can :manage, Part do |part|

@@ -1,6 +1,10 @@
 class Site < Node
   validates :slug, :presence => true
 
+  default_value_for :context do |node|
+    node.context
+  end
+
   delegate :parts, :to => :default_locale
   delegate :template, :to => :default_locale
 

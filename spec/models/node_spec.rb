@@ -140,8 +140,8 @@ describe Node do
 
   describe 'контекст' do
     let(:site) { Fabricate(:site) }
-    let(:locale) { Fabricate(:locale, :parent => site, :slug => 'ru', :context => nil) }
-    let(:page) { Fabricate(:page, :parent => locale, :context => nil) }
+    let(:locale) { Locale.create!(:parent => site, :slug => 'ru', :template => 'main_page') }
+    let(:page) { Page.create!(:parent => locale, :template => 'inner_page', :title => 'страница') }
 
     it { locale.context.should == site.context }
     it { page.context.should == site.context }
