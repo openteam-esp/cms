@@ -34,9 +34,7 @@ class NewsItemPart < Part
       "more_like_this[count]=#{news_mlt_count}&more_like_this[width]=#{news_mlt_width}&more_like_this[height]=#{news_mlt_height}"
     end
 
-    def slug
-      resource_id
-    end
+    alias :slug :resource_id
 
     def url_for_request
       "#{news_url}/channels/#{news_channel}/entries/#{slug}?#{image_size_params}&#{news_mlt_params}"

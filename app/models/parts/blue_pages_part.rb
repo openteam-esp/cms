@@ -34,9 +34,12 @@ class BluePagesPart < Part
       "#{blue_pages_url}/#{blue_pages_category_id}#{expand_parameter}"
     end
 
+    #
+    # example: /categories/94/items/246.json -> /ru/item/-/categories/94/items/246.json
+    #
     def update_item_links(subdivisions = response_hash)
       subdivisions['items'].each { |item|
-        item['link'] = "#{item_page.route_without_site}?parts_params[blue_pages_item][link]=#{item['link']}" if item['link']
+        item['link'] = "#{item_page.route_without_site}/-#{item['link']}" if item['link']
       } if subdivisions['items']
 
       subdivisions['categories'].each { |subdivision| update_item_links(subdivision) } if subdivisions['categories']

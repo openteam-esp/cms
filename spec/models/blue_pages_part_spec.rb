@@ -44,8 +44,8 @@ describe BluePagesPart do
       blue_pages_part.stub(:respense_status).and_return(200)
     end
 
-    it { blue_pages_part.content['items'][0]['link'].should == "#{blue_pages_part.item_page.route_without_site}?parts_params[blue_pages_item][link]=/categories/3/items/1" }
-    it { blue_pages_part.content['subdivisions'][0]['items'][0]['link'].should == "#{blue_pages_part.item_page.route_without_site}?parts_params[blue_pages_item][link]=/categories/15/items/14"}
+    it { blue_pages_part.content['items'][0]['link'].should == "#{blue_pages_part.item_page.route_without_site}/-/categories/3/items/1" }
+    it { blue_pages_part.content['subdivisions'][0]['items'][0]['link'].should == "#{blue_pages_part.item_page.route_without_site}/-/categories/15/items/14"}
   end
 end
 # == Schema Information

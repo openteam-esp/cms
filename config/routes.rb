@@ -26,7 +26,7 @@ Cms::Application.routes.draw do
     root :to => 'sites#index'
   end
 
-  get '/nodes/*id/-/:resource_id', :to => "nodes#show", :format => true
+  get '/nodes/*id/-/*resource_id', :to => "nodes#show", :format => true
   get '/nodes/*id', :to => "nodes#show", :format => true
 
   root :to => 'home#index'

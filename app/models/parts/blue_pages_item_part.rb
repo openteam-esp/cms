@@ -4,7 +4,7 @@ class BluePagesItemPart < Part
   end
 
   def content
-    params['link'] ? response_hash : ''
+    item_path ? response_hash : ''
   end
 
   private
@@ -12,8 +12,10 @@ class BluePagesItemPart < Part
       Settings['blue-pages.url']
     end
 
+    alias :item_path :resource_id
+
     def url_for_request
-      "#{blue_pages_url}/#{params['link']}"
+      "#{blue_pages_url}/#{item_path}"
     end
 end
 # == Schema Information
