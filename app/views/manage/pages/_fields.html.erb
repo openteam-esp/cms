@@ -1,4 +1,9 @@
 <%= form.inputs do %>
+  <%= form.input :parent_id,
+                 :as => :select,
+                 :collection => form.object.node.nodes_from_this_site,
+                 :selected => form.object.parent_id,
+                 :member_label => ->(n) { ('&nbsp;' * 2 * n.depth + n.title).html_safe } %>
   <%= form.input :title, :input_html => { :autofocus => true } %>
   <%= form.input :navigation_title %>
   <%= form.input :slug %>

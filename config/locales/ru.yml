@@ -85,6 +85,7 @@ ru:
         body:         Текст
 
       page:
+        parent_id:                  Родительская страница
         title:                      Заголовок
         navigation_title:           Заголовок в навигации
         slug:                       Слаг
