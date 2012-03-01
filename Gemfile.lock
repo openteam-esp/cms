@@ -313,6 +313,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list!
   attribute_normalizer
+  compass-rails
   configliere
   curb
   el_vfs_client

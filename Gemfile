@@ -21,6 +21,7 @@ gem 'show_for'
 gem 'simple-navigation'
 
 group :assets do
+  gem 'compass-rails'
   gem 'uglifier'
 end
 

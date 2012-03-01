@@ -15,4 +15,5 @@
  *= require title
  *= require content
  *= require footer
+ *= require esp_auth/shared
  */
