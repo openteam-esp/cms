@@ -23,7 +23,7 @@ class Part < ActiveRecord::Base
     [self.class.name.underscore] + templates_from_settings
   end
 
-  def default_hash
+  def to_json
     {}.tap do |hash|
       hash.merge!('template' => template)
 
@@ -32,12 +32,8 @@ class Part < ActiveRecord::Base
     end
   end
 
-  def to_json
-    default_hash
-  end
-
   def response_hash
-    bad_request? ? default_hash : response.response_hash
+    bad_request? ? {} : response.response_hash
   end
 
   protected
