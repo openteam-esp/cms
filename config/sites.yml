@@ -103,6 +103,12 @@ sites:
         site_name:
           required: true
           configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
         breadcrumbs:
           required: true
           configurable: false
@@ -115,15 +121,21 @@ sites:
         content_third:
           required: false
           configurable: true
+        rigth_side_navigation:
+          required: false
+          configurable: true
+        rigth_side_facts:
+          required: false
+          configurable: true
+        rigth_side_links:
+          required: false
+          configurable: true
+        rigth_side_charts:
+          required: false
+          configurable: true
         gallery:
           required: false
           configurable: true
-        main_navigation:
-          required: true
-          configurable: false
-        main_bottom_navigation:
-          required: true
-          configurable: false
         banners:
           required: false
           configurable: true
