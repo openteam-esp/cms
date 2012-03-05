@@ -121,16 +121,16 @@ sites:
         content_third:
           required: false
           configurable: true
-        rigth_side_navigation:
+        right_side_navigation:
           required: false
           configurable: true
-        rigth_side_facts:
+        right_side_facts:
           required: false
           configurable: true
-        rigth_side_links:
+        right_side_links:
           required: false
           configurable: true
-        rigth_side_charts:
+        right_side_charts:
           required: false
           configurable: true
         gallery:
