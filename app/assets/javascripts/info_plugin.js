@@ -199,7 +199,7 @@ $(function(){
 
     $('.error_messages').remove();
 
-    if (additional.length == 0){
+    if ((additional.length == 0) && (info_path.length == 0)){
       $('.info_wrapper').append('<span class="error_messages" style="float: right; color: red;">Заполните обязательные поля!!!</span>');
       remove_ajax_and_unblock_link();
       return false;
