@@ -15,7 +15,7 @@ class ServiceController < ApplicationController
     end
 
     def decode_hash_to_path
-      result = ''
+      result = '/'
       result << Base64.urlsafe_decode64(padded(params[:path_hash].gsub(/r.+?_/,'')))
       return result
     end
