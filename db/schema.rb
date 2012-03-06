@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120221085347) do
+ActiveRecord::Schema.define(:version => 20120306073034) do
 
   create_table "contexts", :force => true do |t|
     t.string   "title"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20120221085347) do
 
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
-    t.string   "description"
+    t.text     "description"
     t.string   "picture_url"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
