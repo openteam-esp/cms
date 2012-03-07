@@ -1,10 +1,15 @@
 <h3><%= gallery_part.title %></h3>
 
 <ol>
-  <% gallery_part.gallery_pictures.each do |picture| %>
-    <li>
-      <%= image_for(picture, :alt => picture.description, :width => '200') %>
-      <%= picture.description %>
+  <% gallery_part.gallery_pictures.each_with_index do |picture, index| %>
+    <li class="<%= cycle :first, :second, :third %>">
+      <div class='image'>
+        <%= image_for(picture, :alt => picture.description, :width => '200') %>
+      </div>
+      <div class="description">
+        <p class='text'><b>Номер <%= index + 1 %>:</b> <%= picture.description %></p>
+        <p class='file'><b>Файл:</b> <%= picture.picture_url.split('/').last %></p>
+      </div>
     </li>
   <% end %>
 </ol>
