@@ -75,4 +75,10 @@ module ApplicationHelper
     options_for_select(result, resource.navigation_position? ? 'current' : 'last')
   end
 
+  def image_for(gallery_picture, options)
+    if thumbnail = gallery_picture.create_thumbnail(options)
+      image_tag_for(thumbnail)
+    end
+  end
+
 end

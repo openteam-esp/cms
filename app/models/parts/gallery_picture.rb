@@ -4,11 +4,12 @@ class GalleryPicture < ActiveRecord::Base
   belongs_to :gallery_part
 
   validates_presence_of :description, :picture_url
+  delegate :create_thumbnail, :thumbnail, :to => :image, :allow_nil => true
 
-  def resized_picture_url(width = 0)
-    return picture_url unless picture_url
-    width > 0 ? picture_url.insert(picture_url.rindex('/'), "/#{width}-#{width}") : picture_url
+  def image
+    @image ||= EspCommons::Image.new(:url => picture_url, :description => description).parse_url if picture_url?
   end
+
 end
 # == Schema Information
 #

@@ -5,7 +5,7 @@
   <%= form.semantic_fields_for :gallery_pictures do |f|%>
     <%= f.input :picture_url, :as => :hidden, :input_html => { :class => 'picture_url' } %>
     <li>
-      <%= image_tag f.object.resized_picture_url(200), :width => '200' %>
+      <%= image_for(f.object, :width => '200') %>
     </li>
     <%= f.input :description %>
     <%= link_to t('choose_picture'), '#', :class => 'choose_picture button icon settings', :id => Time.now.to_i %>

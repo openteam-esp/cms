@@ -1,10 +1,10 @@
 <h3><%= gallery_part.title %></h3>
 
-<ul>
+<ol>
   <% gallery_part.gallery_pictures.each do |picture| %>
     <li>
-      <%= image_tag picture.resized_picture_url(200), :title => picture.description, :alt => picture.description, :width => '200' %>
+      <%= image_for(picture, :alt => picture.description, :width => '200') %>
       <%= picture.description %>
     </li>
   <% end %>
-</ul>
+</ol>
