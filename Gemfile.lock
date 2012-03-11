@@ -105,7 +105,7 @@ GEM
     esp-ckeditor (0.0.8)
       formtastic
       rails
-    esp-commons (0.1.4)
+    esp-commons (0.1.5)
       airbrake
       api_smith
       configliere
