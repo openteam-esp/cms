@@ -133,6 +133,9 @@ sites:
         right_side_charts:
           required: false
           configurable: true
+        reports:
+          required: false
+          configurable: true
         gallery:
           required: false
           configurable: true
