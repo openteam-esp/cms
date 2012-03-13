@@ -161,18 +161,21 @@ function choose_picture(){
     dialog.load_iframe();
 
     input.change(function(){
-      var img = input.closest('.fields').find('img');
-      var src = input.val().split('/');
-      src.splice(-2,1);
-      var src_array = src.slice(0, src.length-1);
-      src_array.push('200-200');
-      src_array.push(src.slice(-1)[0]);
-      src = src_array.join('/');
-      if (img.length != 0 ){
-        img.attr('src', src);
-      } else {
-        $('.image', input.closest('.fields')).html('<img src="' + src + '" width="200px" />');
+      var url = input.val();
+      var type = url.match(/.(\w+)$/)[1];
+      var name = url.split('/').slice(-1)[0];
+      var presentation = input.closest('.fields').find('.presentation');
+      if (type.match(/jpeg|jpg|png|bmp|tiff/)) {
+        var array_url = url.split('/');
+        array_url.splice(-2, 1);
+        var resized_url = array_url.slice(0, array_url.length-1);
+        resized_url.push('200-200');
+        resized_url.push(array_url.slice(-1)[0]);
+        presentation.html('<img src='+resized_url.join('/')+' width="200px" alt='+name+'/>');
+      }else{
+        presentation.html('<a href='+url+'>'+name+'</a>');
       };
+
       input.unbind('change');
     });
 

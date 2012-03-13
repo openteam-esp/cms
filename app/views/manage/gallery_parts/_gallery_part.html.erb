@@ -8,7 +8,7 @@
       </div>
       <div class="description">
         <p class='text'><b>Номер <%= index + 1 %>:</b> <%= picture.description %></p>
-        <p class='file'><b>Файл:</b> <%= picture.picture_url.split('/').last %></p>
+        <p class='file'><b>Файл:</b> <%= link_to picture.picture_url.split('/').last, picture.picture_url %></p>
       </div>
     </li>
   <% end %>
