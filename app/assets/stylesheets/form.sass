@@ -74,7 +74,7 @@
     .inline-errors
       background: url('inline_error_arrow.png') no-repeat 2px 2px
       padding-left: 16px
-  .buttons
+  .actions
     +clearfix
     margin-top: 10px
     li
@@ -85,15 +85,16 @@
   #part_title
     width: 350px
 
-.regions_list
-  .formtastic
-    +clearfix
-    fieldset
-      float: left
-      &.inputs
-        margin-bottom: 0
-      &.buttons
-        margin: 25px 0 0 10px
+#content_wrapper
+  .regions_list
+    .formtastic
+      +clearfix
+      fieldset
+        float: left
+        &.inputs
+          margin-bottom: 0
+        &.actions
+          margin: 25px 0 0 10px
 
 .gallery_part
   .fields

@@ -16,8 +16,8 @@
             <%= form.input :type, :as => :select, :collection => Part.descendants %>
             <%= form.input :region, :as => :hidden, :input_html => { :value => region } %>
           <% end %>
-          <%= form.buttons do %>
-            <%= form.commit_button action_title(:action => 'new', :controller => 'parts'), :button_html => { :class => 'button' } %>
+          <%= form.actions do %>
+            <%= form.action :submit, :as => :button, :label => action_title(:action => 'new', :controller => 'parts'), :button_html => { :class => 'button icon add' } %>
           <% end %>
         <% end %>
       <% end %>

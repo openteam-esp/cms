@@ -2,7 +2,7 @@
 <%= form.inputs do %>
   <%= form.input :region, :as => :hidden %>
   <%= form.input :type, :as => :hidden %>
-  <%= form.semantic_fields_for :gallery_pictures do |f|%>
+  <%= form.semantic_fields_for :gallery_pictures do |f| %>
     <%= f.input :picture_url, :as => :hidden, :input_html => { :class => 'picture_url' } %>
     <li class='image'>
       <%= image_for(f.object, :width => '200') %>
