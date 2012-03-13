@@ -161,7 +161,7 @@ function choose_picture(){
     dialog.load_iframe();
 
     input.change(function(){
-      var img = input.parent().parent().find('img');
+      var img = input.closest('.fields').find('img');
       var src = input.val().split('/');
       src.splice(-2,1);
       var src_array = src.slice(0, src.length-1);
@@ -171,7 +171,7 @@ function choose_picture(){
       if (img.length != 0 ){
         img.attr('src', src);
       } else {
-        input.parent().after('<img src="' + src + '" width="200px" />');
+        $('.image', input.closest('.fields')).html('<img src="' + src + '" width="200px" />');
       };
       input.unbind('change');
     });

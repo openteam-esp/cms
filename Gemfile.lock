@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/kfprimm/nested_form
-  revision: 7173a71f5325a2862f83543fe9e82a4ad606ff10
+  remote: git://github.com/ryanb/nested_form
+  revision: 486e0f0e93f3ca455d5d0fc7869053257b6afce2
   specs:
-    nested_form (0.1.1)
+    nested_form (0.2.0)
 
 GIT
   remote: git://github.com/swanandp/acts_as_list

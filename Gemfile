@@ -13,7 +13,7 @@ gem 'fog',                                        :require => false
 gem 'gilenson'
 gem 'hashie'
 gem 'jquery-rails'
-gem 'nested_form',                                :git => 'git://github.com/kfprimm/nested_form'
+gem 'nested_form',                                :git => 'git://github.com/ryanb/nested_form'
 gem 'rails'
 gem 'sanitize'
 gem 'sass-rails'
