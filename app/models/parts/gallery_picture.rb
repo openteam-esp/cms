@@ -4,6 +4,9 @@ class GalleryPicture < ActiveRecord::Base
   belongs_to :gallery_part
 
   validates_presence_of :description, :picture_url
+
+  default_scope order(:id)
+
   delegate :create_thumbnail, :thumbnail, :to => :image, :allow_nil => true
 
   def image
@@ -11,6 +14,7 @@ class GalleryPicture < ActiveRecord::Base
   end
 
 end
+
 # == Schema Information
 #
 # Table name: gallery_pictures
