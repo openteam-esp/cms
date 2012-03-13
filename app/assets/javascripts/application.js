@@ -161,11 +161,16 @@ function choose_picture(){
     dialog.load_iframe();
 
     input.change(function(){
-      var img = input.parent().parent().find('img'),
-          src = [input.val().slice(0, input.val().lastIndexOf('/')), '/200-200', input.val().slice(input.val().lastIndexOf('/'))].join('');
+      var img = input.parent().parent().find('img');
+      var src = input.val().split('/');
+      src.splice(-2,1);
+      var src_array = src.slice(0, src.length-1);
+      src_array.push('200-200');
+      src_array.push(src.slice(-1)[0]);
+      src = src_array.join('/');
       if (img.length != 0 ){
         img.attr('src', src);
-      }else{
+      } else {
         input.parent().after('<img src="' + src + '" width="200px" />');
       };
       input.unbind('change');

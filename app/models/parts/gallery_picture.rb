@@ -9,6 +9,8 @@ class GalleryPicture < ActiveRecord::Base
 
   delegate :create_thumbnail, :thumbnail, :to => :image, :allow_nil => true
 
+  default_scope :order => "id"
+
   def image
     @image ||= EspCommons::Image.new(:url => picture_url, :description => description).parse_url unless picture_url.blank?
   end
