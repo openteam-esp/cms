@@ -1,29 +1,36 @@
-# encoding: utf-8
+require 'base64'
 
-require 'spec_helper'
+class TextPart < Part
+  validates_presence_of :text_info_path
 
-describe BreadcrumbsPart do
-  let(:site) { Fabricate(:site, :slug => 'www.tgr.ru', :title => 'site') }
-  let(:locale) { Fabricate(:locale, :parent => site, :slug => 'ru', :title => 'ru') }
-  let(:section) { Fabricate(:page, :parent => locale, :slug => 'section', :title => 'section') }
-  let(:subsection) { Fabricate(:page, :parent => section, :slug => 'subsection', :title => 'subsection') }
-  let(:page) { Fabricate(:page, :parent => subsection, :slug => 'page', :title => 'page') }
-
-  it "должен строить крошки" do
-    breadcrumbs_part = BreadcrumbsPart.create(:node => locale, :region => 'region')
-
-    expected_hash = {
-      'type' => 'BreadcrumbsPart',
-      'content' => {
-        'ru' => '/ru',
-        'section' => '/ru/section',
-        'subsection' => '/ru/section/subsection',
-        'page' => '/ru/section/subsection/page'
-      }
-    }
-
-    page.part_for('region', true).to_json.should == expected_hash
+  def to_json
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
+
+  def part_title
+    title
+  end
+
+  def content
+    { 'body' => body, 'updated_at' => updated_at }
+  end
+
+  def body
+    JSON.parse(response_body)['content']
+  end
+
+  private
+    def remote_url
+      "#{Settings[:vfs][:url]}/api/el_finder/v2?format=json&cmd=get"
+    end
+
+    def str_to_hash(str)
+      Base64.urlsafe_encode64(str).strip.tr('=', '')
+    end
+
+    def url_for_request
+      "#{remote_url}&target=r1_#{str_to_hash(text_info_path.gsub(/^\//,''))}"
+    end
 end
 
 # == Schema Information

@@ -2,28 +2,36 @@
 
 require 'spec_helper'
 
-describe BreadcrumbsPart do
-  let(:site) { Fabricate(:site, :slug => 'www.tgr.ru', :title => 'site') }
-  let(:locale) { Fabricate(:locale, :parent => site, :slug => 'ru', :title => 'ru') }
-  let(:section) { Fabricate(:page, :parent => locale, :slug => 'section', :title => 'section') }
-  let(:subsection) { Fabricate(:page, :parent => section, :slug => 'subsection', :title => 'subsection') }
-  let(:page) { Fabricate(:page, :parent => subsection, :slug => 'page', :title => 'page') }
+describe TextPart do
 
-  it "должен строить крошки" do
-    breadcrumbs_part = BreadcrumbsPart.create(:node => locale, :region => 'region')
+  before do
+    @part = Fabricate(:text_part)
+    @part.node.update_attribute(:title, "Заголовок страницы")
+  end
 
-    expected_hash = {
-      'type' => 'BreadcrumbsPart',
-      'content' => {
-        'ru' => '/ru',
-        'section' => '/ru/section',
-        'subsection' => '/ru/section/subsection',
-        'page' => '/ru/section/subsection/page'
-      }
+  it "должна возвращять part_title для своей страницы" do
+    TextPart.any_instance.stub(:content).and_return( { 'body' => 'text content' } )
+    TextPart.any_instance.stub(:title).and_return('Заголовок парта')
+
+    @part.node.page_title.should == "Заголовок страницы"
+  end
+
+  it "должна ставить part_title" do
+    TextPart.any_instance.stub(:content).and_return( { 'body' => '<script type="text/javascript">alert("text content");</script>' } )
+    TextPart.any_instance.stub(:title).and_return('Заголовок парта')
+    TextPart.any_instance.stub(:response_status).and_return(200)
+
+    @expected_hash = {
+      'template' => 'text_part',
+      'response_status' => 200,
+      'type' => 'TextPart',
+      'part_title' => 'Заголовок парта',
+      'content' => { 'body' => '<script type="text/javascript">alert("text content");</script>' }
     }
 
-    page.part_for('region', true).to_json.should == expected_hash
+    @part.to_json.should ==  @expected_hash
   end
+
 end
 
 # == Schema Information

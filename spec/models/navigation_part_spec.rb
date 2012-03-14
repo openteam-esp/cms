@@ -187,5 +187,6 @@ end
 #  youtube_video_related_count :integer
 #  youtube_video_width         :integer
 #  youtube_video_height        :integer
+#  text_info_path              :string(255)
 #
 

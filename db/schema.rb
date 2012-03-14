@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120306073034) do
+ActiveRecord::Schema.define(:version => 20120314024851) do
 
   create_table "contexts", :force => true do |t|
     t.string   "title"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20120306073034) do
     t.integer  "youtube_video_related_count"
     t.integer  "youtube_video_width"
     t.integer  "youtube_video_height"
+    t.string   "text_info_path"
   end
 
   create_table "permissions", :force => true do |t|
