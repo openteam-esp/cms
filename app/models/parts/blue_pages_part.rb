@@ -6,11 +6,15 @@ class BluePagesPart < Part
   validates_presence_of :blue_pages_category_id
 
   def to_json
-    super.merge!(as_json(:only => :type, :methods => 'content'))
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
 
   def content
     update_item_links
+  end
+
+  def part_title
+    title
   end
 
   def categories
