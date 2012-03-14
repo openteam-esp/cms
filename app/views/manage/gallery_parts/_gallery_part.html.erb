@@ -3,8 +3,14 @@
 <ol>
   <% gallery_part.gallery_pictures.each_with_index do |picture, index| %>
     <li class="<%= cycle :first, :second, :third %>">
-      <div class='image'>
-        <%= image_for(picture, :alt => picture.description, :width => '200') %>
+      <div class='presentation'>
+        <% if picture.picture_url? %>
+          <% if picture.picture_url.match(/jpg|jpeg|bmp|png|tiff/i) %>
+            <%= image_for(picture, :alt => picture.description, :width => '200') %>
+          <% else %>
+            <%= link_to picture.picture_url, picture.picture_url %>
+          <% end %>
+        <% end %>
       </div>
       <div class="description">
         <p class='text'><b>Номер <%= index + 1 %>:</b> <%= picture.description %></p>

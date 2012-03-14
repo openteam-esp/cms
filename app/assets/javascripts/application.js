@@ -165,7 +165,7 @@ function choose_picture(){
       var type = url.match(/.(\w+)$/)[1];
       var name = url.split('/').slice(-1)[0];
       var presentation = input.closest('.fields').find('.presentation');
-      if (type.match(/jpeg|jpg|png|bmp|tiff/)) {
+      if (type.match(/jpeg|jpg|png|bmp|tiff/i)) {
         var array_url = url.split('/');
         array_url.splice(-2, 1);
         var resized_url = array_url.slice(0, array_url.length-1);
