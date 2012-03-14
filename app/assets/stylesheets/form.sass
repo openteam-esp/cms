@@ -20,6 +20,7 @@
     .date_picker,
     .url,
     .text,
+    .div_wrapped_text,
     .ckeditor,
     .select
       label
@@ -60,6 +61,7 @@
         width: 258px
         +input_style
     .text,
+    .div_wrapped_text,
     .ckeditor
       textarea
         +input_style
@@ -108,9 +110,10 @@
       img
         border: 1px solid #ddd
         padding: 1px
-
-    .sttring,
-    .text
-      margin: 0 0 15px 0
-      textarea
-        height: 50px
+    .description
+      +clearfix
+      .sttring,
+      .div_wrapped_text
+        margin: 0 0 10px 0
+        textarea
+          height: 50px

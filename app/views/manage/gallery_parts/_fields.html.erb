@@ -5,17 +5,16 @@
   <%= form.semantic_fields_for :gallery_pictures do |f| %>
     <%= f.input :picture_url, :as => :hidden, :input_html => { :class => 'picture_url' } %>
     <li class='presentation'>
-      <% if f.object.picture_url? %>
-        <% if f.object.picture_url.match(/jpg|jpeg|bmp|png|tiff/i) %>
-          <%= image_for(f.object, :width => '200') %>
-        <% else %>
-          <%= link_to f.object.picture_url, f.object.picture_url %>
-        <% end %>
+      <% if f.object.picture_url? && f.object.picture_url.match(/jpg|jpeg|bmp|png|tiff/i) %>
+        <%= image_for(f.object, :width => '200!') %>
       <% end %>
     </li>
-    <%= f.input :description %>
-    <%= link_to t('choose_picture'), '#', :class => 'choose_picture button icon settings', :id => Time.now.to_i %>
-    <%= f.link_to_remove t('remove'), :class => 'button trash icon' %>
+    <li class="description">
+      <%= link_to f.object.picture_url.split('/').last, f.object.picture_url, :class => 'link_to_file' if f.object.picture_url? %>
+      <%= f.input :description, :as => :div_wrapped_text %>
+      <%= link_to t('choose_picture'), '#', :class => 'choose_picture button icon settings', :id => Time.now.to_i %>
+      <%= f.link_to_remove t('remove'), :class => 'button trash icon' %>
+    </li>
   <% end %>
   <%= form.link_to_add t('add_picture'), :gallery_pictures, :class => 'button icon add' %>
 <% end %>

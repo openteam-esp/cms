@@ -148,10 +148,9 @@ function manipulate_titles() {
 };
 
 function choose_picture(){
-  $('#gallery_pictures_fields_blueprint img').remove()
-  $('.choose_picture').live('click', function(){
+  $('.choose_picture').live('click', function() {
     var link = $(this);
-    var origin_id = link.siblings('li').find('.picture_url').attr('id');
+    var origin_id = link.closest('.fields').find('.picture_url').attr('id');
     var input = $('#'+origin_id);
 
     var dialog = link.create_or_return_dialog('elfinder_picture_dialog');
@@ -165,15 +164,23 @@ function choose_picture(){
       var type = url.match(/.(\w+)$/)[1];
       var name = url.split('/').slice(-1)[0];
       var presentation = input.closest('.fields').find('.presentation');
+      var description = input.closest('.fields').find('.description');
+      var link_to_file = $('.link_to_file', description);
       if (type.match(/jpeg|jpg|png|bmp|tiff/i)) {
         var array_url = url.split('/');
         array_url.splice(-2, 1);
         var resized_url = array_url.slice(0, array_url.length-1);
         resized_url.push('200-200');
         resized_url.push(array_url.slice(-1)[0]);
-        presentation.html('<img src='+resized_url.join('/')+' width="200px" alt='+name+'/>');
+        presentation.css('width', '200').html('<img src='+resized_url.join('/')+' width="200px" alt='+name+'/>');
       }else{
         presentation.html('<a href='+url+'>'+name+'</a>');
+      };
+      if (link_to_file.length) {
+        link_to_file.attr('href', url);
+        link_to_file.text(name);
+      } else {
+        description.prepend('<a class="link_to_file" href="' + url + '">' + name + '</a>');
       };
 
       input.unbind('change');
