@@ -21,7 +21,7 @@ end
 #
 #  id              :integer         not null, primary key
 #  gallery_part_id :integer
-#  description     :string(255)
+#  description     :text
 #  picture_url     :string(255)
 #  created_at      :datetime
 #  updated_at      :datetime
