@@ -67,6 +67,7 @@ sites:
   tgr:
     part_templates:
       blue_pages_item_part: department_chief
+      blue_pages_part: list_organizations
       gallery_part: files_list
 
     templates:
