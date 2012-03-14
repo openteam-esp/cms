@@ -9,6 +9,7 @@ Spork.prefork do
   require 'fabrication'
   require "cancan/matchers"
   require 'esp_auth/spec_helper'
+  require 'sunspot_matchers'
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
@@ -19,6 +20,10 @@ Spork.prefork do
 
     config.mock_with :rspec
     config.use_transactional_fixtures = true
+
+    config.before :all do
+      Sunspot.session = SunspotMatchers::SunspotSessionSpy.new(Sunspot.session)
+    end
   end
 end
 

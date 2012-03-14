@@ -42,6 +42,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'spork',                  '~> 0.9.0.rc9'
   gem 'sqlite3'
+  gem 'sunspot_matchers',                        :require => false
 end
 
 group :production do
