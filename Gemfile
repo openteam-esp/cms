@@ -38,9 +38,9 @@ group :test do
   gem 'guard-spork'
   gem 'libnotify'
   gem 'rb-inotify'
-  gem 'rspec-rails',            '~> 2.6.0'
+  gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'spork',                  '~> 0.9.0.rc9'
+  gem 'spork'
   gem 'sqlite3'
   gem 'sunspot_matchers',                        :require => false
 end
