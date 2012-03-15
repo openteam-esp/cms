@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+source ~/.rvm/scripts/rvm
+export LANG=ru_RU.UTF-8
+
+UNICORN=true bundle exec unicorn -c $(realpath $(dirname $0)/../config/unicorn.rb) -E production -D

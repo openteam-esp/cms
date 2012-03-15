@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+PROJECT=$(basename $(dirname $(dirname $(realpath $0))))
+
+git checkout Gemfile.lock
+git pull
+bundle --path .bundle --binstubs --clean --without test:development
+bin/rake db:migrate
+if [ -f /usr/local/etc/rc.d/esp-${PROJECT} ]; then
+  /usr/local/etc/rc.d/esp-${PROJECT} restart
+fi
+bin/rake assets:precompile
+if [ -f /usr/local/etc/rc.d/esp-${PROJECT} ]; then
+  /usr/local/etc/rc.d/esp-${PROJECT} restart
+fi
