@@ -16,11 +16,11 @@ gem 'jquery-rails'
 gem 'nested_form'
 gem 'rails'
 gem 'sanitize'
+gem 'sass-rails'
 gem 'show_for'
 gem 'simple-navigation'
 
 group :assets do
-  gem 'sass-rails'
   gem 'compass-rails'
   gem 'uglifier'
 end
