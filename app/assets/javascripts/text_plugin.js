@@ -157,7 +157,8 @@ function service(params){
 };
 
 function show_content(content){
-  $('.show_text_path').html(content);
+  $('.show_text_path').text('');
+  $('<pre/>').appendTo($('.show_text_path')).text(content);
 };
 
 // Вешаем обработку изменения поля text_path после callback из elFinder

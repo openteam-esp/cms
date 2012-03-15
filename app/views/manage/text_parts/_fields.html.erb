@@ -10,6 +10,6 @@
   </li>
 <% end %>
 
-<div class="show_info_path">
-  <%= resource.body if resource.text_info_path %>
+<div class="show_text_path">
+  <%= content_tag :pre, resource.body if resource.text_info_path %>
 </div>

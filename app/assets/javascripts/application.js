@@ -9,7 +9,7 @@
  *= require jquery-ui.min.js
  *= require jquery.ui.datepicker-ru.js
  *= require jquery_ujs.js
- *= require nested_form.js
+ *= require jquery_nested_form.js
  *= require treeview/jquery.cookie.js
  *= require treeview/jquery.treeview.js
  *= require treeview/jquery.treeview.edit.js
@@ -173,8 +173,8 @@ function choose_picture(){
         resized_url.push('200-200');
         resized_url.push(array_url.slice(-1)[0]);
         presentation.css('width', '200').html('<img src='+resized_url.join('/')+' width="200px" alt='+name+'/>');
-      }else{
-        presentation.html('<a href='+url+'>'+name+'</a>');
+      } else {
+        presentation.css('width', '200').html('<a href='+url+'>'+name+'</a>');
       };
       if (link_to_file.length) {
         link_to_file.attr('href', url);

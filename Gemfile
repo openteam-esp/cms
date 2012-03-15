@@ -13,14 +13,14 @@ gem 'fog',                                        :require => false
 gem 'gilenson'
 gem 'hashie'
 gem 'jquery-rails'
-gem 'nested_form',                                :git => 'git://github.com/ryanb/nested_form'
+gem 'nested_form'
 gem 'rails'
 gem 'sanitize'
-gem 'sass-rails'
 gem 'show_for'
 gem 'simple-navigation'
 
 group :assets do
+  gem 'sass-rails'
   gem 'compass-rails'
   gem 'uglifier'
 end
@@ -42,7 +42,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'spork'
   gem 'sqlite3'
-  gem 'sunspot_matchers',                        :require => false
+  gem 'sunspot_matchers',                         :require => false
 end
 
 group :production do
