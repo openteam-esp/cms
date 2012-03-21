@@ -20,6 +20,10 @@ class Page < Node
   end
 
   private
+    def node_for_json
+      page_for_redirect ? page_for_redirect : super
+    end
+
     def generate_slug
       self.slug = ActiveSupport::Inflector.transliterate(self.title).gsub(/[^[:alnum:]]/, '-').downcase
     end

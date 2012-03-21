@@ -146,6 +146,25 @@ describe Node do
     it { locale.context.should == site.context }
     it { page.context.should == site.context }
   end
+
+  describe 'перенаправление на страницу' do
+    let(:locale) { Fabricate :locale }
+
+    let(:foo_page) { Fabricate :page, :slug => 'foo', :parent => locale }
+    let(:bar_page) { Fabricate :page, :slug => 'bar', :parent => locale, :page_for_redirect => foo_page }
+
+    let(:part) { Fabricate :navigation_part, :node => foo_page, :region => 'content', :from_node => locale }
+
+    before do
+      part
+
+      Page.any_instance.stub(:site_settings).and_return(YAML.load_file(Rails.root.join 'spec/fixtures/sites.yml').to_hash['sites']['www.tgr.ru'])
+    end
+
+    it {
+      bar_page.to_json.should == foo_page.to_json
+    }
+  end
 end
 
 # == Schema Information

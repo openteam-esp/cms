@@ -40,12 +40,13 @@ class Node < ActiveRecord::Base
     ancestry_depth + context.depth + 1
   end
 
+
   def to_json
     {
       'page' => {
-        'title' => page_title,
-        'template' => template,
-        'regions' => regions.inject({}) { |h, r| h.merge(r => part_for(r, true).to_json) }
+        'title' => node_for_json.page_title,
+        'template' => node_for_json.template,
+        'regions' => node_for_json.regions.inject({}) { |h, r| h.merge(r => node_for_json.part_for(r, true).to_json) }
       }
     }
   end
@@ -137,6 +138,10 @@ class Node < ActiveRecord::Base
   end
 
   private
+    def node_for_json
+      self
+    end
+
     def cache_route
       return unless self.slug_changed?
       prepare_route
