@@ -21,7 +21,8 @@ class HtmlPart < Part
 
   private
     def remote_url
-      "#{Settings[:vfs][:url]}/api/el_finder/v2?format=json&cmd=get"
+      key = Settings[:storage] || Settings[:vfs]
+      "#{key[:url]}/api/el_finder/v2?format=json&cmd=get"
     end
 
     def str_to_hash(str)
