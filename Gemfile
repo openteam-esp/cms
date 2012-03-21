@@ -18,6 +18,7 @@ group :default do
   gem 'hashie'
   gem 'jquery-rails'
   gem 'nested_form'
+  gem 'openteam-commons'
   gem 'rails'
   gem 'sanitize'
   gem 'sass-rails'
