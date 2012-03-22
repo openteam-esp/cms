@@ -167,30 +167,6 @@ sites:
         content_first:
           required: false
           configurable: true
-        content_second:
-          required: false
-          configurable: true
-        content_third:
-          required: false
-          configurable: true
-        right_side_navigation:
-          required: false
-          configurable: true
-        right_side_facts:
-          required: false
-          configurable: true
-        right_side_links:
-          required: false
-          configurable: true
-        right_side_charts:
-          required: false
-          configurable: true
-        reports:
-          required: false
-          configurable: true
-        gallery:
-          required: false
-          configurable: true
         banners:
           required: false
           configurable: true
