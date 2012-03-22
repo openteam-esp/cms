@@ -167,6 +167,9 @@ sites:
         content_first:
           required: false
           configurable: true
+        content_second:
+          required: false
+          configurable: true
         banners:
           required: false
           configurable: true
