@@ -45,10 +45,16 @@ class NewsListPart < Part
       "#{news_url}/channels/#{news_channel}/entries.rss"
     end
 
+    def order_by
+      *field, direction = news_order_by.split('_')
+
+      "#{field.join('_')}+#{direction}"
+    end
+
     def search_params
       news_until = ::I18n.l(news_until) if news_until
 
-      URI.escape("utf8=✓&entry_search[channel_ids][]=#{news_channel}&entry_search[order_by]=#{news_order_by.gsub(/_/,'+')}&per_page=#{news_per_page}&page=#{current_page}")
+      URI.escape("utf8=✓&entry_search[channel_ids][]=#{news_channel}&entry_search[order_by]=#{order_by}&per_page=#{news_per_page}&page=#{current_page}")
     end
 
     def image_size_params

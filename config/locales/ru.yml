@@ -132,6 +132,8 @@ ru:
         news_order_by_enum:
           since_desc: по дате публикации
           until_asc: по дате актуальности
+          event_entry_properties_since_asc: по возрастанию даты начала мероприятия
+          event_entry_properties_since_desc: по убыванию даты начала мероприятия
         news_paginated: Постраничный переход
         news_per_page: Количество на странице
         news_height: Высота картинки
