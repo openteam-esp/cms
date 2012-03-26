@@ -91,6 +91,9 @@ sites:
         main_bottom_navigation:
           required: true
           configurable: true
+        map:
+          required: true
+          configurable: true
         banners:
           required: true
           configurable: true
