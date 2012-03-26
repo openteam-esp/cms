@@ -178,7 +178,7 @@ GEM
     omniauth-oauth2 (1.0.0)
       oauth2 (~> 0.5.0)
       omniauth (~> 1.0)
-    openteam-commons (0.0.7)
+    openteam-commons (0.0.8)
       airbrake
       configliere
       rails
