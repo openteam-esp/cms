@@ -91,7 +91,7 @@ sites:
         main_bottom_navigation:
           required: true
           configurable: true
-        map:
+        map_region:
           required: true
           configurable: true
         banners:
