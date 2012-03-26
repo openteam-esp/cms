@@ -4,6 +4,11 @@
   <%= form.input :news_paginated %>
   <%= form.input :news_order_by, :as => :select, :collection => form.object.class.values_for_select_tag(:news_order_by) %>
 
+  <%= form.input :news_event_entry,
+                 :as => :radio,
+                 :collection => form.object.class.values_for_select_tag(:news_event_entry),
+                 :required => false %>
+
   <%= render :partial => 'manage/parts/item_page', :locals => { :form => form } %>
 
   <%= form.input :news_until, :as => :date_picker %>

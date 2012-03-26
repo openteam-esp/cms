@@ -51,10 +51,21 @@ class NewsListPart < Part
       "#{field.join('_')}+#{direction}"
     end
 
+    def gone?
+      news_event_entry == 'until'
+    end
+
+    def coming?
+      news_event_entry == 'since'
+    end
+
     def search_params
       news_until = ::I18n.l(news_until) if news_until
 
-      URI.escape("utf8=✓&entry_search[channel_ids][]=#{news_channel}&entry_search[order_by]=#{order_by}&per_page=#{news_per_page}&page=#{current_page}")
+      URI.escape("utf8=✓&entry_search[channel_ids][]=#{news_channel}&entry_search[order_by]=#{order_by}&per_page=#{news_per_page}&page=#{current_page}").tap do |string|
+        string << "&entry_search[event_entry_properties_until_lt]=#{DateTime.now.rfc3339}" if gone?
+        string << "&entry_search[event_entry_properties_since_gt]=#{DateTime.now.rfc3339}" if coming?
+      end
     end
 
     def image_size_params
@@ -95,8 +106,8 @@ end
 # Table name: parts
 #
 #  id                          :integer         not null, primary key
-#  created_at                  :datetime
-#  updated_at                  :datetime
+#  created_at                  :datetime        not null
+#  updated_at                  :datetime        not null
 #  region                      :string(255)
 #  type                        :string(255)
 #  node_id                     :integer
@@ -139,5 +150,6 @@ end
 #  youtube_video_width         :integer
 #  youtube_video_height        :integer
 #  text_info_path              :string(255)
+#  news_event_entry            :string(255)
 #
 

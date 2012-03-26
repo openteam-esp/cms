@@ -24,8 +24,8 @@ end
 # Table name: parts
 #
 #  id                          :integer         not null, primary key
-#  created_at                  :datetime
-#  updated_at                  :datetime
+#  created_at                  :datetime        not null
+#  updated_at                  :datetime        not null
 #  region                      :string(255)
 #  type                        :string(255)
 #  node_id                     :integer
@@ -68,5 +68,6 @@ end
 #  youtube_video_width         :integer
 #  youtube_video_height        :integer
 #  text_info_path              :string(255)
+#  news_event_entry            :string(255)
 #
 

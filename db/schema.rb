@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120314024851) do
+ActiveRecord::Schema.define(:version => 20120323040652) do
 
   create_table "contexts", :force => true do |t|
     t.string   "title"
@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(:version => 20120314024851) do
 
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
-    t.text     "description",     :limit => 255
+    t.text     "description"
     t.string   "picture_url"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "nodes", :force => true do |t|
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20120314024851) do
     t.integer  "youtube_video_width"
     t.integer  "youtube_video_height"
     t.string   "text_info_path"
+    t.string   "news_event_entry"
   end
 
   create_table "permissions", :force => true do |t|
