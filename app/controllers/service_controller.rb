@@ -11,7 +11,7 @@ class ServiceController < ApplicationController
     def generated_path
       node = Node.find(params[:parent_id])
       additional  = params[:additional].split('/').select{|a| !a.empty?}.join('/')
-      additional = ActiveSupport::Inflector.transliterate(additional).gsub(/'/, '').gsub(/[^[:alnum:]]/, '_')
+      additional = ActiveSupport::Inflector.transliterate(additional).gsub(/'/, '').gsub(/[^[:alnum:]]+/, '_')
       chunks = (node.path.map(&:slug).map(&:underscore) + [additional, "#{additional}.xhtml"]).map(&:downcase)
       '/' + chunks.join('/')
     end
