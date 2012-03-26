@@ -59,12 +59,30 @@ class NewsListPart < Part
       news_event_entry == 'since'
     end
 
+    def since_param
+      params['since'].to_date.rfc3339 rescue nil
+    end
+
+    def until_param
+      params['until'].to_date.rfc3339 rescue nil
+    end
+
+    def events_for_period?
+      !(since_param.blank? || until_param.blank?)
+    end
+
+    def events_params
+      return "&entry_search[event_entry_properties_since_gt]=#{since_param}&entry_search[event_entry_properties_until_lt]=#{until_param}" if events_for_period?
+
+      return "&entry_search[event_entry_properties_until_lt]=#{DateTime.now.rfc3339}" if gone?
+      return "&entry_search[event_entry_properties_since_gt]=#{DateTime.now.rfc3339}" if coming?
+    end
+
     def search_params
       news_until = ::I18n.l(news_until) if news_until
 
       URI.escape("utf8=✓&entry_search[channel_ids][]=#{news_channel}&entry_search[order_by]=#{order_by}&per_page=#{news_per_page}&page=#{current_page}").tap do |string|
-        string << "&entry_search[event_entry_properties_until_lt]=#{DateTime.now.rfc3339}" if gone?
-        string << "&entry_search[event_entry_properties_since_gt]=#{DateTime.now.rfc3339}" if coming?
+        string << events_params
       end
     end
 
