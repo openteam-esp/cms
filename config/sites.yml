@@ -283,3 +283,29 @@ sites:
         content_first:
           required: false
           configurable: true
+
+      event_page:
+        site_name:
+          required: true
+          configurable: false
+        main_top_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: false
+          configurable: true
+        navigation_top:
+          required: false
+          configurable: true
+        navigation_right:
+          required: true
+          configurable: true
+        content_first:
+          required: false
+          configurable: true
+        content_second:
+          required: false
+          configurable: true
