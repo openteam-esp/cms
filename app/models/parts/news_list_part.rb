@@ -76,6 +76,8 @@ class NewsListPart < Part
 
       return "&entry_search[event_entry_properties_until_lt]=#{DateTime.now.rfc3339}" if gone?
       return "&entry_search[event_entry_properties_since_gt]=#{DateTime.now.rfc3339}" if coming?
+
+      ''
     end
 
     def search_params
