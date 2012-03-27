@@ -321,3 +321,6 @@ sites:
         content_second:
           required: false
           configurable: true
+        content_third:
+          required: false
+          configurable: true
