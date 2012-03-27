@@ -131,6 +131,7 @@ ru:
         news_event_entry: Сортировка мероприятий
         news_event_entry_enum:
           until: Прошедшие
+          now: Сейчас
           since: Предстоящие
         news_order_by: Сортировка
         news_order_by_enum:

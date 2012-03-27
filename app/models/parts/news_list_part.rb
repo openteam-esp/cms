@@ -55,6 +55,10 @@ class NewsListPart < Part
       news_event_entry == 'until'
     end
 
+    def now?
+      news_event_entry == 'now'
+    end
+
     def coming?
       news_event_entry == 'since'
     end
@@ -76,6 +80,8 @@ class NewsListPart < Part
 
       return "&entry_search[event_entry_properties_until_lt]=#{DateTime.now.rfc3339}" if gone?
       return "&entry_search[event_entry_properties_since_gt]=#{DateTime.now.rfc3339}" if coming?
+
+      return "&entry_search[event_entry_properties_since_lt]=#{DateTime.now.rfc3339}&entry_search[event_entry_properties_until_gt]=#{DateTime.now.rfc3339}" if now?
 
       ''
     end
