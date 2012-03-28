@@ -283,7 +283,7 @@ sites:
         breadcrumbs:
           required: false
           configurable: true
-        navigation_top:
+        content_header_navigation:
           required: false
           configurable: true
         navigation_right:
@@ -309,9 +309,6 @@ sites:
         breadcrumbs:
           required: false
           configurable: true
-        navigation_top:
-          required: false
-          configurable: true
         navigation_right:
           required: true
           configurable: true
@@ -324,3 +321,17 @@ sites:
         content_third:
           required: false
           configurable: true
+
+      about_project_page:
+        site_name:
+          required: true
+          configurable: false
+        targets:
+          required: true
+          configurable: false
+        main_top_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
