@@ -46,7 +46,6 @@ end
 #  news_item_page_id           :integer
 #  blue_pages_category_id      :integer
 #  appeal_section_slug         :string(255)
-#  blue_pages_expand           :boolean
 #  navigation_group            :string(255)
 #  title                       :string(255)
 #  html_info_path              :string(255)
@@ -75,5 +74,6 @@ end
 #  youtube_video_height        :integer
 #  text_info_path              :string(255)
 #  news_event_entry            :string(255)
+#  blue_pages_expand           :integer
 #
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120328035159) do
+ActiveRecord::Schema.define(:version => 20120328075557) do
 
   create_table "contexts", :force => true do |t|
     t.string   "title"
@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(:version => 20120328035159) do
     t.integer  "news_item_page_id"
     t.integer  "blue_pages_category_id"
     t.string   "appeal_section_slug"
-    t.boolean  "blue_pages_expand"
     t.string   "navigation_group"
     t.string   "title"
     t.string   "html_info_path"
@@ -97,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20120328035159) do
     t.integer  "youtube_video_height"
     t.string   "text_info_path"
     t.string   "news_event_entry"
+    t.integer  "blue_pages_expand"
   end
 
   create_table "permissions", :force => true do |t|

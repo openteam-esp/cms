@@ -110,7 +110,7 @@ ru:
 
       blue_pages_part:
         blue_pages_category_id: Категория
-        blue_pages_expand: Включая вложенные
+        blue_pages_expand: Уровень вложенности
         category_name: Категория
 
       gallery_picture:

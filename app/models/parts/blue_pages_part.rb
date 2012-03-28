@@ -3,7 +3,9 @@
 class BluePagesPart < Part
   belongs_to :item_page, :class_name => 'Node', :foreign_key => :blue_pages_item_page_id
 
-  validates_presence_of :blue_pages_category_id
+  validates_presence_of :blue_pages_category_id, :blue_pages_expand
+
+  default_value_for :blue_pages_expand, 1
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
@@ -31,7 +33,7 @@ class BluePagesPart < Part
     end
 
     def expand_parameter
-      '?expand=true' if blue_pages_expand
+      blue_pages_expand > 1 ? "?expand=#{blue_pages_expand}" : ''
     end
 
     def url_for_request
@@ -73,7 +75,6 @@ end
 #  news_item_page_id           :integer
 #  blue_pages_category_id      :integer
 #  appeal_section_slug         :string(255)
-#  blue_pages_expand           :boolean
 #  navigation_group            :string(255)
 #  title                       :string(255)
 #  html_info_path              :string(255)
@@ -102,5 +103,6 @@ end
 #  youtube_video_height        :integer
 #  text_info_path              :string(255)
 #  news_event_entry            :string(255)
+#  blue_pages_expand           :integer
 #
 
