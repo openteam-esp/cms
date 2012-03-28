@@ -5,7 +5,7 @@ class BluePagesPart < Part
 
   validates_presence_of :blue_pages_category_id, :blue_pages_expand
 
-  default_value_for :blue_pages_expand, 1
+  default_value_for :blue_pages_expand, 0
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
@@ -33,7 +33,7 @@ class BluePagesPart < Part
     end
 
     def expand_parameter
-      blue_pages_expand > 1 ? "?expand=#{blue_pages_expand}" : ''
+      blue_pages_expand.zero? ? '' : "?expand=#{blue_pages_expand}"
     end
 
     def url_for_request
