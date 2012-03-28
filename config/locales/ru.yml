@@ -128,7 +128,7 @@ ru:
       news_list_part:
         item_page: Страница просмотра
         news_channel: Канал
-        news_event_entry: Сортировка мероприятий
+        news_event_entry: Тип мероприятий
         news_event_entry_enum:
           gone: Прошедшие
           current: Сейчас
