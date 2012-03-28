@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120323040652) do
+ActiveRecord::Schema.define(:version => 20120328035159) do
 
   create_table "contexts", :force => true do |t|
     t.string   "title"
@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(:version => 20120323040652) do
     t.integer  "navigation_from_id"
     t.integer  "navigation_default_level"
     t.string   "news_channel"
-    t.string   "news_order_by"
     t.date     "news_until"
     t.integer  "news_per_page"
     t.boolean  "news_paginated"

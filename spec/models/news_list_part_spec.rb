@@ -9,7 +9,6 @@ describe NewsListPart do
   describe "должен правильно строить json" do
     before do
       @news_part = NewsListPart.create(:news_per_page => 2,
-                                      :news_order_by => 'since_desc',
                                       :news_channel => 'news',
                                       :item_page => Fabricate(:page),
                                       :title => 'Новости')
@@ -77,7 +76,6 @@ end
 #  navigation_from_id          :integer
 #  navigation_default_level    :integer
 #  news_channel                :string(255)
-#  news_order_by               :string(255)
 #  news_until                  :date
 #  news_per_page               :integer
 #  news_paginated              :boolean

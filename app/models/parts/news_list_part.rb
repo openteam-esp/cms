@@ -3,8 +3,6 @@
 class NewsListPart < Part
   belongs_to :item_page, :class_name => 'Node', :foreign_key => :news_item_page_id
 
-  validates_presence_of :news_order_by
-
   has_enums
 
   def to_json
@@ -46,44 +44,24 @@ class NewsListPart < Part
     end
 
     def order_by
-      *field, direction = news_order_by.split('_')
+      return 'since desc' unless news_event_entry?
 
-      "#{field.join('_')}+#{direction}"
+      news_event_entry == 'gone' ? 'event_entry_properties_until desc' : 'event_entry_properties_since asc'
     end
 
-    def gone?
-      news_event_entry == 'until'
+    def interval_year
+      params['interval_year']
     end
 
-    def now?
-      news_event_entry == 'now'
-    end
-
-    def coming?
-      news_event_entry == 'since'
-    end
-
-    def since_param
-      params['since'].to_date.rfc3339 rescue nil
-    end
-
-    def until_param
-      params['until'].to_date.rfc3339 rescue nil
-    end
-
-    def events_for_period?
-      !(since_param.blank? || until_param.blank?)
+    def interval_month
+      params['interval_month']
     end
 
     def events_params
-      return "&entry_search[event_entry_properties_since_gt]=#{since_param}&entry_search[event_entry_properties_until_lt]=#{until_param}" if events_for_period?
-
-      return "&entry_search[event_entry_properties_until_lt]=#{DateTime.now.rfc3339}" if gone?
-      return "&entry_search[event_entry_properties_since_gt]=#{DateTime.now.rfc3339}" if coming?
-
-      return "&entry_search[event_entry_properties_since_lt]=#{DateTime.now.rfc3339}&entry_search[event_entry_properties_until_gt]=#{DateTime.now.rfc3339}" if now?
-
-      ''
+      (news_event_entry? ? "&entry_search[interval_type]=#{news_event_entry}" : '').tap do |string|
+        string << "&entry_search[interval_year]=#{interval_year}" if interval_year.present?
+        string << "&entry_search[interval_month]=#{interval_month}" if interval_month.present?
+      end
     end
 
     def search_params
@@ -141,7 +119,6 @@ end
 #  navigation_from_id          :integer
 #  navigation_default_level    :integer
 #  news_channel                :string(255)
-#  news_order_by               :string(255)
 #  news_until                  :date
 #  news_per_page               :integer
 #  news_paginated              :boolean

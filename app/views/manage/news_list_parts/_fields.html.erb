@@ -2,7 +2,6 @@
   <%= form.input :news_channel, :as => :select, :collection => form.object.channels_collection %>
   <%= form.input :news_per_page %>
   <%= form.input :news_paginated %>
-  <%= form.input :news_order_by, :as => :select, :collection => form.object.class.values_for_select_tag(:news_order_by) %>
 
   <%= form.input :news_event_entry,
                  :as => :radio,
