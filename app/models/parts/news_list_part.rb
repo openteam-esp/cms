@@ -65,7 +65,7 @@ class NewsListPart < Part
     end
 
     def events_page
-      params['page'].to_i
+      params['events_page'].to_i
     end
 
     def interval_type
