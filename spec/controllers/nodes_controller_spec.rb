@@ -62,15 +62,17 @@ describe NodesController do
     end
 
     describe 'получение отдельного региона' do
-      let(:expected_hash) { {'key' => 'value'} }
+      let(:expected_hash) { Hash.new('key' => 'value') }
+      let(:parts_params) { Hash.new('parameter' => 'value') }
 
       before { Fabricate :navigation_part, :node => page, :region => 'content', :from_node => page.parent }
       before { NavigationPart.any_instance.stub(:to_json).and_return(expected_hash) }
 
       context 'существующий регион' do
-        before { get :show, :id => page.route, :region => 'content', :format => 'json' }
+        before { get :show, :id => page.route, :region => 'content', :format => 'json', :parts_params => { :navigation => parts_params } }
 
         specify { JSON.parse(response.body).should == expected_hash }
+        specify { assigns(:part).params.should == parts_params }
       end
 
       context 'несуществующий регион' do

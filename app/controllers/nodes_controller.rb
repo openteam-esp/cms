@@ -4,18 +4,18 @@ class NodesController < ApplicationController
 
     render :file => "#{Rails.root}/public/404.html", :layout => false, :status => 404 and return unless @node
 
+    @node.parts_params = params[:parts_params] || {}
+    @node.resource_id = params[:resource_id]
+
     if params[:region]
-      if part = @node.part_for(params[:region])
-        render :json => part.to_json
+      if @part = @node.part_for(params[:region])
+        render :json => @part.to_json
       else
         render :json => 'not found', :status => 404
       end
 
       return
     end
-
-    @node.parts_params = params[:parts_params] || {}
-    @node.resource_id = params[:resource_id]
 
     respond_to do |format|
       format.html
