@@ -60,5 +60,24 @@ describe NodesController do
       it { assigns(:node).should == page }
       it { assigns(:node).part_for('content').params.should == { 'page' => '2' }}
     end
+
+    describe 'получение отдельного региона' do
+      let(:expected_hash) { {'key' => 'value'} }
+
+      before { Fabricate :navigation_part, :node => page, :region => 'content', :from_node => page.parent }
+      before { NavigationPart.any_instance.stub(:to_json).and_return(expected_hash) }
+
+      context 'существующий регион' do
+        before { get :show, :id => page.route, :region => 'content', :format => 'json' }
+
+        specify { JSON.parse(response.body).should == expected_hash }
+      end
+
+      context 'несуществующий регион' do
+        before { get :show, :id => page.route, :region => 'unreal', :format => 'json' }
+
+        specify { response.status.should == 404 }
+      end
+    end
   end
 end
