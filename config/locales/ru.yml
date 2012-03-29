@@ -133,6 +133,7 @@ ru:
           gone: Прошедшие
           current: Сейчас
           coming: Предстоящие
+          all: Все мероприятия
         news_paginated: Постраничный переход
         news_per_page: Количество на странице
         news_height: Высота картинки

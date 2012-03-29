@@ -44,9 +44,16 @@ class NewsListPart < Part
     end
 
     def order_by
-      return 'since desc' unless news_event_entry?
-
-      news_event_entry == 'gone' ? 'event_entry_properties_until desc' : 'event_entry_properties_since asc'
+      case interval_type
+      when 'gone'
+        'event_entry_properties_until desc'
+      when 'all_gone'
+        'event_entry_properties_since desc'
+      when 'coming', 'current', 'all_coming'
+        'event_entry_properties_since asc'
+      else
+        'since desc'
+      end
     end
 
     def interval_year
@@ -57,8 +64,18 @@ class NewsListPart < Part
       params['interval_month']
     end
 
+    def events_page
+      params['page'].to_i
+    end
+
+    def interval_type
+      return news_event_entry unless news_event_entry == 'all'
+
+      events_page < 0 ? 'all_gone' : 'all_coming'
+    end
+
     def events_params
-      (news_event_entry? ? "&entry_search[interval_type]=#{news_event_entry}" : '').tap do |string|
+      (news_event_entry? ? "&entry_search[interval_type]=#{interval_type}" : '').tap do |string|
         string << "&entry_search[interval_year]=#{interval_year}" if interval_year.present?
         string << "&entry_search[interval_month]=#{interval_month}" if interval_month.present?
       end
@@ -89,6 +106,9 @@ class NewsListPart < Part
     end
 
     def current_page
+      return events_page + 1 if interval_type == 'all_coming'
+      return events_page.abs if interval_type == 'all_gone'
+
       (params['page'] || 1).to_i
     end
 
