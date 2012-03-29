@@ -33,7 +33,7 @@ class BluePagesPart < Part
     end
 
     def expand_parameter
-      blue_pages_expand.zero? ? '' : "?expand=#{blue_pages_expand}"
+      blue_pages_expand.to_i.zero? ? '' : "?expand=#{blue_pages_expand}"
     end
 
     def url_for_request
