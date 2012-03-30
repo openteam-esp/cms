@@ -18,6 +18,11 @@ class NewsListPart < Part
     hash.merge!(pagination) if news_paginated?
     hash.merge!('rss_link' => rss_link) if news_channel?
 
+    if news_event_entry?
+      hash.merge!('first_page' => true) if events_first_page?
+      hash.merge!('last_page' => true) if events_last_page?
+    end
+
     hash
   end
 
@@ -110,6 +115,18 @@ class NewsListPart < Part
       return events_page.abs if interval_type == 'all_gone'
 
       (params['page'] || 1).to_i
+    end
+
+    def events_first_page?
+      return false if events_page >= 0
+
+      current_page == 1
+    end
+
+    def events_last_page?
+      return false if events_page < 0
+
+      total_pages <= current_page
     end
 
     def pagination
