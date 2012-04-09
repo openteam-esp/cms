@@ -16,7 +16,11 @@ class HtmlPart < Part
   end
 
   def body
-    JSON.parse(response_body)['content'].gsub(/<p>\s*<\/p>/, "").gsub('&mdash;', '&ndash;').gilensize(:skip_attr => true)
+    begin
+      JSON.parse(response_body)['content'].gsub(/<p>\s*<\/p>/, "").gsub('&mdash;', '&ndash;').gilensize(:skip_attr => true)
+    rescue Exception => e
+      ["HTML_INFO_PATH = #{html_info_path}", "RESPONSE STATUS = #{response_status}"].join('<br />').html_safe
+    end
   end
 
   private
