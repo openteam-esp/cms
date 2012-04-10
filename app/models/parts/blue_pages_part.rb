@@ -28,6 +28,17 @@ class BluePagesPart < Part
     @category_name ||= Requester.new("#{blue_pages_url}/#{blue_pages_category_id}").response_hash['title']
   end
 
+  #
+  # title гиленсезируется, поэтому ищется так
+  #
+  def find_page_by_title(title)
+    Page.all.detect { |node| node.title.gsub(/[[:space:]]/, ' ') == title }
+  end
+
+  def administration_page
+    find_page_by_title('Администрация Томской области')
+  end
+
   private
     def blue_pages_url
       "#{Settings['blue-pages.url']}/categories"
@@ -55,22 +66,14 @@ class BluePagesPart < Part
       subdivisions
     end
 
-    def find_node_by_title(title)
-      Node.all.detect { |node| node.title.gsub(/[[:space:]]/, ' ') == title }
-    end
-
     def set_subdivision_paths
-      if administration_node
+      if administration_page
         response_hash['subdivisions'].each do |subdivision|
-          if node = find_node_by_title(subdivision['title'])
+          if node = find_page_by_title(subdivision['title'])
             subdivision['path'] = node.route_without_site
           end
-        end if response_hash['subdivisions']
+        end if response_hash['subdivisions'].try(:any?)
       end
-    end
-
-    def administration_node
-      Node.find_by_title('Администрация Томской области')
     end
 end
 

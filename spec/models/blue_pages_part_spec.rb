@@ -3,7 +3,11 @@
 require 'spec_helper'
 
 describe BluePagesPart do
-  def data_from_blue_pages
+  def department_page_title
+    'Департамент по культуре'
+  end
+
+  def response_hash
     {
       'title' => 'Губернатор',
       'address' => '634050, Томская область, г. Томск, пл. Ленина, 6',
@@ -17,6 +21,7 @@ describe BluePagesPart do
           'phones' => 'Тел.: (3822) 510-813, (3822) 510-505'
         }
       ],
+
       'subdivisions' => [
         {
           'title' => 'Заместитель губернатора Томской области по особо важным проектам',
@@ -31,7 +36,9 @@ describe BluePagesPart do
               'phones' => 'Тел.: (3822) 511-142'
             }
           ]
-        }
+        },
+
+        { 'title' => department_page_title }
       ]
     }
   end
@@ -40,14 +47,37 @@ describe BluePagesPart do
     let(:blue_pages_part) { BluePagesPart.create(:item_page => Fabricate(:page)) }
 
     before do
-      blue_pages_part.stub(:response_hash).and_return(data_from_blue_pages)
+      blue_pages_part.stub(:response_hash).and_return(response_hash)
       blue_pages_part.stub(:respense_status).and_return(200)
     end
 
     it { blue_pages_part.content['items'][0]['link'].should == "#{blue_pages_part.item_page.route_without_site}/-/categories/3/items/1" }
     it { blue_pages_part.content['subdivisions'][0]['items'][0]['link'].should == "#{blue_pages_part.item_page.route_without_site}/-/categories/15/items/14"}
   end
+
+  describe 'ссылки на подразделения' do
+    let(:administration_page_title) { 'Администрация Томской области' }
+
+    let(:locale)          { Fabricate :locale }
+    let(:administration)  { Fabricate :page, :title => administration_page_title, :parent => locale, :slug => 'admin' }
+    let(:department)      { Fabricate :page, :title => department_page_title, :parent => administration, :slug => 'department' }
+
+    let(:blue_pages_part) { BluePagesPart.create(:node => administration, :item_page => Fabricate(:page, :parent => department)) }
+
+    before { blue_pages_part.stub(:response_hash).and_return(response_hash) }
+    before { blue_pages_part.stub(:respense_status).and_return(200) }
+
+    context 'find_node_by_title' do
+      specify { blue_pages_part.administration_page.should == administration }
+      specify { blue_pages_part.find_page_by_title(department_page_title).should == department }
+    end
+
+    context 'subdivision paths' do
+      specify { blue_pages_part.content['subdivisions'].last['path'].should == '/ru/admin/department' }
+    end
+  end
 end
+
 # == Schema Information
 #
 # Table name: parts
