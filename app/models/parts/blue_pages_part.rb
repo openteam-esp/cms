@@ -12,6 +12,7 @@ class BluePagesPart < Part
   end
 
   def content
+    set_subdivision_paths
     update_item_links
   end
 
@@ -52,6 +53,22 @@ class BluePagesPart < Part
       subdivisions['subdivisions'].each { |subdivision| update_item_links(subdivision) } if subdivisions['subdivisions']
 
       subdivisions
+    end
+
+    def find_node_by_title(title)
+      Node.all.detect { |node| node.title.gsub(/[[:space:]]/, ' ') == title }
+    end
+
+    def set_subdivision_paths
+      if administration_node
+        response_hash['subdivisions'].each do |subdivision|
+          subdivision['path'] = node.route_without_site if find_node_by_title(subdivision['title'])
+        end
+      end
+    end
+
+    def administration_node
+      Node.find_by_title('Администрация Томской области')
     end
 end
 
