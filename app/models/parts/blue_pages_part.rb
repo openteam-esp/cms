@@ -62,7 +62,9 @@ class BluePagesPart < Part
     def set_subdivision_paths
       if administration_node
         response_hash['subdivisions'].each do |subdivision|
-          subdivision['path'] = node.route_without_site if find_node_by_title(subdivision['title'])
+          if node = find_node_by_title(subdivision['title'])
+            subdivision['path'] = node.route_without_site
+          end
         end
       end
     end
