@@ -65,7 +65,7 @@ class BluePagesPart < Part
           if node = find_node_by_title(subdivision['title'])
             subdivision['path'] = node.route_without_site
           end
-        end
+        end if response_hash['subdivisions']
       end
     end
 
