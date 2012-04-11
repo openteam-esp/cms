@@ -24,7 +24,7 @@ class DocumentsPart < Part
   end
 
   def contexts
-    @contexts ||= Requester.new("#{documents_url}/contexts.json").response_hash.first
+    @contexts ||= Requester.new("#{documents_url}/contexts.json").response_hash.map { |hash| [hash.keys.first, hash.values.first] }
   end
 
   private
