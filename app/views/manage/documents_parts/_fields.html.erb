@@ -1,6 +1,13 @@
 <%= form.inputs do %>
-  <%= form.input :documents_kind, :as => :select, :collection => form.object.class.values_for_select_tag(:documents_kind) %>
-  <%= form.input :documents_context_id, :as => :select, :collection => form.object.contexts_options_for_select %>
+  <%= form.input :documents_kind,
+                 :as => :select,
+                 :collection => form.object.class.values_for_select_tag(:documents_kind) %>
+
+  <%= form.input :documents_context_id,
+                 :as => :select,
+                 :required => true,
+                 :collection => form.object.contexts %>
+
   <%= form.input :documents_per_page %>
   <%= form.input :documents_paginated %>
 
