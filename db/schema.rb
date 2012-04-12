@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120328075557) do
+ActiveRecord::Schema.define(:version => 20120411121122) do
 
   create_table "contexts", :force => true do |t|
     t.string   "title"
@@ -76,7 +76,6 @@ ActiveRecord::Schema.define(:version => 20120328075557) do
     t.integer  "documents_item_page_id"
     t.boolean  "documents_paginated"
     t.integer  "documents_per_page"
-    t.integer  "documents_context_id"
     t.string   "youtube_resource_id"
     t.integer  "youtube_item_page_id"
     t.string   "youtube_video_resource_id"
@@ -97,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20120328075557) do
     t.string   "text_info_path"
     t.string   "news_event_entry"
     t.integer  "blue_pages_expand"
+    t.string   "documents_contexts"
   end
 
   create_table "permissions", :force => true do |t|

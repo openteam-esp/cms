@@ -3,7 +3,13 @@
 class DocumentsPart < Part
   belongs_to :item_page, :class_name => 'Node', :foreign_key => :documents_item_page_id
 
-  validates_presence_of :documents_kind, :documents_context_id
+  validates_presence_of :documents_kind, :documents_contexts
+
+  serialize :documents_contexts, Array
+
+  #before_validation :normalize_documents_contexts
+
+  normalize_attribute :documents_contexts, :with => [:as_array_of_integer]
 
   has_enums
 
@@ -28,6 +34,10 @@ class DocumentsPart < Part
   end
 
   private
+    #def normalize_documents_contexts
+      #self.documents_contexts = self.documents_contexts.reject { |e| e.blank? }.map(&:to_i)
+    #end
+
     def documents_url
       "#{Settings['documents.url']}"
     end

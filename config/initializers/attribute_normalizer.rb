@@ -24,5 +24,9 @@ AttributeNormalizer.configure do |config|
   config.normalizers[:gilensize_as_html] = ->(value, options) do
     html_formatter.process value
   end
+
+  config.normalizers[:as_array_of_integer] = ->(value, options) do
+    value.reject { |e| e.blank? }.map(&:to_i)
+  end
 end
 

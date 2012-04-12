@@ -3,8 +3,9 @@
                  :as => :select,
                  :collection => form.object.class.values_for_select_tag(:documents_kind) %>
 
-  <%= form.input :documents_context_id,
+  <%= form.input :documents_contexts,
                  :as => :select,
+                 :multiple => true,
                  :required => true,
                  :collection => form.object.contexts %>
 
