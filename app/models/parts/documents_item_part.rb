@@ -1,10 +1,12 @@
 class DocumentsItemPart < Part
   def to_json
-    as_json(:only => :type, :methods => 'content')
+    super.merge!(as_json(:only => :type, :methods => 'content'))
   end
 
   def content
-    request_body.tap do |paper|
+    response_hash.delete('id')
+
+    response_hash.tap do |paper|
       paper['asserted_projects']  = change_ids_to_links(paper['asserted_projects'])
       paper['canceled_documents'] = change_ids_to_links(paper['canceled_documents'])
       paper['changed_documents']  = change_ids_to_links(paper['changed_documents'])
@@ -20,12 +22,8 @@ class DocumentsItemPart < Part
       "#{Settings['documents.url']}"
     end
 
-    def request
-      @request ||= Curl::Easy.http_get("#{documents_url}/papers/#{paper_id}.json").body_str
-    end
-
-    def request_body
-      ActiveSupport::JSON.decode(request).tap { |hash| hash.delete('id') }
+    def url_for_request
+      "#{documents_url}/papers/#{paper_id}"
     end
 
     def paper_id
