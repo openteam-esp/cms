@@ -15,8 +15,16 @@ class AppealPart < Part
   end
 
   private
+    def headers_accept
+      'text/vnd_html'
+    end
+
+    def appeals_url
+      "#{Settings['appeals.url']}"
+    end
+
     def url_for_request
-      "#{Settings['appeals.url']}/public/sections/#{appeal_section_slug}/appeals"
+      "#{appeals_url}/sections/#{appeal_section_slug}/appeals/new"
     end
 end
 # == Schema Information

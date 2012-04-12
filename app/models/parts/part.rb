@@ -11,8 +11,12 @@ class Part < ActiveRecord::Base
     part.class.name.underscore
   end
 
+  def headers_accept
+    'application/json'
+  end
+
   def response
-    @response ||= Requester.new(url_for_request)
+    @response ||= Requester.new(url_for_request, headers_accept)
   end
 
   delegate :response_body,

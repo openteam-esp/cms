@@ -1,7 +1,7 @@
 class Requester
-  def initialize(url)
+  def initialize(url, headers_accept = 'application/json')
     @response = Curl::Easy.perform(url) do |curl|
-      curl.headers['Accept'] = 'application/json'
+      curl.headers['Accept'] = headers_accept
     end
   end
 
