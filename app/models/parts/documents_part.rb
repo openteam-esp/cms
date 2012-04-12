@@ -16,7 +16,6 @@ class DocumentsPart < Part
   def content
     { 'action' => action_for_search_form,
       'keywords' => keywords,
-      'context_id' => documents_context_id,
       'papers' => papers
     }.tap do |hash|
       hash.merge!(pagination) if documents_paginated?
@@ -44,10 +43,16 @@ class DocumentsPart < Part
       params['page'] || 1
     end
 
+    def context_ids_param
+      documents_contexts.map { |context_id|
+        "&#{documents_kind.singularize}_search[context_ids][]=#{context_id}"
+      }.join
+    end
+
     def query_params
       query_params = "utf8=✓"
       query_params << "&#{documents_kind.singularize}_search[keywords]=#{keywords}"
-      query_params << "&#{documents_kind.singularize}_search[context_id]=#{documents_context_id}"
+      query_params << context_ids_param
       query_params << "&page=#{page}"
       query_params << "&per_page=#{documents_per_page}"
     end
