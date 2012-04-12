@@ -16,7 +16,8 @@ class DocumentsPart < Part
   def content
     { 'action' => action_for_search_form,
       'keywords' => keywords,
-      'papers' => papers
+      'papers' => papers,
+      'rss_link' => rss_link
     }.tap do |hash|
       hash.merge!(pagination) if documents_paginated?
     end
@@ -105,6 +106,12 @@ class DocumentsPart < Part
           'param_name' => 'parts_params[documents][page]'
         }
       }
+    end
+
+    def rss_link
+      params = "utf8=✓#{context_ids_param}"
+
+      URI.encode("#{documents_url}/#{documents_kind}.rss?#{params}")
     end
 end
 
