@@ -22,21 +22,17 @@ class DocumentsItemPart < Part
       "#{Settings['documents.url']}"
     end
 
+    alias :paper_id :resource_id
+
     def url_for_request
       "#{documents_url}/papers/#{paper_id}"
     end
 
-    def paper_id
-      params.try(:[], 'id')
-    end
-
     def change_ids_to_links(papers)
-      if papers
-        papers.map { |p| p.merge!('link' => "#{node.route_without_site}?parts_params[documents_item][id]=#{p['id']}") }
-        papers.each { |p| p.delete('id') }
-      else
-        []
-      end
+      return [] unless papers
+
+      papers.map { |p| p.merge!('link' => "#{node.route_without_site}/-/#{p['id']}") }
+      papers.each { |p| p.delete('id') }
     end
 end
 # == Schema Information
