@@ -13,9 +13,11 @@ class DocumentsItemPart < Part
     end
   end
 
-  def page_title
+  def part_title
     content['title']
   end
+
+  alias :page_title :part_title
 
   private
     def documents_url

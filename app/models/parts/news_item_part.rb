@@ -17,9 +17,7 @@ class NewsItemPart < Part
     content['title']
   end
 
-  def page_title
-    part_title
-  end
+  alias :page_title :part_title
 
   private
     def news_url
