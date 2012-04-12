@@ -55,7 +55,6 @@ end
 #  documents_item_page_id      :integer
 #  documents_paginated         :boolean
 #  documents_per_page          :integer
-#  documents_context_id        :integer
 #  youtube_resource_id         :string(255)
 #  youtube_item_page_id        :integer
 #  youtube_video_resource_id   :string(255)
@@ -76,5 +75,6 @@ end
 #  text_info_path              :string(255)
 #  news_event_entry            :string(255)
 #  blue_pages_expand           :integer
+#  documents_contexts          :string(255)
 #
 
