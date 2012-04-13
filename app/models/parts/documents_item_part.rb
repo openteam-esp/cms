@@ -1,6 +1,6 @@
 class DocumentsItemPart < Part
   def to_json
-    super.merge!(as_json(:only => :type, :methods => 'content'))
+    super.merge!(as_json(:only => :type, :methods => ['content', 'part_title']))
   end
 
   def content

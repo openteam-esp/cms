@@ -16,9 +16,7 @@ class BluePagesPart < Part
     update_item_links
   end
 
-  def part_title
-    title
-  end
+  alias_attribute :part_title, :title
 
   def categories
     @categories ||= Requester.new("#{blue_pages_url}.json").response_hash['categories'].map { |c| [c['title'], c['id']] }
