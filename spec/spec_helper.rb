@@ -26,6 +26,10 @@ Spork.prefork do
     config.before(:all) do
       Sunspot.session = SunspotMatchers::SunspotSessionSpy.new(Sunspot.session)
     end
+
+    config.before do
+      MessageMaker.stub(:make_message)
+    end
   end
 end
 

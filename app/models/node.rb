@@ -136,6 +136,10 @@ class Node < ActiveRecord::Base
     @site_settings ||= YAML.load_file(Rails.root.join 'config/sites.yml').to_hash['sites'][site.slug]
   end
 
+  def send_queue_message
+    MessageMaker.make_message(node_route)
+  end
+
   private
     def node_for_json
       self

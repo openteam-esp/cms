@@ -25,6 +25,7 @@ module Cms
     config.autoload_paths += %W[
                                 #{config.root}/app/models/parts
                                 #{config.root}/app/models/vfs
+                                #{config.root}/lib/queueing
                                 #{config.root}/lib
                                ]
 

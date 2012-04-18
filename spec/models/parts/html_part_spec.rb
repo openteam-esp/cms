@@ -4,32 +4,62 @@ require 'spec_helper'
 
 describe HtmlPart do
 
-  before do
-    @part = Fabricate(:html_part)
-    @part.node.update_attribute(:title, "Заголовок страницы")
+  context 'созданная' do
+    subject do
+      part = Fabricate(:html_part)
+      part.node.update_attribute(:title, "Заголовок страницы")
+      part
+    end
+
+    before { HtmlPart.any_instance.stub(:content).and_return( { 'body' => 'html content' } ) }
+    before { HtmlPart.any_instance.stub(:title).and_return('Заголовок парта') }
+
+    describe "должна возвращять part_title для своей страницы" do
+      its('node.page_title') { should == "Заголовок страницы" }
+    end
+
+    describe "должна ставить part_title" do
+      before { HtmlPart.any_instance.stub(:response_status).and_return(200) }
+
+      let(:expected_hash) do
+        {
+          'template' => 'html_part',
+          'response_status' => 200,
+          'type' => 'HtmlPart',
+          'part_title' => 'Заголовок парта',
+          'content' => { 'body' => 'html content' }
+        }
+      end
+
+      its(:to_json) { should == expected_hash  }
+    end
   end
 
-  it "должна возвращять part_title для своей страницы" do
-    HtmlPart.any_instance.stub(:content).and_return( { 'body' => 'html content' } )
-    HtmlPart.any_instance.stub(:title).and_return('Заголовок парта')
+  context 'should send message for reindex page' do
+    let(:page) { Fabricate :page }
+    let(:html_part) { Fabricate :html_part, :node => page }
 
-    @part.node.page_title.should == "Заголовок страницы"
-  end
+    describe '#create' do
+      before { page.should_receive(:send_queue_message) }
 
-  it "должна ставить part_title" do
-    HtmlPart.any_instance.stub(:content).and_return( { 'body' => 'html content' } )
-    HtmlPart.any_instance.stub(:title).and_return('Заголовок парта')
-    HtmlPart.any_instance.stub(:response_status).and_return(200)
+      specify { html_part }
+    end
 
-    @expected_hash = {
-      'template' => 'html_part',
-      'response_status' => 200,
-      'type' => 'HtmlPart',
-      'part_title' => 'Заголовок парта',
-      'content' => { 'body' => 'html content' }
-    }
+    describe '#update_attribute' do
+      before { html_part }
 
-    @part.to_json.should ==  @expected_hash
+      context 'html_info_path' do
+        before { page.should_receive(:send_queue_message) }
+
+        specify { html_part.update_attribute :html_info_path, 'new/path/part.xhtml' }
+      end
+      describe 'title' do
+        before { page.should_receive(:send_queue_message) }
+
+        specify { html_part.update_attribute :title, 'New title' }
+      end
+    end
+
   end
 
 end

@@ -4,6 +4,7 @@ require 'spec_helper'
 
 describe Page do
   subject { Fabricate(:page) }
+
   it { should have_many :parts }
   it { should validate_presence_of :template }
   it { should validate_presence_of :parent }
@@ -27,6 +28,12 @@ describe Page do
     it { page_without_slug.slug.should == 'stranitsa' }
     it { page_with_slug.slug.should == 'ololo' }
     it { page_with_complex_slug.slug.should == 'nazvanie-stranitsy-sostoyaschee-iz-neskolkih-slov' }
+  end
+
+  describe '#send_queue_message' do
+    before { MessageMaker.should_receive(:make_message).with(subject.node_route) }
+
+    specify { subject.send_queue_message }
   end
 end
 
