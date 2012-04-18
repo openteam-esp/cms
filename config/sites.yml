@@ -79,7 +79,13 @@ sites:
         breadcrumbs:
           required: true
           configurable: true
-        content:
+        governor_message:
+          required: true
+          configurable: true
+        governor_comments:
+          required: true
+          configurable: true
+        news:
           required: true
           configurable: true
         gallery:
