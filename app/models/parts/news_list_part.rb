@@ -6,13 +6,15 @@ class NewsListPart < Part
   has_enums
 
   def to_json
-    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content', 'collection_link']))
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
 
   def content
     return response_hash if bad_request?
 
     hash = data_hash.update(data_hash) {|v,k| k.each{|l| l['link']="#{item_page.route_without_site}/-/#{l['slug']}"}}
+
+    hash.merge!('collection_link' => collection_link)
 
     hash.merge!('title' => title) if title?
     hash.merge!(pagination) if news_paginated?

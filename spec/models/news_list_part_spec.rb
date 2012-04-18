@@ -28,7 +28,6 @@ describe NewsListPart do
         'template' => 'news_list_part',
         'response_status' => 200,
         'type' => 'NewsListPart',
-        'collection_link' => '/ru',
         'part_title' => 'Новости',
         'content' => {
           'items' => [
@@ -36,6 +35,7 @@ describe NewsListPart do
             {'title' => 'title2', 'annotation' => 'annotation2', 'slug' => 'link2', 'link' => @news_part.item_page.route_without_site + '/-/link2'}
           ],
 
+          'collection_link' => '/ru',
           'title' => 'Новости',
           'rss_link' => 'http://news.esp.tomsk.gov.ru/channels/news/entries.rss'
         }
