@@ -258,6 +258,9 @@ sites:
         last_video:
           required: true
           configurable: true
+        last_photo:
+          required: true
+          configurable: true
         event_list:
           required: true
           configurable: true
