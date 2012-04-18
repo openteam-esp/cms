@@ -7,11 +7,14 @@ describe NewsListPart do
   it { should belong_to :item_page }
 
   describe "должен правильно строить json" do
+    let(:page) { Fabricate :page }
+
     before do
       @news_part = NewsListPart.create(:news_per_page => 2,
                                       :news_channel => 'news',
-                                      :item_page => Fabricate(:page),
-                                      :title => 'Новости')
+                                      :item_page => page,
+                                      :title => 'Новости',
+                                      :node => page.locale)
 
       response_hash = [
         {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1'},
@@ -25,6 +28,7 @@ describe NewsListPart do
         'template' => 'news_list_part',
         'response_status' => 200,
         'type' => 'NewsListPart',
+        'collection_link' => '/ru',
         'part_title' => 'Новости',
         'content' => {
           'items' => [

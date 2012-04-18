@@ -6,7 +6,7 @@ class NewsListPart < Part
   has_enums
 
   def to_json
-    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content', 'collection_link']))
   end
 
   def content
@@ -24,6 +24,10 @@ class NewsListPart < Part
     end
 
     hash
+  end
+
+  def collection_link
+    item_page.parent.route_without_site
   end
 
   def part_title
