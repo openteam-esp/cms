@@ -25,6 +25,7 @@ describe NodesController do
       page.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][page.site.slug]['templates'])
       html_part = Fabricate(:html_part, :node => page, :region => 'content')
 
+      HtmlPart.any_instance.stub(:response_status).and_return(200)
       HtmlPart.any_instance.stub(:body).and_return('some body')
 
       get :show, :id => page.route, :format => :json
