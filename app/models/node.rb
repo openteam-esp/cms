@@ -40,7 +40,6 @@ class Node < ActiveRecord::Base
     ancestry_depth + context.depth + 1
   end
 
-
   def to_json
     {
       'page' => {
