@@ -79,6 +79,9 @@ sites:
         breadcrumbs:
           required: true
           configurable: true
+        actual:
+          required: true
+          configurable: true
         governor_message:
           required: true
           configurable: true
