@@ -10,7 +10,7 @@ describe SearchPart do
   its(:search_per_page) { should == 15 }
 
   context 'url_for_request' do
-    let(:expected_url) { "#{Settings['search_engine.url']}?url=http://example.com&q=&page=1&per_page=15" }
+    let(:expected_url) { "#{Settings['searcher.url']}?url=http://example.com&q=&page=1&per_page=15" }
 
     let(:mock_object) { Object }
 

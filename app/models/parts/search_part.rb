@@ -16,8 +16,8 @@ class SearchPart < Part
   end
 
   private
-    def search_engine_url
-      Settings['search_engine.url']
+    def searcher_url
+      Settings['searcher.url']
     end
 
     def site_url
@@ -44,7 +44,7 @@ class SearchPart < Part
     end
 
     def url_for_request
-      "#{search_engine_url}?#{request_params}"
+      "#{searcher_url}?#{request_params}"
     end
 end
 # == Schema Information
