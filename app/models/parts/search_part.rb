@@ -12,7 +12,10 @@ class SearchPart < Part
   end
 
   def content
-    { 'items' => response_hash }
+    { 'items' => response_hash }.tap do |hash|
+      hash.merge!(pagination)
+    end
+
   end
 
   private
@@ -45,6 +48,29 @@ class SearchPart < Part
 
     def url_for_request
       URI.encode("#{searcher_url}?#{request_params}")
+    end
+
+    def total_count
+      response_headers['X-Total-Count'].to_i
+    end
+
+    def total_pages
+      response_headers['X-Total-Pages'].to_i
+    end
+
+    def current_page
+      response_headers['X-Current-Page'].to_i
+    end
+
+    def pagination
+      {
+        'pagination' => {
+          'total_count' => total_count,
+          'current_page' => current_page,
+          'per_page' => search_per_page,
+          'param_name' => 'parts_params[search][page]'
+        }
+      }
     end
 end
 # == Schema Information
