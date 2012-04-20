@@ -1,5 +1,5 @@
 class Site < Node
-  validates :slug, :presence => true
+  validates :slug, :client_url, :presence => true
 
   default_value_for :context do |node|
     node.context

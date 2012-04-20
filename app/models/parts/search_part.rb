@@ -20,8 +20,12 @@ class SearchPart < Part
       Settings['search_engine.url']
     end
 
-    def site_slug
-      node.site.slug
+    def site_url
+      node.site.client_url
+    end
+
+    def site_url
+      node.site.client_url
     end
 
     def query
@@ -33,14 +37,14 @@ class SearchPart < Part
     end
 
     def request_params
-      request_params = site_slug
-      request_params = "q=#{query}"
+      request_params = "url=#{site_url}"
+      request_params << "&q=#{query}"
       request_params << "&page=#{page}"
       request_params << "&per_page=#{search_per_page}"
     end
 
     def url_for_request
-      p "#{search_engine_url}?#{request_params}"
+      "#{search_engine_url}?#{request_params}"
     end
 end
 # == Schema Information
