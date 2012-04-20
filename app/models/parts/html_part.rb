@@ -2,7 +2,7 @@ require 'base64'
 
 class HtmlPart < Part
   validates_presence_of :html_info_path
-  after_save :reindex_node
+  after_save :node_index
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
@@ -25,9 +25,7 @@ class HtmlPart < Part
   end
 
   private
-    def reindex_node
-      node.send_queue_message
-    end
+    delegate :index, :to => :node, :prefix => true
 
     def remote_url
       key = Settings[:storage] || Settings[:vfs]

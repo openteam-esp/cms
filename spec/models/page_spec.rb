@@ -20,7 +20,11 @@ describe Page do
     it { child_page.navigation_group.should == 'group' }
   end
 
-  describe 'slug' do
+  describe '#url' do
+    its(:url) { should == 'http://example.com/ru/name' }
+  end
+
+  describe '#slug' do
     let(:page_without_slug) { Fabricate(:page, :title => 'Страница', :slug => '') }
     let(:page_with_slug) { Fabricate(:page, :title => 'Страница', :slug => 'ololo') }
     let(:page_with_complex_slug) { Fabricate(:page, :title => 'Название страницы состоящее из нескольких слов', :slug => '') }
@@ -31,9 +35,9 @@ describe Page do
   end
 
   describe '#send_queue_message' do
-    before { MessageMaker.should_receive(:make_message).with(subject.node_route) }
+    before { MessageMaker.should_receive(:make_message).with('esp.searcher.index', subject.url) }
 
-    specify { subject.send_queue_message }
+    specify { subject.index }
   end
 end
 

@@ -40,7 +40,7 @@ describe HtmlPart do
     let(:html_part) { Fabricate :html_part, :node => page }
 
     describe '#create' do
-      before { page.should_receive(:send_queue_message) }
+      before { page.should_receive(:index) }
 
       specify { html_part }
     end
@@ -49,12 +49,12 @@ describe HtmlPart do
       before { html_part }
 
       context 'html_info_path' do
-        before { page.should_receive(:send_queue_message) }
+        before { page.should_receive(:index) }
 
         specify { html_part.update_attribute :html_info_path, 'new/path/part.xhtml' }
       end
       describe 'title' do
-        before { page.should_receive(:send_queue_message) }
+        before { page.should_receive(:index) }
 
         specify { html_part.update_attribute :title, 'New title' }
       end
