@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120411121122) do
+ActiveRecord::Schema.define(:version => 20120420023023) do
 
   create_table "contexts", :force => true do |t|
     t.string   "title"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20120411121122) do
     t.string   "news_event_entry"
     t.integer  "blue_pages_expand"
     t.string   "documents_contexts"
+    t.integer  "search_per_page"
   end
 
   create_table "permissions", :force => true do |t|
