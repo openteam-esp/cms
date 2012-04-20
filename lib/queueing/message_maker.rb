@@ -1,7 +1,7 @@
 require 'bunny'
 
 class MessageMaker
-  SUCCESS_QUEUE = 'esp.cms.updated.page'
+  SUCCESS_QUEUE = 'esp.searcher.not_indexed_routes'
 
   def self.make_message(message)
     amqp_client = Bunny.new(:logging => false)
