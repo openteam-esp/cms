@@ -136,5 +136,6 @@ end
 #  news_event_entry            :string(255)
 #  blue_pages_expand           :integer
 #  documents_contexts          :string(255)
+#  search_per_page             :integer
 #
 
