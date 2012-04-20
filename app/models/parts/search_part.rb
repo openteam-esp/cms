@@ -8,17 +8,16 @@ class SearchPart < Part
   alias_attribute :part_title, :title
 
   def to_json
-    super.merge!(as_json(:only => :type, :methods => ['part_title', 'search_query', 'content']))
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
 
   def content
-    { 'items' => response_hash }.tap do |hash|
+    {
+      'items' => response_hash,
+      'search_query' => query
+    }.tap do |hash|
       hash.merge!(pagination)
     end
-  end
-
-  def search_query
-    query
   end
 
   private
