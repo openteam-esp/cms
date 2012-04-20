@@ -44,7 +44,7 @@ class SearchPart < Part
     end
 
     def url_for_request
-      "#{searcher_url}?#{request_params}"
+      URI.encode("#{searcher_url}?#{request_params}")
     end
 end
 # == Schema Information
