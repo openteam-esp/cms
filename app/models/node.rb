@@ -148,6 +148,10 @@ class Node < ActiveRecord::Base
     @site_settings ||= YAML.load_file(Rails.root.join 'config/sites.yml').to_hash['sites'][site.slug]
   end
 
+  def templates_hash
+    site_settings['templates']
+  end
+
   def index
     MessageMaker.make_message('esp.searcher.index', url)
   end
@@ -172,10 +176,6 @@ class Node < ActiveRecord::Base
       save!
       descendants.map(&:update_route)
       Node.set_callback(:save, :after, :cache_route)
-    end
-
-    def templates_hash
-      site_settings['templates']
     end
 
     def set_navigation_position_and_recalculate_weights

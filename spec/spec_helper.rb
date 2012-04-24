@@ -19,16 +19,19 @@ Spork.prefork do
     config.include AttributeNormalizer::RSpecMatcher
     config.include Devise::TestHelpers, :type => :controller
     config.include EspAuth::SpecHelper
+    config.include EspCmsHelper
 
     config.mock_with :rspec
     config.use_transactional_fixtures = true
 
-    config.before(:all) do
+    config.before :all do
       Sunspot.session = SunspotMatchers::SunspotSessionSpy.new(Sunspot.session)
     end
 
     config.before do
       MessageMaker.stub(:make_message)
+
+      stub_sites_yml_for_all_nodes
     end
   end
 end

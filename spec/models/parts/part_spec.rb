@@ -14,10 +14,10 @@ describe Part do
     end
 
     describe 'available' do
-      let(:site_settings) { { 'part_templates' => { 'html_part' => 'template1|template2' } } }
+      let(:part_templates) { { 'part_templates' => { 'html_part' => 'template1|template2' } } }
 
       before do
-        Page.any_instance.stub(:site_settings).and_return(site_settings)
+        Page.any_instance.stub(:site_settings).and_return(YAML.load_file(Rails.root.join 'spec/fixtures/sites.yml').to_hash['sites']['www.tgr.ru'].merge!(part_templates))
       end
 
       it { part.available_templates.should == %w[html_part template1 template2] }
