@@ -34,33 +34,6 @@ describe HtmlPart do
       its(:to_json) { should == expected_hash  }
     end
   end
-
-  context 'should send message for reindex page' do
-    let(:page) { Fabricate :page }
-    let(:html_part) { Fabricate :html_part, :node => page }
-
-    describe '#create' do
-      before { page.should_receive(:index) }
-
-      specify { html_part }
-    end
-
-    describe '#update_attribute' do
-      before { html_part }
-
-      context 'html_info_path' do
-        before { page.should_receive(:index) }
-
-        specify { html_part.update_attribute :html_info_path, 'new/path/part.xhtml' }
-      end
-
-      describe 'title' do
-        before { page.should_receive(:index) }
-
-        specify { html_part.update_attribute :title, 'New title' }
-      end
-    end
-  end
 end
 
 # == Schema Information

@@ -3,33 +3,48 @@
 require 'spec_helper'
 
 describe NewsItemPart do
+  let(:part) { Fabricate :news_item_part }
 
-  before do
-    @part = Fabricate(:news_item_part)
-    @part.node.update_attribute(:title, "Заголовок страницы")
+  before { part.node.update_attribute(:title, "Заголовок страницы") }
+
+  context "должна возвращять page_title для своей страницы" do
+    before { NewsItemPart.any_instance.stub(:content).and_return({ 'title' => 'entry title' }) }
+
+    specify { part.node.page_title.should == "entry title | Заголовок страницы" }
   end
 
-  it "должна возвращять page_title для своей страницы" do
-    NewsItemPart.any_instance.stub(:content).and_return( { 'title' => 'entry title' } )
+  context "должна ставить title своего парта" do
+    before { NewsItemPart.any_instance.stub(:content).and_return({ 'title' => 'entry title' }) }
+    before { NewsItemPart.any_instance.stub(:response_status).and_return(200) }
 
-    @part.node.page_title.should == "entry title | Заголовок страницы"
-  end
-
-  it "должна ставить title своего парта" do
-    NewsItemPart.any_instance.stub(:content).and_return( { 'title' => 'entry title' } )
-    NewsItemPart.any_instance.stub(:response_status).and_return(200)
-
-    @expected_hash = {
-      'template' => 'news_item_part',
-      'response_status' => 200,
-      'type' => 'NewsItemPart',
-      'part_title' => 'entry title',
-      'content' => { 'title' => 'entry title' }
+    let(:expected_hash) {
+      {
+        'template' => 'news_item_part',
+        'response_status' => 200,
+        'type' => 'NewsItemPart',
+        'part_title' => 'entry title',
+        'content' => { 'title' => 'entry title' }
+      }
     }
 
-    @part.to_json.should ==  @expected_hash
+    specify { part.to_json.should ==  expected_hash }
   end
+
+  #context 'should send to queue messages with pages ulrs' do
+    #let(:page) { Fabricate :page, :template => 'main_page' }
+    #let(:part) { Fabricate :news_item_part, :node => page, :region => 'content' }
+
+    #before { part }
+
+    #it 'when update channel' do
+     #MessageMaker.should_receive(:make_message).once.with('esp.searcher.index', page.url)
+     #MessageMaker.should_receive(:make_message).once.with('esp.searcher.index', page.url)
+
+     #part.update_attributes :news_channel => '1'
+    #end
+  #end
 end
+
 # == Schema Information
 #
 # Table name: parts

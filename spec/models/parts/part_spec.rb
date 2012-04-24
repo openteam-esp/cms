@@ -40,43 +40,44 @@ describe Part do
     end
   end
 
-  context 'should send message to queue' do
+  describe 'indexing nodes' do
     let(:page) { Fabricate :page, :template => 'main_page' }
     let(:indexable_part) { Fabricate :html_part, :region => 'content', :node => page }
     let(:not_indexable_part) { Fabricate :html_part, :region => 'footer', :node => page }
 
-    describe '#update' do
-      it 'in indexable region' do
-        indexable_part.should_receive :index
+    describe 'indexable region' do
+      before { indexable_part.should_receive :node_index }
 
-        indexable_part.update_attribute :title, 'ololo'
+      context '#save' do
+        specify { indexable_part.update_attribute :title, 'ololo' }
       end
 
-      it 'in not indexable region' do
-        not_indexable_part.should_not_receive :index
-
-        not_indexable_part.update_attribute :title, 'ololo'
+      context '#destroy' do
+        specify { indexable_part.destroy }
       end
     end
 
-    describe '#destroy' do
-      it 'in indexable region' do
-        indexable_part.should_receive :index
+    describe 'not indexable region' do
+      before { not_indexable_part.should_not_receive :node_index }
 
-        indexable_part.destroy
+      context '#save' do
+        specify { not_indexable_part.update_attribute :title, 'ololo' }
       end
 
-      it 'in not indexable region' do
-        not_indexable_part.should_not_receive :index
-
-        not_indexable_part.destroy
+      context '#destroy' do
+        specify { not_indexable_part.destroy }
       end
     end
+  end
 
-    describe '#index' do
+  describe 'sending messages to queue' do
+    let(:page) { Fabricate :page, :template => 'main_page' }
+    let(:indexable_part) { Fabricate :html_part, :region => 'content', :node => page }
+
+    context '#index' do
       before { MessageMaker.should_receive(:make_message).with('esp.searcher.index', page.url) }
 
-      specify { indexable_part.update_attribute :title, 'ololo' }
+      specify { indexable_part }
     end
   end
 end

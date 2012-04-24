@@ -2,7 +2,6 @@ require 'base64'
 
 class HtmlPart < Part
   validates_presence_of :html_info_path
-  after_save :node_index
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
@@ -25,8 +24,6 @@ class HtmlPart < Part
   end
 
   private
-    delegate :index, :to => :node, :prefix => true
-
     def remote_url
       key = Settings[:storage] || Settings[:vfs]
       "#{key[:url]}/api/el_finder/v2?format=json&cmd=get"

@@ -12,13 +12,13 @@ describe SearchPart do
   context 'url_for_request' do
     let(:expected_url) { "#{Settings['searcher.url']}?url=http://example.com&q=&page=1&per_page=15" }
 
-    let(:mock_object) { Object }
+    let(:requester) { double('requester') }
 
-    before { mock_object.stub(:response_status).and_return(200) }
-    before { mock_object.stub(:response_hash).and_return({}) }
-    before { mock_object.stub(:response_headers).and_return({}) }
+    before { requester.stub(:response_status).and_return(200) }
+    before { requester.stub(:response_hash).and_return({}) }
+    before { requester.stub(:response_headers).and_return({}) }
 
-    before { Requester.should_receive(:new).with(expected_url, 'application/json').and_return(mock_object) }
+    before { Requester.should_receive(:new).with(expected_url, 'application/json').and_return(requester) }
 
     it { subject.to_json }
   end
