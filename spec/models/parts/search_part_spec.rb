@@ -16,6 +16,7 @@ describe SearchPart do
 
     before { mock_object.stub(:response_status).and_return(200) }
     before { mock_object.stub(:response_hash).and_return({}) }
+    before { mock_object.stub(:response_headers).and_return({}) }
 
     before { Requester.should_receive(:new).with(expected_url, 'application/json').and_return(mock_object) }
 
