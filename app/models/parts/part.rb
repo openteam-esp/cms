@@ -40,6 +40,10 @@ class Part < ActiveRecord::Base
     bad_request? ? {} : response.response_hash
   end
 
+  def indexable?
+    node.indexable_regions.include? region
+  end
+
   protected
     def error_title
       case response_status

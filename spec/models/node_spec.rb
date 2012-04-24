@@ -103,9 +103,7 @@ describe Node do
         @first_page.update_attribute(:navigation_position_param, '1')
         locale.reload.child_ids.should == [@second_page.id, @first_page.id, @third_page.id, @some_page.id]
       end
-
     end
-
   end
 
   describe 'navigation_group' do
@@ -164,6 +162,18 @@ describe Node do
     it {
       bar_page.to_json.should == foo_page.to_json
     }
+  end
+
+  describe 'индексируемые парты' do
+    before { Page.any_instance.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites']['www.tgr.ru']['templates']) }
+
+    let(:locale) { Fabricate :locale }
+
+    let(:foo_page) { Fabricate :page, :slug => 'foo', :parent => locale, :template => 'main_page' }
+    let(:bar_page) { Fabricate :page, :slug => 'bar', :parent => locale, :template => 'inner_page' }
+
+    it { foo_page.indexable_regions.should == ['content'] }
+    it { bar_page.indexable_regions.should be_empty }
   end
 end
 

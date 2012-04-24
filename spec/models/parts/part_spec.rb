@@ -23,6 +23,24 @@ describe Part do
       it { part.available_templates.should == %w[html_part template1 template2] }
     end
   end
+
+  describe 'indexed parts' do
+    let(:page) { Fabricate :page, :template => 'main_page' }
+
+    before { Page.any_instance.stub(:site_settings).and_return(YAML.load_file(Rails.root.join 'spec/fixtures/sites.yml').to_hash['sites']['www.tgr.ru']) }
+
+    context 'indexable part' do
+      let(:part) { Fabricate :html_part, :region => 'content', :node => page }
+
+      it { part.should be_indexable }
+    end
+
+    context 'not indexable part' do
+      let(:part) { Fabricate :html_part, :region => 'footer', :node => page }
+
+      it { part.should_not be_indexable }
+    end
+  end
 end
 
 # == Schema Information

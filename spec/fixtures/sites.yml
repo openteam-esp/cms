@@ -8,6 +8,7 @@ sites:
         content:
           required: true
           configurable: true
+          indexable: true
         footer:
           required: true
           configurable: true
@@ -18,6 +19,7 @@ sites:
         content:
           required: true
           configurable: true
+          indexable: false
         footer:
           required: false
           configurable: false

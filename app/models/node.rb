@@ -63,7 +63,11 @@ class Node < ActiveRecord::Base
   end
 
   def required_regions
-    templates_hash[template].select { | region, options | options['required'] }.keys
+    regions_with_option 'required'
+  end
+
+  def indexable_regions
+    regions_with_option 'indexable'
   end
 
   def scope_condition
@@ -77,7 +81,7 @@ class Node < ActiveRecord::Base
   end
 
   def configurable_regions
-    templates_hash[template].select { | region, options | options['configurable'] }.keys
+    regions_with_option 'configurable'
   end
 
   def page_title
@@ -147,6 +151,10 @@ class Node < ActiveRecord::Base
   private
     def node_for_json
       self
+    end
+
+    def regions_with_option(option)
+      templates_hash[template].select { | region, options | options[option] }.keys
     end
 
     def cache_route
