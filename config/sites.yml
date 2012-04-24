@@ -82,7 +82,13 @@ sites:
         actual:
           required: true
           configurable: true
-        calendar:
+        calendar_current:
+          required: true
+          configurable: true
+        calendar_nearest:
+          required: true
+          configurable: true
+        calendar_gone:
           required: true
           configurable: true
         governor_message:
