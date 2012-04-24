@@ -17,7 +17,7 @@ describe Part do
       let(:part_templates) { { 'part_templates' => { 'html_part' => 'template1|template2' } } }
 
       before do
-        Page.any_instance.stub(:site_settings).and_return(YAML.load_file(Rails.root.join 'spec/fixtures/sites.yml').to_hash['sites']['www.tgr.ru'].merge!(part_templates))
+        Page.any_instance.stub(:site_settings).and_return(sites_settings['sites']['www.tgr.ru'].merge!(part_templates))
       end
 
       it { part.available_templates.should == %w[html_part template1 template2] }
@@ -26,8 +26,6 @@ describe Part do
 
   describe 'indexed parts' do
     let(:page) { Fabricate :page, :template => 'main_page' }
-
-    before { Page.any_instance.stub(:site_settings).and_return(YAML.load_file(Rails.root.join 'spec/fixtures/sites.yml').to_hash['sites']['www.tgr.ru']) }
 
     context 'indexable part' do
       let(:part) { Fabricate :html_part, :region => 'content', :node => page }
@@ -43,8 +41,6 @@ describe Part do
   end
 
   context 'should send message to queue' do
-    before { Page.any_instance.stub(:site_settings).and_return(YAML.load_file(Rails.root.join 'spec/fixtures/sites.yml').to_hash['sites']['www.tgr.ru']) }
-
     let(:page) { Fabricate :page, :template => 'main_page' }
     let(:indexable_part) { Fabricate :html_part, :region => 'content', :node => page }
     let(:not_indexable_part) { Fabricate :html_part, :region => 'footer', :node => page }

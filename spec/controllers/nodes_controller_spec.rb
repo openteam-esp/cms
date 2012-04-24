@@ -9,10 +9,6 @@ describe NodesController do
     let(:page) { Fabricate(:page, :template => 'inner_page') }
     let(:body) { JSON.parse(response.body).with_indifferent_access[:page] }
 
-    before do
-      Page.any_instance.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][page.site.slug]['templates'])
-    end
-
     describe "page properties in json" do
       before do
         get :show, :id => page.route, :format => :json
@@ -22,7 +18,6 @@ describe NodesController do
     end
 
     it "HtmlPart content" do
-      page.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][page.site.slug]['templates'])
       html_part = Fabricate(:html_part, :node => page, :region => 'content')
 
       HtmlPart.any_instance.stub(:response_status).and_return(200)
@@ -43,8 +38,6 @@ describe NodesController do
       let(:news_list_part) { Fabricate(:news_list_part, :node => page, :region => 'content', :item_page => view_page) }
 
       before do
-        page.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][page.site.slug]['templates'])
-
         data_hash = {
           'items' => [
             {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1'},

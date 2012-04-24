@@ -106,7 +106,7 @@ describe NavigationPart do
 
     it "показывать раскрытую часть навигации для текущей страницы" do
       page111.update_attribute(:template, :inner_pagei)
-      page111.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][site.slug]['templates'])
+
       navigation_part = Fabricate(:navigation_part,
                                   :node => locale,
                                   :region => 'navigation',

@@ -38,11 +38,7 @@ describe Node do
     let(:site) { Fabricate(:site) }
     let(:locale) { Fabricate(:locale, :template => 'main_page', :parent => site)}
     let(:page) { Fabricate(:page, :template => 'inner_page', :parent => locale)}
-    before do
-      Site.any_instance.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][site.slug]['templates'])
-      Locale.any_instance.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][site.slug]['templates'])
-      Page.any_instance.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites'][site.slug]['templates'])
-    end
+
     it  { site.templates.should == ['main_page', 'inner_page'] }
     it  { locale.configurable_regions.should == ['navigation', 'content', 'footer'] }
     it  { locale.required_regions.should == ['navigation', 'content', 'footer'] }
@@ -153,20 +149,12 @@ describe Node do
 
     let(:part) { Fabricate :navigation_part, :node => foo_page, :region => 'content', :from_node => locale }
 
-    before do
-      part
+    before { part }
 
-      Page.any_instance.stub(:site_settings).and_return(YAML.load_file(Rails.root.join 'spec/fixtures/sites.yml').to_hash['sites']['www.tgr.ru'])
-    end
-
-    it {
-      bar_page.to_json.should == foo_page.to_json
-    }
+    it { bar_page.to_json.should == foo_page.to_json }
   end
 
   describe 'индексируемые парты' do
-    before { Page.any_instance.stub(:templates_hash).and_return(YAML.load_file(Rails.root.join('spec/fixtures/sites.yml')).to_hash['sites']['www.tgr.ru']['templates']) }
-
     let(:locale) { Fabricate :locale }
 
     let(:foo_page) { Fabricate :page, :slug => 'foo', :parent => locale, :template => 'main_page' }
