@@ -172,6 +172,106 @@ sites:
           required: true
           configurable: false
 
+      event_list_template:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+        content_second:
+          required: false
+          configurable: true
+        content_third:
+          required: false
+          configurable: true
+        right_side_navigation:
+          required: false
+          configurable: true
+        right_side_facts:
+          required: false
+          configurable: true
+        right_side_links:
+          required: false
+          configurable: true
+        right_side_charts:
+          required: false
+          configurable: true
+        reports:
+          required: false
+          configurable: true
+        gallery:
+          required: false
+          configurable: true
+        banners:
+          required: false
+          configurable: true
+        secondary_navigation:
+          required: true
+          configurable: false
+        footer:
+          required: true
+          configurable: false
+
+      event_show_template:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+        content_second:
+          required: false
+          configurable: true
+        content_third:
+          required: false
+          configurable: true
+        right_side_navigation:
+          required: false
+          configurable: true
+        right_side_facts:
+          required: false
+          configurable: true
+        right_side_links:
+          required: false
+          configurable: true
+        right_side_charts:
+          required: false
+          configurable: true
+        reports:
+          required: false
+          configurable: true
+        gallery:
+          required: false
+          configurable: true
+        banners:
+          required: false
+          configurable: true
+        secondary_navigation:
+          required: true
+          configurable: false
+        footer:
+          required: true
+          configurable: false
+
       organization_structure:
         site_name:
           required: true
