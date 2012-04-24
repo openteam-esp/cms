@@ -8,6 +8,7 @@ class Node < ActiveRecord::Base
   validates_presence_of :context
 
   validates :slug, :format => { :with => %r{^[[:alnum:]_\.-]+$} }
+
   validates_uniqueness_of :slug, :scope => :ancestry
 
   default_scope :order => [:weight]
@@ -62,12 +63,16 @@ class Node < ActiveRecord::Base
     templates_hash.keys
   end
 
-  def required_regions
-    regions_with_option 'required'
+  def configurable_regions
+    regions_with_option 'configurable'
   end
 
   def indexable_regions
     regions_with_option 'indexable'
+  end
+
+  def required_regions
+    regions_with_option 'required'
   end
 
   def scope_condition
@@ -76,12 +81,10 @@ class Node < ActiveRecord::Base
 
   def regions
     result = required_regions
-    result << parts.map(&:region)
-    result.flatten.uniq
-  end
 
-  def configurable_regions
-    regions_with_option 'configurable'
+    result << parts.map(&:region)
+
+    result.flatten.uniq
   end
 
   def page_title
@@ -100,14 +103,19 @@ class Node < ActiveRecord::Base
 
   def part_for(region, select_from_parents = nil)
     @parts ||= {}
+
     return @parts[region] if @parts.key?(region)
+
     part = parts.where(:region => region).first
+
     part ||= Part.where(:region => region, :node_id => path_ids).first if select_from_parents
+
     if part
       part.current_node = self
       part.params = parts_params ? (parts_params[part.type.underscore.gsub('_part','')] || {}) : {}
       part.resource_id = self.resource_id
     end
+
     @parts[region] = part
   end
 

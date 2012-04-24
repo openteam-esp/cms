@@ -53,15 +53,14 @@ describe HtmlPart do
 
         specify { html_part.update_attribute :html_info_path, 'new/path/part.xhtml' }
       end
+
       describe 'title' do
         before { page.should_receive(:index) }
 
         specify { html_part.update_attribute :title, 'New title' }
       end
     end
-
   end
-
 end
 
 # == Schema Information

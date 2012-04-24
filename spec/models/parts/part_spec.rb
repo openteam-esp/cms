@@ -41,6 +41,48 @@ describe Part do
       it { part.should_not be_indexable }
     end
   end
+
+  context 'should send message to queue' do
+    before { Page.any_instance.stub(:site_settings).and_return(YAML.load_file(Rails.root.join 'spec/fixtures/sites.yml').to_hash['sites']['www.tgr.ru']) }
+
+    let(:page) { Fabricate :page, :template => 'main_page' }
+    let(:indexable_part) { Fabricate :html_part, :region => 'content', :node => page }
+    let(:not_indexable_part) { Fabricate :html_part, :region => 'footer', :node => page }
+
+    describe '#update' do
+      it 'in indexable region' do
+        indexable_part.should_receive :index
+
+        indexable_part.update_attribute :title, 'ololo'
+      end
+
+      it 'in not indexable region' do
+        not_indexable_part.should_not_receive :index
+
+        not_indexable_part.update_attribute :title, 'ololo'
+      end
+    end
+
+    describe '#destroy' do
+      it 'in indexable region' do
+        indexable_part.should_receive :index
+
+        indexable_part.destroy
+      end
+
+      it 'in not indexable region' do
+        not_indexable_part.should_not_receive :index
+
+        not_indexable_part.destroy
+      end
+    end
+
+    describe '#index' do
+      before { MessageMaker.should_receive(:make_message).with('esp.searcher.index', page.url) }
+
+      specify { indexable_part.update_attribute :title, 'ololo' }
+    end
+  end
 end
 
 # == Schema Information

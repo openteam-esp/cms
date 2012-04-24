@@ -5,6 +5,9 @@ class Part < ActiveRecord::Base
 
   validates_presence_of :node, :region, :template
 
+  after_save :index, :if => :indexable?
+  after_destroy :index, :if => :indexable?
+
   default_value_for :params, {}
 
   default_value_for :template do |part|
@@ -66,6 +69,9 @@ class Part < ActiveRecord::Base
 
     def templates_from_settings
       node.site_settings['part_templates'].try(:[], self.class.name.underscore).try(:split, '|' ) || []
+    end
+
+    def index
     end
 end
 
