@@ -80,7 +80,10 @@ sites:
           required: true
           configurable: true
         actual:
-          required: false
+          required: true
+          configurable: true
+        calendar:
+          required: true
           configurable: true
         governor_message:
           required: true
