@@ -46,7 +46,7 @@ describe Part do
     let(:not_indexable_part) { Fabricate :html_part, :region => 'footer', :node => page }
 
     describe 'indexable region' do
-      before { indexable_part.should_receive :node_index }
+      before { indexable_part.should_receive :index }
 
       context '#save' do
         specify { indexable_part.update_attribute :title, 'ololo' }
@@ -75,7 +75,7 @@ describe Part do
     let(:indexable_part) { Fabricate :html_part, :region => 'content', :node => page }
 
     context '#index' do
-      before { MessageMaker.should_receive(:make_message).with('esp.searcher.index', page.url) }
+      before { MessageMaker.should_receive(:make_message).with('esp.searcher.add', page.url) }
 
       specify { indexable_part }
     end

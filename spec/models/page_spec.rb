@@ -33,12 +33,6 @@ describe Page do
     it { page_with_slug.slug.should == 'ololo' }
     it { page_with_complex_slug.slug.should == 'nazvanie-stranitsy-sostoyaschee-iz-neskolkih-slov' }
   end
-
-  describe '#send_queue_message' do
-    before { MessageMaker.should_receive(:make_message).with('esp.searcher.index', subject.url) }
-
-    specify { subject.index }
-  end
 end
 
 # == Schema Information

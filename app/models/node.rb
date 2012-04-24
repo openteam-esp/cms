@@ -11,6 +11,8 @@ class Node < ActiveRecord::Base
 
   validates_uniqueness_of :slug, :scope => :ancestry
 
+  after_destroy :remove_page_from_index
+
   default_scope :order => [:weight]
 
   delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
@@ -152,10 +154,6 @@ class Node < ActiveRecord::Base
     site_settings['templates']
   end
 
-  def index
-    MessageMaker.make_message('esp.searcher.index', url)
-  end
-
   def url
     "#{root.client_url}#{route_without_site}"
   end
@@ -204,6 +202,10 @@ class Node < ActiveRecord::Base
     def weights
       # NOTE: не больше 100
       [parent_weight, sprintf('%02d', navigation_position)].keep_if(&:present?).join('/').split('/')
+    end
+
+    def remove_page_from_index
+      MessageMaker.make_message('esp.searcher.remove', url)
     end
 end
 

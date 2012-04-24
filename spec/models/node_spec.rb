@@ -163,6 +163,14 @@ describe Node do
     it { foo_page.indexable_regions.should == ['content'] }
     it { bar_page.indexable_regions.should be_empty }
   end
+
+  describe 'удаление' do
+    let(:page) { Fabricate :page }
+
+    before { MessageMaker.should_receive(:make_message).with('esp.searcher.remove', page.url) }
+
+    specify { page.destroy }
+  end
 end
 
 # == Schema Information
