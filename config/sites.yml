@@ -185,15 +185,15 @@ sites:
         breadcrumbs:
           required: true
           configurable: false
-        content_first:
-          required: false
-          configurable: true
-        content_second:
-          required: false
-          configurable: true
-        content_third:
-          required: false
-          configurable: true
+        current_events:
+          required: true
+          configurable: false
+        nearest_events:
+          required: true
+          configurable: false
+        gone_events:
+          required: true
+          configurable: false
         right_side_navigation:
           required: false
           configurable: true
