@@ -187,30 +187,12 @@ sites:
           configurable: false
         current_events:
           required: true
-          configurable: false
+          configurable: true
         nearest_events:
           required: true
-          configurable: false
+          configurable: true
         gone_events:
           required: true
-          configurable: false
-        right_side_navigation:
-          required: false
-          configurable: true
-        right_side_facts:
-          required: false
-          configurable: true
-        right_side_links:
-          required: false
-          configurable: true
-        right_side_charts:
-          required: false
-          configurable: true
-        reports:
-          required: false
-          configurable: true
-        gallery:
-          required: false
           configurable: true
         banners:
           required: false
