@@ -6,7 +6,7 @@ class NewsListPart < Part
   has_enums
 
   def to_json
-    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content', 'border_dates']))
   end
 
   def content
@@ -20,15 +20,16 @@ class NewsListPart < Part
     hash.merge!(pagination) if news_paginated?
     hash.merge!('rss_link' => rss_link) if news_channel?
 
-    hash.merge!('min_event_datetime' => min_event_datetime)
-    hash.merge!('max_event_datetime' => max_event_datetime)
-
     if news_event_entry?
       hash.merge!('first_page' => true) if events_first_page?
       hash.merge!('last_page' => true) if events_last_page?
     end
 
     hash
+  end
+
+  def border_dates
+    { 'min' => min_event_datetime, 'max' => max_event_datetime }
   end
 
   def collection_link
@@ -157,7 +158,6 @@ class NewsListPart < Part
         }
       }
     end
-
     def urls_for_index
       []
     end

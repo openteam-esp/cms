@@ -29,6 +29,7 @@ describe NewsListPart do
         'response_status' => 200,
         'type' => 'NewsListPart',
         'part_title' => 'Новости',
+        'border_dates' => { 'min' => nil, 'max' => nil },
         'content' => {
           'items' => [
             {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1', 'link' => @news_part.item_page.route_without_site + '/-/link1'},
@@ -38,8 +39,6 @@ describe NewsListPart do
           'collection_link' => '/ru',
           'title' => 'Новости',
           'rss_link' => 'http://news.esp.tomsk.gov.ru/channels/news/entries.rss',
-          'min_event_datetime' => nil,
-          'max_event_datetime' => nil
         }
       }
     end

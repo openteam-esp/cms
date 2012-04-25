@@ -75,7 +75,7 @@ describe Part do
     let(:indexable_part) { Fabricate :html_part, :region => 'content', :node => page }
 
     context '#index' do
-      before { MessageMaker.should_receive(:make_message).with('esp.searcher.add', page.url) }
+      before { MessageMaker.should_receive(:make_message).with('searcher.add', page.url) }
 
       specify { indexable_part }
     end
