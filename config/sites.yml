@@ -16,27 +16,35 @@ sites:
         actual:
           required: true
           configurable: true
+          indexable: true
         calendar_current:
           required: true
           configurable: true
+          indexable: true
         calendar_nearest:
           required: true
           configurable: true
+          indexable: true
         calendar_gone:
           required: true
           configurable: true
+          indexable: true
         governor_message:
           required: true
           configurable: true
+          indexable: true
         governor_comments:
           required: true
           configurable: true
+          indexable: true
         news:
           required: true
           configurable: true
+          indexable: true
         gallery:
           required: false
           configurable: true
+          indexable: true
         main_navigation:
           required: true
           configurable: true
@@ -46,9 +54,11 @@ sites:
         map_region:
           required: true
           configurable: true
+          indexable: true
         banners:
           required: true
           configurable: true
+          indexable: true
         secondary_navigation:
           required: true
           configurable: true
@@ -72,33 +82,41 @@ sites:
         content_first:
           required: false
           configurable: true
+          indexable: true
         content_second:
           required: false
           configurable: true
+          indexable: true
         content_third:
           required: false
           configurable: true
+          indexable: true
         right_side_navigation:
           required: false
           configurable: true
         right_side_facts:
           required: false
           configurable: true
+          indexable: true
         right_side_links:
           required: false
           configurable: true
+          indexable: true
         right_side_charts:
           required: false
           configurable: true
         reports:
           required: false
           configurable: true
+          indexable: true
         gallery:
           required: false
           configurable: true
+          indexable: true
         banners:
           required: false
           configurable: true
+          indexable: true
         secondary_navigation:
           required: true
           configurable: false
@@ -122,15 +140,19 @@ sites:
         current_events:
           required: true
           configurable: true
+          indexable: true
         nearest_events:
           required: true
           configurable: true
+          indexable: true
         gone_events:
           required: true
           configurable: true
+          indexable: true
         banners:
           required: false
           configurable: true
+          indexable: true
         secondary_navigation:
           required: true
           configurable: false
@@ -154,33 +176,41 @@ sites:
         content_first:
           required: false
           configurable: true
+          indexable: true
         content_second:
           required: false
           configurable: true
+          indexable: true
         content_third:
           required: false
           configurable: true
+          indexable: true
         right_side_navigation:
           required: false
           configurable: true
         right_side_facts:
           required: false
           configurable: true
+          indexable: true
         right_side_links:
           required: false
           configurable: true
+          indexable: true
         right_side_charts:
           required: false
           configurable: true
         reports:
           required: false
           configurable: true
+          indexable: true
         gallery:
           required: false
           configurable: true
+          indexable: true
         banners:
           required: false
           configurable: true
+          indexable: true
         secondary_navigation:
           required: true
           configurable: false
@@ -204,12 +234,15 @@ sites:
         content_first:
           required: false
           configurable: true
+          indexable: true
         content_second:
           required: false
           configurable: true
+          indexable: true
         banners:
           required: false
           configurable: true
+          indexable: true
         secondary_navigation:
           required: true
           configurable: false
@@ -233,24 +266,30 @@ sites:
         content_first:
           required: false
           configurable: true
+          indexable: true
         regulation:
           required: false
           configurable: true
+          indexable: true
         reports:
           required: false
           configurable: true
+          indexable: true
         dependent_subdivisions:
           required: false
           configurable: true
+          indexable: true
         links:
           required: false
           configurable: true
+          indexable: true
         secondary_navigation:
           required: true
           configurable: false
         banners:
           required: false
           configurable: true
+          indexable: true
         footer:
           required: true
           configurable: false
@@ -277,12 +316,15 @@ sites:
         news_list:
           required: true
           configurable: true
+          indexable: true
         interview_list:
           required: true
           configurable: true
+          indexable: true
         belief_list:
           required: true
           configurable: true
+          indexable: true
         last_video:
           required: true
           configurable: true
@@ -292,6 +334,7 @@ sites:
         event_list:
           required: true
           configurable: true
+          indexable: true
 
       inner_page:
         site_name:
@@ -318,6 +361,7 @@ sites:
         content_first:
           required: false
           configurable: true
+          indexable: true
 
       event_page:
         site_name:
@@ -341,12 +385,15 @@ sites:
         content_first:
           required: false
           configurable: true
+          indexable: true
         content_second:
           required: false
           configurable: true
+          indexable: true
         content_third:
           required: false
           configurable: true
+          indexable: true
 
       about_project_page:
         site_name:
@@ -367,3 +414,4 @@ sites:
         content_first:
           required: false
           configurable: true
+          indexable: true
