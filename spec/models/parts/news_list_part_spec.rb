@@ -29,7 +29,7 @@ describe NewsListPart do
         'response_status' => 200,
         'type' => 'NewsListPart',
         'part_title' => 'Новости',
-        'border_dates' => { 'min' => nil, 'max' => nil },
+        'border_dates' => { 'min_date' => nil, 'max_date' => nil },
         'content' => {
           'items' => [
             {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1', 'link' => @news_part.item_page.route_without_site + '/-/link1'},

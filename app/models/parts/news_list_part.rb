@@ -29,7 +29,7 @@ class NewsListPart < Part
   end
 
   def border_dates
-    { 'min' => min_event_datetime, 'max' => max_event_datetime }
+    { 'min_date' => min_event_datetime, 'max_date' => max_event_datetime }
   end
 
   def collection_link
