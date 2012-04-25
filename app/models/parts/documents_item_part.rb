@@ -36,7 +36,12 @@ class DocumentsItemPart < Part
       papers.map { |p| p.merge!('link' => "#{node.route_without_site}/-/#{p['id']}") }
       papers.each { |p| p.delete('id') }
     end
+
+    def urls_for_index
+      []
+    end
 end
+
 # == Schema Information
 #
 # Table name: parts

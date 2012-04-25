@@ -33,6 +33,10 @@ class NavigationPart < Part
 
       hash
     end
+
+    def urls_for_index
+      []
+    end
 end
 
 # == Schema Information

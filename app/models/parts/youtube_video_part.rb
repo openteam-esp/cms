@@ -63,7 +63,12 @@ class YoutubeVideoPart < Part
         }
       end
     end
+
+    def urls_for_index
+      []
+    end
 end
+
 # == Schema Information
 #
 # Table name: parts

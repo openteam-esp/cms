@@ -16,21 +16,28 @@ class TextPart < Part
   end
 
   def body
-    JSON.parse(response_body)['content']
+    response_hash['content']
   end
 
   private
-    def remote_url
+    def storage_url
       key = Settings[:storage] || Settings[:vfs]
-      "#{key[:url]}/api/el_finder/v2?format=json&cmd=get"
+
+      "#{key[:url]}/api/el_finder/v2"
     end
 
     def str_to_hash(str)
       Base64.urlsafe_encode64(str).strip.tr('=', '')
     end
 
+    def request_params
+      params = "format=json"
+      params << "&cmd=get"
+      params << "&target=r1_#{str_to_hash(text_info_path.gsub(/^\//,''))}"
+    end
+
     def url_for_request
-      "#{remote_url}&target=r1_#{str_to_hash(text_info_path.gsub(/^\//,''))}"
+      "#{storage_url}?#{request_params}"
     end
 end
 

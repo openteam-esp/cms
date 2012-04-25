@@ -111,6 +111,10 @@ class DocumentsPart < Part
 
       URI.encode("#{documents_url}/#{documents_kind}.rss?#{params}")
     end
+
+    def urls_for_index
+      []
+    end
 end
 
 # == Schema Information

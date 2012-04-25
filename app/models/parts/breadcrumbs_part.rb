@@ -15,6 +15,11 @@ class BreadcrumbsPart < Part
 
     hash.merge!(current_node.page_title => current_node.page_route)
   end
+
+  private
+    def urls_for_index
+      []
+    end
 end
 
 # == Schema Information

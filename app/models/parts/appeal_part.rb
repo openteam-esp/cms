@@ -26,7 +26,12 @@ class AppealPart < Part
     def url_for_request
       "#{appeals_url}/sections/#{appeal_section_slug}/appeals/new"
     end
+
+    def urls_for_index
+      []
+    end
 end
+
 # == Schema Information
 #
 # Table name: parts

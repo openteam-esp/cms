@@ -23,7 +23,12 @@ class BluePagesItemPart < Part
     def url_for_request
       "#{blue_pages_url}/#{item_path}"
     end
+
+    def urls_for_index
+      []
+    end
 end
+
 # == Schema Information
 #
 # Table name: parts
