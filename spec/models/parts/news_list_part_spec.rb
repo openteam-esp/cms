@@ -37,7 +37,9 @@ describe NewsListPart do
 
           'collection_link' => '/ru',
           'title' => 'Новости',
-          'rss_link' => 'http://news.esp.tomsk.gov.ru/channels/news/entries.rss'
+          'rss_link' => 'http://news.esp.tomsk.gov.ru/channels/news/entries.rss',
+          'min_event_datetime' => nil,
+          'max_event_datetime' => nil
         }
       }
     end
