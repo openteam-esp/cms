@@ -20,6 +20,9 @@ class NewsListPart < Part
     hash.merge!(pagination) if news_paginated?
     hash.merge!('rss_link' => rss_link) if news_channel?
 
+    hash.merge!('min_event_datetime' => min_event_datetime)
+    hash.merge!('max_event_datetime' => max_event_datetime)
+
     if news_event_entry?
       hash.merge!('first_page' => true) if events_first_page?
       hash.merge!('last_page' => true) if events_last_page?
@@ -44,6 +47,7 @@ class NewsListPart < Part
     @channel_response = Requester.new("#{news_url}/channels")
     @channel_response.response_hash.map { |a| [ "#{'&nbsp;'*a['depth']*2}#{a['title']}".html_safe, a['id'] ] }
   end
+
 
   private
     def news_url
@@ -116,6 +120,14 @@ class NewsListPart < Part
       response_headers['X-Total-Pages'].to_i
     end
 
+    def min_event_datetime
+      response_headers['X-Min-Event-Since']
+    end
+
+    def max_event_datetime
+      response_headers['X-Max-Event-Until']
+    end
+
     def current_page
       return events_page + 1 if interval_type == 'all_coming'
       return events_page.abs if interval_type == 'all_gone'
@@ -146,7 +158,6 @@ class NewsListPart < Part
       }
     end
 end
-
 
 # == Schema Information
 #

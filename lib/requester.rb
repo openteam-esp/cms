@@ -10,7 +10,7 @@ class Requester
   end
 
   def response_headers
-    @response_headers ||= Hash[response.header_str.split("\r\n").map { |s| s.split(':').map(&:strip) }]
+    @response_headers ||= Hash[response.header_str.split("\r\n").map { |s| s.split(': ').map(&:strip) }]
   end
 
   def response_status
