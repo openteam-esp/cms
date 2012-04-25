@@ -77,7 +77,7 @@ class Part < ActiveRecord::Base
 
     def index
       urls_for_index.each do |url|
-        MessageMaker.make_message('esp.searcher.add', url)
+        MessageMaker.make_message('searcher.add', url)
       end
     end
 end
