@@ -105,7 +105,7 @@ GEM
     esp-ckeditor (0.1.0)
       formtastic
       rails
-    esp-commons (0.2.6)
+    esp-commons (0.2.7)
       active_attr
       curb
       openteam-commons
@@ -191,7 +191,7 @@ GEM
     omniauth-oauth2 (1.0.0)
       oauth2 (~> 0.5.0)
       omniauth (~> 1.0)
-    openteam-commons (0.1.4)
+    openteam-commons (0.1.6)
       airbrake
       configliere
       rails
