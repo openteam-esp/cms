@@ -105,8 +105,9 @@ GEM
     esp-ckeditor (0.1.0)
       formtastic
       rails
-    esp-commons (0.2.3)
+    esp-commons (0.2.5)
       active_attr
+      curb
       openteam-commons
       rails
     esp-gems (0.0.2)
@@ -307,7 +308,6 @@ DEPENDENCIES
   attribute_normalizer
   bunny
   compass-rails
-  curb
   el_vfs_client
   esp-auth
   esp-ckeditor
