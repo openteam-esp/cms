@@ -8,7 +8,6 @@ end
 group :default do
   gem 'acts_as_list',         :ref => '7fd2',     :git => 'git://github.com/swanandp/acts_as_list'
   gem 'attribute_normalizer'
-  gem 'bunny'
   gem 'el_vfs_client'
   gem 'esp-auth'
   gem 'esp-ckeditor'
