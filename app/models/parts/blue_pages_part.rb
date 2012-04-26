@@ -19,11 +19,11 @@ class BluePagesPart < Part
   alias_attribute :part_title, :title
 
   def categories
-    @categories ||= Requester.new("#{blue_pages_url}.json").response_hash['categories'].map { |c| [c['title'], c['id']] }
+    @categories ||= Requester.new("#{blue_pages_url}", 'application/json').response_hash['categories'].map { |c| [c['title'], c['id']] }
   end
 
   def category_name
-    @category_name ||= Requester.new("#{blue_pages_url}/#{blue_pages_category_id}").response_hash['title']
+    @category_name ||= Requester.new("#{blue_pages_url}/#{blue_pages_category_id}", 'application/json').response_hash['title']
   end
 
   #
