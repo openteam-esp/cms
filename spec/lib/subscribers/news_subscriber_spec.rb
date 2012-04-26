@@ -11,6 +11,8 @@ describe NewsSubscriber do
   let(:foo_part) { Fabricate :news_item_part, :node => foo_page, :news_channel => '1' }
   let(:bar_part) { Fabricate :news_item_part, :node => bar_page, :news_channel => '1' }
 
+  let(:baz_part) { Fabricate :news_item_part, :node => locale, :news_channel => '2' }
+
   before { foo_part; bar_part }
 
   before { MessageMaker.stub(:make_message) }
