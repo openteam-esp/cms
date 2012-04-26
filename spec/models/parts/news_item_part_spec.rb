@@ -30,6 +30,32 @@ describe NewsItemPart do
     specify { part.to_json.should ==  expected_hash }
   end
 
+  context '#content' do
+    subject { part }
+
+    let(:response_hash) {
+      { 'more_like_this' => [
+          { 'slug' => 'ololo' },
+          { 'slug' => 'pysh' }
+        ]
+      }
+    }
+
+    let(:expected_hash) {
+      { 'more_like_this' => [
+          { 'slug' => 'ololo', 'link' => '/ru/name/-/ololo' },
+          { 'slug' => 'pysh', 'link' => '/ru/name/-/pysh' }
+        ]
+      }
+    }
+
+    before { part.stub(:response_status).and_return(200) }
+    before { part.stub(:response_hash).and_return(response_hash) }
+    before { part.stub(:slug).and_return('news_slug') }
+
+    its(:content) { should == expected_hash }
+  end
+
   #context 'should send to queue messages with pages ulrs' do
     #let(:page) { Fabricate :page, :template => 'main_page' }
     #let(:part) { Fabricate :news_item_part, :node => page, :region => 'content' }

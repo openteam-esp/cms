@@ -19,6 +19,14 @@ class NewsItemPart < Part
 
   alias :page_title :part_title
 
+  def path_with_slug(slug)
+    "#{node.route_without_site}/-/#{slug}"
+  end
+
+  def url_with_slug(slug)
+    "#{node.url}-/#{slug}"
+  end
+
   private
     def news_url
       Settings['news.url']
@@ -42,7 +50,7 @@ class NewsItemPart < Part
       {}.tap do |hash|
         hash.merge!(response_hash)
 
-        hash['more_like_this'] = hash['more_like_this'].each { |e| e['link'] = "#{node.route_without_site}/-/#{e['slug']}" } if hash['more_like_this']
+        hash['more_like_this'] = hash['more_like_this'].each { |e| e['link'] = path_with_slug(e['slug']) } if hash['more_like_this']
       end
     end
 end
