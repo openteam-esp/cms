@@ -25,8 +25,8 @@ module Cms
     config.autoload_paths += %W[
                                 #{config.root}/app/models/parts
                                 #{config.root}/app/models/vfs
-                                #{config.root}/lib/queueing
                                 #{config.root}/lib
+                                #{config.root}/lib/subscribers
                                ]
 
     # Only load the plugins named here, in the order given (default is alphabetical).

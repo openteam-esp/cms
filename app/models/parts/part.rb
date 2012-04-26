@@ -47,6 +47,12 @@ class Part < ActiveRecord::Base
     node.indexable_regions.include? region
   end
 
+  def index
+    urls_for_index.each do |url|
+      MessageMaker.make_message('esp.cms.searcher', 'add', url)
+    end
+  end
+
   protected
     def error_title
       case response_status
@@ -73,12 +79,6 @@ class Part < ActiveRecord::Base
 
     def urls_for_index
       [node.url]
-    end
-
-    def index
-      urls_for_index.each do |url|
-        MessageMaker.make_message('esp.cms.searcher', 'add', url)
-      end
     end
 end
 

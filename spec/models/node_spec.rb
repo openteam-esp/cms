@@ -167,7 +167,7 @@ describe Node do
   describe 'удаление' do
     let(:page) { Fabricate :page }
 
-    before { MessageMaker.should_receive(:make_message).with('esp.searcher.remove', page.url) }
+    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', page.url) }
 
     specify { page.destroy }
   end

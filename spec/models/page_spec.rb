@@ -21,7 +21,7 @@ describe Page do
   end
 
   describe '#url' do
-    its(:url) { should == 'http://example.com/ru/name' }
+    its(:url) { should == 'http://example.com/ru/name/' }
   end
 
   describe '#slug' do

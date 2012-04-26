@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(:version => 20120420023023) do
 
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
-    t.text     "description",     :limit => 255
+    t.text     "description"
     t.string   "picture_url"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "nodes", :force => true do |t|
