@@ -155,7 +155,7 @@ class Node < ActiveRecord::Base
   end
 
   def url
-    "#{root.client_url}#{route_without_site}"
+    "#{root.client_url}#{route_without_site}/"
   end
 
   private
@@ -205,7 +205,7 @@ class Node < ActiveRecord::Base
     end
 
     def remove_page_from_index
-      MessageMaker.make_message('esp.searcher.remove', url)
+      MessageMaker.make_message('esp.cms.searcher', 'remove', url)
     end
 end
 

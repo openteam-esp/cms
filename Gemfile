@@ -33,10 +33,6 @@ group :development do
   gem 'therubyracer'                              unless RUBY_PLATFORM =~ /freebsd/
 end
 
-group :production do
-  gem 'unicorn',                                  :require => false unless ENV['SHARED_DATABASE_URL']
-end
-
 group :test do
   gem 'fabrication',                              :require => false
   gem 'guard-rspec'
