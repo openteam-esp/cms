@@ -119,7 +119,7 @@ sites:
           configurable: true
           indexable: true
         main_subnavigation:
-          required: false
+          required: true
           configurable: true
         secondary_navigation:
           required: true
