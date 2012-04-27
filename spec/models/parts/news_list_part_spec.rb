@@ -16,6 +16,8 @@ describe NewsListPart do
                                       :title => 'Новости',
                                       :node => page.locale)
 
+      @news_part.stub(:border_dates).and_return({ 'min_date' => nil, 'max_date' => nil })
+
       response_hash = [
         {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1'},
         {'title' => 'title2', 'annotation' => 'annotation2', 'slug' => 'link2'}
@@ -38,7 +40,7 @@ describe NewsListPart do
 
           'collection_link' => '/ru',
           'title' => 'Новости',
-          'rss_link' => 'http://news.esp.tomsk.gov.ru/channels/news/entries.rss',
+          'rss_link' => "#{Settings['news.url']}/channels/news/entries.rss",
         }
       }
     end

@@ -13,7 +13,7 @@ describe NewsSubscriber do
 
   let(:baz_part) { Fabricate :news_item_part, :node => locale, :news_channel => '2', :region => 'content' }
 
-  before { NewsItemPart.any_instance.stub(:index).and_return(nil) }
+  before { NewsItemPart.any_instance.stub(:index) }
 
   before { foo_part; bar_part; baz_part }
 

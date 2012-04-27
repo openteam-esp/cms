@@ -5,10 +5,9 @@ require 'spec_helper'
 describe NewsItemPart do
   let(:part) { Fabricate :news_item_part }
 
-  before { part.node.update_attribute(:title, "Заголовок страницы") }
-
   context "должна возвращять page_title для своей страницы" do
     before { NewsItemPart.any_instance.stub(:content).and_return({ 'title' => 'entry title' }) }
+    before { part.node.update_attribute(:title, "Заголовок страницы") }
 
     specify { part.node.page_title.should == "entry title | Заголовок страницы" }
   end
@@ -88,29 +87,31 @@ describe NewsItemPart do
     end
   end
 
-  describe 'should send to queue messages with add pages news slugs after update' do
+  describe 'should send to queue messages with' do
     let(:page) { Fabricate :page, :template => 'main_page' }
     let(:part) { Fabricate :news_item_part, :node => page, :region => 'content' }
 
-    before { part.stub(:news_pages_count).and_return(2) }
-    before { part.stub(:news_slugs_for_page).with(1).and_return(['ololo']) }
-    before { part.stub(:news_slugs_for_page).with(2).and_return(['pish-pish']) }
+    before { NewsItemPart.any_instance.stub(:news_pages_count).and_return(0) }
+    before { NewsItemPart.any_instance.stub(:news_slugs_for_page).and_return([]) }
 
-    before { MessageMaker.should_receive(:make_message).once.with('esp.cms.searcher', 'add', part.url_with_slug('ololo')) }
-    before { MessageMaker.should_receive(:make_message).once.with('esp.cms.searcher', 'add', part.url_with_slug('pish-pish')) }
+    describe 'add pages news slugs after update' do
+      before { part.stub(:news_pages_count).and_return(2) }
+      before { part.stub(:news_slugs_for_page).with(1).and_return(['ololo']) }
+      before { part.stub(:news_slugs_for_page).with(2).and_return(['pish-pish']) }
 
-    specify { part.update_attribute :title, "123234" }
-  end
+      before { MessageMaker.should_receive(:make_message).once.with('esp.cms.searcher', 'add', part.url_with_slug('ololo')) }
+      before { MessageMaker.should_receive(:make_message).once.with('esp.cms.searcher', 'add', part.url_with_slug('pish-pish')) }
 
-  describe 'should send to queue messages with remove page_url after destroy' do
-    let(:page) { Fabricate :page, :template => 'main_page' }
-    let(:part) { Fabricate :news_item_part, :node => page, :region => 'content' }
+      specify { part.update_attribute :title, "123234" }
+    end
 
-    before { part.should_not_receive(:index) }
+    describe 'with remove page_url after destroy' do
+      before { part.should_not_receive(:index) }
 
-    before { MessageMaker.should_receive(:make_message).once.with('esp.cms.searcher', 'remove', page.url) }
+      before { MessageMaker.should_receive(:make_message).once.with('esp.cms.searcher', 'remove', page.url) }
 
-    specify { part.destroy }
+      specify { part.destroy }
+    end
   end
 end
 
