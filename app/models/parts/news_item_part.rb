@@ -47,6 +47,10 @@ class NewsItemPart < Part
     end
   end
 
+  def index_after_destroy
+    MessageMaker.make_message('esp.cms.searcher', 'remove', node.url)
+  end
+
   private
     def news_url
       Settings['news.url']

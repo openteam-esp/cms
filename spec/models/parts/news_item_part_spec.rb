@@ -73,7 +73,7 @@ describe NewsItemPart do
       specify { part.news_slugs_for_page(1).should == ['foo', 'bar'] }
     end
 
-    context '#paginate_news' do
+    context '#news_pages_count' do
       let(:response_headers) {
         { 'X-Total-Pages' => 3 }
       }
@@ -88,7 +88,7 @@ describe NewsItemPart do
     end
   end
 
-  describe 'should send to queue messages with pages ulrs' do
+  describe 'should send to queue messages with add pages news slugs after update' do
     let(:page) { Fabricate :page, :template => 'main_page' }
     let(:part) { Fabricate :news_item_part, :node => page, :region => 'content' }
 
@@ -100,6 +100,17 @@ describe NewsItemPart do
     before { MessageMaker.should_receive(:make_message).once.with('esp.cms.searcher', 'add', part.url_with_slug('pish-pish')) }
 
     specify { part.update_attribute :title, "123234" }
+  end
+
+  describe 'should send to queue messages with remove page_url after destroy' do
+    let(:page) { Fabricate :page, :template => 'main_page' }
+    let(:part) { Fabricate :news_item_part, :node => page, :region => 'content' }
+
+    before { part.should_not_receive(:index) }
+
+    before { MessageMaker.should_receive(:make_message).once.with('esp.cms.searcher', 'remove', page.url) }
+
+    specify { part.destroy }
   end
 end
 

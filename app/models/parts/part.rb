@@ -5,8 +5,8 @@ class Part < ActiveRecord::Base
 
   validates_presence_of :node, :region, :template
 
-  after_save :index, :if => :indexable?
-  after_destroy :index, :if => :indexable?
+  after_save :index_after_save, :if => :indexable?
+  after_destroy :index_after_destroy, :if => :indexable?
 
   default_value_for :params, {}
 
@@ -79,6 +79,14 @@ class Part < ActiveRecord::Base
 
     def urls_for_index
       [node.url]
+    end
+
+    def index_after_save
+      index
+    end
+
+    def index_after_destroy
+      index
     end
 end
 
