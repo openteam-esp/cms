@@ -27,6 +27,26 @@ class NewsItemPart < Part
     "#{node.url}-/#{slug}"
   end
 
+  def news_list_url(page = 1)
+    URI.escape("#{news_url}?utf8=✓&entry_search[channel_ids][]=#{news_channel}&per_page=50&page=#{page}")
+  end
+
+  def news_slugs_for_page(page)
+    Requester.new(news_list_url(page), headers_accept).response_hash.map { |item| item['slug'] }
+  end
+
+  def news_pages_count
+    Requester.new(news_list_url, headers_accept).response_headers['X-Total-Pages'].to_i
+  end
+
+  def index
+    (1..news_pages_count).each do |page|
+      news_slugs_for_page(page).each do |slug|
+        MessageMaker.make_message('esp.cms.searcher', 'add', url_with_slug(slug))
+      end
+    end
+  end
+
   private
     def news_url
       Settings['news.url']

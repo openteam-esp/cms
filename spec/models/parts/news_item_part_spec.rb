@@ -56,19 +56,51 @@ describe NewsItemPart do
     its(:content) { should == expected_hash }
   end
 
-  #context 'should send to queue messages with pages ulrs' do
-    #let(:page) { Fabricate :page, :template => 'main_page' }
-    #let(:part) { Fabricate :news_item_part, :node => page, :region => 'content' }
+  describe 'receive news slugs from NEWS' do
+    context '#news_slugs_for_page' do
+      let(:page_json) {
+        [
+          { 'slug' => 'foo' },
+          { 'slug' => 'bar' }
+        ]
+      }
 
-    #before { part }
+      let(:requester) { double(Requester) }
 
-    #it 'when update channel' do
-     #MessageMaker.should_receive(:make_message).once.with('esp.searcher.index', page.url)
-     #MessageMaker.should_receive(:make_message).once.with('esp.searcher.index', page.url)
+      before { requester.stub(:response_hash).and_return(page_json) }
+      before { Requester.should_receive(:new).with(part.news_list_url(1), 'application/json').and_return(requester) }
 
-     #part.update_attributes :news_channel => '1'
-    #end
-  #end
+      specify { part.news_slugs_for_page(1).should == ['foo', 'bar'] }
+    end
+
+    context '#paginate_news' do
+      let(:response_headers) {
+        { 'X-Total-Pages' => 3 }
+      }
+
+      let(:requester) { double(Requester) }
+
+      before { requester.stub(:response_headers).and_return(response_headers) }
+      before { Requester.should_receive(:new).with(part.news_list_url(1), 'application/json').and_return(requester) }
+
+      specify { part.news_pages_count.should == 3 }
+
+    end
+  end
+
+  describe 'should send to queue messages with pages ulrs' do
+    let(:page) { Fabricate :page, :template => 'main_page' }
+    let(:part) { Fabricate :news_item_part, :node => page, :region => 'content' }
+
+    before { part.stub(:news_pages_count).and_return(2) }
+    before { part.stub(:news_slugs_for_page).with(1).and_return(['ololo']) }
+    before { part.stub(:news_slugs_for_page).with(2).and_return(['pish-pish']) }
+
+    before { MessageMaker.should_receive(:make_message).once.with('esp.cms.searcher', 'add', part.url_with_slug('ololo')) }
+    before { MessageMaker.should_receive(:make_message).once.with('esp.cms.searcher', 'add', part.url_with_slug('pish-pish')) }
+
+    specify { part.update_attribute :title, "123234" }
+  end
 end
 
 # == Schema Information
