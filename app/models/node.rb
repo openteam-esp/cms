@@ -205,7 +205,7 @@ class Node < ActiveRecord::Base
     end
 
     def remove_page_from_index
-      MessageMaker.make_message('esp.cms.searcher', 'remove', url)
+      MessageMaker.make_message('esp.cms.searcher', 'remove', url) unless ancestry_callbacks_disabled?
     end
 end
 
