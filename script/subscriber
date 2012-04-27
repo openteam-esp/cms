@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require File.expand_path('../../config/environment',  __FILE__)
+
+dir = Rails.root.to_s
+
+daemon_name = (dir.split('/')[-2..-1] << "daemon").join('-')
+
+daemon_options = {
+  :multiple   => false,
+  :dir_mode   => :normal,
+  :dir        => Rails.root.join('tmp', 'pids'),
+  :backtrace  => true
+}
+
+Daemons.run_proc(daemon_name, daemon_options) do
+  if ARGV.include?('--')
+    ARGV.slice! 0..ARGV.index('--')
+  else
+    ARGV.clear
+  end
+
+  Dir.chdir dir
+
+  Subscriber.new.start
+end
+

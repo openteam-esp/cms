@@ -70,6 +70,7 @@ GEM
     configliere (0.4.8)
       json
     curb (0.8.0)
+    daemons (1.1.8)
     default_value_for (1.0.7)
     devise (2.0.4)
       bcrypt-ruby (~> 3.0)
@@ -105,10 +106,12 @@ GEM
     esp-ckeditor (0.1.0)
       formtastic
       rails
-    esp-commons (0.3.0)
+    esp-commons (0.3.1)
       active_attr
+      amqp
       bunny
       curb
+      daemons
       openteam-commons
       rails
     esp-gems (0.0.2)
@@ -308,6 +311,7 @@ DEPENDENCIES
   acts_as_list!
   attribute_normalizer
   compass-rails
+  daemons
   el_vfs_client
   esp-auth
   esp-ckeditor
