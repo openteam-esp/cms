@@ -18,7 +18,7 @@ describe NewsSubscriber do
   before { MessageMaker.stub(:make_message) }
 
   let(:news) {
-    '{ "channels": [1, 2], "slug": "ololo" }'
+    '{ "channel_ids": [1, 2], "slug": "ololo" }'
   }
 
   context '#publish' do
