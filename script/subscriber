@@ -1,17 +1,39 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
+options = {}
+OptionParser.new do |opts|
+  opts.on('-e', '--environment=ENVIRONMENT', 'Rails environment') do |env|
+    ENV['RAILS_ENV'] = env
+  end
+  opts.on('-p', '--pid-files-directory=DIRECTORY', "Pid files directory") do |dir|
+    options[:pid_files_dir] = dir
+  end
+  opts.on('-l', '--log-files-directory=DIRECTORY', "Log files directory") do |dir|
+    options[:log_files_dir] = dir
+  end
+end.parse!
+
 require File.expand_path('../../config/environment',  __FILE__)
 
 dir = Rails.root.to_s
 
-daemon_name = (dir.split('/')[-2..-1] << "daemon").join('-')
+dir_chunks = dir.split('/')
+
+project_name = dir_chunks[-1]
+project_group = dir_chunks[-2]
+
+daemon_name = [project_group, project_name, 'subscriber'].join('-')
 
 daemon_options = {
   :multiple   => false,
   :dir_mode   => :normal,
-  :dir        => Rails.root.join('tmp', 'pids'),
+  :dir        => options[:pid_files_dir] || Rails.root.join('tmp', 'pids'),
+  :log_dir    => options[:log_files_dir] || Rails.root.join('log'),
   :backtrace  => true
 }
+
+require 'daemons'
 
 Daemons.run_proc(daemon_name, daemon_options) do
   if ARGV.include?('--')

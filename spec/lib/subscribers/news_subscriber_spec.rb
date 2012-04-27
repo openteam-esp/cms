@@ -5,20 +5,20 @@ describe NewsSubscriber do
 
   let(:locale) { Fabricate :locale }
 
-  let(:foo_page) { Fabricate :page, :parent => locale }
-  let(:bar_page) { Fabricate :page, :parent => locale, :slug => 'bar' }
+  let(:foo_page) { Fabricate :page, :parent => locale, :template => 'main_page' }
+  let(:bar_page) { Fabricate :page, :parent => locale, :slug => 'bar', :template => 'main_page' }
 
-  let(:foo_part) { Fabricate :news_item_part, :node => foo_page, :news_channel => '1' }
-  let(:bar_part) { Fabricate :news_item_part, :node => bar_page, :news_channel => '3' }
+  let(:foo_part) { Fabricate :news_item_part, :node => foo_page, :news_channel => '1', :region => 'content' }
+  let(:bar_part) { Fabricate :news_item_part, :node => bar_page, :news_channel => '3', :region => 'content' }
 
-  let(:baz_part) { Fabricate :news_item_part, :node => locale, :news_channel => '2' }
+  let(:baz_part) { Fabricate :news_item_part, :node => locale, :news_channel => '2', :region => 'content' }
 
   before { foo_part; bar_part; baz_part }
 
   before { MessageMaker.stub(:make_message) }
 
   let(:news) {
-    { 'channels' => [1, 2], 'slug' => 'ololo' }
+    '{ "channels": [1, 2], "slug": "ololo" }'
   }
 
   context '#publish' do

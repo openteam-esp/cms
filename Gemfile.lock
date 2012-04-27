@@ -106,7 +106,7 @@ GEM
     esp-ckeditor (0.1.0)
       formtastic
       rails
-    esp-commons (0.3.1)
+    esp-commons (0.3.2)
       active_attr
       amqp
       bunny
@@ -311,7 +311,6 @@ DEPENDENCIES
   acts_as_list!
   attribute_normalizer
   compass-rails
-  daemons
   el_vfs_client
   esp-auth
   esp-ckeditor
