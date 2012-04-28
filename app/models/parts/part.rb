@@ -44,7 +44,7 @@ class Part < ActiveRecord::Base
   end
 
   def indexable?
-    node.indexable_regions.include? region
+    node && node.indexable_regions.include?(region)
   end
 
   def index
