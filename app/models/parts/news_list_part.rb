@@ -88,7 +88,7 @@ class NewsListPart < Part
     end
 
     def entry_type_param
-      "type=#{self.class.name.underscore.split('_').first}"
+      "entry_search[entry_type]=#{self.class.name.underscore.split('_').first}"
     end
 
     def search_params

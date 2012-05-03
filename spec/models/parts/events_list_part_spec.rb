@@ -20,7 +20,7 @@ describe EventsListPart do
   describe 'should build right query string' do
     let(:common_params) {
       q = "#{Settings['news.url']}/entries?utf8=%E2%9C%93"
-      q << "&type=events"
+      q << "&entry_search[entry_type]=events"
       q << "&entry_search[channel_ids][]=13"
       q << "&per_page=#{part.news_per_page}"
     }
@@ -30,7 +30,7 @@ describe EventsListPart do
     }
 
     describe 'for first page' do
-      let(:query_string) { common_params << "&page=1&events_type=current" << image_params }
+      let(:query_string) { common_params << "&page=1&entry_search[events_type]=current" << image_params }
 
       before { part.stub(:params).and_return({}) }
 

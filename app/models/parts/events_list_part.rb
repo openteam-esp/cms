@@ -3,7 +3,7 @@ class EventsListPart < NewsListPart
 
   protected
     def search_params
-      super << "&events_type=#{news_event_entry}"
+      super << "&entry_search[events_type]=#{news_event_entry}"
     end
 end
 # == Schema Information
