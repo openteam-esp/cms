@@ -7,11 +7,34 @@ class GalleryPicture < ActiveRecord::Base
 
   default_scope order(:id)
 
+  after_create :register_in_storage
+  after_update :reregister_in_storage, :if => :picture_url_changed?
+  after_destroy :unregister_in_storage
+
   delegate :create_thumbnail, :thumbnail, :to => :image, :allow_nil => true
 
   def image
     @image ||= EspCommons::Image.new(:url => picture_url, :description => description).parse_url if picture_url?
   end
+
+  private
+
+    def url
+      "#{gallery_part.url}##{id}"
+    end
+
+    def register_in_storage
+      MessageMaker.make_message 'esp.cms.storage', 'lock', :url => url, :storage_url => picture_url
+    end
+
+    def reregister_in_storage
+      MessageMaker.make_message 'esp.cms.storage', 'unlock', :url => url, :storage_url => picture_url_was
+      MessageMaker.make_message 'esp.cms.storage', 'lock', :url => url, :storage_url => picture_url
+    end
+
+    def unregister_in_storage
+      MessageMaker.make_message 'esp.cms.storage', 'unlock', :url => url, :storage_url => picture_url
+    end
 
 end
 

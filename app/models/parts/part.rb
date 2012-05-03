@@ -53,6 +53,13 @@ class Part < ActiveRecord::Base
     end
   end
 
+  def url
+    "#{node.url}##{region}"
+  end
+
+  def url_was
+    "#{node.url}##{region_was}"
+  end
   protected
     def error_title
       case response_status

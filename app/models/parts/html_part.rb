@@ -2,9 +2,10 @@ require 'base64'
 
 class HtmlPart < Part
   validates_presence_of :html_info_path
-  before_create :register_in_storage
-  before_update :reregister_in_storage
-  before_destroy :unregister_in_storage
+
+  after_create :register_in_storage
+  after_update :reregister_in_storage
+  after_destroy :unregister_in_storage
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
@@ -40,16 +41,16 @@ class HtmlPart < Part
     end
 
     def register_in_storage
-      MessageMaker.make_message 'esp.cms.storage', 'lock', :url => "#{node.url}##{region}", :path => html_info_path
+      MessageMaker.make_message 'esp.cms.storage', 'lock', :url => url, :path => html_info_path
     end
 
     def reregister_in_storage
-      MessageMaker.make_message 'esp.cms.storage', 'unlock', :url => "#{node.url}##{region_was}", :path => html_info_path_was
-      MessageMaker.make_message 'esp.cms.storage', 'lock', :url => "#{node.url}##{region}", :path => html_info_path
+      MessageMaker.make_message 'esp.cms.storage', 'unlock', :url => url_was, :path => html_info_path_was
+      MessageMaker.make_message 'esp.cms.storage', 'lock', :url => url, :path => html_info_path
     end
 
     def unregister_in_storage
-      MessageMaker.make_message 'esp.cms.storage', 'unlock', :url => "#{node.url}##{region}", :path => html_info_path
+      MessageMaker.make_message 'esp.cms.storage', 'unlock', :url => url, :path => html_info_path
     end
 end
 
