@@ -5,6 +5,9 @@ require 'spec_helper'
 describe NewsListPart do
   it { should belong_to :item_page }
 
+  it { should validate_presence_of :news_channel }
+  it { should validate_presence_of :item_page }
+
   let(:page) { Fabricate :page }
   let(:part) { NewsListPart.create(:news_per_page => 2,
                                    :news_channel => '13',
@@ -80,6 +83,7 @@ describe NewsListPart do
   describe 'should bu)ld right query string' do
     let(:common_params) {
       q = "#{Settings['news.url']}/entries?utf8=%E2%9C%93"
+      q << "&type=news"
       q << "&entry_search[channel_ids][]=13"
       q << "&entry_search[order_by]=since%20desc"
       q << "&per_page=#{part.news_per_page}"

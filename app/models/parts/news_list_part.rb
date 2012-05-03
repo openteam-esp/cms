@@ -3,6 +3,8 @@
 class NewsListPart < Part
   belongs_to :item_page, :class_name => 'Node', :foreign_key => :news_item_page_id
 
+  validates_presence_of :news_channel, :item_page
+
   has_enums
 
   def to_json
@@ -81,8 +83,12 @@ class NewsListPart < Part
       end
     end
 
+    def entry_type_param
+      "type=#{self.class.name.underscore.split('_').first}"
+    end
+
     def search_params
-      URI.escape("utf8=✓&entry_search[channel_ids][]=#{news_channel}&entry_search[order_by]=#{order_by}&per_page=#{news_per_page}&page=#{current_page}").tap do |s|
+      URI.escape("utf8=✓&#{entry_type_param}&entry_search[channel_ids][]=#{news_channel}&entry_search[order_by]=#{order_by}&per_page=#{news_per_page}&page=#{current_page}").tap do |s|
         s << archive_params
       end
     end
