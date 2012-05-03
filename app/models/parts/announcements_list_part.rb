@@ -1,34 +1,6 @@
-class BluePagesItemPart < Part
-  def to_json
-    super.merge!(as_json(:only => :type, :methods => ['content', 'part_title']))
-  end
+class AnnouncementsListPart < NewsListPart
 
-  def content
-    item_path ? response_hash : ''
-  end
-
-  def part_title
-    "#{response_hash['surname']} #{response_hash['name']} #{response_hash['patronymic']}"
-  end
-
-  alias :page_title :part_title
-
-  private
-    def blue_pages_url
-      Settings['blue-pages.url']
-    end
-
-    alias :item_path :resource_id
-
-    def url_for_request
-      "#{blue_pages_url}/#{item_path}"
-    end
-
-    def urls_for_index
-      []
-    end
 end
-
 # == Schema Information
 #
 # Table name: parts
