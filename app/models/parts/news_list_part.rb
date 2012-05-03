@@ -158,6 +158,7 @@ class NewsListPart < Part
         }
       }
     end
+
     def urls_for_index
       []
     end
