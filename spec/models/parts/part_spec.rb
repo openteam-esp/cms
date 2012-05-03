@@ -70,7 +70,7 @@ describe Part do
     end
   end
 
-  describe 'sending messages to queue' do
+  describe 'sending messages to searcher queue' do
     let(:page) { Fabricate :page, :template => 'main_page' }
     let(:indexable_part) { Fabricate :html_part, :region => 'content', :node => page }
 

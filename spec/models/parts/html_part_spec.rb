@@ -34,6 +34,14 @@ describe HtmlPart do
       its(:to_json) { should == expected_hash  }
     end
   end
+
+  context 'sending messages to storage queue' do
+    let(:node) { Fabricate :page }
+    describe '#create' do
+      before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'lock', {:url => "#{node.url}#region", :path => 'http://storage.link'}) }
+      specify { Fabricate :html_part, :node => node, :html_info_path => 'http://storage.link' }
+    end
+  end
 end
 
 # == Schema Information
