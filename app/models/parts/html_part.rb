@@ -2,6 +2,9 @@ require 'base64'
 
 class HtmlPart < Part
   validates_presence_of :html_info_path
+  before_create :register_in_storage
+  before_update :reregister_in_storage
+  before_destroy :unregister_in_storage
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
@@ -25,8 +28,7 @@ class HtmlPart < Part
 
   private
     def remote_url
-      key = Settings[:storage] || Settings[:vfs]
-      "#{key[:url]}/api/el_finder/v2?format=json&cmd=get"
+      "#{Settings['storage.url']}/api/el_finder/v2?format=json&cmd=get"
     end
 
     def str_to_hash(str)
@@ -35,6 +37,19 @@ class HtmlPart < Part
 
     def url_for_request
       "#{remote_url}&target=r1_#{str_to_hash(html_info_path.gsub(/^\//,''))}"
+    end
+
+    def register_in_storage
+      MessageMaker.make_message 'esp.cms.storage', 'lock', :url => "#{node.url}##{region}", :path => html_info_path
+    end
+
+    def reregister_in_storage
+      MessageMaker.make_message 'esp.cms.storage', 'unlock', :url => "#{node.url}##{region_was}", :path => html_info_path_was
+      MessageMaker.make_message 'esp.cms.storage', 'lock', :url => "#{node.url}##{region}", :path => html_info_path
+    end
+
+    def unregister_in_storage
+      MessageMaker.make_message 'esp.cms.storage', 'unlock', :url => "#{node.url}##{region}", :path => html_info_path
     end
 end
 
