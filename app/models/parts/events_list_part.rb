@@ -48,12 +48,4 @@ class EventsListPart < NewsListPart
 
       total_pages <= current_page
     end
-
-    def min_event_datetime
-      response_headers['X-Min-Event-Since']
-    end
-
-    def max_event_datetime
-      response_headers['X-Max-Event-Until']
-    end
 end

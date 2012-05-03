@@ -6,7 +6,7 @@ class NewsListPart < Part
   has_enums
 
   def to_json
-    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content', 'border_dates']))
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'archive_dates', 'content']))
   end
 
   def content
@@ -28,8 +28,8 @@ class NewsListPart < Part
     hash
   end
 
-  def border_dates
-    { 'min_date' => min_event_datetime, 'max_date' => max_event_datetime }
+  def archive_dates
+    { 'min_date' => min_archive_date, 'max_date' => max_archive_date }
   end
 
   def collection_link
@@ -116,6 +116,14 @@ class NewsListPart < Part
 
     def urls_for_index
       []
+    end
+
+    def min_archive_date
+      response_headers['X-Min-Date']
+    end
+
+    def max_archive_date
+      response_headers['X-Max-Date']
     end
 end
 

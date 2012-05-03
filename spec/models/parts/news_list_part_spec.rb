@@ -14,6 +14,8 @@ describe NewsListPart do
                                    :news_width => '100',
                                    :news_height => '100') }
 
+  before { part.stub(:response_headers).and_return('X-Min-Date' => '2012-01-01', 'X-Max-Date' => '2012-05-02') }
+
   describe 'should build json' do
     let(:border_dates) {
       { 'min_date' => nil, 'max_date' => nil }
@@ -32,7 +34,7 @@ describe NewsListPart do
         'response_status' => 200,
         'type' => 'NewsListPart',
         'part_title' => 'Новости',
-        'border_dates' => { 'min_date' => nil, 'max_date' => nil },
+        'archive_dates' => { 'min_date' => '2012-01-01', 'max_date' => '2012-05-02' },
         'content' => {
           'items' => [
             {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1', 'link' => part.item_page.route_without_site + '/-/link1'},
@@ -41,7 +43,7 @@ describe NewsListPart do
 
           'collection_link' => '/ru',
           'title' => 'Новости',
-          'rss_link' => "#{Settings['news.url']}/channels/news/entries.rss",
+          'rss_link' => "#{Settings['news.url']}/channels/13/entries.rss",
         }
       }
     }
