@@ -3,30 +3,31 @@
 require 'spec_helper'
 
 describe NewsListPart do
-
   it { should belong_to :item_page }
 
-  describe "должен правильно строить json" do
-    let(:page) { Fabricate :page }
+  let(:page) { Fabricate :page }
+  let(:part) { NewsListPart.create(:news_per_page => 2,
+                                   :news_channel => '13',
+                                   :item_page => page,
+                                   :title => 'Новости',
+                                   :node => page.locale,
+                                   :news_width => '100',
+                                   :news_height => '100') }
 
-    before do
-      @news_part = NewsListPart.create(:news_per_page => 2,
-                                      :news_channel => 'news',
-                                      :item_page => page,
-                                      :title => 'Новости',
-                                      :node => page.locale)
+  describe 'should build json' do
+    let(:border_dates) {
+      { 'min_date' => nil, 'max_date' => nil }
+    }
 
-      @news_part.stub(:border_dates).and_return({ 'min_date' => nil, 'max_date' => nil })
-
-      response_hash = [
+    let(:response_hash) {
+      [
         {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1'},
         {'title' => 'title2', 'annotation' => 'annotation2', 'slug' => 'link2'}
       ]
+    }
 
-      @news_part.stub(:response_hash).and_return(response_hash)
-      @news_part.stub(:response_status).and_return(200)
-
-      @expected_hash = {
+    let(:expected_hash) {
+      {
         'template' => 'news_list_part',
         'response_status' => 200,
         'type' => 'NewsListPart',
@@ -34,8 +35,8 @@ describe NewsListPart do
         'border_dates' => { 'min_date' => nil, 'max_date' => nil },
         'content' => {
           'items' => [
-            {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1', 'link' => @news_part.item_page.route_without_site + '/-/link1'},
-            {'title' => 'title2', 'annotation' => 'annotation2', 'slug' => 'link2', 'link' => @news_part.item_page.route_without_site + '/-/link2'}
+            {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1', 'link' => part.item_page.route_without_site + '/-/link1'},
+            {'title' => 'title2', 'annotation' => 'annotation2', 'slug' => 'link2', 'link' => part.item_page.route_without_site + '/-/link2'}
           ],
 
           'collection_link' => '/ru',
@@ -43,32 +44,80 @@ describe NewsListPart do
           'rss_link' => "#{Settings['news.url']}/channels/news/entries.rss",
         }
       }
+    }
+
+    before { part.stub(:border_dates).and_return(border_dates) }
+    before { part.stub(:response_hash).and_return(response_hash) }
+    before { part.stub(:response_status).and_return(200) }
+
+    describe 'without pagination' do
+      specify { part.to_json.should == expected_hash }
     end
 
-    it "без пагинации" do
-      @news_part.to_json.should == @expected_hash
+    describe 'with pagination' do
+      before { part.update_attribute(:news_paginated, true) }
+
+      before { part.stub(:total_count).and_return(100) }
+      before { part.stub(:total_pages).and_return(10) }
+      before { part.stub(:per_page).and_return(10) }
+      before { part.stub(:current_page).and_return(2) }
+
+      before {
+        expected_hash['content'].merge!('pagination' => {
+          'total_count' => 100,
+          'current_page' => 2,
+          'per_page' => 2,
+          'param_name' => 'parts_params[news_list][page]'
+        })
+      }
+
+      specify { part.to_json.should == expected_hash }
+    end
+  end
+
+  describe 'should bu)ld right query string' do
+    let(:common_params) {
+      q = "#{Settings['news.url']}/entries?utf8=%E2%9C%93"
+      q << "&entry_search[channel_ids][]=13"
+      q << "&entry_search[order_by]=since%20desc"
+      q << "&per_page=#{part.news_per_page}"
+    }
+
+    let(:image_params) {
+      "&entries_params[width]=100&entries_params[height]=100"
+    }
+
+    describe 'when params empty' do
+      let(:query_string) { common_params << "&page=1" << image_params }
+
+      before { part.stub(:params).and_return({}) }
+
+      specify { part.url_for_request.should == query_string }
     end
 
-    it "с пагинацией" do
-      @news_part.update_attribute(:news_paginated, true)
+    describe 'for second page' do
+      let(:query_string) { common_params << "&page=2" << image_params }
 
-      @news_part.stub(:total_count).and_return(100)
-      @news_part.stub(:total_pages).and_return(10)
-      @news_part.stub(:per_page).and_return(10)
-      @news_part.stub(:current_page).and_return(2)
+      before { part.stub(:params).and_return({ 'page' => '2' }) }
 
-      @expected_hash['content'].merge!('pagination' => {
-        'total_count' => 100,
-        'current_page' => 2,
-        'per_page' => 2,
-        'param_name' => 'parts_params[news_list][page]'
-      })
-
-      @news_part.to_json.should == @expected_hash
+      specify { part.url_for_request.should == query_string }
     end
 
+    describe 'when params has interval_year and interval_month' do
+      let(:query_string) {
+        common_params <<
+        "&page=1" <<
+        "&entry_search[interval_year]=2012&entry_search[interval_month]=5" <<
+        image_params
+      }
+
+      before { part.stub(:params).and_return({ 'interval_year' => '2012', 'interval_month' => '5' }) }
+
+      specify { part.url_for_request.should == query_string }
+    end
   end
 end
+
 # == Schema Information
 #
 # Table name: parts
