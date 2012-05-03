@@ -1,10 +1,1 @@
-<%= show_for announcements_list_part do |part| %>
-  <%= part.attributes :template,
-                      :news_channel,
-                      :news_per_page,
-                      :news_paginated,
-                      :item_page,
-                      :news_width,
-                      :news_height,
-                      :template %>
-<% end %>
+<%= render :partial => 'manage/news_list_parts/news_list_part', :locals => { :news_list_part => announcements_list_part } %>

@@ -1,13 +1,1 @@
-<%= form.inputs do %>
-  <%= form.input :news_channel, :as => :select, :collection => form.object.channels_collection %>
-  <%= form.input :news_per_page %>
-  <%= form.input :news_paginated %>
-
-  <%= render :partial => 'manage/parts/item_page', :locals => { :form => form } %>
-
-  <%= form.input :news_width %>
-  <%= form.input :news_height %>
-
-  <%= form.input :region, :as => :hidden %>
-  <%= form.input :type, :as => :hidden %>
-<% end %>
+<%= render :partial => 'manage/news_list_parts/fields', :locals => { :form => form } %>

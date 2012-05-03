@@ -46,9 +46,13 @@ class NewsListPart < Part
     { 'items' => response_hash }
   end
 
-  def channels_collection
-    @channel_response = Requester.new("#{news_url}/channels")
-    @channel_response.response_hash.map { |a| [ "#{'&nbsp;'*a['depth']*2}#{a['title']}".html_safe, a['id'] ] }
+
+  def channels_for_select
+    @channels_for_select ||= channels_hash.map { |a| [ "#{'&nbsp;'*a['depth']*2}#{a['title']}".html_safe, a['id'] ] }
+  end
+
+  def disabled_channel_ids
+    channels_hash.select { |channel| channel['entry_type'].nil? || channel['entry_type'] != "#{self.class.name.underscore.split('_').first.singularize}_entry" }.map { |channel| channel['id'] }
   end
 
   def url_for_request
@@ -130,6 +134,10 @@ class NewsListPart < Part
 
     def max_archive_date
       response_headers['X-Max-Date']
+    end
+
+    def channels_hash
+      @channels_hash ||= Requester.new("#{news_url}/channels").response_hash
     end
 end
 
