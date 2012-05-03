@@ -1,5 +1,5 @@
 sites:
-  tgr:
+  tgr: &typical_site
     part_templates:
       news_list_part: smi_news_list_part
       blue_pages_item_part: department_chief
@@ -300,6 +300,9 @@ sites:
         footer:
           required: true
           configurable: false
+
+  uvto:
+    <<: *typical_site
 
   inotomsk:
     part_templates:
