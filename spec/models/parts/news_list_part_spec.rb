@@ -20,10 +20,6 @@ describe NewsListPart do
   before { part.stub(:response_headers).and_return('X-Min-Date' => '2012-01-01', 'X-Max-Date' => '2012-05-02') }
 
   describe 'should build json' do
-    let(:border_dates) {
-      { 'min_date' => nil, 'max_date' => nil }
-    }
-
     let(:response_hash) {
       [
         {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1'},
@@ -51,7 +47,6 @@ describe NewsListPart do
       }
     }
 
-    before { part.stub(:border_dates).and_return(border_dates) }
     before { part.stub(:response_hash).and_return(response_hash) }
     before { part.stub(:response_status).and_return(200) }
 
@@ -85,7 +80,6 @@ describe NewsListPart do
       q = "#{Settings['news.url']}/entries?utf8=%E2%9C%93"
       q << "&type=news"
       q << "&entry_search[channel_ids][]=13"
-      q << "&entry_search[order_by]=since%20desc"
       q << "&per_page=#{part.news_per_page}"
     }
 

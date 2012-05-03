@@ -88,7 +88,7 @@ class NewsListPart < Part
     end
 
     def search_params
-      URI.escape("utf8=✓&#{entry_type_param}&entry_search[channel_ids][]=#{news_channel}&entry_search[order_by]=#{order_by}&per_page=#{news_per_page}&page=#{current_page}").tap do |s|
+      URI.escape("utf8=✓&#{entry_type_param}&entry_search[channel_ids][]=#{news_channel}&per_page=#{news_per_page}&page=#{current_page}").tap do |s|
         s << archive_params
       end
     end

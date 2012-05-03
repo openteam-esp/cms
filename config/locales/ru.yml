@@ -131,9 +131,9 @@ ru:
         news_event_entry: Тип мероприятий
         news_event_entry_enum:
           gone: Прошедшие
-          current: Сейчас
+          current: Текущие
           coming: Предстоящие
-          all: Все мероприятия
+          current_coming: Текущие и предстоящие
         news_paginated: Постраничный переход
         news_per_page: Количество на странице
         news_height: Высота картинки

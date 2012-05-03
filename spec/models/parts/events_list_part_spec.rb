@@ -1,4 +1,42 @@
-class AnnouncementsListPart < NewsListPart
+# encoding: utf-8
+
+require 'spec_helper'
+
+describe EventsListPart do
+  it { should belong_to :item_page }
+
+  it { should validate_presence_of :news_event_entry }
+
+  let(:page) { Fabricate :page }
+  let(:part) { EventsListPart.create(:news_per_page => 2,
+                                     :news_channel => '13',
+                                     :news_event_entry => 'current',
+                                     :item_page => page,
+                                     :title => 'Новости',
+                                     :node => page.locale,
+                                     :news_width => '100',
+                                     :news_height => '100') }
+
+  describe 'should build right query string' do
+    let(:common_params) {
+      q = "#{Settings['news.url']}/entries?utf8=%E2%9C%93"
+      q << "&type=events"
+      q << "&entry_search[channel_ids][]=13"
+      q << "&per_page=#{part.news_per_page}"
+    }
+
+    let(:image_params) {
+      "&entries_params[width]=100&entries_params[height]=100"
+    }
+
+    describe 'for first page' do
+      let(:query_string) { common_params << "&page=1&events_type=current" << image_params }
+
+      before { part.stub(:params).and_return({}) }
+
+      specify { part.url_for_request.should == query_string }
+    end
+  end
 end
 
 # == Schema Information
@@ -15,6 +53,7 @@ end
 #  navigation_from_id          :integer
 #  navigation_default_level    :integer
 #  news_channel                :string(255)
+#  news_until                  :date
 #  news_per_page               :integer
 #  news_paginated              :boolean
 #  news_item_page_id           :integer
@@ -49,6 +88,5 @@ end
 #  news_event_entry            :string(255)
 #  blue_pages_expand           :integer
 #  documents_contexts          :string(255)
-#  search_per_page             :integer
 #
 
