@@ -9,7 +9,6 @@ class NewsSubscriber
 
   private
     def send_message(message, news)
-      news = JSON.parse(news)
       NewsItemPart.where(:news_channel => news['channel_ids'].map(&:to_s)).select(&:indexable?).each do |news_item_part|
         MessageMaker.make_message 'esp.cms.searcher', message, news_item_part.url_with_slug(news['slug'])
       end

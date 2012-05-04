@@ -19,9 +19,7 @@ describe NewsSubscriber do
 
   before { MessageMaker.stub(:make_message) }
 
-  let(:news) {
-    '{ "channel_ids": [1, 2], "slug": "ololo" }'
-  }
+  let(:news) { { 'channel_ids' => [1, 2], 'slug' => 'ololo' } }
 
   context '#publish' do
     before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "#{foo_page.url}-/ololo") }
