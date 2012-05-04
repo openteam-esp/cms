@@ -22,11 +22,6 @@ class NewsListPart < Part
     hash.merge!(pagination) if news_paginated?
     hash.merge!('rss_link' => rss_link) if news_channel?
 
-    if news_event_entry?
-      hash.merge!('first_page' => true) if events_first_page?
-      hash.merge!('last_page' => true) if events_last_page?
-    end
-
     hash
   end
 
