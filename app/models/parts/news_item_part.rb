@@ -51,6 +51,14 @@ class NewsItemPart < Part
     MessageMaker.make_message('esp.cms.searcher', 'remove', node.url)
   end
 
+  def channel_description
+    @channel_description ||= Requester.new("#{news_url}/channels/#{news_channel}", headers_accept).response_hash['description']
+  end
+
+  def channels_for_select
+    @channels_for_select ||= channels_hash.map { |a| [ "#{'&nbsp;'*a['depth']*2}#{a['title']}".html_safe, a['id'] ] }
+  end
+
   private
     def news_url
       Settings['news.url']
@@ -76,6 +84,10 @@ class NewsItemPart < Part
 
         hash['more_like_this'] = hash['more_like_this'].each { |e| e['link'] = path_with_slug(e['slug']) } if hash['more_like_this']
       end
+    end
+
+    def channels_hash
+      @channels_hash ||= Requester.new("#{news_url}/channels").response_hash
     end
 end
 
