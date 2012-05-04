@@ -17,6 +17,8 @@ describe EventsListPart do
                                      :news_width => '100',
                                      :news_height => '100') }
 
+  before { part.stub(:response_headers).and_return('X-Min-Date' => '2012-01-01', 'X-Max-Date' => '2012-05-02') }
+
   describe 'should build right query string' do
     let(:common_params) {
       q = "#{Settings['news.url']}/entries?utf8=%E2%9C%93"
@@ -35,6 +37,59 @@ describe EventsListPart do
       before { part.stub(:params).and_return({}) }
 
       specify { part.url_for_request.should == query_string }
+    end
+  end
+
+  describe 'should build json' do
+    let(:response_hash) {
+      [
+        {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1'},
+        {'title' => 'title2', 'annotation' => 'annotation2', 'slug' => 'link2'}
+      ]
+    }
+
+    let(:expected_hash) {
+      {
+        'template' => 'events_list_part',
+        'response_status' => 200,
+        'type' => 'EventsListPart',
+        'part_title' => 'Новости',
+        'archive_dates' => { 'min_date' => '2012-01-01', 'max_date' => '2012-05-02' },
+        'content' => {
+          'items' => [
+            {'title' => 'title1', 'annotation' => 'annotation1', 'slug' => 'link1', 'link' => part.item_page.route_without_site + '/-/link1'},
+            {'title' => 'title2', 'annotation' => 'annotation2', 'slug' => 'link2', 'link' => part.item_page.route_without_site + '/-/link2'}
+          ],
+
+          'collection_link' => '/ru',
+          'title' => 'Новости',
+          'rss_link' => "#{Settings['news.url']}/channels/13/entries.rss",
+        }
+      }
+    }
+
+    before { part.stub(:response_hash).and_return(response_hash) }
+    before { part.stub(:response_status).and_return(200) }
+
+
+    describe 'with pagination' do
+      before { part.update_attribute(:news_paginated, true) }
+
+      before { part.stub(:total_count).and_return(100) }
+      before { part.stub(:total_pages).and_return(10) }
+      before { part.stub(:per_page).and_return(10) }
+      before { part.stub(:current_page).and_return(2) }
+
+      before {
+        expected_hash['content'].merge!('pagination' => {
+          'total_count' => 100,
+          'current_page' => 2,
+          'per_page' => 2,
+          'param_name' => 'parts_params[events_list][page]'
+        })
+      }
+
+      specify { part.to_json.should == expected_hash }
     end
   end
 end

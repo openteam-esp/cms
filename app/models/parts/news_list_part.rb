@@ -82,12 +82,12 @@ class NewsListPart < Part
       end
     end
 
-    def entry_type_param
-      "entry_search[entry_type]=#{self.class.name.underscore.split('_').first}"
+    def entry_type
+      "#{self.class.name.underscore.split('_').first}"
     end
 
     def search_params
-      URI.escape("utf8=✓&#{entry_type_param}&entry_search[channel_ids][]=#{news_channel}&per_page=#{news_per_page}&page=#{current_page}").tap do |s|
+      URI.escape("utf8=✓&entry_search[entry_type]=#{entry_type}&entry_search[channel_ids][]=#{news_channel}&per_page=#{news_per_page}&page=#{current_page}").tap do |s|
         s << archive_params
       end
     end
@@ -114,7 +114,7 @@ class NewsListPart < Part
           'total_count' => total_count,
           'current_page' => current_page,
           'per_page' => news_per_page,
-          'param_name' => "parts_params[#{entry_type_param}_list][page]"
+          'param_name' => "parts_params[#{entry_type}_list][page]"
         }
       }
     end
