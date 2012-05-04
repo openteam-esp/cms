@@ -41,6 +41,9 @@ class NewsListPart < Part
     { 'items' => response_hash }
   end
 
+  def channel_description
+    @channel_description ||= Requester.new("#{news_url}/channels/#{news_channel}", headers_accept).response_hash['description']
+  end
 
   def channels_for_select
     @channels_for_select ||= channels_hash.map { |a| [ "#{'&nbsp;'*a['depth']*2}#{a['title']}".html_safe, a['id'] ] }
