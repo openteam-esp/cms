@@ -306,6 +306,7 @@ sites:
 
   inotomsk:
     part_templates:
+      events_list_part: event_list_part|main_event_list_part
       news_list_part: interview_list_part|belief_list_part|event_list_part|photo_album_list_part|main_event_list_part
       news_item_part: interview_item_part|belief_item_part|event_item_part|photo_album_item_part
 
