@@ -114,7 +114,7 @@ class NewsListPart < Part
           'total_count' => total_count,
           'current_page' => current_page,
           'per_page' => news_per_page,
-          'param_name' => 'parts_params[news_list][page]'
+          'param_name' => "parts_params[#{entry_type_param}_list][page]"
         }
       }
     end
