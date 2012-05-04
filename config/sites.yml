@@ -67,7 +67,7 @@ sites:
           required: true
           configurable: true
 
-      inner_page:
+      inner_page: &tgr_inner_page
         site_name:
           required: true
           configurable: false
@@ -127,6 +127,9 @@ sites:
         footer:
           required: true
           configurable: false
+
+      inner_page_with_social:
+        <<: *tgr_inner_page
 
       event_list_template:
         site_name:
