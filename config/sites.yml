@@ -131,6 +131,42 @@ sites:
       inner_page_with_social:
         <<: *tgr_inner_page
 
+      entries_list_template:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        content_first:
+          required: true
+          configurable: true
+          indexable: true
+        content_second:
+          required: true
+          configurable: true
+          indexable: true
+        content_third:
+          required: true
+          configurable: true
+          indexable: true
+        banners:
+          required: false
+          configurable: true
+          indexable: true
+        secondary_navigation:
+          required: true
+          configurable: false
+        footer:
+          required: true
+          configurable: false
+
       event_list_template:
         site_name:
           required: true
