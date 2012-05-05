@@ -1,7 +1,7 @@
 sites:
   tgr: &typical_site
     part_templates:
-      news_list_part: smi_news_list_part
+      news_list_part: main_news_list_part
       announcements_list_part: news_list_part
       blue_pages_item_part: department_chief
       blue_pages_part: list_organizations
