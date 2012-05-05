@@ -5,6 +5,7 @@ class NodesController < ApplicationController
     render :file => "#{Rails.root}/public/404.html", :layout => false, :status => 404 and return unless @node
 
     @node.parts_params = params[:parts_params] || {}
+    @node.parts_params.merge!(:page => params[:page])
     @node.resource_id = params[:resource_id]
 
     if params[:region]

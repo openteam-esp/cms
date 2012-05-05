@@ -49,11 +49,11 @@ describe NodesController do
         NewsListPart.any_instance.stub(:data_hash).and_return(data_hash)
         NewsListPart.any_instance.stub(:archive_dates)
 
-        get :show, :id => "#{news_list_part.node.route}", :parts_params => {"news_list"=>{"page"=>"2"}}, :format => :json
+        get :show, :id => "#{news_list_part.node.route}", 'page' => "2", :format => :json
       end
 
       it { assigns(:node).should == page }
-      it { assigns(:node).part_for('content').params.should == { 'page' => '2' }}
+      it { assigns(:node).part_for('content').params.should == { :page => '2' }}
     end
 
     describe 'получение отдельного региона' do

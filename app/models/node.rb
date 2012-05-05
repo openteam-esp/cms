@@ -115,6 +115,7 @@ class Node < ActiveRecord::Base
     if part
       part.current_node = self
       part.params = parts_params ? (parts_params[part.type.underscore.gsub('_part','')] || {}) : {}
+      part.params.merge!(:page => parts_params[:page]) if parts_params[:page]
       part.resource_id = self.resource_id
     end
 
