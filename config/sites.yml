@@ -157,6 +157,9 @@ sites:
           required: true
           configurable: true
           indexable: true
+        right_side_navigation:
+          required: false
+          configurable: true
         banners:
           required: false
           configurable: true
