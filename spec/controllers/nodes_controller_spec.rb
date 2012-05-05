@@ -53,7 +53,7 @@ describe NodesController do
       end
 
       it { assigns(:node).should == page }
-      it { assigns(:node).part_for('content').params.should == { :page => '2' }}
+      it { assigns(:node).part_for('content').params.should == { 'page' => '2' }}
     end
 
     describe 'получение отдельного региона' do
