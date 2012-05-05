@@ -14,7 +14,7 @@ class GalleryPicture < ActiveRecord::Base
   delegate :create_thumbnail, :thumbnail, :to => :image, :allow_nil => true
 
   def image
-    @image ||= EspCommons::Image.new(:url => picture_url, :description => description).parse_url if picture_url?
+    @image ||= EspCommons::Image.new(:external_url => picture_url, :description => description).parse_url if picture_url?
   end
 
   private
@@ -24,16 +24,16 @@ class GalleryPicture < ActiveRecord::Base
     end
 
     def register_in_storage
-      MessageMaker.make_message 'esp.cms.storage', 'lock', :url => url, :storage_url => picture_url
+      MessageMaker.make_message 'esp.cms.storage', 'lock_by_url', :external_url => url, :entry_url => picture_url
     end
 
     def reregister_in_storage
-      MessageMaker.make_message 'esp.cms.storage', 'unlock', :url => url, :storage_url => picture_url_was
-      MessageMaker.make_message 'esp.cms.storage', 'lock', :url => url, :storage_url => picture_url
+      MessageMaker.make_message 'esp.cms.storage', 'unlock_by_url', :external_url => url, :entry_url => picture_url_was
+      MessageMaker.make_message 'esp.cms.storage', 'lock_by_url', :external_url => url, :entry_url => picture_url
     end
 
     def unregister_in_storage
-      MessageMaker.make_message 'esp.cms.storage', 'unlock', :url => url, :storage_url => picture_url
+      MessageMaker.make_message 'esp.cms.storage', 'unlock_by_url', :external_url => url, :entry_url => picture_url
     end
 
 end

@@ -40,25 +40,25 @@ describe HtmlPart do
     subject { Fabricate :html_part, :node => node, :html_info_path => '/storage/path/to/file.xhtml' }
     alias :create_subject :subject
     describe '.create' do
-      before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'lock', {:url => "#{node.url}#region", :path => '/storage/path/to/file.xhtml'}) }
+      before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'lock_by_path', {:external_url => "#{node.url}#region", :entry_path => '/storage/path/to/file.xhtml'}) }
       specify { create_subject }
     end
     describe '#update' do
       before { create_subject }
       context 'html_info_path updated' do
-        before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'unlock', {:url => "#{node.url}#region", :path => '/storage/path/to/file.xhtml'}) }
-        before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'lock', {:url => "#{node.url}#region", :path => '/new/path/to/file.xhtml'}) }
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'unlock_by_path', {:external_url => "#{node.url}#region", :entry_path => '/storage/path/to/file.xhtml'}) }
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'lock_by_path', {:external_url => "#{node.url}#region", :entry_path => '/new/path/to/file.xhtml'}) }
         specify { subject.update_attribute :html_info_path, '/new/path/to/file.xhtml' }
       end
       context 'region updated' do
-        before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'unlock', {:url => "#{node.url}#region", :path => '/storage/path/to/file.xhtml'}) }
-        before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'lock', {:url => "#{node.url}#new_region", :path => '/storage/path/to/file.xhtml'}) }
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'unlock_by_path', {:external_url => "#{node.url}#region", :entry_path => '/storage/path/to/file.xhtml'}) }
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'lock_by_path', {:external_url => "#{node.url}#new_region", :entry_path => '/storage/path/to/file.xhtml'}) }
         specify { subject.update_attribute :region, 'new_region' }
       end
     end
     describe '#destroy' do
       before { create_subject }
-      before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'unlock', {:url => "#{node.url}#region", :path => '/storage/path/to/file.xhtml'}) }
+      before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'unlock_by_path', {:external_url => "#{node.url}#region", :entry_path => '/storage/path/to/file.xhtml'}) }
       specify { subject.destroy }
     end
   end

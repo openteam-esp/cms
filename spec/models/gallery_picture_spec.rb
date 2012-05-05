@@ -12,21 +12,21 @@ describe GalleryPicture do
     alias :create_subject :subject
 
     describe '.create' do
-      before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'lock',
-                                                               :url => "http://example.com/ru/name/#region#1",
-                                                               :storage_url => "http://storage.esp.url/files/1.png") }
+      before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'lock_by_url',
+                                                               :external_url => "http://example.com/ru/name/#region#1",
+                                                               :entry_url => "http://storage.esp.url/files/1.png") }
       specify { create_subject }
     end
 
     describe '#update' do
       before { create_subject }
       context 'picture_url updated' do
-        before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'unlock',
-                                                                 :url => "http://example.com/ru/name/#region#1",
-                                                                 :storage_url => "http://storage.esp.url/files/1.png") }
-        before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'lock',
-                                                                 :url => "http://example.com/ru/name/#region#1",
-                                                                 :storage_url => "http://storage.esp.url/files/2.png") }
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'unlock_by_url',
+                                                                 :external_url => "http://example.com/ru/name/#region#1",
+                                                                 :entry_url => "http://storage.esp.url/files/1.png") }
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'lock_by_url',
+                                                                 :external_url => "http://example.com/ru/name/#region#1",
+                                                                 :entry_url => "http://storage.esp.url/files/2.png") }
         specify { subject.update_attribute :picture_url, 'http://storage.esp.url/files/2.png' }
       end
       context 'description updated' do
@@ -37,9 +37,9 @@ describe GalleryPicture do
 
     describe '#destroy' do
       before { create_subject }
-      before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'unlock',
-                                                               :url => "http://example.com/ru/name/#region#1",
-                                                               :storage_url => "http://storage.esp.url/files/1.png") }
+      before { MessageMaker.should_receive(:make_message).with('esp.cms.storage', 'unlock_by_url',
+                                                               :external_url => "http://example.com/ru/name/#region#1",
+                                                               :entry_url => "http://storage.esp.url/files/1.png") }
       specify { subject.destroy }
     end
   end
