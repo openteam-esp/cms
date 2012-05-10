@@ -1,55 +1,11 @@
-class DocumentsItemPart < Part
-  validates_presence_of :documents_contexts
+# encoding: utf-8
 
-  normalize_attribute :documents_contexts, :with => [:as_array_of_integer]
+require 'spec_helper'
 
-  serialize :documents_contexts, Array
+describe DocumentsItemPart do
+  subject { Fabricate :documents_item_part }
 
-  def to_json
-    super.merge!(as_json(:only => :type, :methods => ['content', 'part_title']))
-  end
-
-  def content
-    response_hash.delete('id')
-
-    response_hash.tap do |paper|
-      paper['asserted_projects']  = change_ids_to_links(paper['asserted_projects'])
-      paper['canceled_documents'] = change_ids_to_links(paper['canceled_documents'])
-      paper['changed_documents']  = change_ids_to_links(paper['changed_documents'])
-    end
-  end
-
-  def part_title
-    content['title']
-  end
-
-  alias :page_title :part_title
-
-  def contexts
-    @contexts ||= Requester.new("#{documents_url}/contexts", headers_accept).response_hash.map { |hash| [hash.keys.first, hash.values.first] }
-  end
-
-  private
-    def documents_url
-      "#{Settings['documents.url']}"
-    end
-
-    alias :paper_id :resource_id
-
-    def url_for_request
-      "#{documents_url}/papers/#{paper_id}"
-    end
-
-    def change_ids_to_links(papers)
-      return [] unless papers
-
-      papers.map { |p| p.merge!('link' => "#{node.route_without_site}/-/#{p['id']}") }
-      papers.each { |p| p.delete('id') }
-    end
-
-    def urls_for_index
-      []
-    end
+  it { should normalize_attribute(:documents_contexts).from(['', '', '1', '2']).to([1, 2]) }
 end
 
 # == Schema Information
@@ -66,6 +22,7 @@ end
 #  navigation_from_id          :integer
 #  navigation_default_level    :integer
 #  news_channel                :string(255)
+#  news_until                  :date
 #  news_per_page               :integer
 #  news_paginated              :boolean
 #  news_item_page_id           :integer
@@ -100,6 +57,5 @@ end
 #  news_event_entry            :string(255)
 #  blue_pages_expand           :integer
 #  documents_contexts          :string(255)
-#  search_per_page             :integer
 #
 

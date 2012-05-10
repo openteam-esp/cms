@@ -1,4 +1,9 @@
 <%= form.inputs do %>
+  <%= form.input :documents_contexts,
+                 :as => :select,
+                 :multiple => true,
+                 :collection => form.object.contexts %>
+
   <%= form.input :region, :as => :hidden %>
   <%= form.input :type, :as => :hidden %>
 <% end %>
