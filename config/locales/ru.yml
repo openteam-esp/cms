@@ -149,12 +149,17 @@ ru:
 
       documents_part:
         documents_kind: Тип
-        documents_kind_enum:
+        documents_kind_enum: &documents_kind
           documents: Нормативные документы
           projects: Проекты документов
         item_page: Страница просмотра
         documents_paginated: Постраничный переход
         documents_per_page: Количество на странице
+
+      documents_item_part:
+        documents_kind: Тип
+        documents_kind_enum:
+          <<: *documents_kind
 
       youtube_part:
         item_page: Страница просмотра

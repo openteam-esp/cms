@@ -1,7 +1,9 @@
 class DocumentsItemPart < Part
-  validates_presence_of :documents_contexts
+  validates_presence_of :documents_kind, :documents_contexts
 
   normalize_attribute :documents_contexts, :with => [:as_array_of_integer]
+
+  has_enums
 
   serialize :documents_contexts, Array
 
@@ -29,6 +31,10 @@ class DocumentsItemPart < Part
     @contexts ||= Requester.new("#{documents_url}/contexts", headers_accept).response_hash.map { |hash| [hash.keys.first, hash.values.first] }
   end
 
+  def url_for_request
+    "#{documents_url}/#{documents_kind}/#{paper_id}?#{context_ids_param}"
+  end
+
   private
     def documents_url
       "#{Settings['documents.url']}"
@@ -36,8 +42,8 @@ class DocumentsItemPart < Part
 
     alias :paper_id :resource_id
 
-    def url_for_request
-      "#{documents_url}/papers/#{paper_id}"
+    def context_ids_param 
+      documents_contexts.map { |c| "context_ids[]=#{c}" }.join('&')
     end
 
     def change_ids_to_links(papers)

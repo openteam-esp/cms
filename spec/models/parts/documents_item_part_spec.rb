@@ -6,6 +6,22 @@ describe DocumentsItemPart do
   subject { Fabricate :documents_item_part }
 
   it { should normalize_attribute(:documents_contexts).from(['', '', '1', '2']).to([1, 2]) }
+
+  describe '#url_for_request' do
+    before { DocumentsItemPart.any_instance.stub(:paper_id).and_return('1') }
+
+    describe 'for documents part' do
+      let(:part) { Fabricate :documents_item_part, :documents_kind => 'documents', :documents_contexts => [2, 3] }
+
+      specify { part.url_for_request.should == "#{Settings['documents.url']}/documents/1?context_ids[]=2&context_ids[]=3" }
+    end
+
+    describe 'for projects part' do
+      let(:part) { Fabricate :documents_item_part, :documents_kind => 'projects', :documents_contexts => [2, 3] }
+
+      specify { part.url_for_request.should == "#{Settings['documents.url']}/projects/1?context_ids[]=2&context_ids[]=3" }
+    end
+  end
 end
 
 # == Schema Information
