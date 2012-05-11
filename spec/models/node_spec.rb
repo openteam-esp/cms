@@ -32,6 +32,14 @@ describe Node do
       root.reload.route.should == 'st'
       history.reload.route.should == 'st/ru/about/history'
     end
+
+    it "после изменения родителя" do
+      history
+      about.parent = root
+      about.save
+      about.reload.route.should == 'site/about'
+      history.reload.route.should == 'site/about/history'
+    end
   end
 
   describe "должна" do

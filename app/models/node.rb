@@ -159,6 +159,14 @@ class Node < ActiveRecord::Base
     "#{root.client_url}#{route_without_site}/"
   end
 
+  def cache_route!
+    prepare_route
+    Node.skip_callback(:save, :after, :cache_route)
+    save!
+    descendants.map(&:update_route)
+    Node.set_callback(:save, :after, :cache_route)
+  end
+
   private
     def node_for_json
       self
@@ -169,12 +177,7 @@ class Node < ActiveRecord::Base
     end
 
     def cache_route
-      return unless self.slug_changed?
-      prepare_route
-      Node.skip_callback(:save, :after, :cache_route)
-      save!
-      descendants.map(&:update_route)
-      Node.set_callback(:save, :after, :cache_route)
+      cache_route! if self.slug_changed? || self.ancestry_changed?
     end
 
     def set_navigation_position_and_recalculate_weights
