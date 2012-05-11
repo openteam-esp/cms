@@ -3,7 +3,10 @@
 require 'spec_helper'
 
 describe DocumentsPart do
-  subject { Fabricate :documents_part }
+  let(:locale) { Fabricate :locale }
+  let(:page) { Fabricate :page, :parent => locale }
+
+  subject { Fabricate :documents_part, :node => locale, :item_page => page }
 
   it { should normalize_attribute(:documents_contexts).from(['', '', '1', '2']).to([1, 2]) }
 end

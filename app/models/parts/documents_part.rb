@@ -3,11 +3,13 @@
 class DocumentsPart < Part
   belongs_to :item_page, :class_name => 'Node', :foreign_key => :documents_item_page_id
 
-  validates_presence_of :documents_kind, :documents_contexts
+  validates_presence_of :documents_kind, :documents_contexts, :item_page
 
   serialize :documents_contexts, Array
 
   normalize_attribute :documents_contexts, :with => [:as_array_of_integer]
+
+  default_value_for :documents_per_page, 10
 
   has_enums
 
