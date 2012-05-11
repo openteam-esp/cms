@@ -17,8 +17,6 @@ describe NewsSubscriber do
 
   before { foo_part; bar_part; baz_part }
 
-  before { MessageMaker.stub(:make_message) }
-
   let(:news) { { 'channel_ids' => [1, 2], 'slug' => 'ololo' } }
 
   context '#publish' do

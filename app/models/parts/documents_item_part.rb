@@ -35,6 +35,10 @@ class DocumentsItemPart < Part
     "#{documents_url}/#{documents_kind}/#{paper_id}?#{context_ids_param}"
   end
 
+  def document_url(document_id)
+    "#{node.url}-/#{document_id}"
+  end
+
   private
     def documents_url
       "#{Settings['documents.url']}"
