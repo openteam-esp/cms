@@ -30,6 +30,8 @@ class BluePagesPart < Part
   # title гиленсезируется, поэтому ищется так
   #
   def find_page_by_title(title)
+    # NOTE: Page.all офигенно фиговая практика
+    # TODO: искать ч/з Sunspot или сохранять дублированное поле без гиленсизации
     Page.all.detect { |node| node.title.gsub(/[[:space:]]/, ' ') == title }
   end
 
