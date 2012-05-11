@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class DocumentsItemPart < Part
   validates_presence_of :documents_kind, :documents_contexts
 
@@ -35,8 +37,28 @@ class DocumentsItemPart < Part
     "#{documents_url}/#{documents_kind}/#{paper_id}?#{context_ids_param}"
   end
 
-  def document_url(document_id)
+  def paper_url(document_id)
     "#{node.url}-/#{document_id}"
+  end
+
+  def papers_list_url(page = 1)
+    URI.escape("#{documents_url}/#{documents_kind}?utf8=✓&#{context_ids_params}&per_page=50&page=#{page}")
+  end
+
+  def papers_pages_count
+    Requester.new(papers_list_url, headers_accept).response_headers['X-Total-Pages'].to_i
+  end
+
+  def paper_ids_for_page(page)
+    Requester.new(papers_list_url(page), headers_accept).response_hash.map { |item| item['id'] }
+  end
+
+  def index
+    (1..papers_pages_count).each do |page|
+      paper_ids_for_page(page).each do |id|
+        MessageMaker.make_message('esp.cms.searcher', 'add', paper_url(id))
+      end
+    end
   end
 
   private
@@ -59,6 +81,14 @@ class DocumentsItemPart < Part
 
     def urls_for_index
       []
+    end
+
+    def context_ids_params
+      documents_contexts.map { |c| "document_search[context_ids][]=#{c}" }.join('&')
+    end
+
+    def index_after_destroy
+      MessageMaker.make_message('esp.cms.searcher', 'remove', node.url)
     end
 end
 

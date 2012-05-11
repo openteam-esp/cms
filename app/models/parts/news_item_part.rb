@@ -47,10 +47,6 @@ class NewsItemPart < Part
     end
   end
 
-  def index_after_destroy
-    MessageMaker.make_message('esp.cms.searcher', 'remove', node.url)
-  end
-
   def channel_description
     @channel_description ||= Requester.new("#{news_url}/channels/#{news_channel}", headers_accept).response_hash['description']
   end
@@ -88,6 +84,10 @@ class NewsItemPart < Part
 
     def channels_hash
       @channels_hash ||= Requester.new("#{news_url}/channels").response_hash
+    end
+
+    def index_after_destroy
+      MessageMaker.make_message('esp.cms.searcher', 'remove', node.url)
     end
 end
 
