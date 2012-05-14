@@ -9,10 +9,6 @@ class BluePagesSubscriber
     reindex_parents options
   end
 
-  def update_category(category_id)
-    index 0, category_id
-  end
-
   private
     def index(level, category_id)
       BluePagesPart.where(:blue_pages_expand => level, :blue_pages_category_id => category_id).map(&:index)
