@@ -65,4 +65,20 @@ describe BluePagesSubscriber do
       end
     end
   end
+
+  context 'item updates' do
+    context 'level=0' do
+      let(:part) { blue_pages_part :level => 0, :category_id => 4 }
+      let(:blue_pages_item_part) { Fabricate :blue_pages_item_part, :node => page }
+      let(:item_page) { blue_pages_item_part.node }
+
+      before { part.update_attributes :item_page => item_page }
+
+      describe '#add_item' do
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', page.url) }
+
+        specify { subject.add_item(1, 'subdivision' => { 'id' => 4, 'parent_ids' => [3, 2, 1] }, 'position' => 2) }
+      end
+    end
+  end
 end

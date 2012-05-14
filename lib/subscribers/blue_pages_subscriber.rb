@@ -9,6 +9,10 @@ class BluePagesSubscriber
     reindex_parents options
   end
 
+  def add_item(id, options)
+    add_category options['subdivision']['id'], 'parent_ids' => options['subdivision']['parent_ids']
+  end
+
   private
     def index(level, category_id)
       BluePagesPart.where(:blue_pages_expand => level, :blue_pages_category_id => category_id).map(&:index)
