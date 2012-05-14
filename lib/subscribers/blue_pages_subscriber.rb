@@ -11,10 +11,8 @@ class BluePagesSubscriber
 
   private
     def reindex_parents(options)
-      level = 0
-      options['parent_ids'].each do |category_id|
-        level += 1
-        BluePagesPart.where(:blue_pages_expand => level, :blue_pages_category_id => category_id).map(&:index)
+      (1..2).each do |level|
+        BluePagesPart.where(:blue_pages_expand => level, :blue_pages_category_id => options['parent_ids'][level-1]).map(&:index)
       end
     end
 end
