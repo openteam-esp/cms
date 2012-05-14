@@ -22,6 +22,12 @@ describe BluePagesSubscriber do
     subject.remove_category 4, 'parent_ids' => [3, 2, 1]
   end
 
+  describe '#update_category' do
+    let(:part) { blue_pages_part :level => 0, :category_id => 4 }
+    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', page.url) }
+    specify { subject.update_category 4 }
+  end
+
   context 'level=0' do
     let(:part) { blue_pages_part :level => 0, :category_id => 4 }
 

@@ -1,6 +1,6 @@
 class BluePagesSubscriber
   def add_category(category_id, options)
-    BluePagesPart.where(:blue_pages_expand => 0, :blue_pages_category_id => category_id).map(&:index)
+    index 0, category_id
     reindex_parents options
   end
 
@@ -9,10 +9,18 @@ class BluePagesSubscriber
     reindex_parents options
   end
 
+  def update_category(category_id)
+    index 0, category_id
+  end
+
   private
+    def index(level, category_id)
+      BluePagesPart.where(:blue_pages_expand => level, :blue_pages_category_id => category_id).map(&:index)
+    end
+
     def reindex_parents(options)
       (1..2).each do |level|
-        BluePagesPart.where(:blue_pages_expand => level, :blue_pages_category_id => options['parent_ids'][level-1]).map(&:index)
+        index level, options['parent_ids'][level-1]
       end
     end
 end
