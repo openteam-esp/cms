@@ -39,6 +39,10 @@ class BluePagesPart < Part
     find_page_by_title('Администрация Томской области')
   end
 
+  def unindex
+    MessageMaker.make_message 'esp.cms.searcher', 'remove', node.url
+  end
+
   private
     def blue_pages_url
       "#{Settings['blue-pages.url']}/categories"
@@ -74,10 +78,6 @@ class BluePagesPart < Part
           end
         end if response_hash['subdivisions'].try(:any?)
       end
-    end
-
-    def urls_for_index
-      []
     end
 end
 

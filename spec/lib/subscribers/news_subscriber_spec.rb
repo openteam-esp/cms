@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe NewsSubscriber do
-  subject { NewsSubscriber.new }
-
   let(:locale) { Fabricate :locale }
 
   let(:foo_page) { Fabricate :page, :parent => locale, :template => 'main_page' }
