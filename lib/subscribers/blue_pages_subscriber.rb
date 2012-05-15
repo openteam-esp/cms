@@ -4,26 +4,34 @@ class BluePagesSubscriber
     reindex_parents options
   end
 
-  def remove_category(id, options)
-    BluePagesPart.where(:blue_pages_expand => 0, :blue_pages_category_id => id).map(&:unindex)
+  def remove_category(category_id, options)
+    parts(0, category_id).map(&:unindex)
     reindex_parents options
   end
 
   def add_person(item_id, options)
-    BluePagesPart.where(:blue_pages_expand => 0, :blue_pages_category_id => options['subdivision']['id']).map(&:item_page).compact.each do |page|
-      MessageMaker.make_message 'esp.cms.searcher', 'add', "#{page.url}-/categories/#{options['subdivision']['id']}/items/#{item_id}/"
-    end
+    send_messages_for_item_pages('add', item_id, options['subdivision']['id'], 0)
+    send_messages_for_item_pages('add', item_id, options['subdivision']['parent_ids'].first, 1)
   end
 
   def remove_person(item_id, options)
-    BluePagesPart.where(:blue_pages_expand => 0, :blue_pages_category_id => options['subdivision']['id']).map(&:item_page).compact.each do |page|
-      MessageMaker.make_message 'esp.cms.searcher', 'remove', "#{page.url}-/categories/#{options['subdivision']['id']}/items/#{item_id}/"
-    end
+    send_messages_for_item_pages('remove', item_id, options['subdivision']['id'], 0)
+    send_messages_for_item_pages('remove', item_id, options['subdivision']['parent_ids'].first, 1)
   end
 
   private
+    def parts(level, category_id)
+      BluePagesPart.where(:blue_pages_expand => level, :blue_pages_category_id => category_id)
+    end
+
+    def send_messages_for_item_pages(message, item_id, category_id, level)
+      parts(level, category_id).map(&:item_page).compact.each do |page|
+        MessageMaker.make_message 'esp.cms.searcher', message, "#{page.url}-/categories/#{category_id}/items/#{item_id}/"
+      end
+    end
+
     def index(level, category_id)
-      BluePagesPart.where(:blue_pages_expand => level, :blue_pages_category_id => category_id).map(&:index)
+      parts(level, category_id).map(&:index)
     end
 
     def reindex_parents(options)

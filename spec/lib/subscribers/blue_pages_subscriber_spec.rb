@@ -93,5 +93,22 @@ describe BluePagesSubscriber do
       end
     end
 
+    context 'level=1' do
+      let(:part) { blue_pages_part :level => 1, :category_id => 3 }
+      let(:blue_pages_item_part) { Fabricate :blue_pages_item_part, :node => page }
+      let(:item_page) { blue_pages_item_part.node }
+
+      before { part.update_attributes :item_page => item_page }
+
+      describe '#add_person' do
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "#{item_page.url}-/categories/3/items/1/") }
+        specify { do_add_person }
+      end
+
+      describe '#remove_person' do
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "#{item_page.url}-/categories/3/items/1/") }
+        specify { do_remove_person }
+      end
+    end
   end
 end
