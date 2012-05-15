@@ -17,22 +17,22 @@ describe DocumentsSubscriber  do
 
   before { foo_part; bar_part; baz_part }
 
-  let(:message) { 
-    { 'id' => '222', 'context_id' => '2', 'kind' => 'document' } 
+  let(:message) {
+    { 'id' => '222', 'context_id' => '2', 'kind' => 'document' }
   }
 
   context '#add' do
-    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "#{foo_page.url}-/222") }
-    before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'add', "#{bar_page.url}-/222") }
-    before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'add', "#{locale.url}-/222") }
+    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "#{foo_page.url}-/222/") }
+    before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'add', "#{bar_page.url}-/222/") }
+    before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'add', "#{locale.url}-/222/") }
 
     specify { subject.add message }
   end
 
   context '#remove' do
-    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "#{foo_page.url}-/222") }
-    before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'remove', "#{bar_page.url}-/222") }
-    before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'remove', "#{locale.url}-/222") }
+    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "#{foo_page.url}-/222/") }
+    before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'remove', "#{bar_page.url}-/222/") }
+    before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'remove', "#{locale.url}-/222/") }
 
     specify { subject.remove message }
   end

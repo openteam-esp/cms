@@ -38,7 +38,7 @@ class DocumentsItemPart < Part
   end
 
   def paper_url(document_id)
-    "#{node.url}-/#{document_id}"
+    "#{node.url}-/#{document_id}/"
   end
 
   def papers_list_url(page = 1)
@@ -53,14 +53,6 @@ class DocumentsItemPart < Part
     Requester.new(papers_list_url(page), headers_accept).response_hash.map { |item| item['id'] }
   end
 
-  def index
-    (1..papers_pages_count).each do |page|
-      paper_ids_for_page(page).each do |id|
-        MessageMaker.make_message('esp.cms.searcher', 'add', paper_url(id))
-      end
-    end
-  end
-
   private
     def documents_url
       "#{Settings['documents.url']}"
@@ -68,7 +60,7 @@ class DocumentsItemPart < Part
 
     alias :paper_id :resource_id
 
-    def context_ids_param 
+    def context_ids_param
       documents_contexts.map { |c| "context_ids[]=#{c}" }.join('&')
     end
 
@@ -80,7 +72,9 @@ class DocumentsItemPart < Part
     end
 
     def urls_for_index
-      []
+      (1..papers_pages_count).map { |page|
+        paper_ids_for_page(page).map { |id| paper_url(id) }
+      }.flatten
     end
 
     def context_ids_params
