@@ -9,6 +9,7 @@ class BluePagesPart < Part
 
   after_create :index_persons
   after_update :reindex_persons, :if => -> { blue_pages_item_page_id_changed? || blue_pages_category_id_changed? }
+  after_destroy :unindex_persons
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
@@ -63,6 +64,10 @@ class BluePagesPart < Part
       response_hash['items'].each do |item|
         index_person item['link']
       end if item_page
+    end
+
+    def unindex_persons
+      MessageMaker.make_message 'esp.cms.searcher', 'remove', "#{item_page.url}-/" if item_page
     end
 
     def blue_pages_url

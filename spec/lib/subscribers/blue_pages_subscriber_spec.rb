@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe BluePagesSubscriber do
   let(:locale) { Fabricate :locale }
-
   let(:page) { Fabricate :page, :parent => locale, :template => 'main_page' }
 
   before { part }
+  before { BluePagesPart.any_instance.stub(:reindex_persons) }
 
   def blue_pages_part(options={})
     BluePagesPart.create! :node => page,

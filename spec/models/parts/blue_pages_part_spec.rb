@@ -84,17 +84,25 @@ describe BluePagesPart do
         before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', 'http://example.com/ru/name/-/categories/3/items/1/') }
         specify { blue_pages_part }
       end
+
       context 'persisted' do
         context 'updated title' do
           before { blue_pages_part }
           before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'add', 'http://example.com/ru/name/-/categories/3/items/1/') }
           specify { blue_pages_part.update_attribute :title, 'Новый заголовок' }
         end
+
         context 'updated item_page or category' do
           before { blue_pages_part }
           before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', 'http://example.com/ru/name/-/') }
           before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', 'http://example.com/ru/-/categories/3/items/1/') }
           specify { blue_pages_part.update_attribute :item_page, page.locale }
+        end
+
+        context '#destroy' do
+          before { blue_pages_part }
+          before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', 'http://example.com/ru/name/-/') }
+          specify { blue_pages_part.destroy }
         end
       end
     end
