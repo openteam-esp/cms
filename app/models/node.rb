@@ -11,8 +11,6 @@ class Node < ActiveRecord::Base
 
   validates_uniqueness_of :slug, :scope => :ancestry
 
-  after_destroy :remove_page_from_index
-
   default_scope :order => [:weight]
 
   delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
@@ -30,14 +28,25 @@ class Node < ActiveRecord::Base
 
   acts_as_list :column => :navigation_position
 
+
   has_ancestry :cache_depth => true
   alias :site :root
 
   normalize_attribute :title, :with => [:gilensize_as_text, :squish]
 
+  # NOTE: чтобы не вызавался для новой записи
+  before_update :send_messages_before_update, :unless => :id_changed?
+
   after_save :cache_route
 
   after_save :set_navigation_position_and_recalculate_weights
+  
+  # NOTE: чтобы не вызавался для новой записи
+  after_save :send_messages_after_update, :unless => :id_changed?
+
+  after_destroy :send_messages_after_destroy
+
+
 
   def absolute_depth
     ancestry_depth + context.depth + 1
@@ -156,7 +165,7 @@ class Node < ActiveRecord::Base
   end
 
   def url
-    "#{root.client_url}#{route_without_site}/"
+    "#{site.client_url}#{route_without_site}/"
   end
 
   def cache_route!
@@ -165,6 +174,14 @@ class Node < ActiveRecord::Base
     save!
     descendants.map(&:update_route)
     Node.set_callback(:save, :after, :cache_route)
+  end
+
+  def remove_page_from_index
+    MessageMaker.make_message('esp.cms.searcher', 'remove', url) unless ancestry_callbacks_disabled?
+  end
+
+  def add_page_to_index
+    MessageMaker.make_message('esp.cms.searcher', 'add', url)
   end
 
   private
@@ -208,9 +225,20 @@ class Node < ActiveRecord::Base
       [parent_weight, sprintf('%02d', navigation_position)].keep_if(&:present?).join('/').split('/')
     end
 
-    def remove_page_from_index
-      MessageMaker.make_message('esp.cms.searcher', 'remove', url) unless ancestry_callbacks_disabled?
+
+    def send_messages_after_destroy
+      remove_page_from_index
     end
+
+    def send_messages_before_update
+      # NOTE: тут невозможно ориентироваться на ancestry_callbacks_disabled поэтому смотрим на updated_at
+      remove_page_from_index if self.slug_changed? || (self.ancestry_changed? && !self.updated_at_changed?)
+    end
+
+    def send_messages_after_update
+      add_page_to_index if self.title_changed? || self.navigation_title_changed? || self.template_changed? || self.route_changed? 
+    end
+
 end
 
 # == Schema Information

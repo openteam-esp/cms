@@ -172,14 +172,59 @@ describe Node do
     it { bar_page.indexable_regions.should be_empty }
   end
 
-  describe 'удаление' do
+  describe '#index messages' do
     let(:page) { Fabricate :page }
     let(:child_page) { Fabricate :page, :parent => page}
 
-    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', page.url) }
-    before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'remove', child_page.url) }
+    describe '#destroy' do
+      before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', page.url) }
+      before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'remove', child_page.url) }
 
-    specify { page.destroy }
+      specify { page.destroy }
+    end
+
+    
+    describe '#update' do
+      before { page }
+
+      describe 'title' do
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', page.url).once }
+        specify { page.update_attribute :title, 'новый заголовок'}
+      end
+
+      describe 'template' do
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', page.url).once }
+        specify { page.update_attribute :template, 'new_template'}
+      end
+
+      describe 'navigation_title' do
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', page.url).once }
+        specify { page.update_attribute :template, 'новый заголовок навигации'}
+      end
+
+      describe 'slug' do
+        before { child_page }
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "http://example.com/ru/name/").once }
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "http://example.com/ru/new_slug/").once }
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "http://example.com/ru/new_slug/name/").once }
+        
+        specify { page.update_attribute :slug, 'new_slug'}
+      end
+
+      describe 'ancestry' do
+        let(:other_locale) { page.site.locales.create!(:slug => 'en', :template => 'main_page') }
+        before { child_page }
+
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "http://example.com/ru/name/").once }
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "http://example.com/en/name/").once }
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "http://example.com/en/name/name/").once }
+        
+
+        specify { page.update_attribute :parent_id, other_locale.id }
+      end
+      
+    end
+
   end
 end
 
