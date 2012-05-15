@@ -18,17 +18,17 @@ describe NewsSubscriber do
   let(:news) { { 'channel_ids' => [1, 2], 'slug' => 'ololo' } }
 
   context '#publish' do
-    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "#{foo_page.url}-/ololo") }
-    before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'add', "#{bar_page.url}-/ololo") }
-    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "#{locale.url}-/ololo") }
+    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "#{foo_page.url}-/ololo/") }
+    before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'add', "#{bar_page.url}-/ololo/") }
+    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "#{locale.url}-/ololo/") }
 
     specify { subject.publish news }
   end
 
   context '#remove' do
-    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "#{foo_page.url}-/ololo") }
-    before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'remove', "#{bar_page.url}-/ololo") }
-    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "#{locale.url}-/ololo") }
+    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "#{foo_page.url}-/ololo/") }
+    before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'remove', "#{bar_page.url}-/ololo/") }
+    before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "#{locale.url}-/ololo/") }
 
     specify { subject.remove news }
   end

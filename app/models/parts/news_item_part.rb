@@ -24,7 +24,7 @@ class NewsItemPart < Part
   end
 
   def url_with_slug(slug)
-    "#{node.url}-/#{slug}"
+    "#{node.url}-/#{slug}/"
   end
 
   def news_list_url(page = 1)
@@ -39,14 +39,6 @@ class NewsItemPart < Part
     Requester.new(news_list_url, headers_accept).response_headers['X-Total-Pages'].to_i
   end
 
-  def index
-    (1..news_pages_count).each do |page|
-      news_slugs_for_page(page).each do |slug|
-        MessageMaker.make_message('esp.cms.searcher', 'add', url_with_slug(slug))
-      end
-    end
-  end
-
   def channel_description
     @channel_description ||= Requester.new("#{news_url}/channels/#{news_channel}", headers_accept).response_hash['description']
   end
@@ -58,6 +50,12 @@ class NewsItemPart < Part
   private
     def news_url
       Settings['news.url']
+    end
+
+    def urls_for_index
+      (1..news_pages_count).map { |page|
+        news_slugs_for_page(page).map { |slug| url_with_slug(slug) }
+      }.flatten
     end
 
     def image_size_params
