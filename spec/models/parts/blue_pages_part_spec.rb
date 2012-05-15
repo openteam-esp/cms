@@ -43,13 +43,13 @@ describe BluePagesPart do
     }
   end
 
+  before do
+    BluePagesPart.any_instance.stub(:response_hash).and_return(response_hash)
+    BluePagesPart.any_instance.stub(:respense_status).and_return(200)
+  end
+
   describe 'update links' do
     let(:blue_pages_part) { BluePagesPart.create(:item_page => Fabricate(:page)) }
-
-    before do
-      blue_pages_part.stub(:response_hash).and_return(response_hash)
-      blue_pages_part.stub(:respense_status).and_return(200)
-    end
 
     it { blue_pages_part.content['items'][0]['link'].should == "#{blue_pages_part.item_page.route_without_site}/-/categories/3/items/1" }
     it { blue_pages_part.content['subdivisions'][0]['items'][0]['link'].should == "#{blue_pages_part.item_page.route_without_site}/-/categories/15/items/14"}
@@ -64,9 +64,6 @@ describe BluePagesPart do
 
     let(:blue_pages_part) { BluePagesPart.create(:node => administration, :item_page => Fabricate(:page, :parent => department)) }
 
-    before { blue_pages_part.stub(:response_hash).and_return(response_hash) }
-    before { blue_pages_part.stub(:respense_status).and_return(200) }
-
     context 'find_node_by_title' do
       specify { blue_pages_part.administration_page.should == administration }
       specify { blue_pages_part.find_page_by_title(department_page_title).should == department }
@@ -76,6 +73,33 @@ describe BluePagesPart do
       specify { blue_pages_part.content['subdivisions'].last['path'].should == '/ru/admin/department' }
     end
   end
+
+  describe '#save' do
+    let(:page) { Fabricate :page }
+    let(:blue_pages_part) { Fabricate :blue_pages_part, :node => page, :blue_pages_expand => options[:level], :blue_pages_category_id => options[:category_id], :item_page => page }
+
+    context 'level=0' do
+      let(:options) { {level: 0, category_id: 4} }
+      context 'new_record' do
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', 'http://example.com/ru/name/-/categories/3/items/1/') }
+        specify { blue_pages_part }
+      end
+      context 'persisted' do
+        context 'updated title' do
+          before { blue_pages_part }
+          before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'add', 'http://example.com/ru/name/-/categories/3/items/1/') }
+          specify { blue_pages_part.update_attribute :title, 'Новый заголовок' }
+        end
+        context 'updated item_page or category' do
+          before { blue_pages_part }
+          before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', 'http://example.com/ru/name/-/') }
+          before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', 'http://example.com/ru/-/categories/3/items/1/') }
+          specify { blue_pages_part.update_attribute :item_page, page.locale }
+        end
+      end
+    end
+  end
+
 end
 
 # == Schema Information

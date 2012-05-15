@@ -7,6 +7,9 @@ class BluePagesPart < Part
 
   default_value_for :blue_pages_expand, 0
 
+  after_create :index_persons
+  after_update :reindex_persons, :if => -> { blue_pages_item_page_id_changed? || blue_pages_category_id_changed? }
+
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
@@ -43,7 +46,25 @@ class BluePagesPart < Part
     MessageMaker.make_message 'esp.cms.searcher', 'remove', node.url
   end
 
+  def index_person(link)
+    MessageMaker.make_message 'esp.cms.searcher', 'add', "#{item_page.url}-#{link}/"
+  end
+
   private
+    def reindex_persons
+      if blue_pages_item_page_id_was
+        item_page_url_was = Page.find(blue_pages_item_page_id_was).url
+        MessageMaker.make_message 'esp.cms.searcher', 'remove', "#{item_page_url_was}-/"
+      end
+      index_persons
+    end
+
+    def index_persons
+      response_hash['items'].each do |item|
+        index_person item['link']
+      end if item_page
+    end
+
     def blue_pages_url
       "#{Settings['blue-pages.url']}/categories"
     end
