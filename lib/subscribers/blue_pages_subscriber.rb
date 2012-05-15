@@ -10,11 +10,17 @@ class BluePagesSubscriber
   end
 
   def add_item(id, options)
-    index 0, options['subdivision']['id']
-    reindex_parents 'parent_ids' => options['subdivision']['parent_ids'] if options['position'] == 1
+    index_item_categories(options)
   end
 
+  alias_method :remove_item, :add_item
+
   private
+    def index_item_categories(options)
+      index 0, options['subdivision']['id']
+      reindex_parents 'parent_ids' => options['subdivision']['parent_ids'] if options['position'] == 1
+    end
+
     def index(level, category_id)
       BluePagesPart.where(:blue_pages_expand => level, :blue_pages_category_id => category_id).map(&:index)
     end
