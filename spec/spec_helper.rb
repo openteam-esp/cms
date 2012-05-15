@@ -32,6 +32,7 @@ Spork.prefork do
       MessageMaker.stub(:make_message)
 
       stub_sites_yml_for_all_nodes
+      stub_blue_page_response
     end
   end
 end

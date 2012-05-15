@@ -18,7 +18,6 @@ class GalleryPicture < ActiveRecord::Base
   end
 
   private
-
     def url
       "#{gallery_part.url}##{id}"
     end
@@ -35,7 +34,6 @@ class GalleryPicture < ActiveRecord::Base
     def unregister_in_storage
       MessageMaker.make_message 'esp.cms.storage', 'unlock_by_url', :external_url => url, :entry_url => picture_url
     end
-
 end
 
 # == Schema Information

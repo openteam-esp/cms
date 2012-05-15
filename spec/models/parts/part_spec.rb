@@ -45,26 +45,28 @@ describe Part do
     let(:indexable_part) { Fabricate :html_part, :region => 'content', :node => page }
     let(:not_indexable_part) { Fabricate :html_part, :region => 'footer', :node => page }
 
-    describe 'indexable region' do
-      before { indexable_part.should_receive :index }
+    context 'indexable region' do
+      before { indexable_part }
 
-      context '#save' do
+      describe '#save' do
+        before { indexable_part.should_receive :index }
         specify { indexable_part.update_attribute :title, 'ololo' }
       end
 
-      context '#destroy' do
+      describe '#destroy' do
+        before { indexable_part.should_receive :unindex }
         specify { indexable_part.destroy }
       end
     end
 
-    describe 'not indexable region' do
+    context 'not indexable region' do
       before { not_indexable_part.should_not_receive :node_index }
 
-      context '#save' do
+      describe '#save' do
         specify { not_indexable_part.update_attribute :title, 'ololo' }
       end
 
-      context '#destroy' do
+      describe '#destroy' do
         specify { not_indexable_part.destroy }
       end
     end

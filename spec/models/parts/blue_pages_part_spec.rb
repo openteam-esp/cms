@@ -7,47 +7,6 @@ describe BluePagesPart do
     'Департамент по культуре'
   end
 
-  def response_hash
-    {
-      'title' => 'Губернатор',
-      'address' => '634050, Томская область, г. Томск, пл. Ленина, 6',
-      'phones' => 'Тел.: (3822) 510-813, (3822) 510-505',
-      'items' => [
-        {
-          'person' => 'Кресс Виктор Мельхиорович',
-          'title' => 'Губернатор',
-          'address' => '',
-          'link' => '/categories/3/items/1',
-          'phones' => 'Тел.: (3822) 510-813, (3822) 510-505'
-        }
-      ],
-
-      'subdivisions' => [
-        {
-          'title' => 'Заместитель губернатора Томской области по особо важным проектам',
-          'address' => '634050, Томская область, г. Томск, пл. Ленина, 6',
-          'phones' => 'Тел.: (3822) 511-142',
-          'items' => [
-            {
-              'person' => 'Точилин Сергей Борисович',
-              'title' => 'Заместитель губернатора Томской области по особо важным проектам',
-              'address' => '',
-              'link' => '/categories/15/items/14',
-              'phones' => 'Тел.: (3822) 511-142'
-            }
-          ]
-        },
-
-        { 'title' => department_page_title }
-      ]
-    }
-  end
-
-  before do
-    BluePagesPart.any_instance.stub(:response_hash).and_return(response_hash)
-    BluePagesPart.any_instance.stub(:respense_status).and_return(200)
-  end
-
   describe 'update links' do
     let(:blue_pages_part) { BluePagesPart.create(:item_page => Fabricate(:page)) }
 
@@ -75,8 +34,8 @@ describe BluePagesPart do
   end
 
   describe '#save' do
-    let(:page) { Fabricate :page }
-    let(:blue_pages_part) { Fabricate :blue_pages_part, :node => page, :blue_pages_expand => options[:level], :blue_pages_category_id => options[:category_id], :item_page => page }
+    let(:page) { Fabricate :page, :template => 'main_page' }
+    let(:blue_pages_part) { Fabricate :blue_pages_part, :node => page, :blue_pages_expand => options[:level], :blue_pages_category_id => options[:category_id], :item_page => page, :region => 'content' }
 
     context 'level=0' do
       let(:options) { {level: 0, category_id: 4} }
@@ -86,12 +45,6 @@ describe BluePagesPart do
       end
 
       context 'persisted' do
-        context 'updated title' do
-          before { blue_pages_part }
-          before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'add', 'http://example.com/ru/name/-/categories/3/items/1/') }
-          specify { blue_pages_part.update_attribute :title, 'Новый заголовок' }
-        end
-
         context 'updated item_page or category' do
           before { blue_pages_part }
           before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', 'http://example.com/ru/name/-/') }
@@ -101,13 +54,12 @@ describe BluePagesPart do
 
         context '#destroy' do
           before { blue_pages_part }
-          before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', 'http://example.com/ru/name/-/') }
+          before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', 'http://example.com/ru/name/') }
           specify { blue_pages_part.destroy }
         end
       end
     end
   end
-
 end
 
 # == Schema Information
