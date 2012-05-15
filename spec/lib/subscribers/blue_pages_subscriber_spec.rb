@@ -67,6 +67,10 @@ describe BluePagesSubscriber do
   end
 
   context 'item updates' do
+    def do_add_item(options)
+      subject.add_item(1, {'subdivision' => { 'id' => 4, 'parent_ids' => [3, 2, 1] }}.merge(options))
+    end
+
     context 'level=0' do
       let(:part) { blue_pages_part :level => 0, :category_id => 4 }
       let(:blue_pages_item_part) { Fabricate :blue_pages_item_part, :node => page }
@@ -77,7 +81,31 @@ describe BluePagesSubscriber do
       describe '#add_item' do
         before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', page.url) }
 
-        specify { subject.add_item(1, 'subdivision' => { 'id' => 4, 'parent_ids' => [3, 2, 1] }, 'position' => 2) }
+        specify { do_add_item 'position' => 2 }
+      end
+    end
+
+    context 'level=1' do
+      let(:part) { blue_pages_part :level => 1, :category_id => 3 }
+      let(:blue_pages_item_part) { Fabricate :blue_pages_item_part, :node => page }
+      let(:item_page) { blue_pages_item_part.node }
+
+      before { part.update_attributes :item_page => item_page }
+
+      context 'position = 1' do
+        describe '#add_item' do
+          before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', page.url) }
+
+          specify { do_add_item 'position' => 1 }
+        end
+      end
+
+      context 'position > 1' do
+        describe '#add_item' do
+          before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'add', page.url) }
+
+          specify { do_add_item 'position' => 2 }
+        end
       end
     end
   end

@@ -10,7 +10,8 @@ class BluePagesSubscriber
   end
 
   def add_item(id, options)
-    add_category options['subdivision']['id'], 'parent_ids' => options['subdivision']['parent_ids']
+    index 0, options['subdivision']['id']
+    reindex_parents 'parent_ids' => options['subdivision']['parent_ids'] if options['position'] == 1
   end
 
   private
