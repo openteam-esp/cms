@@ -66,13 +66,13 @@ describe BluePagesSubscriber do
     end
   end
 
-  context 'item updates' do
-    def do_add_item(options)
-      subject.add_item(1, {'subdivision' => { 'id' => 4, 'parent_ids' => [3, 2, 1] }}.merge(options))
+  context 'person updates' do
+    def do_add_person
+      subject.add_person(1, 'subdivision' => {'id' => 4, 'parent_ids' => [3, 2, 1]})
     end
 
-    def do_remove_item(options)
-      subject.remove_item(1, {'subdivision' => { 'id' => 4, 'parent_ids' => [3, 2, 1] }}.merge(options))
+    def do_remove_person
+      subject.remove_person(1, 'subdivision' => {'id' => 4, 'parent_ids' => [3, 2, 1]})
     end
 
     context 'level=0' do
@@ -81,56 +81,17 @@ describe BluePagesSubscriber do
       let(:item_page) { blue_pages_item_part.node }
 
       before { part.update_attributes :item_page => item_page }
-      before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', page.url) }
 
-      describe '#add_item' do
-        specify { do_add_item 'position' => 2 }
+      describe '#add_person' do
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "#{item_page.url}-/categories/4/items/1/") }
+        specify { do_add_person }
       end
 
-      describe '#remove_item' do
-        specify { do_remove_item 'position' => 2 }
-      end
-    end
-
-    shared_examples_for "level > 0" do
-      let(:blue_pages_item_part) { Fabricate :blue_pages_item_part, :node => page }
-      let(:item_page) { blue_pages_item_part.node }
-
-      before { part.update_attributes :item_page => item_page }
-
-      context 'position = 1' do
-        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', page.url) }
-
-        describe '#add_item' do
-          specify { do_add_item 'position' => 1 }
-        end
-
-        describe '#remove_item' do
-          specify { do_remove_item 'position' => 1 }
-        end
-      end
-
-      context 'position > 1' do
-        before { MessageMaker.should_not_receive(:make_message).with('esp.cms.searcher', 'add', page.url) }
-
-        describe '#add_item' do
-          specify { do_add_item 'position' => 2 }
-        end
-
-        describe '#remove_item' do
-          specify { do_remove_item 'position' => 2 }
-        end
+      describe '#remove_person' do
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "#{item_page.url}-/categories/4/items/1/") }
+        specify { do_remove_person }
       end
     end
 
-    context 'level=1' do
-      let(:part) { blue_pages_part :level => 1, :category_id => 3 }
-      it_should_behave_like "level > 0"
-    end
-
-    context 'level=2' do
-      let(:part) { blue_pages_part :level => 2, :category_id => 2 }
-      it_should_behave_like "level > 0"
-    end
   end
 end

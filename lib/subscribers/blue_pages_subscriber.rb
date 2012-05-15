@@ -9,18 +9,19 @@ class BluePagesSubscriber
     reindex_parents options
   end
 
-  def add_item(id, options)
-    index_item_categories(options)
+  def add_person(item_id, options)
+    BluePagesPart.where(:blue_pages_expand => 0, :blue_pages_category_id => options['subdivision']['id']).map(&:item_page).compact.each do |page|
+      MessageMaker.make_message 'esp.cms.searcher', 'add', "#{page.url}-/categories/#{options['subdivision']['id']}/items/#{item_id}/"
+    end
   end
 
-  alias_method :remove_item, :add_item
+  def remove_person(item_id, options)
+    BluePagesPart.where(:blue_pages_expand => 0, :blue_pages_category_id => options['subdivision']['id']).map(&:item_page).compact.each do |page|
+      MessageMaker.make_message 'esp.cms.searcher', 'remove', "#{page.url}-/categories/#{options['subdivision']['id']}/items/#{item_id}/"
+    end
+  end
 
   private
-    def index_item_categories(options)
-      index 0, options['subdivision']['id']
-      reindex_parents 'parent_ids' => options['subdivision']['parent_ids'] if options['position'] == 1
-    end
-
     def index(level, category_id)
       BluePagesPart.where(:blue_pages_expand => level, :blue_pages_category_id => category_id).map(&:index)
     end
