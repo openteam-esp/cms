@@ -53,12 +53,6 @@ class Part < ActiveRecord::Base
     end
   end
 
-  def unindex
-    urls_for_unindex.each do |url|
-      MessageMaker.make_message('esp.cms.searcher', 'remove', url)
-    end
-  end
-
   def url
     "#{node.url}##{region}"
   end
@@ -103,7 +97,7 @@ class Part < ActiveRecord::Base
     end
 
     def index_after_destroy
-      unindex
+      node.reindex
     end
 end
 

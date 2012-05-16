@@ -47,7 +47,7 @@ describe Node do
     let(:locale) { Fabricate(:locale, :template => 'main_page', :parent => site)}
     let(:page) { Fabricate(:page, :template => 'inner_page', :parent => locale)}
 
-    it  { site.templates.should == ['main_page', 'inner_page'] }
+    it  { site.templates.should == ['main_page', 'inner_page', 'template_with_two_indexable_regions'] }
     it  { locale.configurable_regions.should == ['navigation', 'content', 'footer'] }
     it  { locale.required_regions.should == ['navigation', 'content', 'footer'] }
     it  { page.required_regions.should == ['navigation', 'content'] }

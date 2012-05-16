@@ -42,46 +42,44 @@ describe Part do
 
   describe 'indexing nodes' do
     let(:page) { Fabricate :page, :template => 'main_page' }
-    let(:indexable_part) { Fabricate :html_part, :region => 'content', :node => page }
-    let(:not_indexable_part) { Fabricate :html_part, :region => 'footer', :node => page }
 
-    context 'indexable region' do
-      before { indexable_part }
+    context 'indexable' do
+      subject{ Fabricate :html_part, :region => 'content', :node => page }
 
-      describe '#save' do
-        before { indexable_part.should_receive :index }
-        specify { indexable_part.update_attribute :title, 'ololo' }
+      context '#index' do
+        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', page.url) }
+        specify { subject }
       end
 
-      describe '#destroy' do
-        before { indexable_part.should_receive :unindex }
-        specify { indexable_part.destroy }
+      context 'persisted' do
+        before { subject }
+
+        describe '#save' do
+          before { subject.should_receive :index }
+          specify { subject.update_attribute :title, 'ololo' }
+        end
+
+        describe '#destroy' do
+          before { page.should_receive :reindex }
+          specify { subject.destroy }
+        end
       end
     end
 
-    context 'not indexable region' do
-      before { not_indexable_part.should_not_receive :node_index }
+    context 'unindexable' do
+      subject { Fabricate :html_part, :region => 'footer', :node => page }
+      before { subject.should_not_receive :node_index }
 
       describe '#save' do
-        specify { not_indexable_part.update_attribute :title, 'ololo' }
+        specify { subject.update_attribute :title, 'ololo' }
       end
 
       describe '#destroy' do
-        specify { not_indexable_part.destroy }
+        specify { subject.destroy }
       end
     end
   end
 
-  describe 'sending messages to searcher queue' do
-    let(:page) { Fabricate :page, :template => 'main_page' }
-    let(:indexable_part) { Fabricate :html_part, :region => 'content', :node => page }
-
-    context '#index' do
-      before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', page.url) }
-
-      specify { indexable_part }
-    end
-  end
 end
 
 # == Schema Information
