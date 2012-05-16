@@ -14,9 +14,7 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-require File.expand_path('../../config/environment',  __FILE__)
-
-dir = Rails.root.to_s
+dir = File.expand_path('../../',  __FILE__)
 
 dir_chunks = dir.split('/')
 
@@ -28,11 +26,15 @@ daemon_name = [project_group, project_name, 'subscriber'].join('-')
 daemon_options = {
   :multiple   => false,
   :dir_mode   => :normal,
-  :dir        => options[:pid_files_dir] || Rails.root.join('tmp', 'pids'),
-  :log_dir    => options[:log_files_dir] || Rails.root.join('log'),
+  :dir        => options[:pid_files_dir] || "#{dir}/tmp/pids",
+  :log_dir    => options[:log_files_dir] || "#{dir}/log",
   :backtrace  => true
 }
 
+require 'rubygems'
+ENV['BUNDLE_GEMFILE'] ||= "#{dir}/Gemfile"
+
+require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 require 'daemons'
 
 Daemons.run_proc(daemon_name, daemon_options) do
@@ -43,6 +45,8 @@ Daemons.run_proc(daemon_name, daemon_options) do
   end
 
   Dir.chdir dir
+
+  require "#{dir}/config/environment"
 
   Subscriber.new.start
 end

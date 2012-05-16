@@ -106,7 +106,7 @@ GEM
     esp-ckeditor (0.1.0)
       formtastic
       rails
-    esp-commons (0.4.2)
+    esp-commons (0.5.0)
       active_attr
       amqp
       bunny
