@@ -11,11 +11,8 @@ class Node < ActiveRecord::Base
 
   validates_uniqueness_of :slug, :scope => :ancestry
 
-<<<<<<< HEAD
-=======
   after_destroy :unindex
 
->>>>>>> + Node#reindex
   default_scope :order => [:weight]
 
   delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
@@ -33,25 +30,20 @@ class Node < ActiveRecord::Base
 
   acts_as_list :column => :navigation_position
 
-
   has_ancestry :cache_depth => true
   alias :site :root
 
   normalize_attribute :title, :with => [:gilensize_as_text, :squish]
 
   # NOTE: чтобы не вызавался для новой записи
-  before_update :send_messages_before_update, :unless => :id_changed?
+  before_update :unindex_subtree, :unless => :id_changed?
 
   after_save :cache_route
 
   after_save :set_navigation_position_and_recalculate_weights
 
   # NOTE: чтобы не вызавался для новой записи
-  after_save :send_messages_after_update, :unless => :id_changed?
-
-  after_destroy :send_messages_after_destroy
-
-
+  after_save :index_subtree, :unless => :id_changed?
 
   def absolute_depth
     ancestry_depth + context.depth + 1
@@ -244,13 +236,16 @@ class Node < ActiveRecord::Base
       [parent_weight, sprintf('%02d', navigation_position)].keep_if(&:present?).join('/').split('/')
     end
 
-    def send_messages_before_update
+    def unindex_subtree
       # NOTE: тут невозможно ориентироваться на ancestry_callbacks_disabled поэтому смотрим на updated_at
-      remove_page_from_index if self.slug_changed? || (self.ancestry_changed? && !self.updated_at_changed?)
+      if self.slug_changed? || (self.ancestry_changed? && !self.updated_at_changed?)
+        unindex
+      end
     end
 
-    def send_messages_after_update
-      add_page_to_index if self.title_changed? || self.navigation_title_changed? || self.template_changed? || self.route_changed?
+    def index_subtree
+      subtree.map(&:index) and return if self.route_changed?
+      index if self.title_changed? || self.navigation_title_changed? || self.template_changed?
     end
 end
 

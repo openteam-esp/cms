@@ -183,9 +183,9 @@ describe Node do
       specify { page.destroy }
     end
 
-    
     describe '#update' do
-      before { page }
+      let(:part) { Fabricate :html_part, :node => page }
+      before { page.stub(:indexable_parts).twice.and_return([part]) }
 
       describe 'title' do
         before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', page.url).once }
@@ -202,29 +202,27 @@ describe Node do
         specify { page.update_attribute :template, 'новый заголовок навигации'}
       end
 
-      describe 'slug' do
-        before { child_page }
-        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "http://example.com/ru/name/").once }
-        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "http://example.com/ru/new_slug/").once }
-        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "http://example.com/ru/new_slug/name/").once }
-        
-        specify { page.update_attribute :slug, 'new_slug'}
+      context 'slug or ancestry changed' do
+        before { page.should_receive(:subtree).and_return([page, child_page]) }
+
+        describe 'slug' do
+          before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "http://example.com/ru/name/").once }
+          before { page.should_receive :index }
+          before { child_page.should_receive :index }
+
+          specify { page.update_attribute :slug, 'new_slug'}
+        end
+
+        describe 'ancestry' do
+          let(:other_locale) { page.site.locales.create!(:slug => 'en', :template => 'main_page') }
+          before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "http://example.com/ru/name/").once }
+          before { page.should_receive :index }
+          before { child_page.should_receive :index }
+
+          specify { page.update_attribute :parent_id, other_locale.id }
+        end
       end
-
-      describe 'ancestry' do
-        let(:other_locale) { page.site.locales.create!(:slug => 'en', :template => 'main_page') }
-        before { child_page }
-
-        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', "http://example.com/ru/name/").once }
-        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "http://example.com/en/name/").once }
-        before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', "http://example.com/en/name/name/").once }
-        
-
-        specify { page.update_attribute :parent_id, other_locale.id }
-      end
-      
     end
-
   end
 
   describe '#reindex' do
