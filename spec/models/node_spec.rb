@@ -235,7 +235,7 @@ describe Node do
 
     context 'with indexable part' do
       let(:part) { Fabricate :html_part, :node => subject, :region => 'content' }
-      before { subject.should_receive(:indexable_parts).and_return [part] }
+      before { subject.should_receive(:indexable_parts).twice.and_return([part]) }
       before { part.should_receive :index }
       specify { subject.reindex }
     end

@@ -47,7 +47,7 @@ describe BluePagesPart do
       context 'persisted' do
         context 'updated item_page or category' do
           before { blue_pages_part }
-          before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', 'http://example.com/ru/name/-/') }
+          before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'remove', 'http://example.com/ru/name/') }
           before { MessageMaker.should_receive(:make_message).with('esp.cms.searcher', 'add', 'http://example.com/ru/-/categories/3/items/1/') }
           specify { blue_pages_part.update_attribute :item_page, page.locale }
         end

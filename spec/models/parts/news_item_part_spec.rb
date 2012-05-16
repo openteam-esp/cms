@@ -95,10 +95,12 @@ describe NewsItemPart do
     before { NewsItemPart.any_instance.stub(:news_slugs_for_page).and_return([]) }
 
     describe 'add pages news slugs after update' do
+      before { page.stub(:indexable_parts).and_return [part] }
       before { part.stub(:news_pages_count).and_return(2) }
       before { part.stub(:news_slugs_for_page).with(1).and_return(['ololo']) }
       before { part.stub(:news_slugs_for_page).with(2).and_return(['pish-pish']) }
 
+      before { MessageMaker.should_receive(:make_message).once.with('esp.cms.searcher', 'remove', page.url) }
       before { MessageMaker.should_receive(:make_message).once.with('esp.cms.searcher', 'add', part.url_with_slug('ololo')) }
       before { MessageMaker.should_receive(:make_message).once.with('esp.cms.searcher', 'add', part.url_with_slug('pish-pish')) }
 

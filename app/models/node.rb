@@ -187,7 +187,12 @@ class Node < ActiveRecord::Base
   end
 
   def unindex
-    MessageMaker.make_message('esp.cms.searcher', 'remove', url) unless ancestry_callbacks_disabled?
+    unless ancestry_callbacks_disabled?
+      indexable_parts.select{|part| part.respond_to?(:additional_url_for_remove)}.map(&:additional_url_for_remove).compact.each do |url|
+        MessageMaker.make_message('esp.cms.searcher', 'remove', url)
+      end
+      MessageMaker.make_message('esp.cms.searcher', 'remove', url)
+    end
   end
 
   def index

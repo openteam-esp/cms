@@ -5,8 +5,9 @@ class Part < ActiveRecord::Base
 
   validates_presence_of :node, :region, :template
 
-  after_save :index_after_save, :if => :indexable?
-  after_destroy :index_after_destroy, :if => :indexable?
+  after_create :index, :if => :indexable?
+  after_update :node_reindex, :if => [:indexable?, :need_to_reindex?]
+  after_destroy :node_reindex, :if => :indexable?
 
   default_value_for :params, {}
 
@@ -60,7 +61,12 @@ class Part < ActiveRecord::Base
   def url_was
     "#{node.url}##{region_was}"
   end
+
   protected
+    def need_to_reindex?
+      title_changed? || region_changed? || template_changed?
+    end
+
     def error_title
       case response_status
         when 404, 500
@@ -88,17 +94,7 @@ class Part < ActiveRecord::Base
       [node.url]
     end
 
-    def urls_for_unindex
-      urls_for_index
-    end
-
-    def index_after_save
-      index
-    end
-
-    def index_after_destroy
-      node.reindex
-    end
+    delegate :reindex, :to => :node, :prefix => true
 end
 
 # == Schema Information

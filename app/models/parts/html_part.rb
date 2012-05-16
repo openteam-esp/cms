@@ -28,6 +28,10 @@ class HtmlPart < Part
   end
 
   private
+    def need_to_reindex?
+      html_info_path_changed? || super
+    end
+
     def remote_url
       "#{Settings['storage.url']}/api/el_finder/v2?format=json&cmd=get"
     end

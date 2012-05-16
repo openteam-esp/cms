@@ -48,6 +48,10 @@ class NewsItemPart < Part
   end
 
   private
+    def need_to_reindex?
+      news_channel_changed? || super
+    end
+
     def news_url
       Settings['news.url']
     end

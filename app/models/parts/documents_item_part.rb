@@ -54,6 +54,10 @@ class DocumentsItemPart < Part
   end
 
   private
+    def need_to_reindex?
+      documents_contexts_changed? || super
+    end
+
     def documents_url
       "#{Settings['documents.url']}"
     end

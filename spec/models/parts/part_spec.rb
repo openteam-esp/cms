@@ -55,6 +55,7 @@ describe Part do
         before { subject }
 
         describe '#save' do
+          before { page.should_receive(:indexable_parts).twice.and_return([subject]) }
           before { subject.should_receive :index }
           specify { subject.update_attribute :title, 'ololo' }
         end

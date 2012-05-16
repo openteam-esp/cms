@@ -62,6 +62,7 @@ describe DocumentsItemPart do
     before { DocumentsItemPart.any_instance.stub(:paper_ids_for_page).and_return([]) }
 
     describe 'add pages papers ids after update' do
+      before { page.should_receive(:indexable_parts).twice.and_return([part]) }
       before { part.stub(:papers_pages_count).and_return(2) }
       before { part.stub(:paper_ids_for_page).with(1).and_return(['222', '111']) }
       before { part.stub(:paper_ids_for_page).with(2).and_return(['333']) }
