@@ -5,7 +5,7 @@ class BluePagesSubscriber
   end
 
   def remove_category(category_id, options)
-    parts(0, category_id).map(&:unindex)
+    parts(0, category_id).map(&:node).map(&:reindex)
     reindex_parents options
   end
 

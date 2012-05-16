@@ -83,10 +83,6 @@ class NewsItemPart < Part
     def channels_hash
       @channels_hash ||= Requester.new("#{news_url}/channels").response_hash
     end
-
-    def index_after_destroy
-      MessageMaker.make_message('esp.cms.searcher', 'remove', node.url)
-    end
 end
 
 # == Schema Information

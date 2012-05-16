@@ -47,7 +47,7 @@ describe Node do
     let(:locale) { Fabricate(:locale, :template => 'main_page', :parent => site)}
     let(:page) { Fabricate(:page, :template => 'inner_page', :parent => locale)}
 
-    it  { site.templates.should == ['main_page', 'inner_page', 'template_with_two_indexable_regions'] }
+    it  { site.templates.should == ['main_page', 'inner_page'] }
     it  { locale.configurable_regions.should == ['navigation', 'content', 'footer'] }
     it  { locale.required_regions.should == ['navigation', 'content', 'footer'] }
     it  { page.required_regions.should == ['navigation', 'content'] }
@@ -225,6 +225,20 @@ describe Node do
       
     end
 
+  end
+
+  describe '#reindex' do
+    context 'making messages' do
+      before { subject.should_receive :unindex }
+      specify { subject.reindex }
+    end
+
+    context 'with indexable part' do
+      let(:part) { Fabricate :html_part, :node => subject, :region => 'content' }
+      before { subject.should_receive(:indexable_parts).and_return [part] }
+      before { part.should_receive :index }
+      specify { subject.reindex }
+    end
   end
 end
 

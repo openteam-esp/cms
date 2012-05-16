@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Page do
-  subject { Fabricate(:page) }
+  subject { Fabricate :page, :template => 'main_page' }
 
   it { should have_many :parts }
   it { should validate_presence_of :template }

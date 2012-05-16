@@ -23,13 +23,3 @@ sites:
         footer:
           required: false
           configurable: false
-      template_with_two_indexable_regions:
-        first_content:
-          configurable: true
-          indexable: true
-        second_content:
-          configurable: true
-          indexable: true
-        footer:
-          required: true
-          configurable: false

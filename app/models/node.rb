@@ -11,6 +11,11 @@ class Node < ActiveRecord::Base
 
   validates_uniqueness_of :slug, :scope => :ancestry
 
+<<<<<<< HEAD
+=======
+  after_destroy :unindex
+
+>>>>>>> + Node#reindex
   default_scope :order => [:weight]
 
   delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
@@ -40,7 +45,7 @@ class Node < ActiveRecord::Base
   after_save :cache_route
 
   after_save :set_navigation_position_and_recalculate_weights
-  
+
   # NOTE: чтобы не вызавался для новой записи
   after_save :send_messages_after_update, :unless => :id_changed?
 
@@ -176,15 +181,24 @@ class Node < ActiveRecord::Base
     Node.set_callback(:save, :after, :cache_route)
   end
 
-  def remove_page_from_index
+  def reindex
+    unindex
+    index
+  end
+
+  def unindex
     MessageMaker.make_message('esp.cms.searcher', 'remove', url) unless ancestry_callbacks_disabled?
   end
 
-  def add_page_to_index
-    MessageMaker.make_message('esp.cms.searcher', 'add', url)
+  def index
+    indexable_parts.map(&:index)
   end
 
   private
+    def indexable_parts
+      parts.select(&:indexable?)
+    end
+
     def node_for_json
       self
     end
@@ -225,20 +239,14 @@ class Node < ActiveRecord::Base
       [parent_weight, sprintf('%02d', navigation_position)].keep_if(&:present?).join('/').split('/')
     end
 
-
-    def send_messages_after_destroy
-      remove_page_from_index
-    end
-
     def send_messages_before_update
       # NOTE: тут невозможно ориентироваться на ancestry_callbacks_disabled поэтому смотрим на updated_at
       remove_page_from_index if self.slug_changed? || (self.ancestry_changed? && !self.updated_at_changed?)
     end
 
     def send_messages_after_update
-      add_page_to_index if self.title_changed? || self.navigation_title_changed? || self.template_changed? || self.route_changed? 
+      add_page_to_index if self.title_changed? || self.navigation_title_changed? || self.template_changed? || self.route_changed?
     end
-
 end
 
 # == Schema Information

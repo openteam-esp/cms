@@ -80,10 +80,6 @@ class DocumentsItemPart < Part
     def context_ids_params
       documents_contexts.map { |c| "document_search[context_ids][]=#{c}" }.join('&')
     end
-
-    def index_after_destroy
-      MessageMaker.make_message('esp.cms.searcher', 'remove', node.url)
-    end
 end
 
 # == Schema Information
