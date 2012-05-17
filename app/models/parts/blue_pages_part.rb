@@ -45,7 +45,7 @@ class BluePagesPart < Part
 
   private
     def urls_for_index
-      item_page ? super + response_hash['items'].map { |item| "#{item_page.url}-#{item['link']}/" } : super
+      item_page && response_hash['items'] ? super + response_hash['items'].map{ |item| "#{item_page.url}-#{item['link']}/" if item['link'] }.compact : super
     end
 
     def need_to_reindex?
