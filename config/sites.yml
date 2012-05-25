@@ -458,5 +458,26 @@ sites:
           configurable: true
           indexable: true
 
+      innovation_for_people_page:
+        site_name:
+          required: true
+          configurable: false
+        targets:
+          required: true
+          configurable: false
+        main_top_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        content_navigation:
+          required: true
+          configurable: true
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+
       search_results_page:
         <<: *inotomsk_inner_page
