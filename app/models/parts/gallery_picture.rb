@@ -5,7 +5,7 @@ class GalleryPicture < ActiveRecord::Base
 
   validates_presence_of :description, :picture_url
 
-  default_scope order(:id)
+  default_scope order(:position, :id)
 
   after_create :register_in_storage
   after_update :reregister_in_storage, :if => :picture_url_changed?
