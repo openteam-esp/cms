@@ -242,6 +242,9 @@ sites:
         breadcrumbs:
           required: true
           configurable: false
+        description:
+          required: true
+          configurable: true
         content_first:
           required: false
           configurable: true
