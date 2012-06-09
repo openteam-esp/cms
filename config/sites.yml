@@ -264,7 +264,7 @@ sites:
           required: true
           configurable: false
 
-      department_page: &tgr_department_page
+      department_page:
         site_name:
           required: true
           configurable: false
@@ -310,9 +310,6 @@ sites:
         footer:
           required: true
           configurable: false
-
-      department_page_without_chief:
-        <<: *tgr_department_page
 
       sitemap:
         site_name:
