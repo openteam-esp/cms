@@ -23,12 +23,13 @@ group :default do
   gem 'sass-rails'
   gem 'show_for'
   gem 'simple-navigation'
+  gem 'sunspot_rails',    '>= 2.0.0.pre.120417'
 end
 
 group :development do
   gem 'hirb',                                     :require => false
   gem 'itslog'
-  gem 'sunspot_solr'
+  gem 'sunspot_solr',     '>= 2.0.0.pre.120417',  :require => false
   gem 'therubyracer'                              unless RUBY_PLATFORM =~ /freebsd/
 end
 
