@@ -102,7 +102,7 @@ GEM
       progress_bar
       sunspot_rails
       whenever
-    esp-ckeditor (0.1.0)
+    esp-ckeditor (0.1.2)
       formtastic
       rails
     esp-commons (0.5.0)
