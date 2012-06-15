@@ -1,0 +1,8 @@
+<%= form.inputs do %>
+  <%= form.input :organization_list_category_id, :as => :select, :collection => form.object.categories %>
+  <%= form.input :organization_list_per_page %>
+  <%= render :partial => 'manage/parts/item_page', :locals => { :form => form } %>
+
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
+<% end %>

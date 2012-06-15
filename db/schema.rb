@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120604060143) do
+ActiveRecord::Schema.define(:version => 20120615044821) do
 
   create_table "contexts", :force => true do |t|
     t.string   "title"
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(:version => 20120604060143) do
   end
 
   create_table "parts", :force => true do |t|
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.string   "region"
     t.string   "type"
     t.integer  "node_id"
@@ -98,6 +98,9 @@ ActiveRecord::Schema.define(:version => 20120604060143) do
     t.integer  "blue_pages_expand"
     t.string   "documents_contexts"
     t.integer  "search_per_page"
+    t.integer  "organization_list_category_id"
+    t.integer  "organization_list_per_page"
+    t.integer  "organization_list_item_page_id"
   end
 
   create_table "permissions", :force => true do |t|

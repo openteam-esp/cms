@@ -44,7 +44,8 @@ end
 #  gallery_part_id :integer
 #  description     :text
 #  picture_url     :string(255)
-#  created_at      :datetime
-#  updated_at      :datetime
+#  created_at      :datetime        not null
+#  updated_at      :datetime        not null
+#  position        :integer
 #
 
