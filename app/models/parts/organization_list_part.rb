@@ -19,11 +19,8 @@ class OrganizationListPart < Part
 
   def content
     replace_id_with_links
-
-    {
-      :items => response_hash,
-      :pagination => pagination
-    }
+    set_filters
+    response_hash.merge(:pagination => pagination, :query => params['q'])
   end
 
   private
@@ -32,13 +29,25 @@ class OrganizationListPart < Part
     end
 
     def url_for_request
-      "#{blue_pages_url}/innorganizations?#{search_params}"
+      "#{blue_pages_url}/innorganizations?#{query}"
     end
 
-    def search_params
+    def query
       ''.tap do |s|
         s << "per_page=#{organization_list_per_page}&"
-        s << "page=#{page}"
+        s << "page=#{page}&"
+        s << "q=#{params['q']}&"
+        s << filter_params
+      end
+    end
+
+    def filter_params
+      ''.tap do |s|
+        s << %w[sphere status].map { |filter|
+          params[filter].delete('_') if params[filter]
+
+          params[filter].map { |v| "#{filter}[]=#{v}" }.join('&') if params[filter]
+        }.join('&')
       end
     end
 
@@ -67,9 +76,17 @@ class OrganizationListPart < Part
     end
 
     def replace_id_with_links
-      response_hash.map { |e|
-        e['link'] = "#{item_page.route_without_site}/-/#{e.delete('id')}"
-      }
+      response_hash['organizations'].each do |organization|
+        organization['link'] = "#{item_page.route_without_site}/-/#{organization.delete('id')}"
+      end
+    end
+
+    def set_filters
+      %w[sphere status].each do |filter|
+        response_hash['filters'][filter].each do |k, v|
+          v['checked'] = params[filter].include?(k) ? true : false
+        end if params[filter]
+      end
     end
 end
 
