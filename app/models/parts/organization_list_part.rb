@@ -18,6 +18,8 @@ class OrganizationListPart < Part
   end
 
   def content
+    replace_id_with_links
+
     {
       :items => response_hash,
       :pagination => pagination
@@ -61,6 +63,12 @@ class OrganizationListPart < Part
         'total_count' => total_count,
         'current_page' => current_page,
         'per_page' => organization_list_per_page
+      }
+    end
+
+    def replace_id_with_links
+      response_hash.map { |e|
+        e['link'] = "#{item_page.route_without_site}/-/#{e.delete('id')}"
       }
     end
 end
