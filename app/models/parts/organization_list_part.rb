@@ -6,16 +6,62 @@ class OrganizationListPart < Part
   default_value_for :organization_list_per_page, 10
 
   def categories
-    @categories ||= Requester.new("#{blue_pages_url}", 'application/json').response_hash['categories'].map { |c| [c['title'], c['id']] }
+    @categories ||= Requester.new("#{blue_pages_url}/categories", 'application/json').response_hash['categories'].map { |c| [c['title'], c['id']] }
   end
 
   def category_name
-    @category_name ||= Requester.new("#{blue_pages_url}/#{organization_list_category_id}", 'application/json').response_hash['title']
+    @category_name ||= Requester.new("#{blue_pages_url}/categories/#{organization_list_category_id}", 'application/json').response_hash['title']
+  end
+
+  def to_json
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
+  end
+
+  def content
+    {
+      :items => response_hash,
+      :pagination => pagination
+    }
   end
 
   private
     def blue_pages_url
-      "#{Settings['blue-pages.url']}/categories"
+      "#{Settings['blue-pages.url']}"
+    end
+
+    def url_for_request
+      "#{blue_pages_url}/innorganizations?#{search_params}"
+    end
+
+    def search_params
+      ''.tap do |s|
+        s << "per_page=#{organization_list_per_page}&"
+        s << "page=#{page}"
+      end
+    end
+
+    def page
+      params['page'].to_i.zero? ? 1 : params['page'].to_i
+    end
+
+    def total_count
+      response_headers['X-Total-Count'].to_i
+    end
+
+    def total_pages
+      response_headers['X-Total-Pages'].to_i
+    end
+
+    def current_page
+      response_headers['X-Current-Page'].to_i
+    end
+
+    def pagination
+      {
+        'total_count' => total_count,
+        'current_page' => current_page,
+        'per_page' => organization_list_per_page
+      }
     end
 end
 
