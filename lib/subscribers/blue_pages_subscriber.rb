@@ -19,6 +19,14 @@ class BluePagesSubscriber
     send_messages_for_item_pages('remove', item_id, options['subdivision']['parent_ids'].first, 1)
   end
 
+  def index_organization(id, options)
+    MessageMaker.make_message 'esp.cms.searcher', 'add', "#{organization_item_part.node.url}-/#{id}"
+  end
+
+  def remove_organization(id, options)
+    MessageMaker.make_message 'esp.cms.searcher', 'remove', "#{organization_item_part.node.url}-/#{id}"
+  end
+
   private
     def parts(level, category_id)
       BluePagesPart.where(:blue_pages_expand => level, :blue_pages_category_id => category_id)
@@ -38,5 +46,9 @@ class BluePagesSubscriber
       (1..2).each do |level|
         index level, options['parent_ids'][level-1]
       end
+    end
+
+    def organization_item_part
+      OrganizationItemPart.first
     end
 end
