@@ -461,7 +461,7 @@ sites:
           configurable: true
           indexable: true
 
-      barley_break_page:
+      barley_break_page: &inotomsk_barley_break_page
         site_name:
           required: true
           configurable: false
@@ -481,6 +481,9 @@ sites:
           required: false
           configurable: true
           indexable: true
+
+      barley_break_inner_page:
+        <<: *inotomsk_barley_break_page
 
       innovation_for_people_page:
         site_name:
