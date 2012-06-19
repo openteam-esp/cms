@@ -88,6 +88,10 @@ class OrganizationListPart < Part
         end if params[filter]
       end
     end
+
+    def urls_for_index
+      []
+    end
 end
 
 # == Schema Information
