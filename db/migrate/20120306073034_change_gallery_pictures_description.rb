@@ -1,6 +1,6 @@
 class ChangeGalleryPicturesDescription < ActiveRecord::Migration
   def up
-    change_column :gallery_pictures, :description, :text
+    change_column :gallery_pictures, :description, :text, :limit => nil
   end
 
   def down
