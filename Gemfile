@@ -16,8 +16,8 @@ group :default do
   gem 'gilenson'
   gem 'hashie'
   gem 'jquery-rails'
+  gem 'formtastic',       '< 2.2.0'
   gem 'nested_form'
-  gem 'openteam-commons'
   gem 'rails'
   gem 'sanitize'
   gem 'sass-rails'
@@ -28,13 +28,12 @@ end
 
 group :development do
   gem 'hirb',                                     :require => false
-  gem 'itslog'
   gem 'sunspot_solr',     '>= 2.0.0.pre.120417',  :require => false
   gem 'therubyracer'                              unless RUBY_PLATFORM =~ /freebsd/
 end
 
 group :test do
-  gem 'fabrication',                              :require => false
+  gem 'fabrication',      '< 2.0.0',              :require => false
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'libnotify'
