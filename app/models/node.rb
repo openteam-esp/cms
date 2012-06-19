@@ -45,6 +45,8 @@ class Node < ActiveRecord::Base
   # NOTE: чтобы не вызавался для новой записи
   after_save :index_subtree, :unless => :id_changed?
 
+  audited
+
   def absolute_depth
     ancestry_depth + context.depth + 1
   end

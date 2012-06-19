@@ -27,6 +27,8 @@ class Part < ActiveRecord::Base
            :response_headers,
            :response_status, :to => :response
 
+  audited
+
   def available_templates
     [self.class.name.underscore] + templates_from_settings
   end

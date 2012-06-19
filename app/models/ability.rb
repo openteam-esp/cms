@@ -29,6 +29,10 @@ class Ability
       user.manager?
     end
 
+    can :manage, :audits do
+      user.manager_of? Context.first
+    end
+
     # app specific
     can :manage, Node do |node|
       [node] + node.ancestors.each do |n|
