@@ -19,11 +19,11 @@ class BluePagesSubscriber
     send_messages_for_item_pages('remove', item_id, options['subdivision']['parent_ids'].first, 1)
   end
 
-  def index_organization(id, options)
+  def index_organization(id)
     MessageMaker.make_message 'esp.cms.searcher', 'add', "#{organization_item_part.node.url}-/#{id}"
   end
 
-  def remove_organization(id, options)
+  def remove_organization(id)
     MessageMaker.make_message 'esp.cms.searcher', 'remove', "#{organization_item_part.node.url}-/#{id}"
   end
 
