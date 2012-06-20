@@ -474,6 +474,9 @@ sites:
         main_bottom_navigation:
           required: true
           configurable: false
+        breadcrumbs:
+          required: false
+          configurable: true
         content_navigation:
           required: true
           configurable: true
