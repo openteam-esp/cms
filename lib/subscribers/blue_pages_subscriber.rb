@@ -29,7 +29,7 @@ class BluePagesSubscriber
 
   private
     def parts(level, category_id)
-      BluePagesPart.where(:blue_pages_expand => level, :blue_pages_category_id => category_id)
+      BluePagesPart.where('blue_pages_expand >= ?', level).where(:blue_pages_category_id => category_id)
     end
 
     def send_messages_for_item_pages(message, item_id, category_id, level)
