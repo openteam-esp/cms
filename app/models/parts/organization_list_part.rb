@@ -23,6 +23,8 @@ class OrganizationListPart < Part
     response_hash.merge(:pagination => pagination, :query => params['q'])
   end
 
+  alias_attribute :part_title, :title
+
   private
     def blue_pages_url
       "#{Settings['blue-pages.url']}"
