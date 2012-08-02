@@ -352,16 +352,26 @@ sites:
           required: false
           configurable: true
           indexable: true
-        fire_comments:
+        news:
           required: true
           configurable: true
           indexable: true
-        fire_news:
+        comments:
           required: true
           configurable: true
           indexable: true
-        fire_smi_publication:
+        smi_publication:
           required: true
+          configurable: true
+          indexable: true
+        right_side_navigation:
+          required: false
+          configurable: true
+        twitter:
+          required: false
+          configurable: true
+        gallery:
+          required: false
           configurable: true
           indexable: true
         secondary_navigation:
