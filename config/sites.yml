@@ -338,62 +338,38 @@ sites:
       fire_situation:
         site_name:
           required: true
-          configurable: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
         breadcrumbs:
           required: true
-          configurable: true
-        actual:
-          required: true
-          configurable: true
-          indexable: true
-        calendar_current:
-          required: true
-          configurable: true
-          indexable: true
-        calendar_nearest:
-          required: true
-          configurable: true
-          indexable: true
-        calendar_gone:
-          required: true
-          configurable: true
-          indexable: true
-        governor_message:
-          required: true
-          configurable: true
-          indexable: true
-        governor_comments:
-          required: true
-          configurable: true
-          indexable: true
-        news:
-          required: true
-          configurable: true
-          indexable: true
-        gallery:
+          configurable: false
+        content_first:
           required: false
           configurable: true
           indexable: true
-        main_navigation:
-          required: true
-          configurable: true
-        main_bottom_navigation:
-          required: true
-          configurable: true
-        map_region:
+        fire_comments:
           required: true
           configurable: true
           indexable: true
-        banners:
+        fire_news:
+          required: true
+          configurable: true
+          indexable: true
+        fire_smi_publication:
           required: true
           configurable: true
           indexable: true
         secondary_navigation:
           required: true
-          configurable: true
+          configurable: false
         footer:
           required: true
-          configurable: true
+          configurable: false
 
   uvto:
     <<: *typical_site
