@@ -6,6 +6,7 @@ sites:
       blue_pages_item_part: department_chief
       blue_pages_part: list_organizations
       gallery_part: files_list
+      news_item_part: comment_item_part
 
     templates:
       main_page:
