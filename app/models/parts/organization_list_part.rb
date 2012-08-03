@@ -87,7 +87,7 @@ class OrganizationListPart < Part
       %w[sphere status].each do |filter|
         response_hash['filters'][filter].each do |k, v|
           v['checked'] = params[filter].include?(k) ? true : false
-        end if params[filter]
+        end if response_hash['filters'] && params[filter]
       end
     end
 
