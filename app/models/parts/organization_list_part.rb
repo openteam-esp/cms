@@ -31,7 +31,7 @@ class OrganizationListPart < Part
     end
 
     def url_for_request
-      "#{blue_pages_url}/innorganizations?#{query}"
+      URI.escape "#{blue_pages_url}/innorganizations?#{query}"
     end
 
     def query
@@ -44,13 +44,13 @@ class OrganizationListPart < Part
     end
 
     def filter_params
-      ''.tap do |s|
-        s << %w[sphere status].map { |filter|
-          params[filter].delete('_') if params[filter]
+      filter_params = %w[sphere status].map { |filter|
+        params[filter].delete('_') if params[filter]
 
-          params[filter].map { |v| "#{filter}[]=#{v}" }.join('&') if params[filter]
-        }.join('&')
-      end
+        params[filter].map { |v| "#{filter}[]=#{v}" }.join('&') if params[filter]
+      }
+
+      filter_params.delete_if { |i| i.blank? }.join('&')
     end
 
     def page
@@ -87,8 +87,8 @@ class OrganizationListPart < Part
       %w[sphere status].each do |filter|
         response_hash['filters'][filter].each do |k, v|
           v['checked'] = params[filter].include?(k) ? true : false
-        end if response_hash['filters'] && params[filter]
-      end
+        end if params[filter]
+      end if response_hash['filters']
     end
 
     def urls_for_index
