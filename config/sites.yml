@@ -108,6 +108,9 @@ sites:
         right_side_charts:
           required: false
           configurable: true
+        right_side_twitter:
+          required: false
+          configurable: false
         reports:
           required: false
           configurable: true
@@ -361,15 +364,14 @@ sites:
           required: true
           configurable: true
           indexable: true
-        smi_publication:
-          required: true
-          configurable: true
-          indexable: true
         right_side_navigation:
           required: false
           configurable: true
-        twitter:
+        right_side_twitter:
           required: false
+          configurable: true
+        right_side_smi_publication:
+          required: true
           configurable: true
         gallery:
           required: false
