@@ -370,7 +370,7 @@ sites:
         right_side_twitter:
           required: false
           configurable: true
-        right_side_smi_publication:
+        right_side_smi_publications:
           required: true
           configurable: true
         gallery:
