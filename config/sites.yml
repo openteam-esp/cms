@@ -109,8 +109,8 @@ sites:
           required: false
           configurable: true
         right_side_twitter:
-          required: false
-          configurable: false
+          required: true
+          configurable: true
         reports:
           required: false
           configurable: true
