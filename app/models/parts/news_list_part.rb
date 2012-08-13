@@ -63,7 +63,10 @@ class NewsListPart < Part
     end
 
     def rss_link
-      "#{news_url}/channels/#{news_channel}/entries.rss"
+      path_param = ''
+      path_param << item_page.node.site.client_url
+      path_param << item_page.route_without_site
+      "#{news_url}/channels/#{news_channel}/entries.rss?path_param=#{path_param}"
     end
 
     def order_by
