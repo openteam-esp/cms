@@ -80,7 +80,7 @@ class OrganizationListPart < Part
     def replace_id_with_links
       response_hash['organizations'].each do |organization|
         organization['link'] = "#{item_page.route_without_site}/-/#{organization.delete('id')}"
-      end if response_hash['organization']
+      end if response_hash['organizations']
     end
 
     def set_filters
