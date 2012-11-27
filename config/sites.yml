@@ -417,6 +417,14 @@ sites:
         footer:
           required: true
           configurable: true
+        right_side_facts:
+          required: false
+          configurable: true
+          indexable: true
+      sitemap:
+        site_name:
+          required: true
+          configurable: false
 
   inotomsk:
     part_templates:
