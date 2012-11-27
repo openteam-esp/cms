@@ -388,7 +388,35 @@ sites:
     <<: *typical_site
 
   veteran:
-    <<: *typical_site
+    templates:
+      main_page:
+        site_name:
+          required: true
+          configurable: true
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        news:
+          required: true
+          configurable: true
+          indexable: true
+        main_navigation:
+          required: true
+          configurable: true
+        secondary_navigation:
+          required: true
+          configurable: true
+        main_bottom_navigation:
+          required: true
+          configurable: true
+        banners:
+          required: true
+          configurable: true
+          indexable: true
+        footer:
+          required: true
+          configurable: true
 
   inotomsk:
     part_templates:
