@@ -387,6 +387,9 @@ sites:
   uvto:
     <<: *typical_site
 
+  veteran:
+    <<: *typical_site
+
   inotomsk:
     part_templates:
       events_list_part: main_event_list_part
