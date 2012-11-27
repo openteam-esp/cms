@@ -389,6 +389,7 @@ sites:
 
   veteran:
     templates:
+
       main_page:
         site_name:
           required: true
@@ -414,15 +415,50 @@ sites:
           required: true
           configurable: true
           indexable: true
-        footer:
+
+      inner_page: &veteran_inner_page
+        site_name:
           required: true
-          configurable: true
-        right_side_facts:
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        secondary_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        content_first:
           required: false
           configurable: true
           indexable: true
+        banners:
+          required: true
+          configurable: true
+          indexable: true
+
+      inner_page_with_social:
+        <<: *veteran_inner_page
+
       sitemap:
         site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        secondary_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        banners:
           required: true
           configurable: false
 
