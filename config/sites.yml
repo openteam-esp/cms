@@ -437,6 +437,14 @@ sites:
           required: true
           configurable: true
           indexable: true
+        right_side_facts:
+          required: false
+          configurable: true
+          indexable: true
+        right_side_links:
+          required: false
+          configurable: true
+          indexable: true
 
       inner_page_with_social:
         <<: *veteran_inner_page
@@ -528,14 +536,6 @@ sites:
           required: true
           configurable: true
         content_first:
-          required: false
-          configurable: true
-          indexable: true
-        right_side_facts:
-          required: false
-          configurable: true
-          indexable: true
-        right_side_links:
           required: false
           configurable: true
           indexable: true
