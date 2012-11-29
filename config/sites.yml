@@ -531,6 +531,14 @@ sites:
           required: false
           configurable: true
           indexable: true
+        right_side_facts:
+          required: false
+          configurable: true
+          indexable: true
+        right_side_links:
+          required: false
+          configurable: true
+          indexable: true
 
       event_page:
         site_name:
