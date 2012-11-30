@@ -416,6 +416,41 @@ sites:
           configurable: true
           indexable: true
 
+      department_page:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        regulation:
+          required: false
+          configurable: true
+          indexable: true
+        reports:
+          required: false
+          configurable: true
+          indexable: true
+        dependent_subdivisions:
+          required: false
+          configurable: true
+          indexable: true
+        links:
+          required: false
+          configurable: true
+          indexable: true
+        secondary_navigation:
+          required: true
+          configurable: false
+        banners:
+          required: false
+          configurable: true
+          indexable: true
+
       inner_page: &veteran_inner_page
         site_name:
           required: true
