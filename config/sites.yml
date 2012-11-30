@@ -407,7 +407,7 @@ sites:
           configurable: true
         main_bottom_navigation:
           required: true
-          configurable: false
+          configurable: true
         banners:
           required: true
           configurable: true
