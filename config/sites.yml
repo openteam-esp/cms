@@ -408,9 +408,6 @@ sites:
         secondary_navigation:
           required: true
           configurable: true
-        main_bottom_navigation:
-          required: true
-          configurable: true
         banners:
           required: true
           configurable: true
@@ -423,9 +420,6 @@ sites:
         main_navigation:
           required: true
           configurable: false
-        main_bottom_navigation:
-          required: true
-          configurable: true
         content_first:
           required: false
           configurable: true
@@ -464,9 +458,6 @@ sites:
         secondary_navigation:
           required: true
           configurable: false
-        main_bottom_navigation:
-          required: true
-          configurable: false
         content_first:
           required: false
           configurable: true
@@ -495,9 +486,6 @@ sites:
           required: true
           configurable: false
         secondary_navigation:
-          required: true
-          configurable: false
-        main_bottom_navigation:
           required: true
           configurable: false
         content_first:
