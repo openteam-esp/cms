@@ -423,6 +423,9 @@ sites:
         main_navigation:
           required: true
           configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: true
         content_first:
           required: false
           configurable: true
