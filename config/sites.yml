@@ -370,6 +370,9 @@ sites:
         right_side_navigation:
           required: false
           configurable: true
+        right_side_charts:
+          required: false
+          configurable: true
         right_side_twitter:
           required: false
           configurable: true
