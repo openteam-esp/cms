@@ -1,6 +1,7 @@
 source :rubygems
 
 group :assets do
+  gem 'therubyracer'                              unless RUBY_PLATFORM =~ /freebsd/
   gem 'uglifier'
 end
 
@@ -29,7 +30,7 @@ end
 group :development do
   gem 'hirb',                                     :require => false
   gem 'sunspot_solr',     '>= 2.0.0.pre.120417',  :require => false
-  gem 'therubyracer'                              unless RUBY_PLATFORM =~ /freebsd/
+  gem 'rvm-capistrano'
 end
 
 group :test do

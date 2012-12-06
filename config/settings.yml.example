@@ -19,3 +19,9 @@ errors:
 unicorn:
   workers:      2
   timeout:      300
+
+deploy:
+  gateway:      user@host
+  domain:       user@host
+  application:  appname.ru
+  port:         port
