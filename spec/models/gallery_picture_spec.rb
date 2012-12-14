@@ -44,16 +44,17 @@ describe GalleryPicture do
     end
   end
 end
+
 # == Schema Information
 #
 # Table name: gallery_pictures
 #
-#  id              :integer         not null, primary key
-#  gallery_part_id :integer
+#  created_at      :datetime         not null
 #  description     :text
+#  gallery_part_id :integer
+#  id              :integer          not null, primary key
 #  picture_url     :string(255)
-#  created_at      :datetime        not null
-#  updated_at      :datetime        not null
 #  position        :integer
+#  updated_at      :datetime         not null
 #
 
