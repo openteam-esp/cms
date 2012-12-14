@@ -19,8 +19,8 @@ class NewsListPart < Part
     hash.merge!('collection_link' => collection_link)
 
     hash.merge!('title' => title) if title?
-    hash.merge!(pagination) if news_paginated?
     hash.merge!('rss_link' => rss_link) if news_channel?
+    hash.merge!(pagination) if news_paginated?
 
     hash
   end

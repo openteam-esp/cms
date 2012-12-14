@@ -12,9 +12,6 @@ describe Node do
   it { should normalize_attribute(:title).from('  ru   ddd ').to('ru ddd') }
   it { should normalize_attribute(:title).from('ru').to('ru') }
 
-  it { should belong_to :context }
-  it { should validate_presence_of :context }
-
   describe 'сохранение path' do
     let(:root) { Fabricate(:node, :parent => nil, :slug => 'site', :navigation_position => 2) }
     let(:ru) { Fabricate(:node, :parent => root, :slug => 'ru', :navigation_position => 1) }
@@ -144,9 +141,6 @@ describe Node do
     let(:site) { Fabricate(:site) }
     let(:locale) { Locale.create!(:parent => site, :slug => 'ru', :template => 'main_page') }
     let(:page) { Page.create!(:parent => locale, :template => 'inner_page', :title => 'страница') }
-
-    it { locale.context.should == site.context }
-    it { page.context.should == site.context }
   end
 
   describe 'перенаправление на страницу' do
