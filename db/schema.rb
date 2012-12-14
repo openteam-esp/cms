@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120619044742) do
+ActiveRecord::Schema.define(:version => 20121214055021) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -33,17 +33,6 @@ ActiveRecord::Schema.define(:version => 20120619044742) do
   add_index "audits", ["auditable_id", "auditable_type"], :name => "auditable_index"
   add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
   add_index "audits", ["user_id", "user_type"], :name => "user_index"
-
-  create_table "contexts", :force => true do |t|
-    t.string   "title"
-    t.string   "ancestry"
-    t.string   "weight"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "contexts", ["ancestry"], :name => "index_contexts_on_ancestry"
-  add_index "contexts", ["weight"], :name => "index_contexts_on_weight"
 
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
@@ -71,7 +60,6 @@ ActiveRecord::Schema.define(:version => 20120619044742) do
     t.integer  "ancestry_depth",       :default => 0
     t.integer  "page_for_redirect_id"
     t.string   "weight"
-    t.integer  "context_id"
   end
 
   create_table "parts", :force => true do |t|
