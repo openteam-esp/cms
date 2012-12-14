@@ -42,7 +42,7 @@ describe NewsListPart do
 
           'collection_link' => '/ru',
           'title' => 'Новости',
-          'rss_link' => "#{Settings['news.url']}/channels/13/entries.rss",
+          'rss_link' => "#{Settings['news.url']}/channels/13/entries.rss?path_param=http://example.com/ru/name",
         }
       }
     }
