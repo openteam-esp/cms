@@ -4,56 +4,21 @@ class Ability
   def initialize(user)
     return unless user
 
-    can :manage, :all
-
-  end
-end
-__END__
-  raise '111'
-    ## common
-    can :manage, Context do | context |
-      user.manager_of? context
-    end
-
-    can :manage, Permission do | permission |
-      permission.context && user.manager_of?(permission.context)
-    end
-
-    can [:new, :create], Permission do | permission |
-      !permission.context && user.manager?
-    end
-
-    can [:search, :index], User do
-      user.manager?
-    end
-
     can :manage, :application do
       user.have_permissions?
     end
 
-    can :manage, :permissions do
+    # app specific
+    can :manage, Node do |node|
       user.manager?
     end
 
-    can :manage, :audits do
-      user.manager_of? Context.first
-    end
-
-    # app specific
     can :manage, Node do |node|
-      [node] + node.ancestors.each do |n|
-        return true if can?(:manage, n)
-      end
-
-      false
+      user.operator_of?(node)
     end
 
     can :manage, Node do |node|
-      user.manager_of?(node) || user.operator_of?(node)
-    end
-
-    can :manage, Node do |node|
-      user.manager_of?(node.context) if node.context
+      user.permissions.where(:context_type => 'Node').where(:context_id => node.ancestor_ids).exists?
     end
 
     can :create, Site do
