@@ -146,6 +146,8 @@ GEM
       pg
       russian
       sunspot_rails
+    esp-views (0.0.1)
+      sso-auth
     eventmachine (0.12.10)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -313,6 +315,12 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6)
+    sso-auth (0.0.4.1)
+      cancan
+      configliere
+      devise
+      omniauth
+      omniauth-oauth2
     sunspot (2.0.0.pre.120417)
       pr_geohash (~> 1.0)
       rsolr (~> 1.0.7)
@@ -355,6 +363,7 @@ DEPENDENCIES
   esp-ckeditor
   esp-commons
   esp-gems
+  esp-views
   fabrication (< 2.0.0)
   formtastic (< 2.2.0)
   gilenson
@@ -378,6 +387,7 @@ DEPENDENCIES
   simple-navigation
   spork
   sqlite3
+  sso-auth
   sunspot_matchers
   sunspot_rails (>= 2.0.0.pre.120417)
   sunspot_solr (>= 2.0.0.pre.120417)

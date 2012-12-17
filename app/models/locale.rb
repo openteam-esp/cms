@@ -1,4 +1,6 @@
 class Locale < Node
+  attr_accessible :slug, :template
+
   validates :slug, :presence => true
 
   has_enum :slug

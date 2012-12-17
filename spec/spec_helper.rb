@@ -10,23 +10,18 @@ Spork.prefork do
   require 'rspec/autorun'
   require 'fabrication'
   require "cancan/matchers"
-  require 'sunspot_matchers'
-  require 'esp_auth/spec_helper'
+  require 'sso-auth/spec_helper'
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
   RSpec.configure do |config|
     config.include AttributeNormalizer::RSpecMatcher
     config.include Devise::TestHelpers, :type => :controller
-    config.include EspAuth::SpecHelper
+    config.include SsoAuth::SpecHelper
     config.include EspCmsHelper
 
     config.mock_with :rspec
     config.use_transactional_fixtures = true
-
-    config.before :all do
-      Sunspot.session = SunspotMatchers::SunspotSessionSpy.new(Sunspot.session)
-    end
 
     config.before do
       MessageMaker.stub(:make_message)

@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <%= render :partial => "esp_auth/shared/header" %>
+    <%= render :partial => "esp/views/header" %>
 
     <div id="toolbar_wrapper">
       <%= render_navigation :context => :toolbar %>
@@ -22,6 +22,6 @@
       <%= content_for?(:content) ? yield(:content) : yield %>
     </div>
 
-    <%= render :partial => "esp_auth/shared/footer" %>
+    <%= render :partial => "esp/views/footer" %>
   </body>
 </html>
