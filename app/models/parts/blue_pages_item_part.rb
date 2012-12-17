@@ -1,4 +1,6 @@
 class BluePagesItemPart < Part
+  attr_accessible :blue_pages_item_page_id
+
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['content', 'part_title']))
   end

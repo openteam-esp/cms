@@ -1,6 +1,17 @@
 # encoding: utf-8
 
 class NewsItemPart < Part
+  attr_accessible :news_channel
+  attr_accessible :news_event_entry
+  attr_accessible :news_height
+  attr_accessible :news_item_page_id
+  attr_accessible :news_mlt_count
+  attr_accessible :news_mlt_height
+  attr_accessible :news_mlt_width
+  attr_accessible :news_paginated
+  attr_accessible :news_per_page
+  attr_accessible :news_width
+
   validates_presence_of :news_channel, :news_mlt_count
 
   default_value_for :news_mlt_count, 0

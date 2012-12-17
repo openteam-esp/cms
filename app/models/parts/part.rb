@@ -1,9 +1,14 @@
 class Part < ActiveRecord::Base
+  attr_accessible :title
+  attr_accessible :item_page
+
   attr_accessor :current_node, :params, :resource_id
 
   belongs_to :node
 
   validates_presence_of :node, :region, :template
+
+  attr_accessible :node, :region, :template, :type
 
   after_create :index, :if => :indexable?
   after_update :node_reindex, :if => [:indexable?, :need_to_reindex?]

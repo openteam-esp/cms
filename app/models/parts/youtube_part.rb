@@ -1,4 +1,10 @@
 class YoutubePart < Part
+  attr_accessible :youtube_item_page_id
+  attr_accessible :youtube_paginated
+  attr_accessible :youtube_per_page
+  attr_accessible :youtube_resource_id
+  attr_accessible :youtube_resource_kind
+
   belongs_to :item_page, :class_name => 'Node', :foreign_key => :youtube_item_page_id
 
   validates_presence_of :youtube_resource_id, :youtube_resource_kind

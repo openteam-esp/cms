@@ -1,6 +1,12 @@
 # encoding: utf-8
 
 class DocumentsPart < Part
+  attr_accessible :documents_contexts
+  attr_accessible :documents_item_page_id
+  attr_accessible :documents_kind
+  attr_accessible :documents_paginated
+  attr_accessible :documents_per_page
+
   belongs_to :item_page, :class_name => 'Node', :foreign_key => :documents_item_page_id
 
   validates_presence_of :documents_kind, :documents_contexts, :item_page

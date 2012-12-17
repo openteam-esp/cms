@@ -1,6 +1,8 @@
 require 'base64'
 
 class TextPart < Part
+  attr_accessible :text_info_path
+
   validates_presence_of :text_info_path
 
   def to_json

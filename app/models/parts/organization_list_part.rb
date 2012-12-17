@@ -1,4 +1,8 @@
 class OrganizationListPart < Part
+  attr_accessible :organization_list_category_id
+  attr_accessible :organization_list_item_page_id
+  attr_accessible :organization_list_per_page
+
   belongs_to :item_page, :class_name => 'Node', :foreign_key => :organization_list_item_page_id
 
   validates_presence_of :organization_list_category_id

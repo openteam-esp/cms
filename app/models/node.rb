@@ -1,4 +1,6 @@
 class Node < ActiveRecord::Base
+  attr_accessible :slug, :template
+
   attr_accessor :navigation_position_param, :parts_params, :resource_id
 
   has_many :parts

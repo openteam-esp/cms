@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 class SearchPart < Part
+  attr_accessible :search_per_page
+
   validates_presence_of :search_per_page
 
   default_value_for :search_per_page, 15

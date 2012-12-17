@@ -1,4 +1,9 @@
 class NavigationPart < Part
+  attr_accessible :navigation_default_level
+  attr_accessible :navigation_end_level
+  attr_accessible :navigation_from_id
+  attr_accessible :navigation_group
+
   belongs_to :from_node, :foreign_key => :navigation_from_id, :class_name => 'Node'
 
   validates_presence_of :from_node, :navigation_end_level

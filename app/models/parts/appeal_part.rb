@@ -3,6 +3,8 @@
 class AppealPart < Part
   validates_presence_of :appeal_section_slug
 
+  attr_accessible :appeal_section_slug
+
   def to_json
     super.merge!(as_json(:only => :type, :methods => 'content'))
   end

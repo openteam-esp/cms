@@ -1,6 +1,8 @@
 require 'base64'
 
 class HtmlPart < Part
+  attr_accessible :html_info_path
+
   validates_presence_of :html_info_path
 
   after_create :register_in_storage

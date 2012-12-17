@@ -1,4 +1,11 @@
 class YoutubeVideoPart < Part
+  attr_accessible :youtube_video_height
+  attr_accessible :youtube_video_related_count
+  attr_accessible :youtube_video_resource_id
+  attr_accessible :youtube_video_resource_kind
+  attr_accessible :youtube_video_width
+  attr_accessible :youtube_video_with_related
+
   validates_presence_of :youtube_video_resource_id, :youtube_video_resource_kind
 
   has_enums
