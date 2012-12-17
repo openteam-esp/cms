@@ -2,7 +2,7 @@ require "bundler/capistrano"
 require "rvm/capistrano"
 
 load "config/deploy/settings"
-#load "config/deploy/assets"
+load "config/deploy/assets"
 
 namespace :deploy do
   desc "Copy config files"
@@ -35,7 +35,7 @@ after "deploy", "deploy:migrate"
 after "deploy", "deploy:copy_unicorn_config"
 after "deploy", "deploy:reload_servers"
 after "deploy:restart", "deploy:cleanup"
-#after "deploy", "deploy:airbrake"
+after "deploy", "deploy:airbrake"
 
 # deploy:rollback
 after "deploy:rollback", "deploy:reload_servers"
