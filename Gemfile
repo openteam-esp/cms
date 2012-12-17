@@ -7,7 +7,7 @@ group :assets do
 end
 
 group :default do
-  gem 'acts_as_list',         :ref => '7fd2',     :git => 'git://github.com/swanandp/acts_as_list'
+  gem 'acts_as_list'
   gem 'ancestry'
   gem 'attribute_normalizer'
   gem 'audited-activerecord'
