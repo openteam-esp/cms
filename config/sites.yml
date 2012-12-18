@@ -1013,7 +1013,7 @@ sites:
       search_results_page:
         <<: *inotomsk_inner_page
 
-  camps:
+  svchikr:
     templates:
       main_page:
         site_name:
@@ -1022,33 +1022,6 @@ sites:
         main_navigation:
           required: true
           configurable: true
-        actual:
+        sub_navigation:
           required: true
           configurable: true
-          indexable: true
-        news:
-          required: true
-          configurable: true
-          indexable: true
-        useful_links:
-          required: true
-          configurable: true
-
-      inner_page:
-        site_name:
-          required: true
-          configurable: false
-        main_navigation:
-          required: true
-          configurable: false
-        content_first:
-          required: false
-          configurable: true
-          indexable: true
-        gallery:
-          required: false
-          configurable: true
-          indexable: true
-        useful_links:
-          required: true
-          configurable: false
