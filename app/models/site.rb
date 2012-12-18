@@ -1,4 +1,6 @@
 class Site < Node
+  attr_accessible :client_url
+
   validates :slug, :client_url, :presence => true
 
   delegate :parts, :to => :default_locale

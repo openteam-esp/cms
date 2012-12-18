@@ -1,5 +1,5 @@
 class Node < ActiveRecord::Base
-  attr_accessible :slug, :template
+  attr_accessible :slug, :template, :title, :navigation_title, :navigation_group, :navigation_position, :in_navigation, :page_for_redirect_id
 
   attr_accessor :navigation_position_param, :parts_params, :resource_id
 
