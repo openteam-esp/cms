@@ -182,5 +182,11 @@ ru:
         youtube_video_with_related: Включать похожие видео (для пользователя)
         youtube_video_related_count: Количество похожих видео
 
+      directory_presentation_part:
+        template: Шаблон
+        directory_presentation_id: Представление
+        item_page: Страница просмотра сотрудника
+        presentation_title: Представление
+
 
 
