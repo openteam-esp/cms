@@ -18,7 +18,7 @@ class DirectoryPresentationPart < Part
   end
 
   def presentations
-    @presentations ||= Requester.new("#{'http://localhost:3000/api/presentations'}", 'application/json').response_hash.
+    @presentations ||= Requester.new("#{directory_api_url}/presentations", 'application/json').response_hash.
       map { |e| Hashie::Mash.new(e) }.
       map { |presentation| [presentation.title, presentation.id] }
   end
