@@ -23,7 +23,7 @@ group :default do
   gem 'has_enum'
   gem 'hashie'
   gem 'inherited_resources'
-  gem 'jquery-rails'
+  gem 'jquery-rails',   '2.0.3'
   gem 'nested_form'
   gem 'rails'
   gem 'russian'
