@@ -1,14 +1,12 @@
 settings_yml_path = "config/deploy.yml"
 config = YAML::load(File.open(settings_yml_path))
-raise "not found deploy key in settings.yml. see settings.yml.example" unless config['deploy']
+raise "not found deploy key in deploy.yml. see deploy.yml.example" unless config['deploy']
 application = config['deploy']["application"]
-raise "not found deploy.application key in settings.yml. see settings.yml.example" unless application
+raise "not found deploy.application key in deploy.yml. see deploy.yml.example" unless application
 domain = config['deploy']["domain"]
-raise "not found deploy.domain key in settings.yml. see settings.yml.example" unless domain
+raise "not found deploy.domain key in deploy.yml. see deploy.yml.example" unless domain
 gateway = config['deploy']["gateway"]
-raise "not found deploy.gateway key in settings.yml. see settings.yml.example" unless gateway
-pg_domain = config['deploy']["pg_domain"]
-raise "not found deploy.gateway key in settings.yml. see settings.yml.example" unless pg_domain
+raise "not found deploy.gateway key in deploy.yml. see deploy.yml.example" unless gateway
 
 set :application, application
 set :domain, domain
