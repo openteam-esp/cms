@@ -1,44 +1,32 @@
-# encoding: utf-8
-
-class DirectoryPresentationPart < Part
-  attr_accessible :directory_presentation_id, :directory_presentation_item_page_id
-
-  belongs_to :item_page, :class_name => 'Node', :foreign_key => :directory_presentation_item_page_id
-
-  validates_presence_of :directory_presentation_id
-
+class DirectoryPostPart < Part
   def to_json
-    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
+    super.merge!(as_json(:only => :type, :methods => ['content', 'part_title']))
   end
 
   def content
-    response_hash.map { |e|
-      e['link'] = "#{item_page.route_without_site}/-/#{e.delete('id')}" and e
-    }
+    response_hash
   end
 
-  def presentations
-    @presentations ||= Requester.new("#{'http://localhost:3000/api/presentations'}", 'application/json').response_hash.
-      map { |e| Hashie::Mash.new(e) }.
-      map { |presentation| [presentation.title, presentation.id] }
+  def part_title
+    response_hash['person_full_name']
   end
 
-  def presentation
-    @presentation ||= Hashie::Mash.new(Requester.new("#{directory_api_url}/presentations/#{presentation_id}", 'application/json').response_hash)
-  end
-  delegate :title, to: :presentation, prefix: true
-
-  alias_attribute :part_title,      :title
-  alias_attribute :presentation_id, :directory_presentation_id
+  alias :page_title :part_title
 
   private
+
+  alias :post_id :resource_id
 
   def directory_api_url
     "#{Settings['directory.url']}/api"
   end
 
   def url_for_request
-    "#{directory_api_url}/presentations/#{presentation_id}/posts"
+    "#{directory_api_url}/posts/#{post_id}"
+  end
+
+  def urls_for_index
+    []
   end
 end
 
