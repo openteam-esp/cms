@@ -196,5 +196,15 @@ ru:
           '!s': обрезать по нижнему краю
           '!w': обрезать по левому краю
 
+      directory_post_part:
+        directory_post_photo_width: Ширина фотографий
+        directory_post_photo_height: Высота фотографий
+        directory_post_photo_crop_kind: Тип обработки фотографий
+        directory_post_photo_crop_kind_enum:
+          '!n': обрезать по верхнему краю
+          '!e': обрезать по правому краю
+          '!s': обрезать по нижнему краю
+          '!w': обрезать по левому краю
+
 
 

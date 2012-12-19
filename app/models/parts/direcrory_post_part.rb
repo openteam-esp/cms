@@ -1,9 +1,19 @@
 class DirectoryPostPart < Part
+  attr_accessible :directory_post_photo_width, :directory_post_photo_height,
+    :directory_post_photo_crop_kind
+
+  default_value_for :directory_post_photo_width,  100
+  default_value_for :directory_post_photo_height, 100
+
+  has_enums
+
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['content', 'part_title']))
   end
 
   def content
+    response_hash['person_photo_url'] = response_hash['person_photo_url'].gsub(/\/\d+-\d+\//, photo_processing) if response_hash['person_photo_url'].present?
+
     response_hash
   end
 
@@ -27,6 +37,16 @@ class DirectoryPostPart < Part
 
   def urls_for_index
     []
+  end
+
+  private
+
+  alias_attribute :photo_width,   :directory_post_photo_width
+  alias_attribute :photo_height,  :directory_post_photo_height
+  alias_attribute :photo_crop,    :directory_post_photo_crop_kind
+
+  def photo_processing
+    "/#{photo_width}-#{photo_height}#{photo_crop}/"
   end
 end
 

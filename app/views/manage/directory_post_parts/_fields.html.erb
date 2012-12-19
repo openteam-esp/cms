@@ -1,4 +1,10 @@
 <%= form.inputs do %>
+  <%= form.input :directory_post_photo_width %>
+  <%= form.input :directory_post_photo_height %>
+  <%= form.input :directory_post_photo_crop_kind,
+    :as => :select,
+    :collection => form.object.class.values_for_select_tag(:directory_post_photo_crop_kind) %>
+
   <%= form.input :region, :as => :hidden %>
   <%= form.input :type, :as => :hidden %>
 <% end %>
