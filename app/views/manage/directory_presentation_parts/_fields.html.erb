@@ -1,5 +1,10 @@
 <%= form.inputs do %>
   <%= form.input :directory_presentation_id, :as => :select, :collection => form.object.presentations %>
+  <%= form.input :directory_presentation_photo_width %>
+  <%= form.input :directory_presentation_photo_height %>
+  <%= form.input :directory_presentation_photo_crop_kind,
+    :as => :select,
+    :collection => form.object.class.values_for_select_tag(:directory_presentation_photo_crop_kind) %>
 
   <%= render :partial => 'manage/parts/item_page', :locals => { :form => form } %>
 

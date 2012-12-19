@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121218073239) do
+ActiveRecord::Schema.define(:version => 20121219084531) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(:version => 20121218073239) do
   end
 
   create_table "parts", :force => true do |t|
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "region"
     t.string   "type"
     t.integer  "node_id"
@@ -112,6 +112,9 @@ ActiveRecord::Schema.define(:version => 20121218073239) do
     t.integer  "organization_list_item_page_id"
     t.integer  "directory_presentation_id"
     t.integer  "directory_presentation_item_page_id"
+    t.integer  "directory_presentation_photo_width"
+    t.integer  "directory_presentation_photo_height"
+    t.string   "directory_presentation_photo_crop_kind"
   end
 
   create_table "permissions", :force => true do |t|

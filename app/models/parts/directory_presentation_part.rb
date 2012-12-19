@@ -1,11 +1,18 @@
 # encoding: utf-8
 
 class DirectoryPresentationPart < Part
-  attr_accessible :directory_presentation_id, :directory_presentation_item_page_id
+  attr_accessible :directory_presentation_id, :directory_presentation_item_page_id,
+    :directory_presentation_photo_width, :directory_presentation_photo_height,
+    :directory_presentation_photo_crop_kind
 
   belongs_to :item_page, :class_name => 'Node', :foreign_key => :directory_presentation_item_page_id
 
   validates_presence_of :directory_presentation_id
+
+  default_value_for :directory_presentation_photo_width,  100
+  default_value_for :directory_presentation_photo_height, 100
+
+  has_enums
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
@@ -13,7 +20,10 @@ class DirectoryPresentationPart < Part
 
   def content
     response_hash.map { |e|
-      e['link'] = "#{item_page.route_without_site}/-/#{e.delete('id')}" and e
+      e['link'] = "#{item_page.route_without_site}/-/#{e.delete('id')}"
+      e['person_photo_url'] = e['person_photo_url'].gsub(/\/\d+-\d+\//, photo_processing) if e['person_photo_url'].present?
+
+      e
     }
   end
 
@@ -39,6 +49,14 @@ class DirectoryPresentationPart < Part
 
   def url_for_request
     "#{directory_api_url}/presentations/#{presentation_id}/posts"
+  end
+
+  alias_attribute :photo_width,   :directory_presentation_photo_width
+  alias_attribute :photo_height,  :directory_presentation_photo_height
+  alias_attribute :photo_crop,    :directory_presentation_photo_crop_kind
+
+  def photo_processing
+    "/#{photo_width}-#{photo_height}#{photo_crop}/"
   end
 end
 

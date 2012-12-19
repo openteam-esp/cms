@@ -187,6 +187,14 @@ ru:
         directory_presentation_id: Представление
         item_page: Страница просмотра сотрудника
         presentation_title: Представление
+        directory_presentation_photo_width: Ширина фотографий
+        directory_presentation_photo_height: Высота фотографий
+        directory_presentation_photo_crop_kind: Тип обработки фотографий
+        directory_presentation_photo_crop_kind_enum:
+          '!n': обрезать по верхнему краю
+          '!e': обрезать по правому краю
+          '!s': обрезать по нижнему краю
+          '!w': обрезать по левому краю
 
 
 
