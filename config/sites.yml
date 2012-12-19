@@ -1022,6 +1022,14 @@ sites:
         main_navigation:
           required: true
           configurable: true
-        sub_navigation:
+      inner_page:
+        site_name:
           required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        content_first:
+          required: false
           configurable: true
+          indexable: true
