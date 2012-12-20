@@ -1,4 +1,4 @@
-settings_yml_path = "config/settings.yml"
+settings_yml_path = "config/deploy.yml"
 config = YAML::load(File.open(settings_yml_path))
 raise "not found deploy key in settings.yml. see settings.yml.example" unless config['deploy']
 application = config['deploy']["application"]
@@ -7,10 +7,13 @@ domain = config['deploy']["domain"]
 raise "not found deploy.domain key in settings.yml. see settings.yml.example" unless domain
 gateway = config['deploy']["gateway"]
 raise "not found deploy.gateway key in settings.yml. see settings.yml.example" unless gateway
+pg_domain = config['deploy']["pg_domain"]
+raise "not found deploy.gateway key in settings.yml. see settings.yml.example" unless pg_domain
 
 set :application, application
 set :domain, domain
 set :gateway, gateway
+set :pg_domain, pg_domain
 
 set :ssh_options, { :forward_agent => true }
 
