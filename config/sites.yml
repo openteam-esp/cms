@@ -1037,7 +1037,7 @@ sites:
           required: false
           configurable: true
           indexable: true
-      search_results_page:
+      search_results_page: &svchikr_simple_page
         site_name:
           required: true
           configurable: false
@@ -1048,3 +1048,5 @@ sites:
           required: false
           configurable: true
           indexable: true
+      sitemap:
+        <<: *svchikr_simple_page
