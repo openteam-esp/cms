@@ -7,6 +7,8 @@ domain = config['deploy']["domain"]
 raise "not found deploy.domain key in deploy.yml. see deploy.yml.example" unless domain
 gateway = config['deploy']["gateway"]
 raise "not found deploy.gateway key in deploy.yml. see deploy.yml.example" unless gateway
+pg_domain = config['deploy']["pg_domain"]
+raise "not found deploy.pg_domain key in settings.yml. see settings.yml.example" unless domain
 
 set :application, application
 set :domain, domain
