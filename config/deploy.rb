@@ -33,7 +33,7 @@ end
 namespace :subscriber do
   desc "Start rabbitmq subscriber"
   task :start do
-    run "#{deploy_to}/current/script/subscriber start"
+    run "#{deploy_to}/current/script/subscriber -e production start"
   end
 
   desc "Stop rabbitmq subscriber"
