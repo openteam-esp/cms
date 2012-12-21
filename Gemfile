@@ -23,7 +23,7 @@ group :default do
   gem 'has_enum'
   gem 'hashie'
   gem 'inherited_resources'
-  gem 'jquery-rails'
+  gem 'jquery-rails',   '2.0.3'  # see https://github.com/Studio-42/elFinder/issues/450
   gem 'nested_form'
   gem 'rails'
   gem 'russian'
