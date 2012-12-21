@@ -1,6 +1,6 @@
 class DirectoryPostPart < Part
   attr_accessible :directory_post_photo_width, :directory_post_photo_height,
-    :directory_post_photo_crop_kind
+    :directory_post_photo_crop_kind, :directory_post_post_id
 
   default_value_for :directory_post_photo_width,  100
   default_value_for :directory_post_photo_height, 100
