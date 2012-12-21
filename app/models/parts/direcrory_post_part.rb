@@ -25,10 +25,12 @@ class DirectoryPostPart < Part
 
   private
 
-  alias :post_id :resource_id
-
   def directory_api_url
     "#{Settings['directory.url']}/api"
+  end
+
+  def post_id
+    directory_post_post_id? ? directory_post_post_id : resource_id
   end
 
   def url_for_request
