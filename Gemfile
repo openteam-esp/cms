@@ -14,7 +14,7 @@ group :default do
   gem 'compass-rails'
   gem 'default_value_for'
   gem 'devise-russian'
-  gem 'el_vfs_client', '0.3.5' # TODO remove when will be updated storage
+  gem 'el_vfs_client'
   gem 'esp-ckeditor'
   gem 'esp-commons'
   gem 'esp-views'
@@ -23,7 +23,7 @@ group :default do
   gem 'has_enum'
   gem 'hashie'
   gem 'inherited_resources'
-  gem 'jquery-rails', '2.0.3' # TODO remove when will be updated storage
+  gem 'jquery-rails'
   gem 'nested_form'
   gem 'rails'
   gem 'russian'
