@@ -1030,6 +1030,10 @@ sites:
           required: false
           configurable: true
           indexable: true
+        actial_info:
+          required: false
+          configurable: true
+          indexable: true
       inner_page:
         site_name:
           required: true
