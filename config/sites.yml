@@ -1022,7 +1022,7 @@ sites:
         main_navigation:
           required: true
           configurable: true
-        content_first:
+        content:
           required: false
           configurable: true
           indexable: true
@@ -1030,7 +1030,7 @@ sites:
           required: false
           configurable: true
           indexable: true
-        actial_info:
+        actual_info:
           required: false
           configurable: true
           indexable: true
@@ -1041,7 +1041,7 @@ sites:
         main_navigation:
           required: true
           configurable: false
-        content_first:
+        content:
           required: false
           configurable: true
       search_results_page: &svchikr_simple_page
@@ -1051,7 +1051,7 @@ sites:
         main_navigation:
           required: true
           configurable: false
-        content_first:
+        content:
           required: false
           configurable: true
           indexable: true
