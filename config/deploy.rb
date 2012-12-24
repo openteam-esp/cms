@@ -33,12 +33,12 @@ end
 namespace :subscriber do
   desc "Start rabbitmq subscriber"
   task :start do
-    run "#{deploy_to}/current/script/subscriber -e production start"
+    sudo "/etc/init.d/rmq-subscriber start"
   end
 
   desc "Stop rabbitmq subscriber"
   task :stop do
-    run "#{deploy_to}/current/script/subscriber stop"
+    sudo "/etc/init.d/rmq-subscriber stop"
   end
 end
 
