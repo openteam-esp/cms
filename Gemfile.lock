@@ -88,7 +88,7 @@ GEM
     devise-russian (2.0.1.1)
       devise
     diff-lcs (1.1.3)
-    el_vfs_client (0.4.1)
+    el_vfs_client (0.3.5)
       configliere
       curb
       rails
@@ -132,9 +132,9 @@ GEM
       has_scope (~> 0.5.0)
       responders (~> 0.6)
     journey (1.0.4)
-    jquery-rails (2.1.4)
-      railties (>= 3.0, < 5.0)
-      thor (>= 0.14, < 2.0)
+    jquery-rails (2.0.3)
+      railties (>= 3.1.0, < 5.0)
+      thor (~> 0.14)
     json (1.7.5)
     jwt (0.1.5)
       multi_json (>= 1.0)
@@ -287,7 +287,7 @@ DEPENDENCIES
   compass-rails
   default_value_for
   devise-russian
-  el_vfs_client
+  el_vfs_client (= 0.3.5)
   esp-ckeditor
   esp-commons
   esp-views
@@ -298,7 +298,7 @@ DEPENDENCIES
   hashie
   hirb
   inherited_resources
-  jquery-rails
+  jquery-rails (= 2.0.3)
   libv8
   nested_form
   pg
