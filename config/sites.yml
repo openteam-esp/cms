@@ -1036,6 +1036,9 @@ sites:
         content_first:
           required: false
           configurable: true
+        chief_department:
+          required: false
+          configurable: true
           indexable: true
       search_results_page: &svchikr_simple_page
         site_name:
