@@ -47,9 +47,6 @@ namespace :subscriber do
   end
 end
 
-# stop subscribers
-before "deploy", "subscriber:stop"
-
 # deploy
 after "deploy:finalize_update", "deploy:config_app"
 after "deploy", "deploy:migrate"
