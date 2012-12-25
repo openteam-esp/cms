@@ -1014,6 +1014,8 @@ sites:
         <<: *inotomsk_inner_page
 
   svchikr:
+    part_templates:
+      news_list_part: main_news_list_part
     templates:
       main_page:
         site_name:
@@ -1031,6 +1033,10 @@ sites:
           configurable: true
           indexable: true
         actual_info:
+          required: false
+          configurable: true
+          indexable: true
+        main_news:
           required: false
           configurable: true
           indexable: true
