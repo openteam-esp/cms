@@ -394,6 +394,9 @@ sites:
     <<: *typical_site
 
   veteran:
+    part_templates:
+      news_list_part: main_news_list_part
+
     templates:
 
       main_page:
