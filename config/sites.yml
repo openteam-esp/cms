@@ -432,6 +432,9 @@ sites:
         main_bottom_navigation:
           required: true
           configurable: false
+        main_subnavigation:
+          required: true
+          configurable: true
         content_first:
           required: false
           configurable: true
@@ -467,6 +470,9 @@ sites:
         main_bottom_navigation:
           required: true
           configurable: false
+        main_subnavigation:
+          required: true
+          configurable: true
         content_first:
           required: false
           configurable: true
