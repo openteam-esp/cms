@@ -493,6 +493,9 @@ sites:
       inner_page_with_social:
         <<: *veteran_inner_page
 
+      news_list_page:
+        <<: *veteran_inner_page
+
       sitemap:
         site_name:
           required: true
