@@ -1050,6 +1050,10 @@ sites:
         content:
           required: false
           configurable: true
+        right_side_info:
+          required: false
+          configurable: true
+          indexable: true
       search_results_page: &svchikr_simple_page
         site_name:
           required: true
