@@ -1,7 +1,7 @@
 source :rubygems
 
 group :assets do
-  gem 'libv8'
+  gem 'libv8'                                     unless RUBY_PLATFORM =~ /freebsd/
   gem 'therubyracer'                              unless RUBY_PLATFORM =~ /freebsd/
   gem 'uglifier'
 end
