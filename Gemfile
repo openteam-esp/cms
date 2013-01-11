@@ -1,6 +1,7 @@
 source :rubygems
 
 group :assets do
+  gem 'libv8'
   gem 'therubyracer'                              unless RUBY_PLATFORM =~ /freebsd/
   gem 'uglifier'
 end
