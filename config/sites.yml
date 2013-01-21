@@ -394,7 +394,348 @@ sites:
     <<: *typical_site
 
   family:
-    <<: *typical_site
+    part_templates:
+      news_list_part: main_news_list_part
+      announcements_list_part: news_list_part
+      blue_pages_item_part: department_chief
+      blue_pages_part: list_organizations
+      gallery_part: files_list
+      news_item_part: comment_item_part
+
+    templates:
+      main_page:
+        site_name:
+          required: true
+          configurable: true
+        breadcrumbs:
+          required: true
+          configurable: true
+        actual:
+          required: true
+          configurable: true
+          indexable: true
+        calendar_current:
+          required: true
+          configurable: true
+          indexable: true
+        calendar_nearest:
+          required: true
+          configurable: true
+          indexable: true
+        calendar_gone:
+          required: true
+          configurable: true
+          indexable: true
+        governor_message:
+          required: true
+          configurable: true
+          indexable: true
+        governor_comments:
+          required: true
+          configurable: true
+          indexable: true
+        news:
+          required: true
+          configurable: true
+          indexable: true
+        gallery:
+          required: false
+          configurable: true
+          indexable: true
+        main_navigation:
+          required: true
+          configurable: true
+        main_bottom_navigation:
+          required: true
+          configurable: true
+        map_region:
+          required: true
+          configurable: true
+          indexable: true
+        banners:
+          required: true
+          configurable: true
+          indexable: true
+        secondary_navigation:
+          required: true
+          configurable: true
+        footer:
+          required: true
+          configurable: true
+
+      inner_page: &family_inner_page
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        content_second:
+          required: false
+          configurable: true
+          indexable: true
+        content_third:
+          required: false
+          configurable: true
+          indexable: true
+        right_side_navigation:
+          required: false
+          configurable: true
+        right_side_facts:
+          required: false
+          configurable: true
+          indexable: true
+        right_side_links:
+          required: false
+          configurable: true
+          indexable: true
+        right_side_charts:
+          required: false
+          configurable: true
+        right_side_twitter:
+          required: true
+          configurable: true
+        reports:
+          required: false
+          configurable: true
+          indexable: true
+        gallery:
+          required: false
+          configurable: true
+          indexable: true
+        banners:
+          required: false
+          configurable: true
+          indexable: true
+        main_subnavigation:
+          required: true
+          configurable: true
+        secondary_navigation:
+          required: true
+          configurable: false
+        footer:
+          required: true
+          configurable: false
+
+      inner_page_with_social:
+        <<: *family_inner_page
+
+      entries_list_template:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        content_first:
+          required: true
+          configurable: true
+          indexable: true
+        content_second:
+          required: true
+          configurable: true
+          indexable: true
+        content_third:
+          required: true
+          configurable: true
+          indexable: true
+        right_side_navigation:
+          required: false
+          configurable: true
+        banners:
+          required: false
+          configurable: true
+          indexable: true
+        secondary_navigation:
+          required: true
+          configurable: false
+        footer:
+          required: true
+          configurable: false
+
+      event_show_template:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        content_second:
+          required: false
+          configurable: true
+          indexable: true
+        content_third:
+          required: false
+          configurable: true
+          indexable: true
+        right_side_navigation:
+          required: false
+          configurable: true
+        right_side_facts:
+          required: false
+          configurable: true
+          indexable: true
+        right_side_links:
+          required: false
+          configurable: true
+          indexable: true
+        right_side_charts:
+          required: false
+          configurable: true
+        reports:
+          required: false
+          configurable: true
+          indexable: true
+        gallery:
+          required: false
+          configurable: true
+          indexable: true
+        banners:
+          required: false
+          configurable: true
+          indexable: true
+        secondary_navigation:
+          required: true
+          configurable: false
+        footer:
+          required: true
+          configurable: false
+
+      organization_structure:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        description:
+          required: true
+          configurable: true
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        content_second:
+          required: false
+          configurable: true
+          indexable: true
+        banners:
+          required: false
+          configurable: true
+          indexable: true
+        secondary_navigation:
+          required: true
+          configurable: false
+        footer:
+          required: true
+          configurable: false
+
+      department_page:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        schedule_citizens:
+          required: false
+          configurable: true
+          indexable: true
+        regulation:
+          required: false
+          configurable: true
+          indexable: true
+        reports:
+          required: false
+          configurable: true
+          indexable: true
+        dependent_subdivisions:
+          required: false
+          configurable: true
+          indexable: true
+        links:
+          required: false
+          configurable: true
+          indexable: true
+        secondary_navigation:
+          required: true
+          configurable: false
+        banners:
+          required: false
+          configurable: true
+          indexable: true
+        main_subnavigation:
+          required: true
+          configurable: true
+        footer:
+          required: true
+          configurable: false
+
+      sitemap:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        secondary_navigation:
+          required: true
+          configurable: false
+        footer:
+          required: true
+          configurable: false
 
   veteran:
     part_templates:
