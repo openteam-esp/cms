@@ -407,30 +407,7 @@ sites:
         site_name:
           required: true
           configurable: true
-        breadcrumbs:
-          required: true
-          configurable: true
         actual:
-          required: true
-          configurable: true
-          indexable: true
-        calendar_current:
-          required: true
-          configurable: true
-          indexable: true
-        calendar_nearest:
-          required: true
-          configurable: true
-          indexable: true
-        calendar_gone:
-          required: true
-          configurable: true
-          indexable: true
-        governor_message:
-          required: true
-          configurable: true
-          indexable: true
-        governor_comments:
           required: true
           configurable: true
           indexable: true
@@ -457,9 +434,6 @@ sites:
           configurable: true
           indexable: true
         secondary_navigation:
-          required: true
-          configurable: true
-        footer:
           required: true
           configurable: true
 
