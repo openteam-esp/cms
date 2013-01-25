@@ -18,3 +18,4 @@ public/assets/
 solr/data/
 solr/pids/
 tmp/
+.DS_Store
