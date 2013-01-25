@@ -676,6 +676,10 @@ sites:
         secondary_navigation:
           required: true
           configurable: false
+        gallery:
+          required: false
+          configurable: true
+          indexable: true
         banners:
           required: false
           configurable: true
