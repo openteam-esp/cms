@@ -504,9 +504,6 @@ sites:
       inner_page_with_social:
         <<: *family_inner_page
 
-      inner_page_with_request:
-        <<: *family_inner_page
-
       entries_list_template:
         site_name:
           required: true
