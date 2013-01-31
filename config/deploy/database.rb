@@ -34,7 +34,7 @@ namespace :db do
   task :import do
     run_locally("bin/rake db:drop")
     run_locally("bin/rake db:create")
-    run_locally("ssh #{gateway} -At ssh #{pg_domain} pg_dump -U #{db_username} #{database} | psql #{local_database}")
+    run_locally("ssh #{gateway} -At ssh #{domain} pg_dump -U #{db_username} #{database} -h #{pg_domain}| psql #{local_database}")
     run_locally("bin/rake db:migrate RAILS_ENV=test")
     run_locally("bin/rake db:migrate")
   end
