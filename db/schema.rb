@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221053036) do
+ActiveRecord::Schema.define(:version => 20130131085127) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20121221053036) do
     t.integer  "directory_post_photo_height"
     t.string   "directory_post_photo_crop_kind"
     t.integer  "directory_post_post_id"
+    t.integer  "gpo_project_list_chair_id"
   end
 
   create_table "permissions", :force => true do |t|

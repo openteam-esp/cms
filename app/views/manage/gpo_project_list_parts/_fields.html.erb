@@ -1,0 +1,6 @@
+<%= form.inputs do %>
+  <%= form.input :gpo_project_list_chair_id, :as => :select, :collection => form.object.chairs %>
+
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
+<% end %>

@@ -116,6 +116,10 @@ ru:
       gallery_picture:
         description: Описание
 
+      gpo_project_list_part:
+        gpo_project_list_chair_id: Кафедра
+        chair_name: Кафедра
+
       html_part:
         body: Контент
 
