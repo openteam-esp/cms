@@ -1,16 +1,3 @@
-GIT
-  remote: git://github.com/openteam-esp/esp-commons
-  revision: 6ff70356f1e0ec147dab7e6ed9bb2f15661cb1a2
-  specs:
-    esp-commons (0.5.3)
-      active_attr
-      amqp
-      bunny
-      curb
-      daemons
-      openteam-commons
-      rails
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -108,6 +95,14 @@ GEM
     erubis (2.7.0)
     esp-ckeditor (0.1.3)
       formtastic
+      rails
+    esp-commons (0.5.3)
+      active_attr
+      amqp
+      bunny
+      curb
+      daemons
+      openteam-commons
       rails
     esp-views (0.0.1)
       sso-auth
@@ -288,7 +283,7 @@ DEPENDENCIES
   devise-russian
   el_vfs_client
   esp-ckeditor
-  esp-commons!
+  esp-commons
   esp-views
   fabrication (< 2.0.0)
   formtastic (< 2.2.0)

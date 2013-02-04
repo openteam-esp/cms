@@ -16,8 +16,7 @@ group :default do
   gem 'devise-russian'
   gem 'el_vfs_client'
   gem 'esp-ckeditor'
-  # TODO: remove git source when rubygems   up publish API
-  gem 'esp-commons',    :git => 'git://github.com/openteam-esp/esp-commons'
+  gem 'esp-commons'
   gem 'esp-views'
   gem 'formtastic',     '< 2.2.0'
   gem 'gilenson'
