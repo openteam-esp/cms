@@ -1016,4 +1016,58 @@ sites:
         site_name:
           required: true
           configurable: true
+        main_navigation:
+          required: true
+          configurable: true
+        banners:
+          required: true
+          configurable: true
+          indexable: true
+        footer:
+          required: true
+          configurable: true
+
+      inner_page:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        content_second:
+          required: false
+          configurable: true
+          indexable: true
+        content_third:
+          required: false
+          configurable: true
+          indexable: true
+        right_side_navigation:
+          required: false
+          configurable: true
+        right_side_links:
+          required: false
+          configurable: true
+          indexable: true
+        right_side_charts:
+          required: false
+          configurable: true
+        banners:
+          required: false
+          configurable: true
+          indexable: true
+        main_subnavigation:
+          required: true
+          configurable: true
+        secondary_navigation:
+          required: true
+          configurable: false
+        footer:
+          required: true
+          configurable: false
+
 
