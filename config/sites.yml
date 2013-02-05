@@ -1009,3 +1009,11 @@ sites:
 
       search_results_page:
         <<: *inotomsk_inner_page
+
+  camps:
+    templates:
+      main_page:
+        site_name:
+          required: true
+          configurable: true
+
