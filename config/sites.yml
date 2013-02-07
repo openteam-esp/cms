@@ -1019,11 +1019,15 @@ sites:
         main_navigation:
           required: true
           configurable: true
-        banners:
+        actual:
           required: true
           configurable: true
           indexable: true
-        footer:
+        news:
+          required: true
+          configurable: true
+          indexable: true
+        useful_links:
           required: true
           configurable: true
 
@@ -1038,36 +1042,6 @@ sites:
           required: false
           configurable: true
           indexable: true
-        content_second:
-          required: false
-          configurable: true
-          indexable: true
-        content_third:
-          required: false
-          configurable: true
-          indexable: true
-        right_side_navigation:
-          required: false
-          configurable: true
-        right_side_links:
-          required: false
-          configurable: true
-          indexable: true
-        right_side_charts:
-          required: false
-          configurable: true
-        banners:
-          required: false
-          configurable: true
-          indexable: true
-        main_subnavigation:
-          required: true
-          configurable: true
-        secondary_navigation:
+        useful_links:
           required: true
           configurable: false
-        footer:
-          required: true
-          configurable: false
-
-
