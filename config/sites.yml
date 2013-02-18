@@ -108,6 +108,9 @@ sites:
         right_side_charts:
           required: false
           configurable: true
+        right_side_smi_publications:
+          required: true
+          configurable: true
         right_side_twitter:
           required: true
           configurable: true
@@ -317,9 +320,6 @@ sites:
 
       experts_council_page:
         <<: *tgr_department_page
-        right_side_smi_publications:
-          required: true
-          configurable: true
 
       sitemap:
         site_name:
