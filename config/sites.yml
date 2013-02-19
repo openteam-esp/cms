@@ -109,7 +109,7 @@ sites:
           required: false
           configurable: true
         right_side_smi_publications:
-          required: true
+          required: false
           configurable: true
         right_side_twitter:
           required: true
