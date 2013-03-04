@@ -12,7 +12,7 @@ namespace :deploy do
     run "ln -s #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
   end
 
-  desc "HASK copy right unicorn.rb file"
+  desc "Copy unicorn.rb file"
   task :copy_unicorn_config do
     run "mv #{deploy_to}/current/config/unicorn.rb #{deploy_to}/current/config/unicorn.rb.example"
     run "ln -s #{deploy_to}/shared/config/unicorn.rb #{deploy_to}/current/config/unicorn.rb"
@@ -58,3 +58,4 @@ after "deploy", "deploy:airbrake"
 
 # deploy:rollback
 after "deploy:rollback", "deploy:reload_servers"
+after "deploy", "subscriber:restart"

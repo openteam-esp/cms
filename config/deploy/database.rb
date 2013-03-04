@@ -15,26 +15,11 @@ local_db_username = config[local_rails_env]["username"]
 
 set :timestamp, Time.now.strftime("%Y-%m-%d-%H-%M")
 namespace :db do
-  desc "upload local database to remote server"
-  task :export do
-    if adapter == "postgresql"
-      run_locally("pg_dump -O #{local_database} > tmp/#{local_database}-#{timestamp}.sql")
-      upload "tmp/#{local_database}-#{timestamp}.sql", "#{deploy_to}/shared/database/#{local_database}-#{timestamp}.sql"
-      sudo "/etc/init.d/#{unicorn_instance_name} stop"
-      run "cd #{deploy_to}/current bin/rake db:drop bin/rake db:create"
-      run "cd #{deploy_to}/current bin/rails db < #{deploy_to}/shared/database/#{local_database}-#{timestamp}.sql"
-      run "cd #{deploy_to}/current bin/rake sunspot:reindex"
-      sudo "/etc/init.d/#{unicorn_instance_name} start"
-    else
-      puts "Cannot backup, adapter #{adapter} is not implemented for backup yet"
-    end
-  end
-
   desc "download data to local database"
   task :import do
     run_locally("bin/rake db:drop")
     run_locally("bin/rake db:create")
-    run_locally("ssh #{gateway} -At ssh #{domain} pg_dump -U #{db_username} #{database} -h #{pg_domain}| psql #{local_database}")
+    run_locally("ssh #{gateway} -At ssh #{domain} pg_dump -U #{db_username} #{database} -h #{pg_domain} -O | psql #{local_database}")
     run_locally("bin/rake db:migrate RAILS_ENV=test")
     run_locally("bin/rake db:migrate")
   end
