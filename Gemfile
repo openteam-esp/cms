@@ -25,7 +25,7 @@ group :default do
   gem 'inherited_resources'
   gem 'jquery-rails'
   gem 'nested_form'
-  gem 'rails'
+  gem 'rails', '~> 3.2.12'
   gem 'russian'
   gem 'sanitize'
   gem 'sass-rails'
@@ -36,6 +36,7 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'brakeman'
   gem 'hirb',                                     :require => false
   gem 'rvm-capistrano'
 end
