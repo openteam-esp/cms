@@ -1,8 +1,8 @@
 source :rubygems
 
 group :assets do
-  gem 'libv8'                                     unless RUBY_PLATFORM =~ /freebsd/
-  gem 'therubyracer'                              unless RUBY_PLATFORM =~ /freebsd/
+  gem 'compass-rails'
+  gem 'sass-rails'
   gem 'uglifier'
 end
 
@@ -11,7 +11,6 @@ group :default do
   gem 'ancestry'
   gem 'attribute_normalizer'
   gem 'audited-activerecord'
-  gem 'compass-rails'
   gem 'default_value_for'
   gem 'devise-russian'
   gem 'el_vfs_client'
@@ -28,7 +27,6 @@ group :default do
   gem 'rails', '~> 3.2.12'
   gem 'russian'
   gem 'sanitize'
-  gem 'sass-rails'
   gem 'show_for'
   gem 'simple-navigation'
   gem 'sso-auth'
@@ -37,6 +35,7 @@ end
 group :development do
   gem 'annotate'
   gem 'brakeman'
+  gem 'capistrano-ext'
   gem 'hirb',                                     :require => false
   gem 'rvm-capistrano'
 end
