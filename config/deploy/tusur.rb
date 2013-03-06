@@ -120,4 +120,4 @@ after "deploy", "deploy:airbrake"
 
 # deploy:rollback
 after "deploy:rollback", "deploy:reload_servers"
-after "deploy", "subscriber:restart"
+after "deploy:rollback", "subscriber:restart"

@@ -74,43 +74,63 @@ namespace :deploy do
     run "ln -s #{deploy_to}/shared/config/unicorn.rb #{deploy_to}/current/config/unicorn.rb"
   end
 
-  desc "Reload Unicorn"
-  task :reload_servers do
-    run "/usr/local/etc/rc.d/#{unicorn_instance_name} restart"
-  end
-
   desc "Airbrake notify"
   task :airbrake do
     run "cd #{deploy_to}/current && RAILS_ENV=production TO=production bin/rake airbrake:deploy"
   end
 end
 
+namespace :unicorn do
+  desc "Start Unicorn"
+  task :start do
+    run "/usr/local/etc/rc.d/unicorn start"
+  end
+
+  desc "Stop Unicorn"
+  task :stop do
+    run "/usr/local/etc/rc.d/unicorn stop"
+  end
+
+  desc "Reload Unicorn"
+  task :reload do
+    run "/usr/local/etc/rc.d/unicorn reload"
+  end
+
+  desc "Restart Unicorn"
+  task :restart do
+    run "/usr/local/etc/rc.d/unicorn restart"
+  end
+end
+
 namespace :subscriber do
   desc "Start rabbitmq subscriber"
   task :start do
-    sudo "/etc/init.d/rmq-subscriber start"
+    run "/usr/local/etc/rc.d/cms-subscriber.sh start"
   end
 
   desc "Stop rabbitmq subscriber"
   task :stop do
-    sudo "/etc/init.d/rmq-subscriber stop"
+    run "/usr/local/etc/rc.d/cms-subscriber.sh stop"
   end
 
   desc "Restart rabbitmq subscriber"
   task :restart do
-    sudo "/etc/init.d/rmq-subscriber restart"
+    run "/usr/local/etc/rc.d/cms-subscriber.sh restart"
   end
 end
+
+# stop subscribers
+before "deploy", "subscriber:stop"
 
 # deploy
 after "deploy:finalize_update", "deploy:config_app"
 after "deploy", "deploy:migrate"
 after "deploy", "deploy:copy_unicorn_config"
-after "deploy", "deploy:reload_servers"
+after "deploy", "unicorn:reload"
 after "deploy", "subscriber:restart"
 after "deploy:restart", "deploy:cleanup"
 after "deploy", "deploy:airbrake"
 
 # deploy:rollback
-after "deploy:rollback", "deploy:reload_servers"
-after "deploy", "subscriber:restart"
+after "deploy:rollback", "unicorn:restart"
+after "deploy:rollback", "subscriber:restart"
