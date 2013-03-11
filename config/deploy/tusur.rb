@@ -87,6 +87,11 @@ namespace :deploy do
     sudo "/etc/init.d/#{unicorn_instance_name} restart"
   end
 
+  desc "Update crontab tasks"
+  task :crontab do
+    run "cd #{deploy_to}/current && exec bundle exec whenever --update-crontab --load-file #{deploy_to}/current/config/schedule.rb"
+  end
+
   desc "Airbrake notify"
   task :airbrake do
     run "cd #{deploy_to}/current && RAILS_ENV=production TO=production bin/rake airbrake:deploy"
@@ -96,29 +101,28 @@ end
 namespace :subscriber do
   desc "Start rabbitmq subscriber"
   task :start do
-    sudo "/etc/init.d/rmq-subscriber start"
+    run "#{deploy_to}/current/script/subscriber -e production start"
   end
 
   desc "Stop rabbitmq subscriber"
   task :stop do
-    sudo "/etc/init.d/rmq-subscriber stop"
-  end
-
-  desc "Restart rabbitmq subscriber"
-  task :restart do
-    sudo "/etc/init.d/rmq-subscriber restart"
+    run "#{deploy_to}/current/script/subscriber stop"
   end
 end
+
+# stop subscribers
+before "deploy", "subscriber:stop"
 
 # deploy
 after "deploy:finalize_update", "deploy:config_app"
 after "deploy", "deploy:migrate"
 after "deploy", "deploy:copy_unicorn_config"
 after "deploy", "deploy:reload_servers"
-after "deploy", "subscriber:restart"
+after "deploy", "subscriber:start"
 after "deploy:restart", "deploy:cleanup"
+after "deploy", "deploy:crontab"
 after "deploy", "deploy:airbrake"
 
 # deploy:rollback
 after "deploy:rollback", "deploy:reload_servers"
-after "deploy:rollback", "subscriber:restart"
+after "deploy:rollback", "subscriber:start"
