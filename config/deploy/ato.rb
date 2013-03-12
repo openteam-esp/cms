@@ -18,7 +18,7 @@ set :unicorn_instance_name, "unicorn"
 
 set :scm, :git
 set :repository, "git://github.com/openteam-esp/cms.git"
-set :branch, "bye_bye_contexts"
+set :branch, "merge"
 set :deploy_via, :remote_cache
 
 set :repository_cache, "cached_copy"
