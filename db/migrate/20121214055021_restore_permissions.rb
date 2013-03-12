@@ -1,12 +1,19 @@
+class Context < ActiveRecord::Base
+end
+
+class Node < ActiveRecord::Base
+  belongs_to :context
+end
+
 class RestorePermissions < ActiveRecord::Migration
   def up
-    remove_column :nodes, :context_id
+    Permission.all.each do |permission|
+      permission.update_attribute :context, Site.find_by_context_id(permission.context_id)
+    end
 
     drop_table :contexts
 
-    Permission.update_all(:context_id => nil, :context_type => nil)
-    Permission.find_by_id(5).try :update_attributes, :context => Node.find_by_id(437)
-    Permission.find_by_id(6).try :update_attributes, :context => Node.find_by_id(702)
+    remove_column :nodes, :context_id
   end
 
   def down
@@ -19,9 +26,7 @@ class RestorePermissions < ActiveRecord::Migration
       t.datetime "created_at", :null => false
       t.datetime "updated_at", :null => false
     end
-
     add_index "contexts", ["ancestry"], :name => "index_contexts_on_ancestry"
     add_index "contexts", ["weight"], :name => "index_contexts_on_weight"
-
   end
 end
