@@ -27,7 +27,8 @@ class BluePagesPart < Part
   end
 
   def category_name
-    @category_name ||= Requester.new("#{blue_pages_url}/#{blue_pages_category_id}", 'application/json').response_hash['title']
+    requester = Requester.new("#{blue_pages_url}/#{blue_pages_category_id}", 'application/json')
+    @category_name ||= requester.response_status == 200 ? requester.response_hash['title'] : "Подразделение не найдено в телефонном справочнике"
   end
 
   #

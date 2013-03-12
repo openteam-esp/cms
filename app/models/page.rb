@@ -5,6 +5,10 @@ class Page < Node
 
   before_validation :generate_slug, :unless => :slug?
 
+  attr_accessible :parent_id, :title, :navigation_title, :slug, :template,
+    :in_navigation, :navigation_group, :navigation_position,
+    :page_for_redirect_id
+
   default_value_for :navigation_group do |object|
     object.parent.try(:navigation_group)
   end
