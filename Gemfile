@@ -24,6 +24,7 @@ group :default do
   gem 'inherited_resources'
   gem 'jquery-rails'
   gem 'nested_form'
+  gem 'progress_bar',                               :require => false
   gem 'rails', '~> 3.2.12'
   gem 'russian'
   gem 'sanitize'

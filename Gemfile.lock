@@ -126,6 +126,7 @@ GEM
     faraday (0.8.4)
       multipart-post (~> 1.1)
     fastercsv (1.5.5)
+    fattr (2.2.1)
     formtastic (2.1.1)
       actionpack (~> 3.0)
     fssm (0.2.9)
@@ -189,9 +190,14 @@ GEM
       rails
       unicorn
       whenever
+    options (2.3.0)
+      fattr
     orm_adapter (0.4.0)
     pg (0.14.1)
     polyglot (0.3.3)
+    progress_bar (0.4.0)
+      highline (~> 1.6.1)
+      options (~> 2.3.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -320,6 +326,7 @@ DEPENDENCIES
   jquery-rails
   nested_form
   pg
+  progress_bar
   rails (~> 3.2.12)
   rspec-rails
   russian
