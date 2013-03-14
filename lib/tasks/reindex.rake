@@ -13,7 +13,6 @@ end
 
 desc "Reindex parts"
 task :reindex_parts, [:type] => :environment do |t, args|
-  raise "cann't detect part type '#{args.type}'" unless Part.descendants.map(&:to_s).include?(type = args.type.to_s.classify)
-  index Part.where(:type => type)
+  index Part.where(:type => args.type.to_s)
 end
 
