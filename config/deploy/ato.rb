@@ -36,7 +36,7 @@ role :db,  domain, :primary => true
 
 # remote database.yml
 database_yml_path = "config/database.yml"
-config = YAML::load(capture("cat #{deploy_to}/shared/#{database_yml_path}"))
+config = YAML::load(capture("cat #{shared_path}/#{database_yml_path}"))
 adapter = config[rails_env]["adapter"]
 database = config[rails_env]["database"]
 db_username = config[rails_env]["username"]
@@ -64,13 +64,13 @@ end
 namespace :deploy do
   desc "Copy config files"
   task :config_app, :roles => :app do
-    run "ln -s #{deploy_to}/shared/config/settings.yml #{release_path}/config/settings.yml"
-    run "ln -s #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+    run "ln -s #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
+    run "ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
 
   desc "Copy unicorn.rb file"
   task :copy_unicorn_config do
-    run "ln -s #{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
+    run "ln -s #{shared_path}/config/unicorn.rb #{release_path}/config/unicorn.rb"
   end
 
   desc "Airbrake notify"
