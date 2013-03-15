@@ -25,7 +25,7 @@ set :unicorn_instance_name, "unicorn"
 
 set :scm, :git
 set :repository, "git://github.com/openteam-esp/cms.git"
-set :branch, "bye_bye_contexts"
+set :branch, "master"
 set :deploy_via, :remote_cache
 
 set :repository_cache, "cached_copy"
@@ -89,7 +89,7 @@ namespace :deploy do
 
   desc "Update crontab tasks"
   task :crontab do
-    run "cd #{release_path} && exec bundle exec whenever --update-crontab --load-file #{release_path}/config/schedule.rb"
+    run "cd #{release_path} && exec bundle exec whenever --update-crontab"
   end
 
   desc "Airbrake notify"
