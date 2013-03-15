@@ -7,10 +7,14 @@ class Manage::PartsController < Manage::ApplicationController
 
   protected
     def build_resource
-      part_class = params[:part][:type].constantize
-      @part = part_class.new(params[:part])
-      @part.node = parent
-      @part
+      part_type = params[:part][:type]
+      if Part.descendants.map(&:to_s).include?(part_type)
+        @part = part_type.constantize.new(params[:part])
+        @part.node = parent
+        @part
+      else
+        raise "Cann't constantize #{params[:part][:type]}"
+      end
     end
 
     def resource_params
