@@ -222,7 +222,7 @@ class Node < ActiveRecord::Base
       when 'last'
         self.move_to_bottom unless self.last?
       else
-        self.insert_at(self.navigation_position_param)
+        self.insert_at(self.navigation_position_param.to_i)
         self.move_lower
       end
     end
