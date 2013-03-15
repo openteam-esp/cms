@@ -34,4 +34,10 @@ Cms::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = false
+
+  config.to_prepare do
+    Dir[Rails.root.join('app/models/parts/*.rb')].each do | file |
+      require_or_load file
+    end
+  end
 end

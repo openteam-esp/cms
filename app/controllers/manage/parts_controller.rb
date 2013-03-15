@@ -13,7 +13,7 @@ class Manage::PartsController < Manage::ApplicationController
         @part.node = parent
         @part
       else
-        raise "Cann't constantize #{params[:part][:type]}"
+        raise "Cann't constantize #{params[:part][:type].inspect}"
       end
     end
 
