@@ -121,7 +121,7 @@ namespace :subscriber do
 
   desc "Restart rabbitmq subscriber"
   task :restart do
-    run "#{release_path}/script/subscriber -e production restart"
+    run "#{current_path}/script/subscriber -e production restart"
   end
 end
 
