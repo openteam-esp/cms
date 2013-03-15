@@ -53,11 +53,11 @@ set :timestamp, Time.now.strftime("%Y-%m-%d-%H-%M")
 namespace :db do
   desc "download data to local database"
   task :import do
-    run_locally("bin/rake db:drop")
-    run_locally("bin/rake db:create")
+    run_locally("bundle exec rake db:drop")
+    run_locally("bundle exec rake db:create")
     run_locally("ssh #{domain} pg_dump -h #{host} -U #{db_username} #{database} -O | psql #{local_database}")
-    run_locally("bin/rake db:migrate RAILS_ENV=test")
-    run_locally("bin/rake db:migrate")
+    run_locally("bundle exec rake db:migrate RAILS_ENV=test")
+    run_locally("bundle exec rake db:migrate")
   end
 end
 
@@ -75,7 +75,7 @@ namespace :deploy do
 
   desc "Airbrake notify"
   task :airbrake do
-    run "cd #{release_path} && RAILS_ENV=production TO=production bin/rake airbrake:deploy"
+    run "cd #{release_path} && RAILS_ENV=production TO=production bundle exec rake airbrake:deploy"
   end
 end
 
