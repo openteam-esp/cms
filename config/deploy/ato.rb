@@ -90,11 +90,6 @@ namespace :unicorn do
     run "/usr/local/etc/rc.d/unicorn stop"
   end
 
-  desc "Reload Unicorn"
-  task :reload do
-    run "/usr/local/etc/rc.d/unicorn reload"
-  end
-
   desc "Restart Unicorn"
   task :restart do
     run "/usr/local/etc/rc.d/unicorn restart"
@@ -109,7 +104,7 @@ namespace :subscriber do
 
   desc "Stop rabbitmq subscriber"
   task :stop do
-    run "#{release_path}/script/subscriber stop"
+    run "#{current_path}/script/subscriber stop"
   end
 end
 
