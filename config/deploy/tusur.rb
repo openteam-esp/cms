@@ -68,6 +68,23 @@ namespace :db do
   end
 end
 
+namespace :unicorn do
+  desc "Start Unicorn"
+  task :start do
+    sudo "/etc/init.d/#{unicorn_instance_name} start"
+  end
+
+  desc "Stop Unicorn"
+  task :stop do
+    sudo "/etc/init.d/#{unicorn_instance_name} stop"
+  end
+
+  desc "Restart Unicorn"
+  task :restart do
+    sudo "/etc/init.d/#{unicorn_instance_name} restart"
+  end
+end
+
 namespace :deploy do
   desc "Copy config files"
   task :config_app, :roles => :app do
@@ -79,12 +96,6 @@ namespace :deploy do
   task :copy_unicorn_config do
     run "mv #{release_path}/config/unicorn.rb #{release_path}/config/unicorn.rb.example"
     run "ln -s #{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
-  end
-
-  desc "Reload Unicorn"
-  task :reload_servers do
-    sudo "/etc/init.d/nginx reload"
-    sudo "/etc/init.d/#{unicorn_instance_name} restart"
   end
 
   desc "Update crontab tasks"
@@ -117,12 +128,12 @@ before "deploy", "subscriber:stop"
 after "deploy:finalize_update", "deploy:config_app"
 after "deploy", "deploy:migrate"
 after "deploy", "deploy:copy_unicorn_config"
-after "deploy", "deploy:reload_servers"
+after "deploy", "unicorn:restart"
 after "deploy", "subscriber:start"
 after "deploy:restart", "deploy:cleanup"
 after "deploy", "deploy:crontab"
 after "deploy", "deploy:airbrake"
 
 # deploy:rollback
-after "deploy:rollback", "deploy:reload_servers"
+after "deploy:rollback", "unicorn:restart"
 after "deploy:rollback", "subscriber:start"
