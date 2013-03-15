@@ -94,7 +94,6 @@ namespace :deploy do
 
   desc "Copy unicorn.rb file"
   task :copy_unicorn_config do
-    run "mv #{release_path}/config/unicorn.rb #{release_path}/config/unicorn.rb.example"
     run "ln -s #{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
   end
 
@@ -117,7 +116,12 @@ namespace :subscriber do
 
   desc "Stop rabbitmq subscriber"
   task :stop do
-    run "#{release_path}/script/subscriber stop"
+    run "#{current_path}/script/subscriber -e production stop"
+  end
+
+  desc "Restart rabbitmq subscriber"
+  task :restart do
+    run "#{release_path}/script/subscriber -e production restart"
   end
 end
 
@@ -136,4 +140,4 @@ after "deploy", "deploy:airbrake"
 
 # deploy:rollback
 after "deploy:rollback", "unicorn:restart"
-after "deploy:rollback", "subscriber:start"
+after "deploy:rollback", "subscriber:restart"

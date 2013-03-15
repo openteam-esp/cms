@@ -104,7 +104,12 @@ namespace :subscriber do
 
   desc "Stop rabbitmq subscriber"
   task :stop do
-    run "#{current_path}/script/subscriber stop"
+    run "#{current_path}/script/subscriber -e production stop"
+  end
+
+  desc "Restart rabbitmq subscriber"
+  task :restart do
+    run "#{release_path}/script/subscriber -e production restart"
   end
 end
 
@@ -123,4 +128,4 @@ after "deploy", "deploy:airbrake"
 
 # deploy:rollback
 after "deploy:rollback", "unicorn:restart"
-after "deploy:rollback", "subscriber:start"
+after "deploy:rollback", "subscriber:restart"
