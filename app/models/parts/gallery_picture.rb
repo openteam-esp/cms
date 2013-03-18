@@ -1,6 +1,8 @@
 # encoding: utf-8
-
 class GalleryPicture < ActiveRecord::Base
+
+  attr_accessible :description, :picture_url, :position
+
   belongs_to :gallery_part
 
   validates_presence_of :description, :picture_url

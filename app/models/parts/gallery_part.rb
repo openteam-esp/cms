@@ -1,6 +1,8 @@
 # encoding: utf-8
-
 class GalleryPart < Part
+
+  attr_accessible :gallery_pictures_attributes
+
   has_many :gallery_pictures
 
   accepts_nested_attributes_for :gallery_pictures, :allow_destroy => true
