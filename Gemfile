@@ -26,7 +26,7 @@ group :default do
   gem 'jquery-rails'
   gem 'nested_form'
   gem 'progress_bar',                               :require => false
-  gem 'rails', '~> 3.2.12'
+  gem 'rails',                                      '~> 3.2.13'
   gem 'russian'
   gem 'sanitize'
   gem 'show_for'
