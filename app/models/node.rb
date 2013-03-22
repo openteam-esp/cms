@@ -5,7 +5,7 @@ class Node < ActiveRecord::Base
 
   has_many :parts
 
-  validates :slug, :format => { :with => %r{^[[:alnum:]_\.-]+$} }
+  validates :slug, :format => { :with => %r{\A[[:alnum:]_\.-]+\z} }
 
   validates_uniqueness_of :slug, :scope => :ancestry
 
