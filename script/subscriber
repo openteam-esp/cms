@@ -2,7 +2,14 @@
 
 APP_ROOT = File.expand_path("../..", __FILE__)
 
-require 'optparse'
+PATH_CHUNKS = APP_ROOT.split('/')
+
+APP_NAME = PATH_CHUNKS[-2] == 'releases' ? PATH_CHUNKS[-3] : PATH_CHUNKS[-1]
+
+ENV['BUNDLE_GEMFILE'] ||= "#{APP_ROOT}/Gemfile"
+
+require 'bundler/setup'
+require 'daemons'
 
 options = {
   :multiple   => false,
@@ -12,21 +19,7 @@ options = {
   :backtrace  => true
 }
 
-OptionParser.new do |parser|
-  parser.on('-n', '--name NAME', "Daemon name") do |name|
-    options[:name] = name
-  end
-  parser.parse!
-end
-
-raise OptionParser::MissingArgument unless options[:name]
-
-ENV['BUNDLE_GEMFILE'] ||= "#{APP_ROOT}/Gemfile"
-
-require 'bundler/setup'
-require 'daemons'
-
-Daemons.run_proc(options[:name], options) do
+Daemons.run_proc("#{APP_NAME}-subscriber", options) do
   Dir.chdir APP_ROOT
   require "#{APP_ROOT}/config/environment"
   Subscriber.new.start
