@@ -40,7 +40,7 @@ group :development do
   gem 'capistrano-db-tasks', :git => 'git://github.com/openteam/capistrano-db-tasks'
   gem 'capistrano-unicorn',  :git => 'git://github.com/sosedoff/capistrano-unicorn'
   gem 'hirb',                                     :require => false
-  gem 'openteam-capistrano',                      :require => false
+  gem 'openteam-capistrano'
 end
 
 group :production do

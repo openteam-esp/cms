@@ -1,1 +1,1 @@
-require 'openteam/capistrano'
+require 'openteam/capistrano/recipes'
