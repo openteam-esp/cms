@@ -25,6 +25,7 @@ group :default do
   gem 'inherited_resources'
   gem 'jquery-rails'
   gem 'nested_form'
+  gem 'pg'
   gem 'progress_bar',                               :require => false
   gem 'rails',                                      '~> 3.2.13'
   gem 'russian'
@@ -41,10 +42,6 @@ group :development do
   gem 'capistrano-unicorn',  :git => 'git://github.com/sosedoff/capistrano-unicorn'
   gem 'hirb',                                     :require => false
   gem 'openteam-capistrano'
-end
-
-group :production do
-  gem 'pg'
 end
 
 group :test do
