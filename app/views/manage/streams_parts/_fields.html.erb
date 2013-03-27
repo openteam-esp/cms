@@ -1,0 +1,6 @@
+<%= form.inputs do %>
+  <%= form.input :streams_degree, :as => :check_boxes, :collection => form.object.search_options['degree'] %>
+
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
+<% end %>

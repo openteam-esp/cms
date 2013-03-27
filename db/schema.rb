@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130131094519) do
+ActiveRecord::Schema.define(:version => 20130327044710) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20130131094519) do
     t.integer  "gallery_part_id"
     t.text     "description"
     t.string   "picture_url"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "position"
   end
 
@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(:version => 20130131094519) do
   end
 
   create_table "parts", :force => true do |t|
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.string   "region"
     t.string   "type"
     t.integer  "node_id"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(:version => 20130131094519) do
     t.string   "directory_post_photo_crop_kind"
     t.integer  "directory_post_post_id"
     t.integer  "gpo_project_list_chair_id"
+    t.string   "streams_degree"
   end
 
   add_index "parts", ["node_id"], :name => "index_parts_on_node_id"
