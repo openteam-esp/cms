@@ -27,7 +27,7 @@ class StreamsPart < Part
     end
 
     def exams
-      params[:exams]
+      (params[:exams] || []).delete_if(&:blank?)
     end
 
     def sector
@@ -35,7 +35,7 @@ class StreamsPart < Part
     end
 
     def tuitions
-      params[:tuitions]
+      (params[:tuitions] || []).delete_if(&:blank?)
     end
 
     def search_params
