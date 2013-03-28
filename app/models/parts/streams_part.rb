@@ -27,19 +27,19 @@ class StreamsPart < Part
     end
 
     def exams
-      (params[:exams] || []).delete_if(&:blank?)
+      params[:exams]
     end
 
     def sector
-      params[:sector].presence
+      params[:sector]
     end
 
     def tuitions
-      (params[:tuitions] || []).delete_if(&:blank?)
+      params[:tuitions]
     end
 
     def search_params
-      { :degrees => degrees, :exams => exams, :sector => sector, :tuitions => tuitions }.to_query
+      { :degrees => degrees, :exams => exams, :sector => sector, :tuitions => tuitions }.delete_if{|k,v| v.nil? || v.blank? || v.empty?}.to_query
     end
 
     def docket_url
