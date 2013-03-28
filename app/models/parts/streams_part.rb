@@ -31,7 +31,7 @@ class StreamsPart < Part
     end
 
     def sector
-      params[:sector] || nil
+      params[:sector].presence
     end
 
     def tuitions
