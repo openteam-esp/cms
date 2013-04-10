@@ -1,15 +1,8 @@
 GIT
-  remote: git://github.com/openteam/capistrano-db-tasks
-  revision: b6b81df2d6965c456e8ca4cf3aa325c95a542b36
+  remote: git://github.com/sgruhier/capistrano-db-tasks
+  revision: 229c2a63ebb43a61ed2aa1f042d4d447ee186037
   specs:
     capistrano-db-tasks (0.2)
-
-GIT
-  remote: git://github.com/sosedoff/capistrano-unicorn
-  revision: dc49187df68e92bc04b7b0fa42da1e24f70d69f5
-  specs:
-    capistrano-unicorn (0.1.7)
-      capistrano
 
 GEM
   remote: http://rubygems.org/
@@ -92,6 +85,8 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
+    capistrano-unicorn (0.1.7)
+      capistrano
     chronic (0.9.0)
     chunky_png (1.2.6)
     compass (0.12.2)
@@ -197,7 +192,7 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    openteam-capistrano (0.0.5)
+    openteam-capistrano (0.0.11)
       capistrano-db-tasks
       capistrano-ext
       capistrano-unicorn
@@ -309,7 +304,7 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    unicorn (4.5.0)
+    unicorn (4.6.2)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -330,7 +325,7 @@ DEPENDENCIES
   audited-activerecord
   brakeman
   capistrano-db-tasks!
-  capistrano-unicorn!
+  capistrano-unicorn
   compass-rails
   default_value_for
   devise-russian
