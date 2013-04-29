@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   sso_auth_user
+
+  attr_accessible :description, :email, :first_name, :last_name, :location, :name, :nickname, :phone
 end
 
 # == Schema Information
