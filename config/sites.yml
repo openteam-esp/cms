@@ -1021,6 +1021,9 @@ sites:
         site_name:
           required: true
           configurable: true
+        breadcrumbs:
+          required: true
+          configurable: true
         main_navigation:
           required: true
           configurable: true
@@ -1044,6 +1047,9 @@ sites:
         site_name:
           required: true
           configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
         main_navigation:
           required: true
           configurable: false
@@ -1056,6 +1062,9 @@ sites:
           indexable: true
       search_results_page: &svchikr_simple_page
         site_name:
+          required: true
+          configurable: false
+        breadcrumbs:
           required: true
           configurable: false
         main_navigation:
