@@ -13,6 +13,7 @@ class DirectoryPostPart < Part
 
   def content
     response_hash['person_photo_url'] = response_hash['person_photo_url'].gsub(/\/\d+-\d+\//, photo_processing) if response_hash['person_photo_url'].present?
+    response_hash.merge!(lectures)
 
     response_hash
   end
@@ -41,7 +42,14 @@ class DirectoryPostPart < Part
     []
   end
 
-  private
+  def lectures
+    timetable_response = Requester.new("#{lecture_disciplines_url}/#{part_title}").response_hash
+    { :lectures => timetable_response['disciplines'] }
+  end
+
+  def lecture_disciplines_url
+    "#{Settings['timetable']['url']}api/v1/lecture_disciplines"
+  end
 
   alias_attribute :photo_width,   :directory_post_photo_width
   alias_attribute :photo_height,  :directory_post_photo_height
