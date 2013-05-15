@@ -1053,6 +1053,9 @@ sites:
         main_navigation:
           required: true
           configurable: false
+        annotation:
+          required: false
+          configurable: true
         content:
           required: false
           configurable: true
