@@ -151,6 +151,9 @@ ru:
         news_mlt_width: Ширина картинки для списка похожих новостей
         news_mlt_height: Высота картинки для списка похожих новостей
 
+      provided_disciplines_part:
+        provided_disciplines_subdepartment: Аббревиатура кафедры
+
       documents_part:
         documents_kind: Тип
         documents_kind_enum: &documents_kind

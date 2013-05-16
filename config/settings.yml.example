@@ -25,3 +25,6 @@ deploy:
   domain:       user@host
   application:  appname.ru
   port:         port
+
+plans:
+  url:          http://plans.url

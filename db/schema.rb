@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327044710) do
+ActiveRecord::Schema.define(:version => 20130516031432) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20130327044710) do
 
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
-    t.text     "description"
+    t.text     "description",     :limit => 255
     t.string   "picture_url"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(:version => 20130327044710) do
     t.string   "appeal_section_slug"
     t.string   "navigation_group"
     t.string   "title"
-    t.text     "html_info_path"
+    t.text     "html_info_path",                         :limit => 255
     t.integer  "blue_pages_item_page_id"
     t.string   "documents_kind"
     t.integer  "documents_item_page_id"
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(:version => 20130327044710) do
     t.integer  "youtube_video_related_count"
     t.integer  "youtube_video_width"
     t.integer  "youtube_video_height"
-    t.text     "text_info_path"
+    t.text     "text_info_path",                         :limit => 255
     t.string   "news_event_entry"
     t.integer  "blue_pages_expand"
     t.string   "documents_contexts"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20130327044710) do
     t.integer  "directory_post_post_id"
     t.integer  "gpo_project_list_chair_id"
     t.string   "streams_degree"
+    t.string   "provided_disciplines_subdepartment"
   end
 
   add_index "parts", ["node_id"], :name => "index_parts_on_node_id"
