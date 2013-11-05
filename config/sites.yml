@@ -1083,6 +1083,7 @@ sites:
           indexable: true
       sitemap:
         <<: *svchikr_simple_page
+
   camps:
     templates:
       main_page:
@@ -1143,3 +1144,6 @@ sites:
           required: false
           configurable: true
           indexable: true
+
+  expert:
+    <<: *typical_site
