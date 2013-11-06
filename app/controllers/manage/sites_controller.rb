@@ -1,9 +1,11 @@
 class Manage::SitesController < Manage::ApplicationController
   inherit_resources
 
-  def index
-    index! do
-      render :layout => 'application' and return
+  layout 'application'
+
+  def show
+    show! do
+      render :layout => 'with_tree' and return
     end
   end
 
