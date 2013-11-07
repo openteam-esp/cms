@@ -1174,7 +1174,7 @@ sites:
           required: true
           configurable: true
 
-      inner_page:
+      inner_page: &expert_inner_page
         site_name:
           required: true
           configurable: false
@@ -1202,3 +1202,6 @@ sites:
         main_bottom_navigation:
           required: true
           configurable: false
+
+      inner_page_with_social:
+        <<: *expert_inner_page
