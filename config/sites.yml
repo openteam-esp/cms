@@ -1123,6 +1123,7 @@ sites:
         useful_links:
           required: true
           configurable: false
+
   intake:
     templates:
       main_page:
@@ -1146,4 +1147,58 @@ sites:
           indexable: true
 
   expert:
-    <<: *typical_site
+    templates:
+      main_page:
+        site_name:
+          required: true
+          configurable: true
+        governor_message:
+          required: true
+          configurable: true
+          indexable: true
+        news:
+          required: true
+          configurable: true
+          indexable: true
+        gallery:
+          required: false
+          configurable: true
+          indexable: true
+        right_side_protocols:
+          required: false
+          configurable: true
+        main_navigation:
+          required: true
+          configurable: true
+        main_bottom_navigation:
+          required: true
+          configurable: true
+
+      inner_page:
+        site_name:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        content_second:
+          required: false
+          configurable: true
+          indexable: true
+        content_third:
+          required: false
+          configurable: true
+          indexable: true
+        right_side_navigation:
+          required: false
+          configurable: true
+        right_side_protocols:
+          required: false
+          configurable: true
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
