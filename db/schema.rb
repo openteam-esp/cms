@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516031432) do
+ActiveRecord::Schema.define(:version => 20131111093633) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -34,12 +34,23 @@ ActiveRecord::Schema.define(:version => 20130516031432) do
   add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
   add_index "audits", ["user_id", "user_type"], :name => "user_index"
 
+  create_table "contexts", :force => true do |t|
+    t.string   "title"
+    t.string   "ancestry"
+    t.string   "weight"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "contexts", ["ancestry"], :name => "index_contexts_on_ancestry"
+  add_index "contexts", ["weight"], :name => "index_contexts_on_weight"
+
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
-    t.text     "description",     :limit => 255
-    t.string   "picture_url"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.text     "description"
+    t.text     "picture_url"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "position"
   end
 
@@ -63,8 +74,8 @@ ActiveRecord::Schema.define(:version => 20130516031432) do
   end
 
   create_table "parts", :force => true do |t|
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "region"
     t.string   "type"
     t.integer  "node_id"
@@ -79,7 +90,7 @@ ActiveRecord::Schema.define(:version => 20130516031432) do
     t.string   "appeal_section_slug"
     t.string   "navigation_group"
     t.string   "title"
-    t.text     "html_info_path",                         :limit => 255
+    t.text     "html_info_path"
     t.integer  "blue_pages_item_page_id"
     t.string   "documents_kind"
     t.integer  "documents_item_page_id"
@@ -102,7 +113,7 @@ ActiveRecord::Schema.define(:version => 20130516031432) do
     t.integer  "youtube_video_related_count"
     t.integer  "youtube_video_width"
     t.integer  "youtube_video_height"
-    t.text     "text_info_path",                         :limit => 255
+    t.text     "text_info_path"
     t.string   "news_event_entry"
     t.integer  "blue_pages_expand"
     t.string   "documents_contexts"
