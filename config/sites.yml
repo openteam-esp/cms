@@ -1205,3 +1205,28 @@ sites:
 
       inner_page_with_social:
         <<: *expert_inner_page
+
+      experts_council:
+        site_name:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        regulation:
+          required: false
+          configurable: true
+          indexable: true
+        right_side_navigation:
+          required: false
+          configurable: true
+        right_side_protocols:
+          required: false
+          configurable: true
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
