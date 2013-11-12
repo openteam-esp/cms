@@ -1206,6 +1206,25 @@ sites:
       inner_page_with_social:
         <<: *expert_inner_page
 
+      department_page:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        regulation:
+          required: false
+          configurable: true
+          indexable: true
+
       experts_council:
         site_name:
           required: true
