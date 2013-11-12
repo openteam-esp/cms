@@ -1249,3 +1249,18 @@ sites:
         main_bottom_navigation:
           required: true
           configurable: false
+
+      sitemap:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        main_bottom_navigation:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
