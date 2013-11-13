@@ -191,7 +191,7 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    openteam-capistrano (0.0.12)
+    openteam-capistrano (0.0.14)
       capistrano-db-tasks
       capistrano-ext
       capistrano-unicorn
