@@ -6,15 +6,17 @@ class NewsItemPart < Part
   attr_accessible :news_height
   attr_accessible :news_item_page_id
   attr_accessible :news_mlt_count
+  attr_accessible :news_mlt_number_of_months
   attr_accessible :news_mlt_height
   attr_accessible :news_mlt_width
   attr_accessible :news_paginated
   attr_accessible :news_per_page
   attr_accessible :news_width
 
-  validates_presence_of :news_channel, :news_mlt_count
+  validates_presence_of :news_channel, :news_mlt_count, :news_mlt_number_of_months
 
   default_value_for :news_mlt_count, 0
+  default_value_for :news_mlt_number_of_months, 1
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
@@ -78,7 +80,7 @@ class NewsItemPart < Part
     end
 
     def news_mlt_params
-      "more_like_this[count]=#{news_mlt_count}&more_like_this[width]=#{news_mlt_width}&more_like_this[height]=#{news_mlt_height}"
+      "more_like_this[count]=#{news_mlt_count}&more_like_this[months]=#{news_mlt_number_of_months}&more_like_this[width]=#{news_mlt_width}&more_like_this[height]=#{news_mlt_height}"
     end
 
     alias :slug :resource_id

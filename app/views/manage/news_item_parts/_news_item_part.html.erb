@@ -1,11 +1,12 @@
 <%= show_for news_item_part do |part| %>
   <%= part.attribute :news_channel do %>
-    <%= news_item_part.channel_description %> 
+    <%= news_item_part.channel_description %>
   <% end %>
 
   <%= part.attributes :news_width,
                       :news_height,
                       :news_mlt_count,
+                      :news_mlt_number_of_months,
                       :news_mlt_width,
                       :news_mlt_height,
                       :template %>
