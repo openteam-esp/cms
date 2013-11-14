@@ -13,10 +13,13 @@ class NewsItemPart < Part
   attr_accessible :news_per_page
   attr_accessible :news_width
 
-  validates_presence_of :news_channel, :news_mlt_count, :news_mlt_number_of_months
+  validates_presence_of :news_channel
 
   default_value_for :news_mlt_count, 0
+  validates :news_mlt_count, :presence => true, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
+
   default_value_for :news_mlt_number_of_months, 1
+  validates :news_mlt_number_of_months, :presence => true, :numericality => { :only_integer => true, :greater_than => 0 }
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
