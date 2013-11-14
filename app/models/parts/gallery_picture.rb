@@ -42,12 +42,12 @@ end
 #
 # Table name: gallery_pictures
 #
-#  created_at      :datetime         not null
-#  description     :text
-#  gallery_part_id :integer
 #  id              :integer          not null, primary key
-#  picture_url     :string(255)
-#  position        :integer
+#  gallery_part_id :integer
+#  description     :text
+#  picture_url     :text
+#  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  position        :integer
 #
 
