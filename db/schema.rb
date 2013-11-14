@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131111093633) do
+ActiveRecord::Schema.define(:version => 20131114034830) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -33,17 +33,6 @@ ActiveRecord::Schema.define(:version => 20131111093633) do
   add_index "audits", ["auditable_id", "auditable_type"], :name => "auditable_index"
   add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
   add_index "audits", ["user_id", "user_type"], :name => "user_index"
-
-  create_table "contexts", :force => true do |t|
-    t.string   "title"
-    t.string   "ancestry"
-    t.string   "weight"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "contexts", ["ancestry"], :name => "index_contexts_on_ancestry"
-  add_index "contexts", ["weight"], :name => "index_contexts_on_weight"
 
   create_table "gallery_pictures", :force => true do |t|
     t.integer  "gallery_part_id"
@@ -74,8 +63,8 @@ ActiveRecord::Schema.define(:version => 20131111093633) do
   end
 
   create_table "parts", :force => true do |t|
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.string   "region"
     t.string   "type"
     t.integer  "node_id"
@@ -133,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20131111093633) do
     t.integer  "gpo_project_list_chair_id"
     t.string   "streams_degree"
     t.string   "provided_disciplines_subdepartment"
+    t.integer  "news_mlt_number_of_months",              :default => 1
   end
 
   add_index "parts", ["node_id"], :name => "index_parts_on_node_id"
