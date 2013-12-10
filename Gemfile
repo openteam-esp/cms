@@ -18,7 +18,7 @@ group :default do
   gem 'esp-ckeditor'
   gem 'esp-commons'
   gem 'esp-views'
-  gem 'formtastic',     '< 2.2.0'
+  gem 'formtastic', '< 2.2.0'
   gem 'gilenson'
   gem 'has_enum'
   gem 'hashie'
@@ -26,8 +26,8 @@ group :default do
   gem 'jquery-rails'
   gem 'nested_form'
   gem 'pg'
-  gem 'progress_bar',                               :require => false
-  gem 'rails',                                      '~> 3.2.13'
+  gem 'progress_bar', :require => false
+  gem 'rails', '~> 3.2.13'
   gem 'russian'
   gem 'sanitize'
   gem 'show_for'
@@ -36,11 +36,11 @@ group :default do
 end
 
 group :development do
-  gem 'annotate'
-  gem 'brakeman'
+  gem 'annotate', :require => false
+  gem 'brakeman', :require => false
   gem 'capistrano-db-tasks', :git => 'git://github.com/sgruhier/capistrano-db-tasks'
-  gem 'capistrano-unicorn'
-  gem 'hirb',                                     :require => false
+  gem 'capistrano-unicorn', '~> 0.1.10', :require => false
+  gem 'hirb', :require => false
   gem 'openteam-capistrano'
 end
 
