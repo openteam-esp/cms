@@ -1206,6 +1206,9 @@ sites:
       inner_page_with_social:
         <<: *expert_inner_page
 
+      meeting_list:
+        <<: *expert_inner_page
+
       department_page:
         site_name:
           required: true
