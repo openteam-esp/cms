@@ -5,6 +5,8 @@ class BluePagesPart < Part
   attr_accessible :blue_pages_expand
   attr_accessible :blue_pages_item_page_id
 
+  attr_accessor :blue_pages_category
+
   belongs_to :item_page, :class_name => 'Node', :foreign_key => :blue_pages_item_page_id
 
   validates_presence_of :blue_pages_category_id, :blue_pages_expand

@@ -1,5 +1,16 @@
+<%= javascript_include_tag 'blue_pages.js' %>
+
 <%= form.inputs do %>
-  <%= form.input :blue_pages_category_id, :as => :select, :collection => form.object.categories %>
+
+  <li class='blue_pages_categories'>
+    <ul>
+      <% form.object.categories.each do |category| %>
+        <li data-id='<%= category.second %>'><%= category.first.gsub(/^-+\s/, '').squish %></li>
+      <% end %>
+    </ul>
+  </li>
+  <%= form.input :blue_pages_category, :input_html => { :id => 'part_blue_pages_category' } %>
+  <%= form.input :blue_pages_category_id, :as => :hidden, :input_html => { :id => 'part_blue_pages_category_id' } %>
 
   <%= render :partial => 'manage/parts/item_page', :locals => { :form => form } %>
 

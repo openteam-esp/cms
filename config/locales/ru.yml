@@ -109,6 +109,7 @@ ru:
         appeal_section_slug: Слаг секции обращений
 
       blue_pages_part:
+        blue_pages_category: Категория
         blue_pages_category_id: Категория
         blue_pages_expand: Уровень вложенности
         category_name: Категория
