@@ -1236,6 +1236,10 @@ sites:
           required: false
           configurable: true
           indexable: true
+        content_second:
+          required: false
+          configurable: true
+          indexable: true
         regulation:
           required: false
           configurable: true
