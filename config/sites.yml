@@ -1240,6 +1240,10 @@ sites:
           required: false
           configurable: true
           indexable: true
+        content_third:
+          required: false
+          configurable: true
+          indexable: true
         regulation:
           required: false
           configurable: true
