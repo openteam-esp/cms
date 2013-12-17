@@ -1164,6 +1164,10 @@ sites:
           required: false
           configurable: true
           indexable: true
+        banners:
+          required: false
+          configurable: true
+          indexable: true
         right_side_protocols:
           required: false
           configurable: true
