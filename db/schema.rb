@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131114034830) do
+ActiveRecord::Schema.define(:version => 20131219041413) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(:version => 20131114034830) do
     t.integer  "blue_pages_category_id"
     t.string   "appeal_section_slug"
     t.string   "navigation_group"
-    t.string   "title"
+    t.text     "title"
     t.text     "html_info_path"
     t.integer  "blue_pages_item_page_id"
     t.string   "documents_kind"

@@ -64,7 +64,7 @@ end
 #  blue_pages_category_id                 :integer
 #  appeal_section_slug                    :string(255)
 #  navigation_group                       :string(255)
-#  title                                  :string(255)
+#  title                                  :text
 #  html_info_path                         :text
 #  blue_pages_item_page_id                :integer
 #  documents_kind                         :string(255)
