@@ -656,7 +656,7 @@ sites:
           required: false
           configurable: true
           indexable: true
-        schedule_citizens:
+        webanketa_voting:
           required: false
           configurable: true
           indexable: true
