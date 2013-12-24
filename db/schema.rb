@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131219041413) do
+ActiveRecord::Schema.define(:version => 20131224072130) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20131219041413) do
 
   create_table "nodes", :force => true do |t|
     t.string   "slug"
-    t.string   "title"
+    t.text     "title"
     t.string   "ancestry"
     t.string   "type"
     t.datetime "created_at",                          :null => false
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(:version => 20131219041413) do
     t.boolean  "in_navigation"
     t.string   "navigation_group"
     t.integer  "navigation_position"
-    t.string   "navigation_title"
+    t.text     "navigation_title"
     t.integer  "ancestry_depth",       :default => 0
     t.integer  "page_for_redirect_id"
     t.string   "weight"
