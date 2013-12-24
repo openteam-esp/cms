@@ -28,5 +28,11 @@ AttributeNormalizer.configure do |config|
   config.normalizers[:as_array_of_integer] = ->(value, options) do
     value.reject { |e| e.blank? }.map(&:to_i)
   end
-end
 
+  config.normalizers[:truncate] = ->(value, options) do
+    options.reverse_merge!(:length => 30, :omission => nil)
+    l = options[:length] - options[:omission].to_s.mb_chars.length
+    chars = value.mb_chars
+    (chars.length > options[:length] ? "#{chars[0...l]}#{options[:omission]}" : value).to_s
+  end
+end

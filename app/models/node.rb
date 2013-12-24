@@ -28,6 +28,7 @@ class Node < ActiveRecord::Base
   alias :site :root
 
   normalize_attribute :title, :with => [:gilensize_as_text, :squish]
+  normalize_attribute :slug, :with => [ :strip, { :truncate => { :length => 255 } } ]
 
   # NOTE: чтобы не вызавался для новой записи
   before_update :unindex_subtree, :unless => :id_changed?
