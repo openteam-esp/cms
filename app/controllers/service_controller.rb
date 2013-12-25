@@ -12,6 +12,7 @@ class ServiceController < ApplicationController
       node = Node.find(params[:parent_id])
       additional  = params[:additional].split('/').select{|a| !a.empty?}.join('/')
       additional = ActiveSupport::Inflector.transliterate(additional).gsub(/'/, '').gsub(/[^[:alnum:]]+/, '_')
+      additional = additional.truncate(230, :omission => '') if additional.length > 230
       chunks = (node.path.map(&:slug).map(&:underscore) + [additional, "#{additional}.xhtml"]).map(&:downcase)
       '/' + chunks.join('/')
     end
