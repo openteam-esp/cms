@@ -1,6 +1,6 @@
 class NodesController < ApplicationController
   def show
-    @node = Node.find_by_route(params[:id])
+    @node = Node.find_by_route(params[:id].force_encoding('iso-8859-1').encode!('utf-8'))
 
     render :file => "#{Rails.root}/public/404", :formats => [:html], :layout => false, :status => 404 and return unless @node
 
