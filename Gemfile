@@ -27,6 +27,7 @@ group :default do
   gem 'nested_form'
   gem 'pg'
   gem 'progress_bar', :require => false
+  gem 'rack-utf8_sanitizer'
   gem 'rails', '~> 3.2.13'
   gem 'russian'
   gem 'sanitize'
