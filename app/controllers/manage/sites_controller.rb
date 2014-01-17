@@ -9,4 +9,9 @@ class Manage::SitesController < Manage::ApplicationController
     end
   end
 
+  protected
+    def collection
+      @sites ||= Site.ordered
+    end
+
 end

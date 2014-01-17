@@ -1,6 +1,8 @@
 class Site < Node
   attr_accessible :client_url
 
+  scope :ordered, order('title')
+
   validates :slug, :client_url, :presence => true
 
   delegate :parts, :to => :default_locale
