@@ -1124,7 +1124,7 @@ sites:
           required: true
           configurable: false
 
-  intake:
+  abiturient:
     templates:
       main_page:
         site_name:
