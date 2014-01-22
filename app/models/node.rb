@@ -155,7 +155,8 @@ class Node < ActiveRecord::Base
   end
 
   def templates_hash
-    site_settings['templates']
+    raise "Site not found! Set templates settings for site [slug: #{site.slug}, title: #{site.title}] in config/sites.yml" unless site_settings.present?
+    site_settings.try(:[], 'templates')
   end
 
   def url
