@@ -43,12 +43,12 @@ class DirectoryPostPart < Part
   end
 
   def lectures
-    timetable_response = Requester.new("#{lecture_disciplines_url}/#{part_title}").response_hash
-    { :lectures => timetable_response['disciplines'] }
+    requester = Requester.new("#{lecture_disciplines_url}/#{part_title}")
+    @lectures ||= requester.response_status == 200 ? { :lectures => requester.response_hash['disciplines'] } : {}
   end
 
   def lecture_disciplines_url
-    "#{Settings['timetable']['url']}api/v1/lecture_disciplines"
+    "#{Settings['timetable']['url']}/api/v1/lecture_disciplines"
   end
 
   alias_attribute :photo_width,   :directory_post_photo_width
