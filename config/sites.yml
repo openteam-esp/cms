@@ -821,6 +821,12 @@ sites:
       news_list_page:
         <<: *veteran_inner_page
 
+      news_list_with_menu_page:
+        <<: *veteran_inner_page
+        right_side_navigation:
+          required: false
+          configurable: true
+
       sitemap:
         site_name:
           required: true
