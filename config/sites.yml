@@ -784,6 +784,9 @@ sites:
           required: false
           configurable: true
           indexable: true
+        right_side_navigation:
+          required: false
+          configurable: true
 
       inner_page: &veteran_inner_page
         site_name:
@@ -1258,9 +1261,6 @@ sites:
           required: false
           configurable: true
           indexable: true
-        right_side_navigation:
-          required: false
-          configurable: true
 
       experts_council:
         site_name:
