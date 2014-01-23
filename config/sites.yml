@@ -814,6 +814,9 @@ sites:
           required: false
           configurable: true
           indexable: true
+        right_side_navigation:
+          required: false
+          configurable: true
 
       inner_page_with_social:
         <<: *veteran_inner_page
