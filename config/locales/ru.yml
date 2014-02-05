@@ -94,6 +94,7 @@ ru:
         in_navigation:              Добавить в навигацию
         navigation_position_param:  Вставить после
         page_for_redirect:          Перенаправлять на страницу
+        external_link:              Внешняя ссылка
 
       locale:
         slug_enum:

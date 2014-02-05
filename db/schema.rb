@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131224072130) do
+ActiveRecord::Schema.define(:version => 20140205091117) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20131224072130) do
     t.integer  "ancestry_depth",       :default => 0
     t.integer  "page_for_redirect_id"
     t.string   "weight"
+    t.text     "external_link"
   end
 
   create_table "parts", :force => true do |t|

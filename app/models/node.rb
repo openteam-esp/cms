@@ -1,5 +1,5 @@
 class Node < ActiveRecord::Base
-  attr_accessible :slug, :template, :title, :navigation_title, :navigation_group, :navigation_position, :in_navigation, :page_for_redirect_id
+  attr_accessible :slug, :template, :title, :navigation_title, :navigation_group, :navigation_position, :in_navigation, :page_for_redirect_id, :external_link
 
   attr_accessor :navigation_position_param, :parts_params, :resource_id
 
@@ -268,5 +268,5 @@ end
 #  ancestry_depth       :integer          default(0)
 #  page_for_redirect_id :integer
 #  weight               :string(255)
+#  external_link        :text
 #
-

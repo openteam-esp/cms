@@ -56,5 +56,5 @@ end
 #  ancestry_depth       :integer          default(0)
 #  page_for_redirect_id :integer
 #  weight               :string(255)
+#  external_link        :text
 #
-

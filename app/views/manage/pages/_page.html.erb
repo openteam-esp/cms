@@ -1,5 +1,8 @@
 <%= show_for resource do | page | %>
   <%= page.attributes :title, :navigation_title, :slug, :template, :in_navigation, :navigation_group, :navigation_position, :page_for_redirect %>
+  <%= page.attribute :external_link do %>
+    <%= resource.external_link? ? link_to(resource.external_link, resource.external_link, :target => :_blank) : 'Не указано' %>
+  <% end %>
 <% end %>
 <div class="actions">
   <%= link_to action_title(:action => 'edit'), edit_resource_path, :class => 'button icon edit' if controller.respond_to? :edit %>
