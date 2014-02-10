@@ -97,6 +97,11 @@ ru:
         external_link:              Внешняя ссылка
 
       locale:
+        title:                      Заголовок
+        slug:                       Слаг
+        template:                   Шаблон
+        navigation_position_param:  Вставить после
+        external_link:              Внешняя ссылка
         slug_enum:
           ru:         русский
           en:         английский
@@ -216,5 +221,21 @@ ru:
           '!s': обрезать по нижнему краю
           '!w': обрезать по левому краю
 
-
-
+      meta:
+        description: 'description'
+        keywords: 'keywords'
+        url: 'url (custom)'
+        image: 'image / og:image / twitter:image'
+        delete_image: 'удалить картинку'
+        og_type: 'og:type'
+        og_site_name: 'og:site_name'
+        og_title: 'og:title (custom)'
+        og_description: 'og:description (custom)'
+        og_locale: 'og:locale'
+        og_locale_alternate: 'og:locale_alternate'
+        twitter_card: 'twitter:card'
+        twitter_domain: 'twitter:domain'
+        twitter_site: 'twitter:site'
+        twitter_creator: 'twitter:creator'
+        twitter_title: 'twitter:title (custom)'
+        twitter_description: 'twitter:description (custom)'

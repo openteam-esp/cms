@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140205091117) do
+ActiveRecord::Schema.define(:version => 20140207081051) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -42,6 +42,36 @@ ActiveRecord::Schema.define(:version => 20140205091117) do
     t.datetime "updated_at",      :null => false
     t.integer  "position"
   end
+
+  create_table "metas", :force => true do |t|
+    t.text     "description"
+    t.text     "keywords"
+    t.string   "url"
+    t.text     "image_meta"
+    t.text     "og_title"
+    t.text     "og_description"
+    t.string   "og_type"
+    t.string   "og_locale"
+    t.string   "og_locale_alternate"
+    t.string   "og_site_name"
+    t.string   "twitter_card"
+    t.string   "twitter_site"
+    t.string   "twitter_creator"
+    t.string   "twitter_title"
+    t.text     "twitter_description"
+    t.string   "twitter_domain"
+    t.integer  "metable_id"
+    t.string   "metable_type"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.text     "image_url"
+  end
+
+  add_index "metas", ["metable_id"], :name => "index_metas_on_metable_id"
 
   create_table "nodes", :force => true do |t|
     t.string   "slug"

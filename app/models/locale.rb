@@ -5,6 +5,10 @@ class Locale < Node
 
   validates_presence_of :parent, :slug, :template
   alias :site :parent
+
+  attr_accessible :meta_attributes
+  has_one :meta, :as => :metable, :dependent => :destroy
+  accepts_nested_attributes_for :meta, :allow_destroy => true
 end
 
 # == Schema Information

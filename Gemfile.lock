@@ -89,6 +89,10 @@ GEM
       capistrano
     chronic (0.9.0)
     chunky_png (1.2.6)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.3)
+      climate_control (>= 0.0.3, < 1.0)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -205,6 +209,16 @@ GEM
     options (2.3.0)
       fattr
     orm_adapter (0.4.0)
+    paperclip (3.5.2)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
+    paperclip-elvfs (0.0.5.2)
+      curb
+      paperclip
+    paperclip-meta (1.0.0)
+      paperclip (>= 3.0.2, < 5.0)
     pg (0.14.1)
     polyglot (0.3.3)
     progress_bar (0.4.0)
@@ -346,6 +360,8 @@ DEPENDENCIES
   jquery-rails
   nested_form
   openteam-capistrano
+  paperclip-elvfs
+  paperclip-meta
   pg
   progress_bar
   rack-utf8_sanitizer

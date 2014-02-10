@@ -13,4 +13,5 @@
   <%= form.input :navigation_position_param, :as => :select, :collection => page_position_collection(resource), :include_blank => false %>
   <%= form.input :page_for_redirect, :collection => form.object.nodes_from_this_site, :member_label => ->(n) { ('&nbsp;' * 2 * n.depth + n.title).html_safe }  %>
   <%= form.input :external_link, :as => :string %>
+  <%= render :partial => 'commons/meta_fields', :locals => { :form => form } %>
 <% end %>

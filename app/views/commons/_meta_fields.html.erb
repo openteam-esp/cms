@@ -1,0 +1,31 @@
+<hr />
+<fieldset class='seo'>
+  <legend>SEO</legend>
+  <% resource.build_meta if resource.meta.blank? %>
+  <%= form.semantic_fields_for :meta do |form_meta| %>
+    <%= form_meta.input :url %>
+    <%= form_meta.input :description %>
+    <%= form_meta.input :keywords, :as => :string %>
+    <% if resource.meta.image.present? %>
+      <p>
+        <%= image_tag resource.meta.image.url, :size => resource.meta.image.image_size %>
+      </p>
+      <%= form_meta.input :delete_image, :as => :boolean %>
+    <% end %>
+    <%= form_meta.input :image %>
+    <hr />
+    <%= form_meta.input :og_type %>
+    <%= form_meta.input :og_site_name %>
+    <%= form_meta.input :og_title, :as => :string %>
+    <%= form_meta.input :og_description %>
+    <%= form_meta.input :og_locale %>
+    <%= form_meta.input :og_locale_alternate %>
+    <hr />
+    <%= form_meta.input :twitter_card, :placeholder => 'summary | summary_large_image' %>
+    <%= form_meta.input :twitter_domain %>
+    <%= form_meta.input :twitter_site %>
+    <%= form_meta.input :twitter_creator %>
+    <%= form_meta.input :twitter_title %>
+    <%= form_meta.input :twitter_description %>
+  <% end %>
+</fieldset>

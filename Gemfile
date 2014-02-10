@@ -25,6 +25,8 @@ group :default do
   gem 'inherited_resources'
   gem 'jquery-rails'
   gem 'nested_form'
+  gem 'paperclip-elvfs'
+  gem 'paperclip-meta'
   gem 'pg'
   gem 'progress_bar', :require => false
   gem 'rack-utf8_sanitizer'
