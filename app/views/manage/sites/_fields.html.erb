@@ -2,5 +2,6 @@
   <%= form.input :title, :as => :string %>
   <%= form.input :slug %>
   <%= form.input :client_url %>
+  <%= render :partial => 'commons/meta_fields', :locals => { :form => form } %>
 <% end %>
 

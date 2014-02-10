@@ -19,6 +19,10 @@ class Node < ActiveRecord::Base
 
   delegate :templates, :to => :site
 
+  attr_accessible :meta_attributes
+  has_one :meta, :as => :metable, :dependent => :destroy
+  accepts_nested_attributes_for :meta, :allow_destroy => true
+
   default_value_for :in_navigation, true
   default_value_for :parts_params,  {}
 
@@ -51,6 +55,7 @@ class Node < ActiveRecord::Base
       'page' => {
         'title' => node_for_json.page_title,
         'template' => node_for_json.template,
+        'meta' => node_for_json.meta,
         'regions' => node_for_json.regions.inject({}) { |h, r| h.merge(r => ((part=node_for_json.part_for(r, true)) == nil ? nil: part.to_json )) }
       }
     }
