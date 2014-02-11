@@ -13,26 +13,26 @@ class Meta < ActiveRecord::Base
 
   alias_attribute :file_url, :image_url
 
-  belongs_to :metable, :polymorphic => true
+  belongs_to :node
 
   default_value_for :og_type, :website
 
   default_value_for :og_site_name do |obj|
-    obj.metable.site
+    obj.node.site if obj.node.present?
   end
 
   default_value_for :og_locale, 'ru_RU'
 
   default_value_for :twitter_domain do |obj|
-    obj.metable.site.client_url
+    obj.node.site.client_url if obj.node.present?
   end
 
   default_value_for :twitter_site do |obj|
-    "@#{obj.metable.site.slug}"
+    "@#{obj.node.site.slug}" if obj.node.present?
   end
 
   default_value_for :twitter_creator do |obj|
-    "@#{obj.metable.site.slug}"
+    "@#{obj.node.site.slug}" if obj.node.present?
   end
 end
 
@@ -44,6 +44,7 @@ end
 #  description         :text
 #  keywords            :text
 #  url                 :string(255)
+#  image_meta          :text
 #  og_title            :text
 #  og_description      :text
 #  og_type             :string(255)
@@ -56,8 +57,7 @@ end
 #  twitter_title       :string(255)
 #  twitter_description :text
 #  twitter_domain      :string(255)
-#  metable_id          :integer
-#  metable_type        :string(255)
+#  node_id             :integer
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  image_file_name     :string(255)

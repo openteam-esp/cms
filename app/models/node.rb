@@ -20,7 +20,7 @@ class Node < ActiveRecord::Base
   delegate :templates, :to => :site
 
   attr_accessible :meta_attributes
-  has_one :meta, :as => :metable, :dependent => :destroy
+  has_one :meta, :dependent => :destroy
   accepts_nested_attributes_for :meta, :allow_destroy => true
 
   default_value_for :in_navigation, true
