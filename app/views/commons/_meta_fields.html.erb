@@ -21,7 +21,7 @@
     <%= form_meta.input :og_locale %>
     <%= form_meta.input :og_locale_alternate %>
     <hr />
-    <%= form_meta.input :twitter_card, :placeholder => 'summary | summary_large_image' %>
+    <%= form_meta.input :twitter_card, :as => :select, :collection => [:summary, :summary_large_image] %>
     <%= form_meta.input :twitter_domain %>
     <%= form_meta.input :twitter_site %>
     <%= form_meta.input :twitter_creator %>
