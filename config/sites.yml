@@ -13,6 +13,12 @@ sites:
         site_name:
           required: true
           configurable: true
+        main_navigation:
+          required: true
+          configurable: true
+        main_bottom_navigation:
+          required: true
+          configurable: true
         breadcrumbs:
           required: true
           configurable: true
@@ -48,12 +54,6 @@ sites:
           required: false
           configurable: true
           indexable: true
-        main_navigation:
-          required: true
-          configurable: true
-        main_bottom_navigation:
-          required: true
-          configurable: true
         map_region:
           required: true
           configurable: true
