@@ -62,6 +62,36 @@ sites:
           required: true
           configurable: true
           indexable: true
+        # regions for new version
+        main_page_actual:
+          required: true
+          configurable: true
+          indexable: true
+        main_page_news:
+          required: true
+          configurable: true
+          indexable: true
+        main_page_calendar:
+          required: true
+          configurable: true
+          indexable: true
+        main_page_schedule_administration:
+          required: true
+          configurable: true
+          indexable: true
+        main_page_documents:
+          required: true
+          configurable: true
+          indexable: true
+        main_page_projects_documents:
+          required: true
+          configurable: true
+          indexable: true
+        main_page_right_side_links:
+          required: true
+          configurable: true
+          indexable: true
+        # /regions for new version
         secondary_navigation:
           required: true
           configurable: true

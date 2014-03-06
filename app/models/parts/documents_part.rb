@@ -23,7 +23,9 @@ class DocumentsPart < Part
 
   def content
     { 'action' => action_for_search_form,
+      'collection_link' => collection_link,
       'keywords' => keywords,
+      'title' => title,
       'papers' => papers,
       'rss_link' => rss_link
     }.tap do |hash|
@@ -37,6 +39,10 @@ class DocumentsPart < Part
 
   def contexts
     @contexts ||= Requester.new("#{documents_url}/contexts.json").response_hash.map { |hash| [hash.keys.first, hash.values.first] }
+  end
+
+  def collection_link
+    item_page.parent.route_without_site
   end
 
   private
