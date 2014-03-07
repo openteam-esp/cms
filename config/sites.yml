@@ -22,47 +22,6 @@ sites:
         breadcrumbs:
           required: true
           configurable: true
-        actual:
-          required: true
-          configurable: true
-          indexable: true
-        calendar_current:
-          required: true
-          configurable: true
-          indexable: true
-        calendar_nearest:
-          required: true
-          configurable: true
-          indexable: true
-        calendar_gone:
-          required: true
-          configurable: true
-          indexable: true
-        governor_message:
-          required: true
-          configurable: true
-          indexable: true
-        governor_comments:
-          required: true
-          configurable: true
-          indexable: true
-        news:
-          required: true
-          configurable: true
-          indexable: true
-        gallery:
-          required: false
-          configurable: true
-          indexable: true
-        map_region:
-          required: true
-          configurable: true
-          indexable: true
-        banners:
-          required: true
-          configurable: true
-          indexable: true
-        # regions for new version
         main_page_actual:
           required: true
           configurable: true
@@ -91,7 +50,18 @@ sites:
           required: true
           configurable: true
           indexable: true
-        # /regions for new version
+        gallery:
+          required: false
+          configurable: true
+          indexable: true
+        map_region:
+          required: true
+          configurable: true
+          indexable: true
+        banners:
+          required: true
+          configurable: true
+          indexable: true
         secondary_navigation:
           required: true
           configurable: true
