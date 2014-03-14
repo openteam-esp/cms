@@ -1166,6 +1166,14 @@ sites:
           required: true
           configurable: false
 
+      timeline:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+
   expert:
     templates:
       main_page:
