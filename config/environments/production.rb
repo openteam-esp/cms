@@ -46,7 +46,13 @@ Cms::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( text_plugin.js info_plugin.js gallery_pictures_sort.js blue_pages.js )
+  config.assets.precompile += %W[
+                                  text_plugin.js
+                                  info_plugin.js
+                                  gallery_pictures_sort.js
+                                  blue_pages.js
+                                  esp-ckeditor/application.js
+                                ]
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
