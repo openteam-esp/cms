@@ -1153,6 +1153,10 @@ sites:
         main_navigation:
           required: true
           configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
 
       educations:
         site_name:
