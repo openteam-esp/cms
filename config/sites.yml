@@ -1173,6 +1173,10 @@ sites:
         main_navigation:
           required: true
           configurable: false
+        content:
+          required: false
+          configurable: true
+          indexable: true
 
   expert:
     templates:
