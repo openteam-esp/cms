@@ -1145,6 +1145,18 @@ sites:
         main_navigation:
           required: true
           configurable: true
+        picture:
+          required: false
+          configurable: true
+          indexable: true
+        timeline_text:
+          required: false
+          configurable: true
+          indexable: true
+        timeline:
+          required: false
+          configurable: true
+          indexable: true
 
       inner_page:
         site_name:
