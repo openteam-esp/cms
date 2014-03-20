@@ -16,7 +16,9 @@ module Cms
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
+    config.paths.add "app/api", glob: "**/*.rb"
     config.autoload_paths += %W[
+                                #{config.root}/app/api
                                 #{config.root}/app/models/parts
                                 #{config.root}/app/models/vfs
                                 #{config.root}/lib

@@ -1,5 +1,6 @@
 Cms::Application.routes.draw do
   mount ElVfsClient::Engine => '/'
+  mount API => '/'
 
   match "/build_info_path" => 'service#build_info_path'
 

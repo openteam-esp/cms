@@ -20,6 +20,7 @@ group :default do
   gem 'esp-views'
   gem 'formtastic', '< 2.2.0'
   gem 'gilenson'
+  gem 'grape'
   gem 'has_enum'
   gem 'hashie'
   gem 'inherited_resources'
