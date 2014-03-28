@@ -54,7 +54,10 @@ class Node < ActiveRecord::Base
     {
       'page' => {
         'title' => node_for_json.page_title,
+        'navigation_title' => node_for_json.navigation_title,
+        'slug' => node_for_json.slug,
         'template' => node_for_json.template,
+        'external_link' => node_for_json.external_link,
         'meta' => node_for_json.meta,
         'regions' => node_for_json.regions.inject({}) { |h, r| h.merge(r => ((part=node_for_json.part_for(r, true)) == nil ? nil: part.to_json )) }
       }
