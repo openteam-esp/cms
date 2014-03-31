@@ -1,7 +1,7 @@
 <hr />
 <fieldset class='seo'>
   <legend>SEO</legend>
-  <% resource.build_meta %>
+  <% resource.build_meta unless resource.meta.present? %>
   <%= form.semantic_fields_for :meta do |form_meta| %>
     <%= form_meta.input :url %>
     <%= form_meta.input :description %>
