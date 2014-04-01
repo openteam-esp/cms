@@ -13,8 +13,6 @@ class Page < Node
     object.parent.try(:navigation_group)
   end
 
-  validates_url :external_link, :allow_blank => true
-
   alias :node :parent
 
   def locale

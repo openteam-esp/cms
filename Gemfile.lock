@@ -350,8 +350,6 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    validate_url (0.2.0)
-      activemodel (>= 3.0.0)
     virtus (1.0.2)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -410,4 +408,3 @@ DEPENDENCIES
   sso-auth
   turbo-sprockets-rails3
   uglifier
-  validate_url

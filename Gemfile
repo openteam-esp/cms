@@ -37,7 +37,6 @@ group :default do
   gem 'show_for'
   gem 'simple-navigation'
   gem 'sso-auth'
-  gem 'validate_url'
 end
 
 group :development do
