@@ -1158,7 +1158,7 @@ sites:
           configurable: true
           indexable: true
 
-      why:
+      inner_page:
         site_name:
           required: true
           configurable: false
@@ -1170,7 +1170,7 @@ sites:
           configurable: true
           indexable: true
 
-      inner_page:
+      why:
         site_name:
           required: true
           configurable: false
