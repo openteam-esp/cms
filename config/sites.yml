@@ -139,6 +139,9 @@ sites:
       inner_page_with_social:
         <<: *tgr_inner_page
 
+      inner_page_with_disqus:
+        <<: *tgr_inner_page
+
       entries_list_template:
         site_name:
           required: true

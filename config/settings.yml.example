@@ -5,16 +5,13 @@ errors:
   key:          KEY
   url:          http://errors.openteam.ru
 
-#solr:
-#  url:          http://localhost:8982/solr
+sso:
+  key:          KEY
+  secret:       SECRET
+  url:          http://domain.ru
 
-#sso:
-#  key:          KEY
-#  secret:       SECRET
-#  url:          http://esp-sso.openteam.ru
-
-#storage
-  #url:         http://esp-storage.openteam.ru
+storage:
+  url:          http://domain.ru
 
 unicorn:
   workers:      2
