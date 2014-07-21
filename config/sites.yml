@@ -1139,7 +1139,7 @@ sites:
           required: true
           configurable: false
 
-  abiturient:
+  abiturient: &abiturient_site
     templates:
       main_page:
         site_name:
@@ -1218,82 +1218,7 @@ sites:
           indexable: true
 
   magistracy:
-    templates:
-      main_page:
-        site_name:
-          required: true
-          configurable: true
-        main_navigation:
-          required: true
-          configurable: true
-        picture:
-          required: false
-          configurable: true
-          indexable: true
-        timeline_text:
-          required: false
-          configurable: true
-          indexable: true
-        timeline:
-          required: false
-          configurable: true
-          indexable: true
-
-      inner_page:
-        site_name:
-          required: true
-          configurable: false
-        main_navigation:
-          required: true
-          configurable: false
-        content_first:
-          required: false
-          configurable: true
-          indexable: true
-
-      why:
-        site_name:
-          required: true
-          configurable: false
-        main_navigation:
-          required: true
-          configurable: false
-        content_first:
-          required: false
-          configurable: true
-          indexable: true
-
-      educations:
-        site_name:
-          required: true
-          configurable: false
-        main_navigation:
-          required: true
-          configurable: false
-
-      timeline:
-        site_name:
-          required: true
-          configurable: false
-        main_navigation:
-          required: true
-          configurable: false
-        content:
-          required: false
-          configurable: true
-          indexable: true
-
-      sitemap:
-        site_name:
-          required: true
-          configurable: false
-        main_navigation:
-          required: true
-          configurable: false
-        content:
-          required: false
-          configurable: true
-          indexable: true
+    <<: *abiturient_site
 
   expert:
     templates:
