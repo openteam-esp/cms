@@ -399,6 +399,27 @@ sites:
   uvto:
     <<: *typical_site
 
+  zdrav:
+    templates:
+      main_page:
+        site_name:
+          required: true
+          configurable: true
+        main_navigation:
+          required: true
+        news:
+          required: true
+          configurable: true
+          indexable: true
+      inner_page:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+          configurable: true
+
   family:
     part_templates:
       news_list_part: main_news_list_part
