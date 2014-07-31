@@ -407,6 +407,7 @@ sites:
           configurable: true
         main_navigation:
           required: true
+          configurable: true
         news:
           required: true
           configurable: true
