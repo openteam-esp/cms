@@ -419,7 +419,6 @@ sites:
         main_navigation:
           required: true
           configurable: false
-          configurable: true
 
   family:
     part_templates:
