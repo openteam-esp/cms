@@ -408,10 +408,29 @@ sites:
         main_navigation:
           required: true
           configurable: true
-        news:
-          required: true
+        # left side
+        quick_links:
+          required: false
           configurable: true
           indexable: true
+        gallery_of_honor:
+          required: false
+          configurable: true
+          indexable: true
+        thanks_from_patients:
+          required: false
+          configurable: true
+          indexable: true
+        # right side
+        actual:
+          required: false
+          configurable: true
+          indexable: true
+        news:
+          required: false
+          configurable: true
+          indexable: true
+
       inner_page:
         site_name:
           required: true
