@@ -429,11 +429,15 @@ sites:
         news:
           required: false
           configurable: true
-          indexable: true
+          indexable: false
+        announcements:
+          required: false
+          configurable: true
+          indexable: false
         banners:
           required: true
           configurable: true
-          indexable: true
+          indexable: false
         pay_attention:
           required: false
           configurable: true
