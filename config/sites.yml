@@ -430,6 +430,14 @@ sites:
           required: false
           configurable: true
           indexable: true
+        banners:
+          required: true
+          configurable: true
+          indexable: true
+        pay_attention:
+          required: false
+          configurable: true
+          indexable: true
 
       inner_page:
         site_name:
