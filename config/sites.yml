@@ -450,6 +450,13 @@ sites:
         main_navigation:
           required: true
           configurable: false
+        subnavigation:
+          required: false
+          configurable: true
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
 
       department_page:
         site_name:
