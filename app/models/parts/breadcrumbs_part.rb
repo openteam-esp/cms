@@ -1,6 +1,10 @@
 class BreadcrumbsPart < Part
   def to_json
-    as_json(:only => :type, :methods => 'content')
+    super.merge!(as_json(:only => :type, :methods => 'content'))
+  end
+
+  def response_status
+    nil
   end
 
   def content
