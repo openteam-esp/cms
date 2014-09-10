@@ -451,7 +451,7 @@ sites:
           required: true
           configurable: false
         subnavigation:
-          required: false
+          required: true
           configurable: true
         content_first:
           required: false
@@ -465,7 +465,10 @@ sites:
         main_navigation:
           required: true
           configurable: false
-        department:
+        subnavigation:
+          required: true
+          configurable: true
+        content_first:
           required: false
           configurable: true
           indexable: true
