@@ -408,6 +408,9 @@ sites:
         main_navigation:
           required: true
           configurable: true
+        breadcrumbs:
+          required: true
+          configurable: true
         # left side
         quick_links:
           required: false
@@ -450,6 +453,9 @@ sites:
         main_navigation:
           required: true
           configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
         subnavigation:
           required: true
           configurable: true
@@ -463,6 +469,9 @@ sites:
           required: true
           configurable: false
         main_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
           required: true
           configurable: false
         subnavigation:
