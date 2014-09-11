@@ -400,6 +400,9 @@ sites:
     <<: *typical_site
 
   zdrav:
+    part_templates:
+      news_list_part: fotoreports_news_list_part
+
     templates:
       main_page:
         site_name:
