@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class DocumentsItemPart < Part
-  attr_accessible :documents_item_page_id
+  attr_accessible :documents_item_page_id, :documents_kind, :documents_contexts
 
   validates_presence_of :documents_kind, :documents_contexts
 
