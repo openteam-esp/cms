@@ -402,6 +402,7 @@ sites:
   zdrav:
     part_templates:
       news_list_part: fotoreports_news_list_part
+      news_item_part: fotoreports_news_item_part
 
     templates:
       main_page:
