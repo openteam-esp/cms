@@ -467,6 +467,10 @@ sites:
           required: false
           configurable: true
           indexable: true
+        content_second:
+          required: false
+          configurable: true
+          indexable: true
 
       department_page:
         site_name:
