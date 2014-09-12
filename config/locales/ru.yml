@@ -8,6 +8,7 @@ ru:
   add:                Добавить
   add_picture:        Добавить картинку
   remove:             Удалить
+  view_in_public:     Публичный вид
 
   external_system_errors:
     '404': Ресурс не найден

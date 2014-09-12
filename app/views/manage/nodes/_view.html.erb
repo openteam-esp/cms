@@ -3,7 +3,9 @@
     <li><a href="#tab-1">Контент</a></li>
     <li><a href="#tab-2">Информация</a></li>
     <li><a href="#tab-3">Вложенные страницы</a></li>
+    <%= link_to I18n.t('view_in_public'), "#{resource.site.client_url}#{resource.route_without_site}", :class => 'button view_in_public', :target => :blank %>
   </ul>
+
   <div id="tab-1">
     <%= render :partial => 'manage/parts/list' %>
   </div>
