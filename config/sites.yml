@@ -472,7 +472,7 @@ sites:
           configurable: true
           indexable: true
 
-      department_page:
+      department_page: &zdrav_department_page
         site_name:
           required: true
           configurable: false
@@ -493,6 +493,9 @@ sites:
           required: false
           configurable: true
           indexable: true
+
+      subdivision_page:
+        <<: *zdrav_department_page
 
   family:
     part_templates:
