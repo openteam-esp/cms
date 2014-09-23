@@ -485,11 +485,19 @@ sites:
         subnavigation:
           required: true
           configurable: true
+        regulation:
+          required: false
+          configurable: true
+          indexable: true
         content_first:
           required: false
           configurable: true
           indexable: true
-        regulation:
+        content_second:
+          required: false
+          configurable: true
+          indexable: true
+        content_third:
           required: false
           configurable: true
           indexable: true
