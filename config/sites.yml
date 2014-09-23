@@ -505,6 +505,9 @@ sites:
       subdivision_page:
         <<: *zdrav_department_page
 
+      department_chief_page:
+        <<: *zdrav_department_page
+
   family:
     part_templates:
       news_list_part: main_news_list_part
