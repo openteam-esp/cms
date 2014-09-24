@@ -463,6 +463,10 @@ sites:
         subnavigation:
           required: true
           configurable: true
+        left_side_links:
+          required: true
+          configurable: true
+          indexable: true
         content_first:
           required: false
           configurable: true
