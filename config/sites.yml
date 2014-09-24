@@ -485,6 +485,10 @@ sites:
         subnavigation:
           required: true
           configurable: true
+        left_side_links:
+          required: false
+          configurable: true
+          indexable: true
         regulation:
           required: false
           configurable: true
