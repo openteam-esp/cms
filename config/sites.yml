@@ -486,7 +486,7 @@ sites:
           required: true
           configurable: true
         left_side_links:
-          required: false
+          required: true
           configurable: true
           indexable: true
         regulation:
