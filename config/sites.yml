@@ -475,6 +475,10 @@ sites:
           required: false
           configurable: true
           indexable: true
+        content_third:
+          required: false
+          configurable: true
+          indexable: true
 
       department_page: &zdrav_department_page
         site_name:
