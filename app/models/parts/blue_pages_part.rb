@@ -33,13 +33,17 @@ class BluePagesPart < Part
     @category_name ||= requester.response_status == 200 ? requester.response_hash['title'] : "Подразделение не найдено в телефонном справочнике"
   end
 
+  def site_subtree
+    @site_subtree ||= node.site.subtree
+  end
+
   #
   # title гиленсезируется, поэтому ищется так
   #
   def find_page_by_title(title)
     # NOTE: Page.all офигенно фиговая практика
     # TODO: искать ч/з Sunspot или сохранять дублированное поле без гиленсизации
-    Page.all.detect { |node| node.title.gsub(/[[:space:]]/, ' ') == title }
+    site_subtree.detect { |node| node.title.gsub(/[[:space:]]/, ' ') == title }
   end
 
   def administration_page
