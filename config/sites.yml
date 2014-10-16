@@ -518,10 +518,10 @@ sites:
           configurable: true
           indexable: true
 
-      subdivision_page:
+      department_chief_page:
         <<: *zdrav_department_page
 
-      department_chief_page:
+      subdivision_page:
         <<: *zdrav_department_page
 
   family:
