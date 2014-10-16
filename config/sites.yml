@@ -479,6 +479,10 @@ sites:
           required: false
           configurable: true
           indexable: true
+        right_side_links:
+          required: false
+          configurable: true
+          indexable: true
 
       department_page: &zdrav_department_page
         site_name:
