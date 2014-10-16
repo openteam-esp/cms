@@ -9,7 +9,11 @@ class NavigationPart < Part
   validates_presence_of :from_node, :navigation_end_level
 
   def to_json
-    super.merge!(as_json(:only => :type, :methods => 'content'))
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
+  end
+
+  def part_title
+    title
   end
 
   def content
