@@ -450,7 +450,7 @@ sites:
           configurable: true
           indexable: true
 
-      inner_page: &:zdrav_inner_page
+      inner_page: &zdrav_inner_page
         site_name:
           required: true
           configurable: false
