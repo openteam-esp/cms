@@ -450,7 +450,7 @@ sites:
           configurable: true
           indexable: true
 
-      inner_page:
+      inner_page: &:zdrav_inner_page
         site_name:
           required: true
           configurable: false
@@ -523,6 +523,9 @@ sites:
 
       subdivision_page:
         <<: *zdrav_department_page
+
+      zemsky_doctor_page:
+        <<: *zdrav_inner_page
 
   family:
     part_templates:
