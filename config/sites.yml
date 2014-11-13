@@ -484,6 +484,9 @@ sites:
           configurable: true
           indexable: true
 
+      full_inner_page:
+        <<: *zdrav_inner_page
+
       department_page: &zdrav_department_page
         site_name:
           required: true
