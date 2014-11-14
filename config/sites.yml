@@ -530,6 +530,30 @@ sites:
       zemsky_doctor_page:
         <<: *zdrav_inner_page
 
+      search_page:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+
+      sitemap_page:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+
   family:
     part_templates:
       news_list_part: main_news_list_part
