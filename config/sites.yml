@@ -484,6 +484,9 @@ sites:
           configurable: true
           indexable: true
 
+      inner_page_with_social:
+        <<: *tgr_inner_page
+
       full_inner_page:
         <<: *zdrav_inner_page
 
