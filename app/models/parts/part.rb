@@ -60,6 +60,7 @@ class Part < ActiveRecord::Base
       begin
         MessageMaker.make_message('esp.cms.searcher', 'add', url)
       rescue => e
+        logger.fatal "Error make message with: #{e.inspect}"
       end
     end
   end
