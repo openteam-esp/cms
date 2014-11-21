@@ -40,7 +40,7 @@ class DocumentsItemPart < Part
   end
 
   def paper_url(document_id)
-    "#{node.url}-/#{document_id}/"
+    "#{node.url}-/#{document_id}"
   end
 
   def papers_list_url(page = 1)

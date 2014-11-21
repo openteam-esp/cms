@@ -34,7 +34,7 @@ class BluePagesSubscriber
 
     def send_messages_for_item_pages(message, item_id, category_id, level)
       parts(level, category_id).map(&:item_page).compact.each do |page|
-        MessageMaker.make_message 'esp.cms.searcher', message, "#{page.url}-/categories/#{category_id}/items/#{item_id}/"
+        MessageMaker.make_message 'esp.cms.searcher', message, "#{page.url}-/categories/#{category_id}/items/#{item_id}"
       end
     end
 
