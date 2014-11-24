@@ -7,7 +7,7 @@ def index(parts)
     begin
       MessageMaker.make_message('esp.cms.searcher', 'add', url)
     rescue => e
-      logger.fatal "Error make message with: #{e.inspect}"
+      puts "Error make message with: #{e.inspect}"
     end
     bar.increment!
   end
@@ -19,7 +19,7 @@ task :reindex_site, [:slug] => :environment do |t, args|
   begin
     MessageMaker.make_message('esp.cms.searcher', 'remove', site.client_url)
   rescue => e
-    logger.fatal "Error make message with: #{e.inspect}"
+    puts "Error make message with: #{e.inspect}"
   end
   index Part.includes(:node).where(site.descendant_conditions)
 end
