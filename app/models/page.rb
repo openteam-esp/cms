@@ -29,7 +29,7 @@ class Page < Node
     end
 
     def generate_slug
-      self.slug = ActiveSupport::Inflector.transliterate(self.title).gsub(/[^[:alnum:]]+/, '-').downcase
+      self.slug = ActiveSupport::Inflector.transliterate(self.title).gsub(/[^[:alnum:]]+/, '-').downcase.gsub(/\A-+/, '').gsub(/-+\z/, '')
     end
 end
 
