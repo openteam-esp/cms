@@ -4,7 +4,7 @@ class Part < ActiveRecord::Base
 
   attr_accessor :current_node, :params, :resource_id
 
-  belongs_to :node
+  belongs_to :node, :touch => true
 
   validates_presence_of :node, :region, :template
 
