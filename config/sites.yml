@@ -1186,6 +1186,16 @@ sites:
       search_results_page:
         <<: *inotomsk_inner_page
 
+  tusur:
+    templates:
+      main_page:
+        site_name:
+          required: true
+          configurable: true
+        main_navigation:
+          required: true
+          configurable: true
+
   svchikr:
     part_templates:
       news_list_part: main_news_list_part
