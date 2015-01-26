@@ -1,16 +1,16 @@
-<%= javascript_include_tag "esp-ckeditor/application" %>
+<script src='/assets/esp-ckeditor/application.js' type='text/javascript'></script>
 <%= javascript_include_tag 'info_plugin.js' %>
 
 <%= form.inputs do %>
   <%= form.input :region, :as => :hidden %>
   <%= form.input :type, :as => :hidden %>
-  <%= form.input :html_info_path, :as => :hidden, :input_html => {:id => 'info_path'} %>
+  <%= form.input :html_info_path, :as => :hidden, :input_html => { :id => 'info_path' } %>
   <li class='info_wrapper'>
     <%= link_to content_tag(:span, t('create_edit_link'), :class => 'link'), '#', :parent_data => form.object.node.id, :class => 'info_link' %>
     <%= link_to "(#{t('choose_link')})", '#', :class => 'choose_link' %>
   </li>
 <% end %>
 
-<div class="show_info_path">
+<div class='show_info_path'>
   <%= raw resource.body if resource.html_info_path %>
 </div>
