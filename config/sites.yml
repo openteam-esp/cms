@@ -1206,9 +1206,6 @@ sites:
         main_navigation:
           required: true
           configurable: false
-        secondary_navigation:
-          required: true
-          configurable: false
         content:
           required: false
           configurable: true
@@ -1219,9 +1216,6 @@ sites:
           required: true
           configurable: false
         main_navigation:
-          required: true
-          configurable: false
-        secondary_navigation:
           required: true
           configurable: false
         content:
