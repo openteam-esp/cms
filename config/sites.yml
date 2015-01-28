@@ -1294,6 +1294,38 @@ sites:
       sitemap:
         <<: *svchikr_simple_page
 
+  fnms:
+    templates:
+      main_page:
+        site_name:
+          required: true
+          configurable: true
+        main_navigation:
+          required: true
+          configurable: true
+        content:
+          required: false
+          configurable: true
+          indexable: true
+        banners:
+          required: false
+          configurable: true
+          indexable: true
+      inner_page:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        content:
+          required: false
+          configurable: true
+          indexable: true
+        banners:
+          required: false
+          configurable: false
+
   camps:
     templates:
       main_page:
@@ -1414,6 +1446,8 @@ sites:
 
   magistracy:
     <<: *abiturient_site
+
+
 
   expert:
     templates:
