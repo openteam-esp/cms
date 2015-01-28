@@ -1294,7 +1294,7 @@ sites:
       sitemap:
         <<: *svchikr_simple_page
 
-  fnms:
+  pnms:
     templates:
       main_page:
         site_name:
