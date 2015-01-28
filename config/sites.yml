@@ -1323,7 +1323,7 @@ sites:
           configurable: true
           indexable: true
         banners:
-          required: false
+          required: true
           configurable: false
 
   camps:
