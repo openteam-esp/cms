@@ -1403,7 +1403,7 @@ sites:
           configurable: true
           indexable: true
 
-      inner_page:
+      inner_page: &abiturient_inner_page
         site_name:
           required: true
           configurable: false
@@ -1447,6 +1447,9 @@ sites:
           configurable: true
           indexable: true
 
+      contacts:
+        <<: *abiturient_inner_page
+
       sitemap:
         site_name:
           required: true
@@ -1461,8 +1464,6 @@ sites:
 
   magistracy:
     <<: *abiturient_site
-
-
 
   expert:
     templates:
