@@ -1326,7 +1326,7 @@ sites:
           required: false
           configurable: true
           indexable: true
-      inner_page:
+      inner_page: &pnms_inner_page
         site_name:
           required: true
           configurable: false
@@ -1340,6 +1340,8 @@ sites:
         banners:
           required: true
           configurable: false
+      on_client:
+        <<: *pnms_inner_page
 
   camps:
     templates:
