@@ -479,6 +479,10 @@ sites:
           required: false
           configurable: true
           indexable: true
+        banners:
+          required: false
+          configurable: true
+          indexable: false
         right_side_links:
           required: false
           configurable: true
