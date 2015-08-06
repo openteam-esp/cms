@@ -1187,6 +1187,9 @@ sites:
           configurable: true
           indexable: true
 
+      on_client:
+        <<: *inotomsk_inner_page
+
       search_results_page:
         <<: *inotomsk_inner_page
 
