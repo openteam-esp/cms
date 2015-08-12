@@ -1085,6 +1085,18 @@ sites:
           required: false
           configurable: true
           indexable: true
+        content_second:
+          required: false
+          configurable: true
+          indexable: true
+        content_third:
+          required: false
+          configurable: true
+          indexable: true
+        content_fourth:
+          required: false
+          configurable: true
+          indexable: true
 
       event_page:
         site_name:
