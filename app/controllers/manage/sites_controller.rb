@@ -9,9 +9,17 @@ class Manage::SitesController < Manage::ApplicationController
     end
   end
 
+  def destroy
+    parent = resource.parent
+
+    destroy! {
+      redirect_to parent
+    }
+  end
+
   protected
+
     def collection
       @sites ||= Site.ordered
     end
-
 end
