@@ -396,6 +396,35 @@ sites:
           required: true
           configurable: false
 
+  gubernator:
+    part_templates:
+      news_list_part: fotoreports_news_list_part
+      news_item_part: fotoreports_news_item_part
+
+    templates:
+      main_page:
+        site_name:
+          required: true
+          configurable: true
+        main_navigation:
+          required: true
+          configurable: true
+        breadcrumbs:
+          required: true
+          configurable: true
+        gallery_of_honor:
+          required: false
+          configurable: true
+          indexable: false
+        news:
+          required: false
+          configurable: true
+          indexable: false
+        slogan:
+          required: false
+          configurable: true
+          indexable: false
+
   uvto:
     <<: *typical_site
 
