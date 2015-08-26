@@ -5,7 +5,7 @@ class GalleryPicture < ActiveRecord::Base
 
   belongs_to :gallery_part
 
-  validates_presence_of :description, :picture_url
+  validates_presence_of :picture_url
 
   default_scope order(:position, :id)
 
