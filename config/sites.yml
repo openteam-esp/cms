@@ -444,6 +444,15 @@ sites:
           indexable: true
 
       hobbies_page:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
         content:
           required: false
           configurable: true
