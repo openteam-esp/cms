@@ -443,6 +443,24 @@ sites:
           configurable: true
           indexable: true
 
+      hobbies_page:
+        content:
+          required: false
+          configurable: true
+          indexable: true
+        first_gallery:
+          required: false
+          configurable: true
+          indexable: false
+        second_gallery:
+          required: false
+          configurable: true
+          indexable: false
+        third_gallery:
+          required: false
+          configurable: true
+          indexable: false
+
   uvto:
     <<: *typical_site
 
