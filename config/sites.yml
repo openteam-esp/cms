@@ -453,6 +453,9 @@ sites:
         breadcrumbs:
           required: true
           configurable: false
+        subnavigation:
+          required: true
+          configurable: true
         content:
           required: false
           configurable: true
