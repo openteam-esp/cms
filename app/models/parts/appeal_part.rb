@@ -10,10 +10,16 @@ class AppealPart < Part
   end
 
   def content
+    return '' # below code is deprecated
+
     res = '<div class="remote_wrapper">'
     res << response_body.force_encoding('utf-8')
     res << '</div>'
     res
+  end
+
+  def response_status
+    200 # override status to success
   end
 
   private
