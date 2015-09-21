@@ -26,7 +26,7 @@ class NavigationPart < Part
 
   private
     def selected_children(node)
-      return node.children.where(:navigation_group => navigation_group).order('navigation_position') if navigation_group?
+      return node.children.where("navigation_group like '%#{navigation_group}%'").order('navigation_position') if navigation_group?
       node.children.order('navigation_position')
     end
 
@@ -35,7 +35,8 @@ class NavigationPart < Part
 
       hash[node.slug].merge!('external_link' => node.external_link.to_s)
       hash[node.slug].merge!('lastmod' => node.updated_at)
-      hash[node.slug].merge!('selected' => true) if current_node.path_ids.include?(node.id) && node != from_node
+      hash[node.slug].merge!('navigation_group' => node.navigation_group)
+      hash[node.slug].merge!('selected' => current_node.path_ids.include?(node.id) && node != from_node)
 
       selected_children(node).navigable.each do |child|
         hash[node.slug]['children'] ||= {}
