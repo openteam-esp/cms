@@ -1297,12 +1297,18 @@ sites:
         secondary_navigation:
           required: true
           configurable: true
+        breadcrumbs:
+          required: true
+          configurable: true
 
       inner_page:
         site_name:
           required: true
           configurable: false
         main_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
           required: true
           configurable: false
         right_navigation:
