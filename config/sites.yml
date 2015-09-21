@@ -1320,21 +1320,6 @@ sites:
         right_contacts:
           required: true
           configurable: true
-        left_navigation:
-          required: true
-          configurable: true
-        left_links:
-          required: true
-          configurable: true
-        left_advert:
-          required: true
-          configurable: true
-        left_documents:
-          required: true
-          configurable: true
-        left_contacts:
-          required: true
-          configurable: true
         content:
           required: false
           configurable: true
