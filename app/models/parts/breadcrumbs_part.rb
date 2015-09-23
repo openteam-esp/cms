@@ -1,6 +1,6 @@
 class BreadcrumbsPart < Part
   def to_json
-    super.merge!(as_json(:only => :type, :methods => 'content'))
+    super.merge!(as_json(:only => :type, :methods => ['content', 'extend_content']))
   end
 
   def response_status
@@ -18,6 +18,30 @@ class BreadcrumbsPart < Part
     end
 
     hash.merge!(current_node.page_title => current_node.page_route)
+  end
+
+  def extend_content
+    content = []
+
+    return content if current_node.is_a? Locale
+
+    current_node.path[1..-2].each do |n|
+      n.parts_params = current_node.parts_params
+      content << {
+        :title => n.page_title,
+        :slug => n.slug,
+        :path => n.page_route,
+        :external_link => n.external_link,
+      }
+    end
+    content << {
+      :title => current_node.page_title,
+      :slug => current_node.slug,
+      :path => current_node.page_route,
+      :external_link => current_node.external_link,
+    }
+
+    content
   end
 
   private
