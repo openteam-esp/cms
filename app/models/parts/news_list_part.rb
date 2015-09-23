@@ -38,7 +38,7 @@ class NewsListPart < Part
   end
 
   def archive_dates
-    { 'min_date' => min_archive_date, 'max_date' => max_archive_date }
+    channel_hash['archive_dates']
   end
 
   def collection_link
@@ -141,16 +141,12 @@ class NewsListPart < Part
       []
     end
 
-    def min_archive_date
-      response_headers['X-Min-Date']
-    end
-
-    def max_archive_date
-      response_headers['X-Max-Date']
-    end
-
     def channels_hash
       @channels_hash ||= Requester.new("#{news_url}/channels").response_hash
+    end
+
+    def channel_hash
+      @channel_hash ||= Requester.new("#{news_url}/channels/#{news_channel}", headers_accept).response_hash
     end
 end
 

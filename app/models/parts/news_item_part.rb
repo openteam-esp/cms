@@ -22,7 +22,7 @@ class NewsItemPart < Part
   validates :news_mlt_number_of_months, :presence => true, :numericality => { :only_integer => true, :greater_than => 0 }
 
   def to_json
-    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'archive_dates', 'content']))
   end
 
   def content
@@ -52,7 +52,7 @@ class NewsItemPart < Part
   end
 
   def news_pages_count
-    Requester.new(news_list_url, headers_accept).response_headers['X-Total-Pages'].to_i
+    response_headers['X-Total-Pages'].to_i
   end
 
   def channel_description
@@ -63,7 +63,12 @@ class NewsItemPart < Part
     @channels_for_select ||= channels_hash.map { |a| [ "#{'&nbsp;'*a['depth']*2}#{a['title']}".html_safe, a['id'] ] }
   end
 
+  def archive_dates
+    channel_hash['archive_dates']
+  end
+
   private
+
     def need_to_reindex?
       news_channel_changed? || super
     end
@@ -102,6 +107,10 @@ class NewsItemPart < Part
 
     def channels_hash
       @channels_hash ||= Requester.new("#{news_url}/channels").response_hash
+    end
+
+    def channel_hash
+      @channel_hash ||= Requester.new("#{news_url}/channels/#{news_channel}", headers_accept).response_hash
     end
 end
 
