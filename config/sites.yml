@@ -1301,7 +1301,7 @@ sites:
           required: true
           configurable: true
 
-      inner_page:
+      inner_page: &tusur_inner_page
         site_name:
           required: true
           configurable: false
@@ -1330,6 +1330,12 @@ sites:
           required: false
           configurable: true
           indexable: true
+
+      news_list_with_months:
+        <<: *tusur_inner_page
+
+      news_list_archive:
+        <<: *tusur_inner_page
 
       sitemap:
         site_name:
