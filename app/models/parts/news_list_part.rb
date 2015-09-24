@@ -20,7 +20,7 @@ class NewsListPart < Part
   has_enums
 
   def to_json
-    super.merge!(as_json(:only => :type, :methods => ['part_title', 'archive_dates', 'content']))
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'archive_dates', 'archive_statistics', 'content']))
   end
 
   def content
@@ -39,6 +39,10 @@ class NewsListPart < Part
 
   def archive_dates
     channel_hash['archive_dates']
+  end
+
+  def archive_statistics
+    channel_hash['archive_statistics']
   end
 
   def collection_link

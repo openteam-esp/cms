@@ -168,7 +168,7 @@ class Node < ActiveRecord::Base
   end
 
   def url
-    "#{site.client_url}#{route_without_site}/"
+    "#{site.client_url}#{route_without_site}"
   end
 
   def cache_route!
