@@ -22,7 +22,11 @@ class NewsItemPart < Part
   validates :news_mlt_number_of_months, :presence => true, :numericality => { :only_integer => true, :greater_than => 0 }
 
   def to_json
-    super.merge!(as_json(:only => :type, :methods => ['part_title', 'archive_dates', 'archive_statistics', 'path_to_list', 'content']))
+    super.merge!(as_json(:only => :type, :methods => [
+      'part_title', 'archive_dates', 'archive_statistics',
+      'path_to_site_news_list', 'navigation_title_of_site_news_list',
+      'content'
+    ]))
   end
 
   def content
@@ -47,8 +51,12 @@ class NewsItemPart < Part
     URI.escape("#{news_url}?utf8=✓&entry_search[channel_ids][]=#{news_channel}&per_page=50&page=#{page}")
   end
 
-  def path_to_list
+  def path_to_site_news_list
     node.parent.route_without_site
+  end
+
+  def navigation_title_of_site_news_list
+    node.parent.navigation_title
   end
 
   def news_slugs_for_page(page)
