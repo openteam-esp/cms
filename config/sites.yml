@@ -1331,12 +1331,6 @@ sites:
           configurable: true
           indexable: true
 
-      news_list_with_months:
-        <<: *tusur_inner_page
-
-      news_list_archive:
-        <<: *tusur_inner_page
-
       sitemap:
         site_name:
           required: true
