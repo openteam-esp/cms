@@ -108,3 +108,23 @@
           display: none
         &.inline-block
           +inline-block
+
+  .spotlight_items
+    .fields
+      margin: 10px 0
+    .sortable
+      +clearfix
+      background-color: #fff
+
+      .sortable_handler
+        width: 16px
+        height: 16px
+        float: left
+        overflow: hidden
+        cursor: move
+        text-indent: -9999em
+        background: transparent image_url('sort.png') no-repeat center center
+        margin-top: 27px
+
+      ul
+        margin-left: 25px

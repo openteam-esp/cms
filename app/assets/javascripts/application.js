@@ -101,6 +101,19 @@ function init_sortable() {
   });
 };
 
+function init_spotlight() {
+  if ($('.spotlight_items').length) {
+    $('.spotlight_items').sortable({
+      axis: 'y',
+      update: function(e, ui) {
+        $('.spotlight_position', e.target).each(function(index, item) {
+          $(this).val(index);
+        });
+      }
+    });
+  }
+}
+
 function toggle_position_fields(field) {
   if ($(field).is(":checked")) {
     $("#page_navigation_group").removeAttr("disabled");
@@ -195,6 +208,7 @@ $(function() {
   init_date_picker();
   init_tabs();
   init_sortable();
+  init_spotlight();
   manipulate_position_fields();
   manipulate_titles();
   choose_picture();

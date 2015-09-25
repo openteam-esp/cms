@@ -7,8 +7,13 @@
 
   <div class='spotlight_items'>
     <%= form.semantic_fields_for :spotlight_items do |f| %>
-      <%= f.input :url, :as => :string, :input_html => { :class => 'spotlight_url' } %>
-      <%= f.input :position, :as => :hidden, :input_html => { :class => 'spotlight_position' } %>
+      <div class='sortable'>
+        <span class='sortable_handler' title='хватай и тащи!'>хвать</span>
+        <ul>
+          <%= f.input :url, :as => :string, :input_html => { :class => 'spotlight_url' } %>
+          <%= f.input :position, :as => :hidden, :input_html => { :class => 'spotlight_position' } %>
+        </ul>
+      </div>
     <% end %>
 
     <%= form.link_to_add t('add_spotlight_item'), :spotlight_items, :class => 'button icon add' %>
