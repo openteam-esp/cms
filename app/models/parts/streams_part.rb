@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class StreamsPart < Part
   validates_presence_of :streams_degree
   attr_accessible :streams_degree

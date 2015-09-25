@@ -1,4 +1,3 @@
-# encoding: utf-8
 class GalleryPicture < ActiveRecord::Base
 
   attr_accessible :description, :picture_url, :position

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class DirectoryPresentationPart < Part
   attr_accessible :directory_presentation_id, :directory_presentation_item_page_id,
     :directory_presentation_photo_width, :directory_presentation_photo_height,

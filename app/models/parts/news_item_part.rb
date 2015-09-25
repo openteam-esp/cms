@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class NewsItemPart < Part
   attr_accessible :news_channel
   attr_accessible :news_event_entry

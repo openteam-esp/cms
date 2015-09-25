@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class GpoProjectListPart < Part
   validates_presence_of :gpo_project_list_chair_id
 

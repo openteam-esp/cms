@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class SearchPart < Part
   attr_accessible :search_per_page
 

@@ -52,9 +52,9 @@ GEM
       eventmachine
     ancestry (1.3.0)
       activerecord (>= 2.3.14)
-    annotate (2.6.1)
-      activerecord (>= 2.3.0)
-      rake (>= 0.8.7)
+    annotate (2.6.10)
+      activerecord (>= 3.2, <= 4.3)
+      rake (~> 10.4)
     arel (3.0.3)
     atomic (1.1.16)
     attribute_normalizer (1.1.0)

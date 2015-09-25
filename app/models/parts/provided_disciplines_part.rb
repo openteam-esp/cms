@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class ProvidedDisciplinesPart < Part
   validates_presence_of :provided_disciplines_subdepartment
   attr_accessible :provided_disciplines_subdepartment

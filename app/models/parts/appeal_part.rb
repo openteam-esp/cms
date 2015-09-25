@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class AppealPart < Part
   validates_presence_of :appeal_section_slug
 

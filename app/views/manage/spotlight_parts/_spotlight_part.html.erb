@@ -1,0 +1,12 @@
+<h3><%= spotlight_part.title %></h3>
+
+<ol>
+  <% spotlight_part.spotlight_items.each do |item| %>
+    <li>
+      <div class='presentation'>
+        <b>№:</b> <%= item.position %>
+        <%= link_to item.url, item.url, :target => '_blank' %>
+      </div>
+    </li>
+  <% end %>
+</ol>

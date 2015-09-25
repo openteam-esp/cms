@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class DocumentsItemPart < Part
   attr_accessible :documents_item_page_id, :documents_kind, :documents_contexts
 

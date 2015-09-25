@@ -1,4 +1,3 @@
-# encoding: utf-8
 class GalleryPart < Part
 
   attr_accessible :gallery_pictures_attributes

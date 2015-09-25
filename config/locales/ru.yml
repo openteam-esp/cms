@@ -7,6 +7,7 @@ ru:
   choose_picture:     Выбрать картинку
   add:                Добавить
   add_picture:        Добавить картинку
+  add_spotlight_item: Добавить ссылку
   remove:             Удалить
   view_in_public:     Публичный вид
 
@@ -123,6 +124,9 @@ ru:
 
       gallery_picture:
         description: Описание
+
+      spotlight_item:
+        url: URL
 
       gpo_project_list_part:
         gpo_project_list_chair_id: Кафедра

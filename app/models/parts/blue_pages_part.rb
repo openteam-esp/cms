@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class BluePagesPart < Part
   attr_accessible :blue_pages_category_id
   attr_accessible :blue_pages_expand

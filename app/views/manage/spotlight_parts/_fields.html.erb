@@ -1,0 +1,16 @@
+<%= javascript_include_tag 'info_plugin.js' %>
+<%= javascript_include_tag 'gallery_pictures_sort.js' %>
+
+<%= form.inputs do %>
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
+
+  <div class='spotlight_items'>
+    <%= form.semantic_fields_for :spotlight_items do |f| %>
+      <%= f.input :url, :as => :string, :input_html => { :class => 'spotlight_url' } %>
+      <%= f.input :position, :as => :hidden, :input_html => { :class => 'spotlight_position' } %>
+    <% end %>
+
+    <%= form.link_to_add t('add_spotlight_item'), :spotlight_items, :class => 'button icon add' %>
+  </div>
+<% end %>
