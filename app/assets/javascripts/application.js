@@ -103,11 +103,27 @@ function init_sortable() {
 
 function init_spotlight() {
   if ($('.spotlight_items').length) {
+    $('.spotlight_items').bind('nested:fieldAdded', function(e) {
+      max_position = 0
+      positions = $('.fields:visible .spotlight_position', $(e.target).closest('.spotlight_items')).map(function() {
+        return parseInt($(this).val());
+      }).get();
+      positions = positions.filter(Number);
+      if (positions.length) {
+        max_position = Math.max.apply(null, positions);
+      }
+      $('.spotlight_position', e.target).val(max_position + 1);
+    })
+    $('.spotlight_items').bind('nested:fieldRemoved', function(e) {
+      $('.fields:visible .spotlight_position', $(e.target).closest('.spotlight_items')).each(function(index, item) {
+        $(this).val(index + 1);
+      });
+    });
     $('.spotlight_items').sortable({
       axis: 'y',
       update: function(e, ui) {
-        $('.spotlight_position', e.target).each(function(index, item) {
-          $(this).val(index);
+        $('.fields:visible .spotlight_position', e.target).each(function(index, item) {
+          $(this).val(index + 1);
         });
       }
     });

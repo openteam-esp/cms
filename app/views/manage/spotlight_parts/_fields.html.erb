@@ -13,6 +13,7 @@
           <%= f.input :url, :as => :string, :input_html => { :class => 'spotlight_url' } %>
           <%= f.input :position, :as => :hidden, :input_html => { :class => 'spotlight_position' } %>
         </ul>
+        <%= f.link_to_remove t('remove'), :class => 'button trash icon' %>
       </div>
     <% end %>
 
