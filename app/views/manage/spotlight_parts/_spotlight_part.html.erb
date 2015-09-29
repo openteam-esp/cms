@@ -1,12 +1,16 @@
 <h3><%= spotlight_part.title %></h3>
 
+<p class='actions'><%= link_to 'Предпросмотр элементов', '#', :class => 'js-spotlight-preview button icon loop' %></p>
+
 <ol>
   <% spotlight_part.spotlight_items.each do |item| %>
     <li>
       <div class='presentation'>
-        <b>№:</b> <%= item.position %>
-        <%= link_to item.url, item.url, :target => '_blank' %>
+        <b>№: <%= item.position %></b>
+        <%= link_to item.url, item.url, :target => '_blank', :class => 'js-preview spotlight_url' %>
       </div>
+      <div class='preview_spotlight_item'></div>
+      <hr />
     </li>
   <% end %>
 </ol>

@@ -23,6 +23,7 @@ Cms::Application.routes.draw do
     resources :pages,   :only => [:show, :edit, :update, :destroy]
     resources :parts,   :only => [:edit, :update, :destroy]
 
+    get 'spotlight' => 'spotlight#proxy'
 
     root :to => 'sites#index'
   end

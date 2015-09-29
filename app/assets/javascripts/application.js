@@ -14,7 +14,19 @@
  *= require treeview/jquery.treeview.js
  *= require treeview/jquery.treeview.edit.js
  *= require treeview/jquery.treeview.async.js
+ *= require jquery-colorbox.js
  */
+
+function init_colorbox() {
+  $('.js-colorbox').colorbox({
+    maxWidth: '90%',
+    maxHeight: '90%',
+    current: '{current} / {total}',
+    previous: 'назад',
+    next: 'вперед',
+    close: 'закрыть'
+  });
+};
 
 function init_tree() {
   if ($.fn.treeview && $('.nodes_tree').length) {
@@ -102,6 +114,7 @@ function init_sortable() {
 };
 
 function init_spotlight() {
+  /* manipulate on form */
   if ($('.spotlight_items').length) {
     $('.spotlight_items').bind('nested:fieldAdded', function(e) {
       max_position = 0
@@ -126,6 +139,73 @@ function init_spotlight() {
           $(this).val(index + 1);
         });
       }
+    });
+  }
+
+  /* preview on part show */
+  if ($('.js-spotlight-preview').length) {
+    $('.js-spotlight-preview').click(function() {
+      collection = $('.spotlight_part .spotlight_url:visible');
+      collection.each(function(index, item) {
+        if ($(this).is('a')) {
+          var context = $(this).closest('li');
+          var elem = $(this);
+          var data_url = elem.attr('href');
+          var preview_block = $('.preview_spotlight_item', context);
+        }
+        if ($(this).is('input')) {
+          var context = $(this).closest('ul');
+          var elem = $(this);
+          var data_url = elem.val();
+          var preview_block = $('.preview_spotlight_item', context);
+        }
+        console.log(this)
+
+        $.ajax({
+          url: '/manage/spotlight',
+          data: { url: data_url },
+          type: 'GET',
+          context: context,
+          dataType: 'json',
+          beforeSend: function(jqXHR, settings) {
+            $(preview_block).html('');
+          },
+          complete: function(jqXHR, textStatus) {
+            $(preview_block).html('').slideUp(function() {
+              if (textStatus == 'success') {
+                response = jqXHR.responseText;
+                json = JSON.parse(response);
+                $('<p>', {html: '<b>code</b>: ' + json.code}).appendTo(preview_block);
+                if (typeof json.body === 'object') {
+                  $('<p>', {html: '<b>type</b>: ' + json.body.type}).appendTo(preview_block);
+                  $('<p>', {html: '<b>slug</b>: ' + json.body.slug}).appendTo(preview_block);
+                  $('<p>', {html: '<b>title</b>: ' + json.body.title}).appendTo(preview_block);
+                  $('<p>', {html: '<b>annotation</b>: ' + json.body.annotation}).appendTo(preview_block);
+                  if (json.body.images.length) {
+
+                    var content = json.body.images.map(function(e) {
+                      return '<a href="' + e.url + '" target="_blank" class="js-colorbox" rel="' + json.body.slug + '">' +
+                        '<img width="100" height="100" src="' + e.url.replace(/\/\d+-\d+\//, '/100-100!n/') + '" />' +
+                        '</a>';
+                    });
+                    $('<p>', {html: '<b>images</b>: <br />' + content.join(' ')}).appendTo(preview_block);
+                  }
+                } else {
+                  $('<p>', {html: '<b>text</b>: ' + json.body}).appendTo(preview_block);
+                }
+              }
+              if (textStatus == 'error') {
+                $('<p>', { class: 'error', text: 'code: ' + jqXHR.status}).appendTo(preview_block);
+                $('<p>', { class: 'error', text: 'text: ' + jqXHR.statusText}).appendTo(preview_block);
+              }
+              preview_block.slideDown();
+              init_colorbox();
+            });
+          }
+        });
+      });
+
+      return false;
     });
   }
 }

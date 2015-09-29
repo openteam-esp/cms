@@ -1,17 +1,17 @@
-<%= javascript_include_tag 'info_plugin.js' %>
-<%= javascript_include_tag 'gallery_pictures_sort.js' %>
-
 <%= form.inputs do %>
   <%= form.input :region, :as => :hidden %>
   <%= form.input :type, :as => :hidden %>
 
   <div class='spotlight_items'>
+    <p><%= link_to 'Предпросмотр элементов', '#', :class => 'js-spotlight-preview button icon loop' %></p>
+
     <%= form.semantic_fields_for :spotlight_items do |f| %>
       <div class='sortable'>
         <span class='sortable_handler' title='хватай и тащи!'>хвать</span>
         <ul>
           <%= f.input :url, :as => :string, :input_html => { :class => 'spotlight_url' } %>
           <%= f.input :position, :as => :hidden, :input_html => { :class => 'spotlight_position' } %>
+          <li class='preview_spotlight_item'></li>
         </ul>
         <%= f.link_to_remove t('remove'), :class => 'button trash icon' %>
       </div>

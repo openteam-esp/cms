@@ -16,4 +16,5 @@
  *= require content
  *= require footer
  *= require esp/views
+ *= require jquery-colorbox/example4/colorbox
  */

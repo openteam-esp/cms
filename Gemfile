@@ -32,11 +32,16 @@ group :default do
   gem 'progress_bar', :require => false
   gem 'rack-utf8_sanitizer'
   gem 'rails', '~> 3.2.13'
+  gem 'rest-client'
   gem 'russian'
   gem 'sanitize'
   gem 'show_for'
   gem 'simple-navigation'
   gem 'sso-auth'
+end
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-jquery-colorbox'
 end
 
 group :development do
