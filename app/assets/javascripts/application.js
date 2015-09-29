@@ -175,12 +175,18 @@ function init_spotlight() {
               if (textStatus == 'success') {
                 response = jqXHR.responseText;
                 json = JSON.parse(response);
-                $('<p>', {html: '<b>code</b>: ' + json.code}).appendTo(preview_block);
+                var code_class = '';
+                if (json.code == 200 || json.code == 302) {
+                  code_class = 'success';
+                } else {
+                  code_class = 'error';
+                }
+                $('<p>', { class: code_class, html: '<b>code</b>: ' + json.code }).appendTo(preview_block);
                 if (typeof json.body === 'object') {
-                  $('<p>', {html: '<b>type</b>: ' + json.body.type}).appendTo(preview_block);
-                  $('<p>', {html: '<b>slug</b>: ' + json.body.slug}).appendTo(preview_block);
-                  $('<p>', {html: '<b>title</b>: ' + json.body.title}).appendTo(preview_block);
-                  $('<p>', {html: '<b>annotation</b>: ' + json.body.annotation}).appendTo(preview_block);
+                  $('<p>', { class: code_class, html: '<b>type</b>: ' + json.body.type }).appendTo(preview_block);
+                  $('<p>', { class: code_class, html: '<b>slug</b>: ' + json.body.slug }).appendTo(preview_block);
+                  $('<p>', { class: code_class, html: '<b>title</b>: ' + json.body.title }).appendTo(preview_block);
+                  $('<p>', { class: code_class, html: '<b>annotation</b>: ' + json.body.annotation }).appendTo(preview_block);
                   if (json.body.images.length) {
 
                     var content = json.body.images.map(function(e) {
@@ -188,15 +194,15 @@ function init_spotlight() {
                         '<img width="100" height="100" src="' + e.url.replace(/\/\d+-\d+\//, '/100-100!n/') + '" />' +
                         '</a>';
                     });
-                    $('<p>', {html: '<b>images</b>: <br />' + content.join(' ')}).appendTo(preview_block);
+                    $('<p>', { class: code_class, html: '<b>images</b>: <br />' + content.join(' ') }).appendTo(preview_block);
                   }
                 } else {
-                  $('<p>', {html: '<b>text</b>: ' + json.body}).appendTo(preview_block);
+                  $('<p>', { class: code_class, html: '<b>text</b>: ' + json.body }).appendTo(preview_block);
                 }
               }
               if (textStatus == 'error') {
-                $('<p>', { class: 'error', text: 'code: ' + jqXHR.status}).appendTo(preview_block);
-                $('<p>', { class: 'error', text: 'text: ' + jqXHR.statusText}).appendTo(preview_block);
+                $('<p>', { class: 'error', text: 'code: ' + jqXHR.status }).appendTo(preview_block);
+                $('<p>', { class: 'error', text: 'text: ' + jqXHR.statusText }).appendTo(preview_block);
               }
               preview_block.slideDown();
               init_colorbox();
