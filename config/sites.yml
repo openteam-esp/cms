@@ -1300,6 +1300,10 @@ sites:
         breadcrumbs:
           required: true
           configurable: true
+        news:
+          required: false
+          configurable: true
+          indexable: true
 
       inner_page: &tusur_inner_page
         site_name:
