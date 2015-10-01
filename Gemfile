@@ -12,6 +12,7 @@ group :default do
   gem 'ancestry'
   gem 'attribute_normalizer'
   gem 'audited-activerecord'
+  gem 'awesome_print'
   gem 'default_value_for'
   gem 'devise-russian'
   gem 'el_vfs_client'
