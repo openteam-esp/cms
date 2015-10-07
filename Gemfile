@@ -19,6 +19,7 @@ group :default do
   gem 'esp-ckeditor', '= 0.1.3'
   gem 'esp-commons'
   gem 'esp-views'
+  gem 'enumerize'
   gem 'formtastic', '< 2.2.0'
   gem 'gilenson'
   gem 'grape'

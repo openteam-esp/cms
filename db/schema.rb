@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150925055209) do
+ActiveRecord::Schema.define(:version => 20151002045237) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -174,6 +174,13 @@ ActiveRecord::Schema.define(:version => 20150925055209) do
     t.integer  "spotlight_part_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "kind"
+    t.string   "title"
+    t.text     "annotation"
+    t.string   "legend"
+    t.datetime "since"
+    t.datetime "starts_on"
+    t.datetime "ends_on"
   end
 
   add_index "spotlight_items", ["spotlight_part_id"], :name => "index_spotlight_items_on_spotlight_part_id"

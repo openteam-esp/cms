@@ -1,17 +1,29 @@
+<%= javascript_include_tag 'esp-ckeditor/application' %>
+<%= javascript_include_tag 'info_plugin.js' %>
+
 <%= form.inputs do %>
   <%= form.input :region, :as => :hidden %>
   <%= form.input :type, :as => :hidden %>
 
   <div class='spotlight_items'>
-    <p><%= link_to 'Предпросмотр элементов', '#', :class => 'js-spotlight-preview button icon loop' %></p>
-
     <%= form.semantic_fields_for :spotlight_items do |f| %>
-      <div class='sortable'>
-        <span class='sortable_handler' title='хватай и тащи!'>хвать</span>
+      <div class='item'>
+        <span class='handler_up' title='вверх'>вверх</span>
+        <span class='handler_down' title='вниз'>вниз</span>
         <ul>
-          <%= f.input :url, :as => :string, :input_html => { :class => 'spotlight_url' } %>
           <%= f.input :position, :as => :hidden, :input_html => { :class => 'spotlight_position' } %>
-          <li class='preview_spotlight_item'></li>
+          <%= f.input :kind, :input_html => { :class => 'spotlight_kind' } %>
+          <%= f.input :legend, :input_html => { :placeholder => 'Пресс-релизы' } %>
+          <%= f.input :title %>
+          <%= f.input :url, :as => :string %>
+          <%#= f.input :annotation, :as => :ckeditor %>
+          <%= f.input :since, :start_year => Time.zone.now.year, :end_year => (Time.zone.now - 10.years).year,
+            :wrapper_html => { :class => :hiddeny } %>
+          <%= f.input :starts_on, :start_year => Time.zone.now.year, :end_year => (Time.zone.now - 10.years).year,
+            :wrapper_html => { :class => :hiddeny } %>
+          <%= f.input :ends_on, :start_year => Time.zone.now.year, :end_year => (Time.zone.now - 10.years).year,
+            :wrapper_html => { :class => :hiddeny } %>
+          <li><hr /></li>
         </ul>
         <%= f.link_to_remove t('remove'), :class => 'button trash icon' %>
       </div>

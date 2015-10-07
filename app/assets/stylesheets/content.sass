@@ -117,8 +117,9 @@
   .spotlight_items
     .fields
       margin: 10px 0
-    .sortable
+    .item
       +clearfix
+      position: relative
       background-color: #fff
 
       .sortable_handler
@@ -131,10 +132,33 @@
         background: transparent image_url('sort.png') no-repeat center center
         margin-top: 27px
 
+      .handler_up
+        width: 16px
+        height: 16px
+        position: absolute
+        top: 27px
+        left: 0
+        overflow: hidden
+        cursor: pointer
+        text-indent: -9999em
+        background: transparent image_url('handler_up.png') no-repeat center center
+
+      .handler_down
+        width: 16px
+        height: 16px
+        position: absolute
+        top: 27px
+        left: 0
+        overflow: hidden
+        cursor: pointer
+        text-indent: -9999em
+        background: transparent image_url('handler_down.png') no-repeat center center
+        margin-top: 27px
+
       ul
         float: left
         width: 60%
-        margin-left: 10px
+        margin-left: 30px
 
         input
           width: 100%

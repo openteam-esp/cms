@@ -126,7 +126,14 @@ ru:
         description: Описание
 
       spotlight_item:
-        url: URL
+        kind: Тип
+        url: Ссылка
+        legend: Надпись
+        title: Заголовок
+        annotation: Аннотация
+        since: Дата, время публикации
+        starts_on: Дата, время начала
+        ends_on: Дата, время окончания
 
       gpo_project_list_part:
         gpo_project_list_chair_id: Кафедра
