@@ -51,7 +51,8 @@ Cms::Application.configure do
                                   info_plugin.js
                                   gallery_pictures_sort.js
                                   blue_pages.js
-                                  esp-ckeditor/application.js
+                                  esp-ckeditor.js
+                                  esp-ckeditor/custom_config.js
                                 ]
 
   # Disable delivery errors, bad email addresses will be ignored

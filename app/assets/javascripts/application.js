@@ -5,16 +5,17 @@
  * It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
  * the compiled file.
  *
- *= require jquery.min.js
- *= require jquery-ui.min.js
- *= require jquery.ui.datepicker-ru.js
- *= require jquery_ujs.js
- *= require jquery_nested_form.js
- *= require treeview/jquery.cookie.js
- *= require treeview/jquery.treeview.js
- *= require treeview/jquery.treeview.edit.js
- *= require treeview/jquery.treeview.async.js
- *= require jquery-colorbox.js
+ * = require jquery.min.js
+ * = require jquery-ui.min.js
+ * = require jquery.ui.datepicker-ru.js
+ * = require jquery_ujs.js
+ * = require jquery_nested_form.js
+ * = require treeview/jquery.cookie.js
+ * = require treeview/jquery.treeview.js
+ * = require treeview/jquery.treeview.edit.js
+ * = require treeview/jquery.treeview.async.js
+ * = require jquery-colorbox.js
+ * = require spotlight
  */
 
 function init_colorbox() {
@@ -113,109 +114,6 @@ function init_sortable() {
   });
 };
 
-function init_spotlight() {
-  /* manipulate on form */
-  if ($('.spotlight_items').length) {
-    $('.spotlight_items').bind('nested:fieldAdded', function(e) {
-      max_position = 0
-      positions = $('.fields:visible .spotlight_position', $(e.target).closest('.spotlight_items')).map(function() {
-        return parseInt($(this).val());
-      }).get();
-      positions = positions.filter(Number);
-      if (positions.length) {
-        max_position = Math.max.apply(null, positions);
-      }
-      $('.spotlight_position', e.target).val(max_position + 1);
-    })
-    $('.spotlight_items').bind('nested:fieldRemoved', function(e) {
-      $('.fields:visible .spotlight_position', $(e.target).closest('.spotlight_items')).each(function(index, item) {
-        $(this).val(index + 1);
-      });
-    });
-    $('.spotlight_items').sortable({
-      axis: 'y',
-      update: function(e, ui) {
-        $('.fields:visible .spotlight_position', e.target).each(function(index, item) {
-          $(this).val(index + 1);
-        });
-      }
-    });
-  }
-
-  /* preview on part show */
-  if ($('.js-spotlight-preview').length) {
-    $('.js-spotlight-preview').click(function() {
-      collection = $('.spotlight_part .spotlight_url:visible');
-      collection.each(function(index, item) {
-        if ($(this).is('a')) {
-          var context = $(this).closest('li');
-          var elem = $(this);
-          var data_url = elem.attr('href');
-          var preview_block = $('.preview_spotlight_item', context);
-        }
-        if ($(this).is('input')) {
-          var context = $(this).closest('ul');
-          var elem = $(this);
-          var data_url = elem.val();
-          var preview_block = $('.preview_spotlight_item', context);
-        }
-        console.log(this)
-
-        $.ajax({
-          url: '/manage/spotlight',
-          data: { url: data_url },
-          type: 'GET',
-          context: context,
-          dataType: 'json',
-          beforeSend: function(jqXHR, settings) {
-            $(preview_block).html('');
-          },
-          complete: function(jqXHR, textStatus) {
-            $(preview_block).html('').slideUp(function() {
-              if (textStatus == 'success') {
-                response = jqXHR.responseText;
-                json = JSON.parse(response);
-                var code_class = '';
-                if (json.code == 200 || json.code == 302) {
-                  code_class = 'success';
-                } else {
-                  code_class = 'error';
-                }
-                $('<p>', { class: code_class, html: '<b>code</b>: ' + json.code }).appendTo(preview_block);
-                if (typeof json.body === 'object') {
-                  $('<p>', { class: code_class, html: '<b>type</b>: ' + json.body.type }).appendTo(preview_block);
-                  $('<p>', { class: code_class, html: '<b>slug</b>: ' + json.body.slug }).appendTo(preview_block);
-                  $('<p>', { class: code_class, html: '<b>title</b>: ' + json.body.title }).appendTo(preview_block);
-                  $('<p>', { class: code_class, html: '<b>annotation</b>: ' + json.body.annotation }).appendTo(preview_block);
-                  if (json.body.images.length) {
-
-                    var content = json.body.images.map(function(e) {
-                      return '<a href="' + e.url + '" target="_blank" class="js-colorbox" rel="' + json.body.slug + '">' +
-                        '<img width="100" height="100" src="' + e.url.replace(/\/\d+-\d+\//, '/100-100!n/') + '" />' +
-                        '</a>';
-                    });
-                    $('<p>', { class: code_class, html: '<b>images</b>: <br />' + content.join(' ') }).appendTo(preview_block);
-                  }
-                } else {
-                  $('<p>', { class: code_class, html: '<b>text</b>: ' + json.body }).appendTo(preview_block);
-                }
-              }
-              if (textStatus == 'error') {
-                $('<p>', { class: 'error', text: 'code: ' + jqXHR.status }).appendTo(preview_block);
-                $('<p>', { class: 'error', text: 'text: ' + jqXHR.statusText }).appendTo(preview_block);
-              }
-              preview_block.slideDown();
-              init_colorbox();
-            });
-          }
-        });
-      });
-
-      return false;
-    });
-  }
-}
-
 function toggle_position_fields(field) {
   if ($(field).is(":checked")) {
     $("#page_navigation_group").removeAttr("disabled");
@@ -310,7 +208,6 @@ $(function() {
   init_date_picker();
   init_tabs();
   init_sortable();
-  init_spotlight();
   manipulate_position_fields();
   manipulate_titles();
   choose_picture();

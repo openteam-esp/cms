@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
 
 group :assets do
+  gem 'coffee-rails'
   gem 'compass-rails'
   gem 'sass-rails'
-  gem 'uglifier'
   gem 'turbo-sprockets-rails3'
+  gem 'uglifier'
 end
 
 group :default do
