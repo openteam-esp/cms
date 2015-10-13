@@ -1,3 +1,4 @@
 /*
- * = require_tree .
+ * = require ./swapsies
+ * = require ./init
  */

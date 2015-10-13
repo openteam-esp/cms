@@ -17,7 +17,7 @@ group :default do
   gem 'default_value_for'
   gem 'devise-russian'
   gem 'el_vfs_client'
-  gem 'esp-ckeditor', '= 0.1.3'
+  gem 'esp-ckeditor'
   gem 'esp-commons'
   gem 'esp-views'
   gem 'enumerize'

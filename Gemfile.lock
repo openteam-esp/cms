@@ -141,9 +141,7 @@ GEM
       activesupport (>= 3.2)
     equalizer (0.0.9)
     erubis (2.7.0)
-    esp-ckeditor (0.1.3)
-      formtastic
-      rails
+    esp-ckeditor (0.1.6)
     esp-commons (0.5.3)
       active_attr
       amqp
@@ -408,7 +406,7 @@ DEPENDENCIES
   devise-russian
   el_vfs_client
   enumerize
-  esp-ckeditor (= 0.1.3)
+  esp-ckeditor
   esp-commons
   esp-views
   fabrication (< 2.0.0)

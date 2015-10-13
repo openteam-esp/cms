@@ -1,4 +1,4 @@
-<%= javascript_include_tag 'esp-ckeditor/application' %>
+<%= javascript_include_tag 'esp-ckeditor' %>
 <%= javascript_include_tag 'info_plugin' %>
 
 <%= form.inputs do %>
@@ -16,7 +16,7 @@
           <%= f.input :legend, :input_html => { :placeholder => 'Пресс-релизы' } %>
           <%= f.input :title %>
           <%= f.input :url, :as => :string %>
-          <%= f.input :annotation, :as => :ckeditor %>
+          <%= f.input :annotation, :input_html => { :class => :ckeditor } %>
           <%= f.input :since, :start_year => Time.zone.now.year, :end_year => (Time.zone.now - 10.years).year,
             :wrapper_html => { :class => :hiddeny } %>
           <%= f.input :starts_on, :start_year => Time.zone.now.year, :end_year => (Time.zone.now - 10.years).year,
