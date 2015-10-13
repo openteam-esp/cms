@@ -6,9 +6,16 @@ class SpotlightItem < ActiveRecord::Base
 
   validates_presence_of :kind, :title, :url
 
-  validates_presence_of :since,     :if => :kind_news?
-  validates_presence_of :starts_on, :if => :kind_event?
-  validates_presence_of :ends_on,   :if => :kind_event?
+  validates_presence_of :annotation,  :if => :kind_news?
+  validates_presence_of :since,       :if => :kind_news?
+
+  validates_presence_of :annotation,  :if => :kind_event?
+  validates_presence_of :starts_on,   :if => :kind_event?
+  validates_presence_of :ends_on,     :if => :kind_event?
+
+  validates_presence_of :since,       :if => :kind_photo?
+
+  validates_presence_of :since,       :if => :kind_video?
 
   default_scope order(:position, :id)
 

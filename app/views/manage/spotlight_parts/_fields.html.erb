@@ -16,13 +16,13 @@
           <%= f.input :legend, :input_html => { :placeholder => 'Пресс-релизы' } %>
           <%= f.input :title %>
           <%= f.input :url, :as => :string %>
-          <%= f.input :annotation, :input_html => { :class => :ckeditor } %>
+          <%= f.input :annotation, :input_html => { :class => :ckeditor }, :wrapper_html => { :class => 'annotation' } %>
           <%= f.input :since, :start_year => Time.zone.now.year, :end_year => (Time.zone.now - 10.years).year,
-            :wrapper_html => { :class => :hiddeny } %>
+            :wrapper_html => { :class => 'hidden since' } %>
           <%= f.input :starts_on, :start_year => Time.zone.now.year, :end_year => (Time.zone.now - 10.years).year,
-            :wrapper_html => { :class => :hiddeny } %>
+            :wrapper_html => { :class => 'hidden starts_on' } %>
           <%= f.input :ends_on, :start_year => Time.zone.now.year, :end_year => (Time.zone.now - 10.years).year,
-            :wrapper_html => { :class => :hiddeny } %>
+            :wrapper_html => { :class => 'hidden ends_on' } %>
           <li><hr /></li>
         </ul>
         <%= f.link_to_remove t('remove'), :class => 'button trash icon' %>
