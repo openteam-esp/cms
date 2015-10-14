@@ -1305,7 +1305,22 @@ sites:
           configurable: true
           indexable: true
 
-      inner_page: &tusur_inner_page
+      aggregate_page:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        spotlight:
+          required: false
+          configurable: true
+          indexable: true
+
+      inner_page:
         site_name:
           required: true
           configurable: false
