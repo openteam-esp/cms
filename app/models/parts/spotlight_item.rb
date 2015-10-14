@@ -18,13 +18,15 @@ class SpotlightItem < ActiveRecord::Base
 
   validates_presence_of :since,       :if => :kind_video?
 
+  validates_presence_of :annotation,  :if => :kind_other?
+
   has_many :spotlight_item_photos, :order => 'created_at', :dependent => :destroy
   accepts_nested_attributes_for :spotlight_item_photos, :allow_destroy => true
 
   default_scope order(:position, :id)
 
   extend Enumerize
-  enumerize :kind, :in => [:news, :event, :photo, :video], :default => :news, :predicates => { :prefix => true }
+  enumerize :kind, :in => [:news, :event, :photo, :video, :other], :default => :news, :predicates => { :prefix => true }
 
 end
 

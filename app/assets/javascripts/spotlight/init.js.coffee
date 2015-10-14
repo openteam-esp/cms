@@ -30,6 +30,11 @@
         $('.since', kind_field.closest('.item')).show()
         $('.starts_on', kind_field.closest('.item')).hide()
         $('.ends_on', kind_field.closest('.item')).hide()
+      when 'other'
+        $('.annotation', kind_field.closest('.item')).show()
+        $('.since', kind_field.closest('.item')).hide()
+        $('.starts_on', kind_field.closest('.item')).hide()
+        $('.ends_on', kind_field.closest('.item')).hide()
     $(kind_field).change ->
       switch_dependent_fields_for(this)
       return
