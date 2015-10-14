@@ -4,8 +4,21 @@
   <% spotlight_part.spotlight_items.each do |item| %>
     <li>
       <div class='presentation'>
-        <b>№: <%= item.position %></b>
-        <%= link_to item.url, item.url, :target => '_blank', :class => 'spotlight_url' %>
+        <p>
+          <b>№ <%= item.position %>, <%= item.kind_text %>:</b>
+          <%= item.title %>
+          <%= "(#{item.legend})" if item.legend? %>
+        </p>
+        <p><%= link_to item.url, item.url, :target => '_blank', :class => 'spotlight_url' %></p>
+        <% if item.spotlight_item_photos.any? %>
+          <p>
+            <% item.spotlight_item_photos.each do |photo| %>
+              <%= link_to photo.photo.to_s, :class => 'js-colorbox', :rel => "colorbox-#{item.id}" do %>
+                <%= image_tag photo.photo.to_s.gsub(/\/\d+-\d+\//, '/100-100!n/'), :size => '100x100' %>
+              <% end %>
+            <% end %>
+          </p>
+        <% end %>
       </div>
       <hr />
     </li>
