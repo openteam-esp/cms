@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151002045237) do
+ActiveRecord::Schema.define(:version => 20151014044503) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -167,6 +167,17 @@ ActiveRecord::Schema.define(:version => 20151002045237) do
   end
 
   add_index "permissions", ["user_id", "role", "context_id", "context_type"], :name => "by_user_and_role_and_context"
+
+  create_table "spotlight_item_photos", :force => true do |t|
+    t.integer  "spotlight_item_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.text     "photo_url"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "spotlight_items", :force => true do |t|
     t.text     "url"

@@ -1,6 +1,7 @@
 class SpotlightItem < ActiveRecord::Base
 
-  attr_accessible :kind, :url, :title, :annotation, :legend, :since, :starts_on, :ends_on, :position
+  attr_accessible :kind, :url, :title, :annotation, :legend, :since, :starts_on, :ends_on, :position,
+    :spotlight_item_photos_attributes
 
   belongs_to :spotlight_part
 
@@ -16,6 +17,9 @@ class SpotlightItem < ActiveRecord::Base
   validates_presence_of :since,       :if => :kind_photo?
 
   validates_presence_of :since,       :if => :kind_video?
+
+  has_many :spotlight_item_photos, :order => 'created_at', :dependent => :destroy
+  accepts_nested_attributes_for :spotlight_item_photos, :allow_destroy => true
 
   default_scope order(:position, :id)
 

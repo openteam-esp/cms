@@ -22,6 +22,7 @@ function init_colorbox() {
   $('.js-colorbox').colorbox({
     maxWidth: '90%',
     maxHeight: '90%',
+    returnFocus: false,
     current: '{current} / {total}',
     previous: 'назад',
     next: 'вперед',
@@ -204,6 +205,7 @@ function choose_picture(){
 };
 
 $(function() {
+  init_colorbox();
   init_tree();
   init_date_picker();
   init_tabs();

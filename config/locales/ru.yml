@@ -135,6 +135,9 @@ ru:
         starts_on: Дата, время начала
         ends_on: Дата, время окончания
 
+      spotlight_item_photo:
+        photo: Изображение
+
       gpo_project_list_part:
         gpo_project_list_chair_id: Кафедра
         chair_name: Кафедра
