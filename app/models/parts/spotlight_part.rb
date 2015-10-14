@@ -19,12 +19,24 @@ class SpotlightPart < Part
     items = []
 
     spotlight_items.each do |item|
-      items << { :url => "#{item.url}.json" }
+      item_hash = item.attributes.reject{ |k, v| reject_item_attributes.include?(k) }
+      item_hash.merge!(:photos => item.spotlight_item_photos.map{ |p| { :url => p.photo.to_s, :updated_at => p.updated_at } }) if item.spotlight_item_photos.any?
+
+      items << item_hash
     end
 
     hash['spotlight_items'] = items
 
     hash
+  end
+
+  def reject_item_attributes
+    %w[
+      id
+      position
+      spotlight_part_id
+      created_at
+    ]
   end
 end
 
