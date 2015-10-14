@@ -1330,6 +1330,9 @@ sites:
         right_contacts:
           required: true
           configurable: true
+        right_html_part:
+          required: true
+          configurable: true
         content:
           required: false
           configurable: true
