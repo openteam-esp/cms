@@ -20,12 +20,12 @@ class SpotlightPart < Part
 
     spotlight_items.each do |item|
       item_hash = item.attributes.reject{ |k, v| reject_item_attributes.include?(k) }
-      item_hash.merge!(:photos => item.spotlight_item_photos.map{ |p| { :url => p.photo.to_s, :updated_at => p.updated_at } }) if item.spotlight_item_photos.any?
+      item_hash.merge!(:images => item.spotlight_item_photos.map{ |p| { :url => p.photo.to_s, :updated_at => p.updated_at } }) if item.spotlight_item_photos.any?
 
       items << item_hash
     end
 
-    hash['spotlight_items'] = items
+    hash['items'] = items
 
     hash
   end
