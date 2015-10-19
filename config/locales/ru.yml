@@ -8,6 +8,7 @@ ru:
   add:                Добавить
   add_picture:        Добавить картинку
   add_spotlight_item: Добавить ссылку
+  add_grouping_item:  Добавить группировку
   remove:             Удалить
   view_in_public:     Публичный вид
 
@@ -150,6 +151,10 @@ ru:
         navigation_default_level: Начальный уровень
         navigation_end_level: Конечный уровень
         navigation_group: Группа навигации
+
+      grouping_item:
+        title: Заголовок группировки
+        group: Группа
 
       news_list_part:
         item_page: Страница просмотра

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151014044503) do
+ActiveRecord::Schema.define(:version => 20151019091948) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -41,6 +41,14 @@ ActiveRecord::Schema.define(:version => 20151014044503) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "position"
+  end
+
+  create_table "grouping_items", :force => true do |t|
+    t.string   "title"
+    t.string   "group"
+    t.integer  "navigation_part_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "metas", :force => true do |t|

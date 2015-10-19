@@ -1,4 +1,7 @@
 <%= form.inputs do %>
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
+
   <%= form.input :from_node,
                  :as => :select,
                  :collection => form.object.node.nodes_from_this_site,
@@ -7,6 +10,14 @@
   <%= form.input :navigation_end_level %>
   <%= form.input :navigation_group %>
 
-  <%= form.input :region, :as => :hidden %>
-  <%= form.input :type, :as => :hidden %>
+  <h4>Добавить группировку</h4>
+  <div class='grouiping_items'>
+    <%= form.semantic_fields_for :grouping_items do |f| %>
+      <%= f.input :title %>
+      <%= f.input :group %>
+      <%= f.link_to_remove t('remove'), :class => 'button trash icon' %>
+    <% end %>
+
+    <%= form.link_to_add t('add_grouping_item'), :grouping_items, :class => 'button icon add' %>
+  </div>
 <% end %>
