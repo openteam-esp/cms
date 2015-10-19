@@ -1,8 +1,7 @@
 class NavigationPart < Part
-  attr_accessible :navigation_default_level
-  attr_accessible :navigation_end_level
-  attr_accessible :navigation_from_id
-  attr_accessible :navigation_group
+  attr_accessible :navigation_end_level,
+                  :navigation_from_id,
+                  :navigation_group
 
   belongs_to :from_node, :foreign_key => :navigation_from_id, :class_name => 'Node'
 
@@ -26,22 +25,24 @@ class NavigationPart < Part
 
   private
     def selected_children(node)
-      return node.children.where("navigation_group like '%#{navigation_group}%'").order('navigation_position') if navigation_group?
+      return node.children.where(:navigation_group => navigation_group).order('navigation_position') if navigation_group?
       node.children.order('navigation_position')
     end
 
     def build_navigation_tree(node)
-      hash = { node.slug => { 'title' => node.navigation_title.blank? ? node.title : node.navigation_title, 'path' => "#{node.route_without_site}" } }
-
-      hash[node.slug].merge!('external_link' => node.external_link.to_s)
-      hash[node.slug].merge!('lastmod' => node.updated_at)
-      hash[node.slug].merge!('navigation_group' => node.navigation_group)
-      hash[node.slug].merge!('selected' => current_node.path_ids.include?(node.id) && node != from_node)
+      hash = { node.slug => {
+        'title' => node.navigation_title.blank? ? node.title : node.navigation_title,
+        'path' => "#{node.route_without_site}",
+        'external_link' => node.external_link.to_s,
+        'lastmod' => node.updated_at,
+        'navigation_group' => node.navigation_group,
+        'selected' => current_node.path_ids.include?(node.id) && node != from_node
+      } }
 
       selected_children(node).navigable.each do |child|
         hash[node.slug]['children'] ||= {}
         hash[node.slug]['children'].merge!(build_navigation_tree(child))
-      end if node.depth - from_node.depth < navigation_default_level || (node.depth - from_node.depth < navigation_end_level && current_node.path_ids.include?(node.id))
+      end if node.depth - from_node.depth < navigation_end_level
 
       hash
     end
