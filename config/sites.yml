@@ -1138,6 +1138,10 @@ sites:
           required: true
           configurable: true
           indexable: true
+        description_part:
+          required: false
+          configurable: true
+          indexable: true
 
       inner_page: &inotomsk_inner_page
         site_name:
@@ -1174,6 +1178,10 @@ sites:
           configurable: true
           indexable: true
         content_fourth:
+          required: false
+          configurable: true
+          indexable: true
+        description_part:
           required: false
           configurable: true
           indexable: true
