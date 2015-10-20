@@ -49,15 +49,17 @@ class NavigationPart < Part
     def build_navigation_tree(node)
       hash = { node.slug => node_hash(node) }
 
-      selected_children(node).navigable.each do |child|
-        hash[node.slug]['children'] ||= {}
-        hash[node.slug]['children'].merge!(build_navigation_tree(child))
-        grouped_children = grouping_children(grouping_items, node)
+      if node.depth - from_node.depth < navigation_end_level
+        selected_children(node).navigable.each do |child|
+          hash[node.slug]['children'] ||= {}
+          hash[node.slug]['children'].merge!(build_navigation_tree(child))
+        end
+        grouped_children = grouping_children(grouping_items.order('position'), node)
         unless grouped_children.empty?
           hash[node.slug]['grouping_children'] ||= {}
           hash[node.slug]['grouping_children'].merge!(grouped_children)
         end
-      end if node.depth - from_node.depth < navigation_end_level
+      end
 
       hash
     end
@@ -65,7 +67,7 @@ class NavigationPart < Part
     def grouping_children(items, node)
       h = {}
       items.each do |item|
-        children = node.descendants.where(:navigation_group => item.group, :page_for_redirect_id => nil).map{ |child| node_hash(child) }
+        children = node.descendants.navigable.where(:navigation_group => item.group, :page_for_redirect_id => nil).map{ |child| node_hash(child) }
         h[item.group] = { :title => item.title, :children => children } if children.any?
       end
 

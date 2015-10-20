@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20151019091948) do
     t.string   "title"
     t.string   "group"
     t.integer  "navigation_part_id"
+    t.integer  "position"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
   end

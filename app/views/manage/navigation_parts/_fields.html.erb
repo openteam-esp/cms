@@ -15,6 +15,7 @@
     <%= form.semantic_fields_for :grouping_items do |f| %>
       <%= f.input :title %>
       <%= f.input :group %>
+      <%= f.input :position %>
       <%= f.link_to_remove t('remove'), :class => 'button trash icon' %>
     <% end %>
 

@@ -1,5 +1,5 @@
 class GroupingItem < ActiveRecord::Base
-  attr_accessible :group, :title
+  attr_accessible :group, :title, :position
 end
 
 # == Schema Information
