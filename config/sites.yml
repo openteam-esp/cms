@@ -1341,6 +1341,12 @@ sites:
         right_navigation:
           required: true
           configurable: true
+        right_navigation_with_title:
+          required: true
+          configurable: true
+        right_navigation_without_title:
+          required: true
+          configurable: true
         right_links:
           required: true
           configurable: true
