@@ -42,7 +42,7 @@ class NavigationPart < Part
         'external_link' => node.external_link.to_s,
         'lastmod' => node.updated_at,
         'navigation_group' => node.navigation_group,
-        'selected' => current_node.path_ids.include?(node.id) && node != from_node
+        'selected' => current_node.path_ids.include?(node.id) # FIXME what is it? => && node != from_node
       }
     end
 
