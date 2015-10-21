@@ -1338,9 +1338,6 @@ sites:
         breadcrumbs:
           required: true
           configurable: false
-        right_navigation:
-          required: true
-          configurable: true
         right_navigation_with_title:
           required: true
           configurable: true
