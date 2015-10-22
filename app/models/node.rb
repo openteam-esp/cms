@@ -59,7 +59,11 @@ class Node < ActiveRecord::Base
         'template' => node_for_json.template,
         'external_link' => node_for_json.external_link,
         'meta' => node_for_json.meta,
-        'regions' => node_for_json.regions.inject({}) { |h, r| h.merge(r => ((part=node_for_json.part_for(r, true)) == nil ? nil: part.to_json )) }
+        'regions' => node_for_json.regions.inject({}) do |hash, region|
+          hash.merge(
+            { region => ((part = node_for_json.part_for(region, true)) == nil ? nil : part.to_json ) }
+          )
+        end
       }
     }
   end
@@ -121,7 +125,7 @@ class Node < ActiveRecord::Base
 
     part = parts.where(:region => region).first
 
-    part ||= Part.where(:region => region, :node_id => path_ids).first if select_from_parents
+    part ||= Part.where(:region => region, :node_id => path_ids).last if select_from_parents
 
     if part
       part.current_node = self

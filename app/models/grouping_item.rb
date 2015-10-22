@@ -10,6 +10,7 @@ end
 #  title              :string(255)
 #  group              :string(255)
 #  navigation_part_id :integer
+#  position           :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #

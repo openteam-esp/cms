@@ -5,12 +5,11 @@ class NavigationPart < Part
                   :grouping_items_attributes
 
   has_many :grouping_items
+  accepts_nested_attributes_for :grouping_items, :allow_destroy => true
 
   belongs_to :from_node, :foreign_key => :navigation_from_id, :class_name => 'Node'
 
   validates_presence_of :from_node, :navigation_end_level
-
-  accepts_nested_attributes_for :grouping_items, :allow_destroy => true
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
