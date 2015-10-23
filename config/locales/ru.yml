@@ -9,6 +9,7 @@ ru:
   add_picture:        Добавить картинку
   add_spotlight_item: Добавить ссылку
   add_grouping_item:  Добавить группировку
+  add_news_collection_item: Добавить канал
   remove:             Удалить
   view_in_public:     Публичный вид
 
@@ -178,6 +179,11 @@ ru:
         news_mlt_number_of_months: Количество месяцев для выборки похожих новостей
         news_mlt_width: Ширина картинки для списка похожих новостей
         news_mlt_height: Высота картинки для списка похожих новостей
+
+      news_collection_item:
+        title: Заголовок
+        node: Страница с новостями
+        count: Количество новостей
 
       youtube_list_part:
         item_page: Страница просмотра

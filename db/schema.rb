@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151023060842) do
+ActiveRecord::Schema.define(:version => 20151023073627) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -80,6 +80,18 @@ ActiveRecord::Schema.define(:version => 20151023060842) do
   end
 
   add_index "metas", ["node_id"], :name => "index_metas_on_metable_id"
+
+  create_table "news_collection_items", :force => true do |t|
+    t.string   "title"
+    t.integer  "node_id"
+    t.integer  "news_collection_part_id"
+    t.integer  "count"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  add_index "news_collection_items", ["news_collection_part_id"], :name => "index_news_collection_items_on_news_collection_part_id"
+  add_index "news_collection_items", ["node_id"], :name => "index_news_collection_items_on_node_id"
 
   create_table "nodes", :force => true do |t|
     t.string   "slug"

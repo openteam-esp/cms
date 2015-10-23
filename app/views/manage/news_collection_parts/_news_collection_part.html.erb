@@ -1,0 +1,17 @@
+<%= show_for news_collection_part do |part| %>
+  <%= part.attributes :title, :template %>
+<% end %>
+
+
+<ol>
+  <% news_collection_part.news_collection_items.each do |item| %>
+    <li>
+      <div class='presentation'>
+        <p>Заголовок: <%= item.title %></p>
+        <p>Страница: <%= (item.node.ancestors << item.node).map{ |node| node.title }.join(' / ') %></p>
+        <p>Количество: <%= item.count %></p>
+      </div>
+      <hr />
+    </li>
+  <% end %>
+</ol>
