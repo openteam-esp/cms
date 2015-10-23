@@ -1,14 +1,9 @@
-class NewsListPart < Part
+class YoutubeListPart < Part
   attr_accessible :news_channel
   attr_accessible :news_event_entry
-  attr_accessible :news_height
   attr_accessible :news_item_page_id
-  attr_accessible :news_mlt_count
-  attr_accessible :news_mlt_height
-  attr_accessible :news_mlt_width
   attr_accessible :news_paginated
   attr_accessible :news_per_page
-  attr_accessible :news_width
   attr_accessible :item_page
 
   belongs_to :item_page, :class_name => 'Node', :foreign_key => :news_item_page_id

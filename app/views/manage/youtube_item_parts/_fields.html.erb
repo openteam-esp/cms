@@ -1,0 +1,10 @@
+<%= form.inputs do %>
+  <%= form.input :news_channel,
+                 :as => :select,
+                 :collection => form.object.channels_for_select %>
+
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
+  <%= form.input :news_mlt_count %>
+  <%= form.input :news_mlt_number_of_months %>
+<% end %>

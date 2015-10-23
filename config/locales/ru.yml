@@ -179,6 +179,21 @@ ru:
         news_mlt_width: Ширина картинки для списка похожих новостей
         news_mlt_height: Высота картинки для списка похожих новостей
 
+      youtube_list_part:
+        item_page: Страница просмотра
+        news_channel: Канал
+        news_paginated: Постраничный переход
+        news_per_page: Количество на странице
+        news_height: Высота картинки
+        news_width: Ширина картинки
+
+      youtube_item_part:
+        news_channel: Канал
+        news_height: Высота картинки
+        news_width: Ширина картинки
+        news_mlt_count: Количество похожих видео (0 - если не нужны)
+        news_mlt_number_of_months: Количество месяцев для выборки похожих видео
+
       provided_disciplines_part:
         provided_disciplines_subdepartment: Аббревиатура кафедры
 

@@ -74,23 +74,12 @@ end
 #  documents_item_page_id                 :integer
 #  documents_paginated                    :boolean
 #  documents_per_page                     :integer
-#  youtube_resource_id                    :string(255)
-#  youtube_item_page_id                   :integer
-#  youtube_video_resource_id              :string(255)
-#  youtube_resource_kind                  :string(255)
-#  youtube_per_page                       :integer
-#  youtube_paginated                      :boolean
-#  youtube_video_resource_kind            :string(255)
 #  news_height                            :integer
 #  news_width                             :integer
 #  news_mlt_count                         :integer
 #  news_mlt_width                         :integer
 #  news_mlt_height                        :integer
 #  template                               :string(255)
-#  youtube_video_with_related             :boolean
-#  youtube_video_related_count            :integer
-#  youtube_video_width                    :integer
-#  youtube_video_height                   :integer
 #  text_info_path                         :text
 #  news_event_entry                       :string(255)
 #  blue_pages_expand                      :integer
@@ -113,4 +102,3 @@ end
 #  provided_disciplines_subdepartment     :string(255)
 #  news_mlt_number_of_months              :integer          default(1)
 #
-

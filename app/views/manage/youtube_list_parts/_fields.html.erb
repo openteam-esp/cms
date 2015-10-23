@@ -1,0 +1,14 @@
+<%= form.inputs do %>
+  <%= form.input :news_channel,
+                 :as => :select,
+                 :collection => form.object.channels_for_select,
+                 :disabled => form.object.disabled_channel_ids %>
+
+  <%= form.input :news_per_page %>
+  <%= form.input :news_paginated %>
+
+  <%= render :partial => 'manage/parts/item_page', :locals => { :form => form } %>
+
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
+<% end %>

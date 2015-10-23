@@ -1,0 +1,9 @@
+<%= show_for youtube_item_part do |part| %>
+  <%= part.attribute :news_channel do %>
+    <%= youtube_item_part.channel_description %>
+  <% end %>
+
+  <%= part.attributes :template,
+                      :news_mlt_count,
+                      :news_mlt_number_of_months %>
+<% end %>

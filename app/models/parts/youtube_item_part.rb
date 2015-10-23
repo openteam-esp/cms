@@ -1,38 +1,76 @@
-class NewsListPart < Part
+class YoutubeItemPart < Part
   attr_accessible :news_channel
   attr_accessible :news_event_entry
   attr_accessible :news_height
   attr_accessible :news_item_page_id
   attr_accessible :news_mlt_count
+  attr_accessible :news_mlt_number_of_months
   attr_accessible :news_mlt_height
   attr_accessible :news_mlt_width
   attr_accessible :news_paginated
   attr_accessible :news_per_page
   attr_accessible :news_width
-  attr_accessible :item_page
 
-  belongs_to :item_page, :class_name => 'Node', :foreign_key => :news_item_page_id
+  validates_presence_of :news_channel
 
-  validates_presence_of :news_channel, :item_page
+  default_value_for :news_mlt_count, 0
+  validates :news_mlt_count, :presence => true, :numericality => { :only_integer => true, :greater_than_or_equal_to => 0 }
 
-  has_enums
+  default_value_for :news_mlt_number_of_months, 1
+  validates :news_mlt_number_of_months, :presence => true, :numericality => { :only_integer => true, :greater_than => 0 }
 
   def to_json
-    super.merge!(as_json(:only => :type, :methods => ['part_title', 'archive_dates', 'archive_statistics', 'content']))
+    super.merge!(as_json(:only => :type, :methods => [
+      'part_title', 'archive_dates', 'archive_statistics',
+      'path_to_site_news_list', 'navigation_title_of_site_news_list',
+      'content'
+    ]))
   end
 
   def content
-    return response_hash if bad_request?
+    slug ? data_hash : ''
+  end
 
-    hash = data_hash.update(data_hash) {|v,k| k.each{|l| l['link']="#{item_page.route_without_site}/-/#{l['slug']}"}}
+  def part_title
+    content['title']
+  end
 
-    hash.merge!('collection_link' => collection_link)
+  alias :page_title :part_title
 
-    hash.merge!('title' => title) if title?
-    hash.merge!('rss_link' => rss_link) if news_channel?
-    hash.merge!(pagination) if news_paginated?
+  def path_with_slug(slug)
+    "#{node.route_without_site}/-/#{slug}"
+  end
 
-    hash
+  def url_with_slug(slug)
+    "#{node.url}-/#{slug}"
+  end
+
+  def news_list_url(page = 1)
+    URI.escape("#{news_url}?utf8=✓&entry_search[channel_ids][]=#{news_channel}&per_page=50&page=#{page}")
+  end
+
+  def path_to_site_news_list
+    node.parent.route_without_site
+  end
+
+  def navigation_title_of_site_news_list
+    node.parent.navigation_title
+  end
+
+  def news_slugs_for_page(page)
+    Requester.new(news_list_url(page), headers_accept).response_hash.map { |item| item['slug'] }
+  end
+
+  def news_pages_count
+    response_headers['X-Total-Pages'].to_i
+  end
+
+  def channel_description
+    channel_hash['description']
+  end
+
+  def channels_for_select
+    @channels_for_select ||= channels_hash.map { |a| [ "#{'&nbsp;'*a['depth']*2}#{a['title']}".html_safe, a['id'] ] }
   end
 
   def archive_dates
@@ -43,104 +81,42 @@ class NewsListPart < Part
     channel_hash['archive_statistics']
   end
 
-  def collection_link
-    item_page.parent.route_without_site
-  end
+  private
 
-  def part_title
-    title
-  end
+    def need_to_reindex?
+      news_channel_changed? || super
+    end
 
-  def data_hash
-    { 'items' => response_hash }
-  end
-
-  def channel_description
-    @channel_description ||= Requester.new("#{news_url}/channels/#{news_channel}", headers_accept).response_hash['description']
-  end
-
-  def channels_for_select
-    @channels_for_select ||= channels_hash.map { |a| [ "#{'&nbsp;'*a['depth']*2}#{a['title']}".html_safe, a['id'] ] }
-  end
-
-  def disabled_channel_ids
-    channels_hash.select { |channel| channel['entry_type'].nil? || channel['entry_type'] != "#{self.class.name.underscore.split('_').first.singularize}_entry" }.map { |channel| channel['id'] }
-  end
-
-  def url_for_request
-    "#{news_url}/entries?#{search_params}&#{image_size_params}"
-  end
-
-  protected
     def news_url
       Settings['news.url']
     end
 
-    def rss_link
-      path_param = ''
-      path_param << item_page.node.site.client_url
-      path_param << item_page.route_without_site
-      "#{news_url}/channels/#{news_channel}/entries.rss?path_param=#{path_param}"
-    end
-
-    def order_by
-      'since desc'
-    end
-
-    def interval_year
-      params['interval_year']
-    end
-
-    def interval_month
-      params['interval_month']
-    end
-
-    def archive_params
-      ''.tap do |s|
-        s << "&entry_search[interval_year]=#{interval_year}" if interval_year
-        s << "&entry_search[interval_month]=#{interval_month}" if interval_month
-      end
-    end
-
-    def entry_type
-      "#{self.class.name.underscore.split('_').first}"
-    end
-
-    def search_params
-      URI.escape("utf8=✓&entry_search[entry_type]=#{entry_type}&entry_search[channel_ids][]=#{news_channel}&per_page=#{news_per_page}&page=#{current_page}").tap do |s|
-        s << archive_params
-      end
+    def urls_for_index
+      (1..news_pages_count).map { |page|
+        news_slugs_for_page(page).map { |slug| url_with_slug(slug) }
+      }.flatten
     end
 
     def image_size_params
       "entries_params[width]=#{news_width}&entries_params[height]=#{news_height}"
     end
 
-    def total_count
-      response_headers['X-Total-Count'].to_i
+    def news_mlt_params
+      "more_like_this[count]=#{news_mlt_count}&more_like_this[months]=#{news_mlt_number_of_months}&more_like_this[width]=#{news_mlt_width}&more_like_this[height]=#{news_mlt_height}"
     end
 
-    def total_pages
-      response_headers['X-Total-Pages'].to_i
+    alias :slug :resource_id
+
+    def url_for_request
+      "#{news_url}/channels/#{news_channel}/entries/#{slug}?#{image_size_params}&#{news_mlt_params}"
     end
 
-    def current_page
-      (params['page'] || 1).to_i
-    end
+    def data_hash
+      {}.tap do |hash|
+        hash.merge!(response_hash)
 
-    def pagination
-      {
-        'pagination' => {
-          'total_count' => total_count,
-          'current_page' => current_page,
-          'per_page' => news_per_page,
-          'param_name' => "parts_params[#{entry_type}_list][page]"
-        }
-      }
-    end
-
-    def urls_for_index
-      []
+        hash['more_like_this'] = hash['more_like_this'].each { |e| e['link'] = path_with_slug(e['slug']) } if hash['more_like_this']
+      end
     end
 
     def channels_hash

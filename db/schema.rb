@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151019091948) do
+ActiveRecord::Schema.define(:version => 20151023060842) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -124,23 +124,12 @@ ActiveRecord::Schema.define(:version => 20151019091948) do
     t.integer  "documents_item_page_id"
     t.boolean  "documents_paginated"
     t.integer  "documents_per_page"
-    t.string   "youtube_resource_id"
-    t.integer  "youtube_item_page_id"
-    t.string   "youtube_video_resource_id"
-    t.string   "youtube_resource_kind"
-    t.integer  "youtube_per_page"
-    t.boolean  "youtube_paginated"
-    t.string   "youtube_video_resource_kind"
     t.integer  "news_height"
     t.integer  "news_width"
     t.integer  "news_mlt_count"
     t.integer  "news_mlt_width"
     t.integer  "news_mlt_height"
     t.string   "template"
-    t.boolean  "youtube_video_with_related"
-    t.integer  "youtube_video_related_count"
-    t.integer  "youtube_video_width"
-    t.integer  "youtube_video_height"
     t.text     "text_info_path"
     t.string   "news_event_entry"
     t.integer  "blue_pages_expand"
