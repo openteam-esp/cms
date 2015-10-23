@@ -13,7 +13,7 @@
       <% else %>
         <%= semantic_form_for :part, :url => new_manage_node_part_path(resource), :html => {:method => :get }  do | form | %>
           <%= form.inputs do %>
-            <%= form.input :type, :as => :select, :collection => Part.descendants %>
+            <%= form.input :type, :as => :select, :collection => Part.descendants.sort_by {|c| c.name} %>
             <%= form.input :region, :as => :hidden, :input_html => { :value => region } %>
           <% end %>
           <%= form.actions do %>
