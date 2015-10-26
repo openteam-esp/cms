@@ -13,7 +13,7 @@ class NewsCollectionPart < Part
   end
 
   def content
-    lists ||= news_collection_items.map(&:to_json)
+    { :items => news_collection_items.map(&:to_json) }
   end
 
   def response_status
