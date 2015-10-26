@@ -1326,6 +1326,12 @@ sites:
         breadcrumbs:
           required: true
           configurable: false
+        right_navigation_with_title:
+          required: true
+          configurable: true
+        right_navigation_without_title:
+          required: true
+          configurable: true
         spotlight:
           required: false
           configurable: true
