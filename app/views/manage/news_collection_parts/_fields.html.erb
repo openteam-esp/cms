@@ -3,8 +3,10 @@
   <%= form.input :type, :as => :hidden %>
 
   <h4>Добавить список</h4>
-  <div class='grouiping_items'>
+  <div class='grouiping_items js-sortable'>
     <%= form.semantic_fields_for :news_collection_items do |f| %>
+      <span class='js-sortable-handler'></span>
+      <%= f.input :position, :as => :hidden, :input_html => { :class => 'js-sortable-position' } %>
       <%= f.input :title %>
       <%= f.input :node,
         :as => :select,

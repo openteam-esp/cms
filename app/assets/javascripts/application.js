@@ -16,6 +16,7 @@
  * = require treeview/jquery.treeview.async.js
  * = require jquery-colorbox.js
  * = require spotlight
+ * = require sortable
  */
 
 function init_colorbox() {

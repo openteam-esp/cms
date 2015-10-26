@@ -13,7 +13,7 @@ class NewsCollectionPart < Part
   end
 
   def content
-    build_navigation_tree(from_node)
+    lists ||= news_collection_items.map(&:to_json)
   end
 
   def response_status
