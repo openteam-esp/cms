@@ -1,7 +1,7 @@
 require 'progress_bar'
 
 def index(parts)
-  urls = parts.flat_map{ |p| p.send(:urls_for_index) if p.indexable? && p.node.in_navigation? }.compact.uniq.map{ |url| url.gsub(/\/$/, '') }
+  urls = parts.flat_map{|p| p.send(:urls_for_index) if p.indexable?}.compact.uniq.map{ |url| url.gsub(/\/$/, '') }
   bar = ProgressBar.new(urls.count)
   urls.each do |url|
     begin
