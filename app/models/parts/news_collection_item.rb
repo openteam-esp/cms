@@ -9,8 +9,21 @@ class NewsCollectionItem < ActiveRecord::Base
 
   default_scope order(:position, :id)
 
+  def types_for_json
+    [
+      'AnnouncementsListPart',
+      'EventsListPart',
+      'NewsListPart',
+      'YoutubeListPart'
+    ]
+  end
+
+  def available_parts
+    node.parts.where(:type => types_for_json)
+  end
+
   def to_json
-    list_part = node.parts.where(:type => ['NewsListPart', 'YoutubeListPart']).first
+    list_part = available_parts.first
     return {
       :title => title,
       :path => node.page_route,
@@ -25,6 +38,7 @@ class NewsCollectionItem < ActiveRecord::Base
       :items => list_part.content['items']
     )
   end
+
 end
 
 # == Schema Information
