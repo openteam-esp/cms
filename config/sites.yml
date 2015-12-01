@@ -521,6 +521,10 @@ sites:
           required: false
           configurable: true
           indexable: false
+        news_institutions:
+          required: false
+          configurable: true
+          indexable: false
         banners:
           required: true
           configurable: true
