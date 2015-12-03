@@ -36,8 +36,10 @@ class NavigationPart < Part
 
     def node_hash(node)
       {
-        'title' => node.navigation_title.blank? ? node.title : node.navigation_title,
-        'path' => "#{node.route_without_site}",
+        'title' => node.title,
+        'navigation_title' => node.navigation_title,
+        'alternative_title' => node.alternative_title,
+        'path' => node.route_without_site,
         'external_link' => node.external_link.to_s,
         'lastmod' => node.updated_at,
         'navigation_group' => node.navigation_group,

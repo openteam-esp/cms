@@ -92,6 +92,7 @@ ru:
         parent_id:                  Родительская страница
         title:                      Заголовок
         navigation_title:           Заголовок в навигации
+        alternative_title:          Альтернативный заголовок
         slug:                       Слаг
         template:                   Шаблон
         navigation_group:           Группа навигации

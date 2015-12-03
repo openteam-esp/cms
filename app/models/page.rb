@@ -55,4 +55,5 @@ end
 #  page_for_redirect_id :integer
 #  weight               :string(255)
 #  external_link        :text
+#  alternative_title    :text
 #

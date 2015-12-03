@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151023093209) do
+ActiveRecord::Schema.define(:version => 20151203054322) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(:version => 20151023093209) do
     t.integer  "page_for_redirect_id"
     t.string   "weight"
     t.text     "external_link"
+    t.text     "alternative_title"
   end
 
   create_table "parts", :force => true do |t|

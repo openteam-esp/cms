@@ -6,6 +6,7 @@
                  :member_label => ->(n) { ('&nbsp;' * 2 * n.depth + n.title).html_safe } %>
   <%= form.input :title, :as => :string, :input_html => { :autofocus => true } %>
   <%= form.input :navigation_title, :as => :string %>
+  <%= form.input :alternative_title, :as => :string %>
   <%= form.input :slug %>
   <%= form.input :template, :as => :select, :collection => resource.templates %>
   <%= form.input :in_navigation %>

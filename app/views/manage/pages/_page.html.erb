@@ -1,5 +1,7 @@
 <%= show_for resource do | page | %>
-  <%= page.attributes :title, :navigation_title, :slug, :template, :in_navigation, :navigation_group, :navigation_position, :page_for_redirect %>
+  <%= page.attributes :title, :navigation_title, :alternative_title %>
+  <%= page.attributes :slug, :template %>
+  <%= page.attributes :in_navigation, :navigation_group, :navigation_position, :page_for_redirect %>
   <%= page.attribute :external_link do %>
     <%= resource.external_link? ? link_to(resource.external_link, resource.external_link, :target => :_blank) : 'Не указано' %>
   <% end %>
