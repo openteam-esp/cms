@@ -1377,6 +1377,9 @@ sites:
         right_html_part:
           required: true
           configurable: true
+        spotlight:
+          required: false
+          configurable: true
         content:
           required: false
           configurable: true
