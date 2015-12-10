@@ -142,7 +142,7 @@ GEM
     equalizer (0.0.9)
     erubis (2.7.0)
     esp-ckeditor (0.1.6)
-    esp-commons (0.5.7)
+    esp-commons (0.5.8)
       active_attr
       amqp (~> 0.9.8)
       bunny (~> 0.8.0)
