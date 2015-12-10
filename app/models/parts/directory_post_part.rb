@@ -43,7 +43,7 @@ class DirectoryPostPart < Part
   end
 
   def lectures
-    requester = Requester.new("#{lecture_disciplines_url}/#{part_title}")
+    requester = Requester.new("#{lecture_disciplines_url}/#{URI.encode part_title}")
     @lectures ||= requester.response_status == 200 ? { :lectures => requester.response_hash['disciplines'] } : {}
   end
 
