@@ -1299,8 +1299,8 @@ sites:
 
   tusur:
     part_templates:
-      news_list_part: photo_album_list_part|smi_list_part
-      news_item_part: photo_album_item_part|smi_item_part
+      news_list_part: photo_album_list_part|smi_list_part|events_list_part
+      news_item_part: photo_album_item_part|smi_item_part|events_item_part
     templates:
       main_page:
         site_name:
