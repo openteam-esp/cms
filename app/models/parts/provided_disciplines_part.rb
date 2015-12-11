@@ -21,7 +21,7 @@ class ProvidedDisciplinesPart < Part
     end
 
     def url_for_request
-      "#{plans_url}/api/v1/disciplines_provided_by/#{provided_disciplines_subdepartment}"
+      "#{plans_url}/api/v1/disciplines_provided_by/#{URI.encode provided_disciplines_subdepartment}"
     end
 end
 
