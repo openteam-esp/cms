@@ -1346,7 +1346,7 @@ sites:
           required: false
           configurable: true
 
-      inner_page:
+      inner_page: &tusur_inner_page
         site_name:
           required: true
           configurable: false
@@ -1382,49 +1382,8 @@ sites:
           configurable: true
           indexable: true
 
-      research_interships_page:
-        site_name:
-          required: true
-          configurable: false
-        main_navigation:
-          required: true
-          configurable: false
-        breadcrumbs:
-          required: true
-          configurable: false
-        right_navigation_with_title:
-          required: true
-          configurable: true
-        right_navigation_without_title:
-          required: true
-          configurable: true
-        right_links:
-          required: true
-          configurable: true
-        right_advert:
-          required: true
-          configurable: true
-        right_documents:
-          required: true
-          configurable: true
-        right_contacts:
-          required: true
-          configurable: true
-        right_html_part:
-          required: true
-          configurable: true
-        content_first:
-          required: false
-          configurable: true
-          indexable: true
-        content_second:
-          required: false
-          configurable: true
-          indexable: true
-        content_third:
-          required: false
-          configurable: true
-          indexable: true
+      on_client:
+        <<: *tusur_inner_page
 
       sitemap:
         site_name:
