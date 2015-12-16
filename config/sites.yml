@@ -114,6 +114,9 @@ sites:
         right_side_twitter:
           required: true
           configurable: true
+        right_side_events:
+          required: false
+          configurable: true
         reports:
           required: false
           configurable: true
