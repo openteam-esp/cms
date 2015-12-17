@@ -1377,7 +1377,7 @@ sites:
         right_html_part:
           required: true
           configurable: true
-        right_side_events:
+        right_events:
           required: false
           configurable: true
         content:
