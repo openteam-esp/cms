@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151203054322) do
+ActiveRecord::Schema.define(:version => 20151225043810) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(:version => 20151203054322) do
     t.integer  "position"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+  end
+
+  create_table "locale_associations", :force => true do |t|
+    t.integer  "site_id"
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "metas", :force => true do |t|
@@ -99,8 +106,8 @@ ActiveRecord::Schema.define(:version => 20151203054322) do
     t.text     "title"
     t.string   "ancestry"
     t.string   "type"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.text     "route"
     t.string   "template"
     t.string   "client_url"
@@ -108,11 +115,12 @@ ActiveRecord::Schema.define(:version => 20151203054322) do
     t.string   "navigation_group"
     t.integer  "navigation_position"
     t.text     "navigation_title"
-    t.integer  "ancestry_depth",       :default => 0
+    t.integer  "ancestry_depth",        :default => 0
     t.integer  "page_for_redirect_id"
     t.string   "weight"
     t.text     "external_link"
     t.text     "alternative_title"
+    t.integer  "locale_association_id"
   end
 
   create_table "parts", :force => true do |t|

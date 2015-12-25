@@ -2,11 +2,15 @@
   <ul>
     <li><a href="#tab-1">Информация</a></li>
     <li><a href="#tab-2">Языки</a></li>
+    <li><a href="#tab-3">Соответсвия страниц</a></li>
   </ul>
   <div id="tab-1">
     <%= render resource %>
   </div>
   <div id="tab-2">
     <%= render :partial => "manage/nodes/list", :locals => { :controller => 'locales', :path => new_manage_site_locale_path(resource) } %>
+  </div>
+  <div id="tab-3">
+    <%= render :partial => "manage/locale_associations/list", :locals => { :controller => 'locale_associations' } %>
   </div>
 </div>
