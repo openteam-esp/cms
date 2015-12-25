@@ -1,4 +1,4 @@
-<%= semantic_nested_form_for resource, :as => resource_instance_name, :url => collection_url, :html => { :class => resource.type.underscore, :multipart => true } do | form | %>
+<%= semantic_nested_form_for resource, :as => resource_instance_name, :url => collection_url, :html => { :class => resource.class.name.underscore, :multipart => true } do | form | %>
   <%= form.semantic_errors %>
   <%= render :partial => "fields", :locals => { :form => form } %>
   <%= form.actions do %>

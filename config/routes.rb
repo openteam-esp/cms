@@ -17,11 +17,12 @@ Cms::Application.routes.draw do
 
     resources :sites do
       resources :locales, :only => [:new, :create]
+      resources :locale_associations, :only => [:new, :create, :destroy]
     end
 
-    resources :locales, :only => [:show, :edit, :update, :destroy]
-    resources :pages,   :only => [:show, :edit, :update, :destroy]
-    resources :parts,   :only => [:edit, :update, :destroy]
+    resources :locales,            :only => [:show, :edit, :update, :destroy]
+    resources :pages,              :only => [:show, :edit, :update, :destroy]
+    resources :parts,              :only => [:edit, :update, :destroy]
 
     get 'spotlight' => 'spotlight#proxy'
 

@@ -62,6 +62,7 @@ class Node < ActiveRecord::Base
         'template' => node_for_json.template,
         'external_link' => node_for_json.external_link,
         'meta' => node_for_json.meta,
+        'related_pages' => related_pages,
         'regions' => node_for_json.regions.inject({}) do |hash, region|
           hash.merge(
             { region => ((part = node_for_json.part_for(region, true)) == nil ? nil : part.to_json ) }
@@ -73,6 +74,12 @@ class Node < ActiveRecord::Base
 
   def to_s
     title
+  end
+
+  def related_pages
+    if locale_association
+      (locale_association.pages - [self]).inject({}){ |hash, page| hash["#{page.locale.slug}"] = page.route; hash }
+    end
   end
 
   def pages

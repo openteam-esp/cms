@@ -8,6 +8,8 @@ class Site < Node
   delegate :parts, :to => :default_locale
   delegate :template, :to => :default_locale
 
+  has_many :locale_associations, :dependent => :destroy
+
   def locales
     Locale.where(:ancestry => child_ancestry)
   end
