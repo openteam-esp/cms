@@ -1,0 +1,11 @@
+<ul>
+  <% resource.locale_associations.each do |la| %>
+    <li>
+      <%= la.title %>
+      <%= link_to "Удалить", manage_site_locale_association_path(@site, la), :method => :delete %>
+  </li>
+  <% end %>
+</ul>
+<div class="actions">
+  <%= link_to "Создать связь", new_manage_site_locale_association_path(@site), :class => 'button icon edit' %>
+</div>

@@ -1,0 +1,7 @@
+<%= form.inputs do %>
+  <% @site.locales.pluck(:slug).each do |locale| %>
+    <p><%= locale %></p>
+    <%= form.input :page_ids, :collection => @site.locales.find_by_slug(locale).descendants, :member_label => ->(n) { ('&nbsp;' * 2 * n.depth + n.title).html_safe },
+      :input_html => {:name => "locale_association[page_ids][]",} %>
+  <% end %>
+<% end %>
