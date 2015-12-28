@@ -79,9 +79,17 @@ class Node < ActiveRecord::Base
   end
 
   def related_pages
-    if locale_association
-      (locale_association.pages - [self]).inject({}){ |hash, page| hash["#{page.locale.slug}"] = page.page_route; hash }
+    return site.locales.map(&:page_route) - [self.page_route] if self.is_a? Locale
+
+    if first_page_with_relation = recurcusive_parent_search(self)
+      (first_page_with_relation.locale_association.pages - [first_page_with_relation]).inject({}){ |hash, page| hash["#{page.locale.slug}"] = page.page_route; hash }
     end
+  end
+
+  def recurcusive_parent_search(node)
+    return node if node.parent.nil?
+
+    node.locale_association || node.parent.nil?  ? node : recurcusive_parent_search(node.parent)
   end
 
   def pages
