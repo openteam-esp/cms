@@ -80,7 +80,7 @@ class Node < ActiveRecord::Base
 
   def related_pages
     if locale_association
-      (locale_association.pages - [self]).inject({}){ |hash, page| hash["#{page.locale.slug}"] = page.route; hash }
+      (locale_association.pages - [self]).inject({}){ |hash, page| hash["#{page.locale.slug}"] = page.page_route; hash }
     end
   end
 
