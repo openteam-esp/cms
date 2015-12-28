@@ -13,8 +13,6 @@ class Page < Node
     object.parent.try(:navigation_group)
   end
 
-  belongs_to :locale_association
-
   alias :node :parent
 
   def locale

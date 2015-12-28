@@ -8,6 +8,8 @@ class Node < ActiveRecord::Base
 
   has_many :parts
 
+  belongs_to :locale_association
+
   validates :slug, :format => { :with => %r{\A[[:alnum:]_\.-]+\z} }
 
   validates_uniqueness_of :slug, :scope => :ancestry
