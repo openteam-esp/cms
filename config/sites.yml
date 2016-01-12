@@ -1398,6 +1398,12 @@ sites:
           required: true
           configurable: true
 
+      faculty:
+        <<: *tusur_inner_page
+
+      chair:
+        <<: *tusur_inner_page
+
       sitemap:
         site_name:
           required: true
