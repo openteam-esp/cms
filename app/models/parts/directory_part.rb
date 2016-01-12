@@ -13,8 +13,7 @@ class DirectoryPart < Part
   end
 
   def content
-    #set_subdivision_paths
-    #update_item_links
+    response_hash
   end
 
   alias_attribute :part_title, :title
@@ -28,35 +27,11 @@ class DirectoryPart < Part
     @subdivision_name ||= requester.response_status == 200 ? requester.response_hash['title'] : "Подразделение не найдено в телефонном справочнике"
   end
 
-  def site_subtree
-    @site_subtree ||= node.site.subtree
-  end
-
-  #
-  # title гиленсезируется, поэтому ищется так
-  #
-  def find_page_by_title(title)
-    # NOTE: Page.all офигенно фиговая практика
-    # TODO: искать ч/з Sunspot или сохранять дублированное поле без гиленсизации
-    site_subtree.detect { |node| node.title.gsub(/[[:space:]]/, ' ') == title }
-  end
-
-  #def administration_page
-    #find_page_by_title('Администрация Томской области')
-  #end
-
-  #def additional_url_for_remove
-    #Page.find(blue_pages_item_page_id_was).url if blue_pages_item_page_id_changed?
-  #end
-
   private
-    #def urls_for_index
-      #item_page && response_hash['items'] ? super + response_hash['items'].map{ |item| "#{item_page.url}-#{item['link']}/" if item['link'] }.compact : super
-    #end
 
-    #def need_to_reindex?
-      #blue_pages_item_page_id_changed? || blue_pages_category_id_changed? || blue_pages_expand_changed? || super
-    #end
+    def need_to_reindex?
+      directory_subdivision_id_changed? || directory_depth_changed? || super
+    end
 
     def directory_url
       "#{Settings['directory.url']}/api/subdivisions"
@@ -70,29 +45,6 @@ class DirectoryPart < Part
       "#{directory_url}/#{directory_subdivision_id}#{depth_parameter}"
     end
 
-    #
-    # example: /categories/94/items/246.json -> /ru/item/-/categories/94/items/246.json
-    #
-    #def update_item_links(subdivisions = response_hash)
-      #subdivisions['items'].each { |item|
-        #item['link'] = "#{item_page.route_without_site}/-#{item['link']}" if item['link']
-      #} if subdivisions['items']
-
-      #subdivisions['categories'].each { |subdivision| update_item_links(subdivision) } if subdivisions['categories']
-      #subdivisions['subdivisions'].each { |subdivision| update_item_links(subdivision) } if subdivisions['subdivisions']
-
-      #subdivisions
-    #end
-
-    #def set_subdivision_paths
-      #if administration_page
-        #response_hash['subdivisions'].each do |subdivision|
-          #if node = find_page_by_title(subdivision['title'])
-            #subdivision['path'] = node.route_without_site
-          #end
-        #end if response_hash['subdivisions'].try(:any?)
-      #end
-    #end
 end
 
 # == Schema Information
