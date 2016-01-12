@@ -1388,6 +1388,16 @@ sites:
       on_client:
         <<: *tusur_inner_page
 
+      faculties_list:
+        <<: *tusur_inner_page
+        faculties_navigation:
+          required: true
+          configurable: true
+
+        directory_part:
+          required: true
+          configurable: true
+
       sitemap:
         site_name:
           required: true
