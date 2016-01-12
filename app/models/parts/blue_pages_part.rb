@@ -152,4 +152,6 @@ end
 #  streams_degree                         :string(255)
 #  provided_disciplines_subdepartment     :string(255)
 #  news_mlt_number_of_months              :integer          default(1)
+#  directory_subdivision_id               :integer
+#  directory_depth                        :integer
 #

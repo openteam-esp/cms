@@ -1,103 +1,98 @@
-class OrganizationListPart < Part
-  attr_accessible :organization_list_category_id
-  attr_accessible :organization_list_item_page_id
-  attr_accessible :organization_list_per_page
+class DirectoryPart < Part
+  attr_accessible :directory_subdivision_id
+  attr_accessible :directory_depth
 
-  belongs_to :item_page, :class_name => 'Node', :foreign_key => :organization_list_item_page_id
+  attr_accessor :directory_subdivision
 
-  validates_presence_of :organization_list_category_id
+  validates_presence_of :directory_subdivision_id, :directory_depth
 
-  default_value_for :organization_list_per_page, 10
-
-  def categories
-    @categories ||= Requester.new("#{blue_pages_url}/categories", 'application/json').response_hash['categories'].map { |c| [c['title'], c['id']] }
-  end
-
-  def category_name
-    @category_name ||= Requester.new("#{blue_pages_url}/categories/#{organization_list_category_id}", 'application/json').response_hash['title']
-  end
+  default_value_for :directory_depth, 1
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
 
   def content
-    replace_id_with_links
-    set_filters
-    response_hash.merge(:pagination => pagination, :query => params['q'])
+    #set_subdivision_paths
+    #update_item_links
   end
 
   alias_attribute :part_title, :title
 
+  def subdivisions
+    @subdivisions ||= Requester.new("#{directory_url}", 'application/json').response_hash
+  end
+
+  def subdivision_name
+    requester = Requester.new("#{directory_url}/#{directory_subdivision_id}", 'application/json')
+    @subdivision_name ||= requester.response_status == 200 ? requester.response_hash['title'] : "Подразделение не найдено в телефонном справочнике"
+  end
+
+  def site_subtree
+    @site_subtree ||= node.site.subtree
+  end
+
+  #
+  # title гиленсезируется, поэтому ищется так
+  #
+  def find_page_by_title(title)
+    # NOTE: Page.all офигенно фиговая практика
+    # TODO: искать ч/з Sunspot или сохранять дублированное поле без гиленсизации
+    site_subtree.detect { |node| node.title.gsub(/[[:space:]]/, ' ') == title }
+  end
+
+  #def administration_page
+    #find_page_by_title('Администрация Томской области')
+  #end
+
+  #def additional_url_for_remove
+    #Page.find(blue_pages_item_page_id_was).url if blue_pages_item_page_id_changed?
+  #end
+
   private
-    def blue_pages_url
-      "#{Settings['blue-pages.url']}"
+    #def urls_for_index
+      #item_page && response_hash['items'] ? super + response_hash['items'].map{ |item| "#{item_page.url}-#{item['link']}/" if item['link'] }.compact : super
+    #end
+
+    #def need_to_reindex?
+      #blue_pages_item_page_id_changed? || blue_pages_category_id_changed? || blue_pages_expand_changed? || super
+    #end
+
+    def directory_url
+      "#{Settings['directory.url']}/api/subdivisions"
+    end
+
+    def depth_parameter
+      directory_depth.to_i.zero? ? '' : "?depth=#{directory_depth}"
     end
 
     def url_for_request
-      URI.escape "#{blue_pages_url}/innorganizations?#{query}"
+      "#{directory_url}/#{directory_subdivision_id}#{depth_parameter}"
     end
 
-    def query
-      ''.tap do |s|
-        s << "per_page=#{organization_list_per_page}&"
-        s << "page=#{page}&"
-        s << "q=#{params['q']}&"
-        s << filter_params
-      end
-    end
+    #
+    # example: /categories/94/items/246.json -> /ru/item/-/categories/94/items/246.json
+    #
+    #def update_item_links(subdivisions = response_hash)
+      #subdivisions['items'].each { |item|
+        #item['link'] = "#{item_page.route_without_site}/-#{item['link']}" if item['link']
+      #} if subdivisions['items']
 
-    def filter_params
-      filter_params = %w[sphere status].map { |filter|
-        params[filter].delete('_') if params[filter]
+      #subdivisions['categories'].each { |subdivision| update_item_links(subdivision) } if subdivisions['categories']
+      #subdivisions['subdivisions'].each { |subdivision| update_item_links(subdivision) } if subdivisions['subdivisions']
 
-        params[filter].map { |v| "#{filter}[]=#{v}" }.join('&') if params[filter]
-      }
+      #subdivisions
+    #end
 
-      filter_params.delete_if { |i| i.blank? }.join('&')
-    end
-
-    def page
-      params['page'].to_i.zero? ? 1 : params['page'].to_i
-    end
-
-    def total_count
-      response_headers['X-Total-Count'].to_i
-    end
-
-    def total_pages
-      response_headers['X-Total-Pages'].to_i
-    end
-
-    def current_page
-      response_headers['X-Current-Page'].to_i
-    end
-
-    def pagination
-      {
-        'total_count' => total_count,
-        'current_page' => current_page,
-        'per_page' => organization_list_per_page
-      }
-    end
-
-    def replace_id_with_links
-      response_hash['organizations'].each do |organization|
-        organization['link'] = "#{item_page.route_without_site}/-/#{organization.delete('id')}"
-      end if response_hash['organizations']
-    end
-
-    def set_filters
-      %w[sphere status].each do |filter|
-        response_hash['filters'][filter].each do |k, v|
-          v['checked'] = params[filter].include?(k) ? true : false
-        end if params[filter]
-      end if response_hash['filters']
-    end
-
-    def urls_for_index
-      []
-    end
+    #def set_subdivision_paths
+      #if administration_page
+        #response_hash['subdivisions'].each do |subdivision|
+          #if node = find_page_by_title(subdivision['title'])
+            #subdivision['path'] = node.route_without_site
+          #end
+        #end if response_hash['subdivisions'].try(:any?)
+      #end
+    #end
 end
 
 # == Schema Information

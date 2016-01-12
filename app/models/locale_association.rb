@@ -36,3 +36,13 @@ class LocaleAssociation < ActiveRecord::Base
     errors[:page_ids] = "Все поля обязательны для заполнения" if page_ids.empty?
   end
 end
+
+# == Schema Information
+#
+# Table name: locale_associations
+#
+#  id         :integer          not null, primary key
+#  site_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151225043810) do
+ActiveRecord::Schema.define(:version => 20160112090101) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -172,6 +172,8 @@ ActiveRecord::Schema.define(:version => 20151225043810) do
     t.string   "streams_degree"
     t.string   "provided_disciplines_subdepartment"
     t.integer  "news_mlt_number_of_months",              :default => 1
+    t.integer  "directory_subdivision_id"
+    t.integer  "directory_depth"
   end
 
   add_index "parts", ["node_id"], :name => "index_parts_on_node_id"

@@ -1,0 +1,19 @@
+<%= javascript_include_tag 'blue_pages.js' %>
+
+<%= form.inputs do %>
+
+  <li class='blue_pages_categories'>
+    <ul>
+      <% form.object.subdivisions.each do |subdivision| %>
+        <li data-id='<%= subdivision['id'] %>'><%= subdivision['title'].squish %></li>
+      <% end %>
+    </ul>
+  </li>
+  <%= form.input :directory_subdivision, :input_html => { :id => 'part_blue_pages_category' } %>
+  <%= form.input :directory_subdivision_id, :as => :hidden, :input_html => { :id => 'part_blue_pages_category_id' } %>
+
+  <%= form.input :directory_depth %>
+
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
+<% end %>
