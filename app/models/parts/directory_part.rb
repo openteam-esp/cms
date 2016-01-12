@@ -1,8 +1,7 @@
 class DirectoryPart < Part
-  attr_accessible :directory_subdivision_id
-  attr_accessible :directory_depth
-
   attr_accessor :directory_subdivision
+
+  attr_accessible :directory_subdivision_id, :directory_depth
 
   validates_presence_of :directory_subdivision_id, :directory_depth
 
