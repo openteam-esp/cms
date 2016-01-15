@@ -271,6 +271,21 @@ ru:
           '!s': обрезать по нижнему краю
           '!w': обрезать по левому краю
 
+      directory_part:
+        subdivision_name: 'Подразделение'
+        directory_subdivision: 'Подразделение'
+        directory_depth: 'Конечный уровень'
+
+      priem_part:
+        context_title: 'Подразделение'
+        priem_context_kind: 'Тип'
+        priem_context: 'Подразделение'
+        priem_kinds: 'Уровни направлений подготовки'
+        priem_forms: 'Формы обучения'
+        priem_context_kind_enum:
+          faculty: 'Факультет'
+          subfaculty: 'Кафедра'
+
       meta:
         description: 'description'
         keywords: 'keywords'

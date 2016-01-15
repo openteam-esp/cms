@@ -1,83 +1,71 @@
-class SearchPart < Part
-  attr_accessible :search_per_page
+class PriemPart < Part
+  attr_accessor :priem_context
 
-  validates_presence_of :search_per_page
+  attr_accessible :priem_context_id, :priem_context_kind, :priem_kinds, :priem_forms
 
-  default_value_for :search_per_page, 15
+  validates_presence_of :priem_context_id, :priem_kinds, :priem_forms
 
-  alias_attribute :part_title, :title
+  extend Enumerize
+
+  serialize :priem_kinds, Array
+  enumerize :priem_kinds, in: [
+    'bachelor', 'specialist', 'magister'
+  ], multiple: true
+
+  serialize :priem_forms, Array
+  enumerize :priem_forms, in: [
+    'fulltime', 'correspondence'
+  ], multiple: true
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
 
   def content
-    {
-      'items' => response_hash,
-      'search_query' => query
-    }.tap do |hash|
-      hash.merge!(pagination)
-    end
+    p response_hash
+  end
+
+  alias_attribute :part_title, :title
+
+  def contexts
+    @contexts ||= Requester.new("#{priem_context_url}", 'application/json').response_hash
+  end
+
+  def context_title
+    requester = Requester.new("#{priem_context_url}/#{priem_context_id}?context_kind=#{priem_context_kind}", 'application/json')
+    @context_title ||= requester.response_status == 200 ? requester.response_hash['title'] : "Подразделение не найдено в личном кабинете абитуриента"
   end
 
   private
-    def searcher_url
-      Settings['searcher.url']
+
+    def need_to_reindex?
+      priem_context_id_changed? || priem_kinds_changed? || priem_forms_changed? || super
     end
 
-    def site_url
-      node.site.client_url
+    def priem_context_url
+      "#{Settings['priem.url']}/api/subdivisions"
     end
 
-    def site_url
-      node.site.client_url
+    def priem_programs_url
+      "#{Settings['priem.url']}/api/programs"
     end
 
-    def query
-      params['q']
+    def priem_kinds_param
+      kinds = priem_kinds.values.map{ |k| "kinds[]=#{k}" }.join('&')
+
+      "&#{kinds}"
     end
 
-    def page
-      params['page'] || 1
-    end
+    def priem_forms_param
+      training_forms = priem_forms.values.map{ |tf| "training_forms[]=#{tf}" }.join('&')
 
-    def request_params
-      request_params = "url=#{site_url}"
-      request_params << "&q=#{query}"
-      request_params << "&page=#{page}"
-      request_params << "&per_page=#{search_per_page}"
+      "&#{training_forms}"
     end
 
     def url_for_request
-      URI.encode("#{searcher_url}?#{request_params}")
+      "#{priem_programs_url}?context_id=#{priem_context_id}&context_kind=#{priem_context_kind}#{priem_kinds_param}#{priem_forms_param}"
     end
 
-    def total_count
-      response_headers['X-Total-Count'].to_i
-    end
-
-    def total_pages
-      response_headers['X-Total-Pages'].to_i
-    end
-
-    def current_page
-      response_headers['X-Current-Page'].to_i
-    end
-
-    def pagination
-      {
-        'pagination' => {
-          'total_count' => total_count,
-          'current_page' => current_page,
-          'per_page' => search_per_page,
-          'param_name' => 'parts_params[search][page]'
-        }
-      }
-    end
-
-    def urls_for_index
-      []
-    end
 end
 
 # == Schema Information

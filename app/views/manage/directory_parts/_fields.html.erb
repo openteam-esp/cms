@@ -1,6 +1,8 @@
 <%= javascript_include_tag 'blue_pages.js' %>
 
 <%= form.inputs do %>
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
 
   <li class='blue_pages_categories'>
     <ul>

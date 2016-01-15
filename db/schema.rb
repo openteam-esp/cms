@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160112090101) do
+ActiveRecord::Schema.define(:version => 20160115050717) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -174,6 +174,10 @@ ActiveRecord::Schema.define(:version => 20160112090101) do
     t.integer  "news_mlt_number_of_months",              :default => 1
     t.integer  "directory_subdivision_id"
     t.integer  "directory_depth"
+    t.integer  "priem_context_id"
+    t.string   "priem_context_kind"
+    t.string   "priem_kinds"
+    t.string   "priem_forms"
   end
 
   add_index "parts", ["node_id"], :name => "index_parts_on_node_id"

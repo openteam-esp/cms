@@ -1,9 +1,19 @@
 ru:
   enumerize:
+
     spotlight_item:
       kind:
-        news: Новость
-        event: Мероприятие
-        photo: Фото
-        video: Видео
-        other: Другое
+        news: 'Новость'
+        event: 'Мероприятие'
+        photo: 'Фото'
+        video: 'Видео'
+        other: 'Другое'
+
+    priem_part:
+      priem_kinds:
+        bachelor: 'бакалавриат'
+        specialist: 'специалитет'
+        magister: 'магистратура'
+      priem_forms:
+        fulltime: 'очная форма обучения'
+        correspondence: 'заочная форма обучения'

@@ -1,0 +1,21 @@
+<%= javascript_include_tag 'priem.js' %>
+
+<%= form.inputs do %>
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
+
+  <li class='priem_contexts hidden'>
+    <ul>
+      <% form.object.contexts.each do |context| %>
+        <li data-context-id='<%= context['context_id'] %>' data-context-kind='<%= context['context_kind'] %>'><%= context['title'].squish %></li>
+      <% end %>
+    </ul>
+  </li>
+
+  <%= form.input :priem_context, required: true, input_html: { id: :priem_context } %>
+  <%= form.input :priem_context_id, as: :hidden, input_html: { id: :priem_context_id } %>
+  <%= form.input :priem_context_kind, as: :hidden, input_html: { id: :priem_context_kind } %>
+  <%= form.input :priem_kinds, as: :check_boxes %>
+  <%= form.input :priem_forms, as: :check_boxes %>
+
+<% end %>

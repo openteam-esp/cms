@@ -102,4 +102,8 @@ end
 #  news_mlt_number_of_months              :integer          default(1)
 #  directory_subdivision_id               :integer
 #  directory_depth                        :integer
+#  priem_context_id                       :integer
+#  priem_context_kind                     :string(255)
+#  priem_kinds                            :string(255)
+#  priem_forms                            :string(255)
 #

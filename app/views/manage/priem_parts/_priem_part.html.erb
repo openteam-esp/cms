@@ -1,0 +1,12 @@
+<%= show_for priem_part do |part| %>
+  <%= part.attributes :template, :context_title %>
+  <%= part.attribute :priem_context_kind do %>
+    <%= I18n.t("activerecord.attributes.priem_part.priem_context_kind_enum.#{part.object.priem_context_kind}") %>
+  <% end %>
+  <%= part.attribute :priem_kinds do %>
+    <%= part.object.priem_kinds.texts.join(', ') %>
+  <% end %>
+  <%= part.attribute :priem_forms do %>
+    <%= part.object.priem_forms.texts.join(', ') %>
+  <% end %>
+<% end %>

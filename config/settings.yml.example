@@ -25,3 +25,6 @@ deploy:
 
 plans:
   url:          http://plans.url
+
+priem:
+  url:          http://priem.url
