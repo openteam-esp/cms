@@ -12,11 +12,14 @@ class PriemPart < Part
     'bachelor', 'specialist', 'magister'
   ], multiple: true
 
+  default_value_for :priem_kinds, ['bachelor', 'specialist', 'magister']
+
   serialize :priem_forms, Array
   enumerize :priem_forms, in: [
     'fulltime', 'correspondence'
   ], multiple: true
 
+  default_value_for :priem_forms, ['fulltime']
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
