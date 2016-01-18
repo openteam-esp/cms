@@ -1400,6 +1400,15 @@ sites:
 
       faculty:
         <<: *tusur_inner_page
+        html_content:
+          required: false
+          configurable: true
+          indexable: true
+
+        priem_content:
+          required: false
+          configurable: true
+          indexable: true
 
       chair:
         <<: *tusur_inner_page
