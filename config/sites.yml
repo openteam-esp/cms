@@ -1412,6 +1412,15 @@ sites:
 
       chair:
         <<: *tusur_inner_page
+        html_content:
+          required: false
+          configurable: true
+          indexable: true
+
+        priem_content:
+          required: false
+          configurable: true
+          indexable: true
 
       sitemap:
         site_name:
