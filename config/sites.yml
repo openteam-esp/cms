@@ -1422,6 +1422,27 @@ sites:
           configurable: true
           indexable: true
 
+      subdivision_list:
+        <<: *tusur_inner_page
+        structure_navigation:
+          required: true
+          configurable: true
+
+        directory_part:
+          required: true
+          configurable: true
+
+      subdivision:
+        <<: *tusur_inner_page
+        html_content:
+          required: false
+          configurable: true
+          indexable: true
+
+        directory_part:
+          required: true
+          configurable: true
+
       sitemap:
         site_name:
           required: true
