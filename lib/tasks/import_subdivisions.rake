@@ -20,15 +20,14 @@ private
 
 def recursive_page_creation(parent_page, subdivision, pb, depth=0)
   subdivision['children'].each do |child|
-    full_title = child['abbr'].present? ? "#{child['title']} (#{child['abbr']})" : "#{child['title']}"
     title = child['title']
     page = Page.new(:title => title)
     page = parent_page.children.find_by_slug(page.send(:generate_slug)) || page
     page.parent = parent_page
     page.template = 'subdivision'
     page.navigation_group = 'subdivision'
-    page.title = full_title
-    page.navigation_title = full_title
+    page.title = title
+    page.navigation_title = title
 
     page.save!
 
