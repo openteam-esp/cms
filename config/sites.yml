@@ -1400,6 +1400,11 @@ sites:
 
       faculty:
         <<: *tusur_inner_page
+
+        directory_part:
+          required: true
+          configurable: true
+
         html_content:
           required: false
           configurable: true
@@ -1412,6 +1417,11 @@ sites:
 
       chair:
         <<: *tusur_inner_page
+
+        directory_part:
+          required: true
+          configurable: true
+
         html_content:
           required: false
           configurable: true
