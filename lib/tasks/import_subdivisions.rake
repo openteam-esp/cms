@@ -1,6 +1,6 @@
 require 'progress_bar'
 
-desc 'super task'
+desc 'import subdivisions'
 task :import_subdivisions => :environment do
   structure = RestClient::Request.execute(
     :method => :get,

@@ -1,5 +1,6 @@
 require 'progress_bar'
 
+desc 'import faculties and subfaculties'
 task :import_faculties => :environment do
   structure = RestClient::Request.execute(
     :method => :get,
