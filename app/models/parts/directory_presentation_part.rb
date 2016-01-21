@@ -34,6 +34,7 @@ class DirectoryPresentationPart < Part
   def presentation
     @presentation ||= Hashie::Mash.new(Requester.new("#{directory_api_url}/presentations/#{presentation_id}", 'application/json').response_hash)
   end
+
   delegate :title, to: :presentation, prefix: true
 
   alias_attribute :part_title,      :title

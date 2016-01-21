@@ -36,6 +36,8 @@ group :default do
   gem 'rack-utf8_sanitizer'
   gem 'rails', '~> 3.2.13'
   gem 'rest-client'
+  gem 'rest-client-components'
+  gem 'rack-cache'
   gem 'russian'
   gem 'sanitize'
   gem 'show_for'
