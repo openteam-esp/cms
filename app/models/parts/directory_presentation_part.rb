@@ -18,7 +18,7 @@ class DirectoryPresentationPart < Part
 
   def content
     response_hash.map { |e|
-      e['link'] = "#{item_page.route_without_site}/-/#{e.delete('id')}"
+      e['link'] = "#{item_page.route_without_site}/-/#{e.delete('id')}" if item_page.present?
       e['person_photo_url'] = e['person_photo_url'].gsub(/\/\d+-\d+\//, photo_processing) if e['person_photo_url'].present?
 
       e

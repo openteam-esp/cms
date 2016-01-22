@@ -1440,6 +1440,67 @@ sites:
           configurable: true
           indexable: true
 
+      academic_council:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        right_navigation_with_title:
+          required: true
+          configurable: true
+        right_navigation_without_title:
+          required: true
+          configurable: true
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        council:
+          required: false
+          configurable: true
+          indexable: true
+        content_second:
+          required: false
+          configurable: true
+          indexable: true
+        commission_first:
+          required: false
+          configurable: true
+          indexable: true
+        commission_second:
+          required: false
+          configurable: true
+          indexable: true
+        commission_third:
+          required: false
+          configurable: true
+          indexable: true
+        commission_fourth:
+          required: false
+          configurable: true
+          indexable: true
+        commission_fifth:
+          required: false
+          configurable: true
+          indexable: true
+        commission_sixth:
+          required: false
+          configurable: true
+          indexable: true
+        normative_documents:
+          required: false
+          configurable: true
+          indexable: true
+        archive:
+          required: false
+          configurable: true
+          indexable: true
+
       on_client:
         <<: *tusur_inner_page
 
