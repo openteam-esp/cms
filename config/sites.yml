@@ -1456,6 +1456,9 @@ sites:
         right_navigation_without_title:
           required: true
           configurable: true
+        right_contacts:
+          required: true
+          configurable: true
         content_first:
           required: false
           configurable: true
