@@ -23,11 +23,11 @@ class BluePagesPart < Part
   alias_attribute :part_title, :title
 
   def categories
-    @categories ||= Requester.new("#{blue_pages_url}", 'application/json').response_hash['categories'].map { |c| [c['title'], c['id']] }
+    @categories ||= Requester.new("#{blue_pages_url}", { headers: { Accept: 'application/json' } }).response_hash['categories'].map { |c| [c['title'], c['id']] }
   end
 
   def category_name
-    requester = Requester.new("#{blue_pages_url}/#{blue_pages_category_id}", 'application/json')
+    requester = Requester.new("#{blue_pages_url}/#{blue_pages_category_id}", { headers: { Accept: 'application/json' } })
     @category_name ||= requester.response_status == 200 ? requester.response_hash['title'] : "Подразделение не найдено в телефонном справочнике"
   end
 

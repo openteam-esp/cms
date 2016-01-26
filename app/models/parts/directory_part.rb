@@ -7,6 +7,8 @@ class DirectoryPart < Part
 
   default_value_for :directory_depth, 1
 
+  after_initialize :check_subdivision_url
+
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
@@ -18,12 +20,26 @@ class DirectoryPart < Part
   alias_attribute :part_title, :title
 
   def subdivisions
-    @subdivisions ||= Requester.new("#{directory_url}", 'application/json').response_hash
+    @subdivisions ||= Requester.new("#{directory_url}", { headers: { Accept: 'application/json' } }).response_hash
   end
 
   def subdivision_name
-    requester = Requester.new("#{directory_url}/#{directory_subdivision_id}", 'application/json')
+    requester = Requester.new("#{directory_url}/#{directory_subdivision_id}", { headers: { Accept: 'application/json' } })
     @subdivision_name ||= requester.response_status == 200 ? requester.response_hash['title'] : "Подразделение не найдено в телефонном справочнике"
+  end
+
+  def check_subdivision_url
+    subdivision = { :id => response_hash['id'], :url => response_hash['url'], :title => response_hash['title'] }
+
+    if normalize_subdivision_title(node.title) == normalize_subdivision_title(subdivision[:title])
+      unless subdivision[:url] == node.route_without_site
+        Requester.new("#{Settings['directory.url']}/api/set_subdivision_url", { payload: { id: subdivision[:id], url: node.route_without_site }, method: :put })
+      end
+    end
+  end
+
+  def normalize_subdivision_title(title)
+    title.split('(').first.squish.mb_chars.downcase.gsub(/[[:space:]]/, ' ')
   end
 
   private

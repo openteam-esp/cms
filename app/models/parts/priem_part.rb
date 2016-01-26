@@ -31,11 +31,11 @@ class PriemPart < Part
   alias_attribute :part_title, :title
 
   def contexts
-    @contexts ||= Requester.new("#{priem_context_url}", 'application/json').response_hash
+    @contexts ||= Requester.new("#{priem_context_url}", { headers: { Accept: 'application/json' } }).response_hash
   end
 
   def context_title
-    requester = Requester.new("#{priem_context_url}/#{priem_context_id}?context_kind=#{priem_context_kind}", 'application/json')
+    requester = Requester.new("#{priem_context_url}/#{priem_context_id}?context_kind=#{priem_context_kind}", { headers: { Accept: 'application/json' } })
     @context_title ||= requester.response_status == 200 ? requester.response_hash['title'] : "Подразделение не найдено в личном кабинете абитуриента"
   end
 

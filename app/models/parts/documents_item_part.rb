@@ -30,7 +30,7 @@ class DocumentsItemPart < Part
   alias :page_title :part_title
 
   def contexts
-    @contexts ||= Requester.new("#{documents_url}/contexts", headers_accept).response_hash.map { |hash| [hash.keys.first, hash.values.first] }
+    @contexts ||= Requester.new("#{documents_url}/contexts", { headers: { Accept: headers_accept } }).response_hash.map { |hash| [hash.keys.first, hash.values.first] }
   end
 
   def url_for_request
@@ -46,11 +46,11 @@ class DocumentsItemPart < Part
   end
 
   def papers_pages_count
-    Requester.new(papers_list_url, headers_accept).response_headers['X-Total-Pages'].to_i
+    Requester.new(papers_list_url, { headers: { Accept: headers_accept } }).response_headers['X-Total-Pages'].to_i
   end
 
   def paper_ids_for_page(page)
-    Requester.new(papers_list_url(page), headers_accept).response_hash.map { |item| item['id'] }
+    Requester.new(papers_list_url(page), { headers: { Accept: headers_accept  } }).response_hash.map { |item| item['id'] }
   end
 
   private

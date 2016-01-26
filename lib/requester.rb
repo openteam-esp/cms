@@ -2,7 +2,15 @@ require 'restclient/components'
 require 'rack/cache'
 
 class Requester
-  def initialize(url, headers_accept = nil)
+  def initialize(url, options = {})
+    opts = {
+      method: :get,
+      url: url,
+      timeout: nil,
+      payload: nil,
+      headers: { Accept: nil }
+    }.merge!(options)
+
     RestClient.enable Rack::CommonLogger
     RestClient.enable Rack::Cache,
       :metastore => "file:#{Rails.root.join('tmp/rack-cache/meta')}",
@@ -10,12 +18,7 @@ class Requester
       :verbose => true
 
     @response ||= RestClient::Request.execute(
-      :method => :get,
-      :url => url,
-      :timeout => nil,
-      :headers => {
-        :Accept => headers_accept
-      }
+      opts
     ) do |response, request, result, &block|
       response
     end

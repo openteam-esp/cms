@@ -58,7 +58,7 @@ class YoutubeItemPart < Part
   end
 
   def news_slugs_for_page(page)
-    Requester.new(news_list_url(page), headers_accept).response_hash.map { |item| item['slug'] }
+    Requester.new(news_list_url(page), { headers: { Accept: headers_accept } }).response_hash.map { |item| item['slug'] }
   end
 
   def news_pages_count
@@ -124,7 +124,7 @@ class YoutubeItemPart < Part
     end
 
     def channel_hash
-      @channel_hash ||= Requester.new("#{news_url}/channels/#{news_channel}", headers_accept).response_hash
+      @channel_hash ||= Requester.new("#{news_url}/channels/#{news_channel}", { headers: { Accept: headers_accept } }).response_hash
     end
 end
 

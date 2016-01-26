@@ -25,7 +25,7 @@ class Part < ActiveRecord::Base
   end
 
   def response
-    @response ||= Requester.new(url_for_request, headers_accept)
+    @response ||= Requester.new(url_for_request, { headers: { Accept: headers_accept } })
   end
 
   delegate :response_body,
