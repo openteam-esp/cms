@@ -39,7 +39,7 @@ class DirectoryPart < Part
   end
 
   def normalize_subdivision_title(title)
-    title.split('(').first.squish.mb_chars.downcase.gsub(/[[:space:]]/, ' ')
+    title.split('(').first.squish.mb_chars.downcase.gsub(/[[:space:]]/, ' ') rescue ''
   end
 
   private
