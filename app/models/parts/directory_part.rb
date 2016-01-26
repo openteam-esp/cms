@@ -32,8 +32,8 @@ class DirectoryPart < Part
     subdivision = { :id => response_hash['id'], :url => response_hash['url'], :title => response_hash['title'] }
 
     if normalize_subdivision_title(node.title) == normalize_subdivision_title(subdivision[:title])
-      unless subdivision[:url] == node.route_without_site
-        Requester.new("#{Settings['directory.url']}/api/set_subdivision_url", { payload: { id: subdivision[:id], url: node.route_without_site }, method: :put })
+      unless subdivision[:url] == node.url
+        Requester.new("#{Settings['directory.url']}/api/set_subdivision_url", { payload: { id: subdivision[:id], url: node.url }, method: :put })
       end
     end
   end
