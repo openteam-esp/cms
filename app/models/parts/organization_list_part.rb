@@ -10,11 +10,11 @@ class OrganizationListPart < Part
   default_value_for :organization_list_per_page, 10
 
   def categories
-    @categories ||= Requester.new("#{blue_pages_url}/categories", 'application/json').response_hash['categories'].map { |c| [c['title'], c['id']] }
+    @categories ||= Requester.new("#{blue_pages_url}/categories", { headers: { Accept: 'application/json' } }).response_hash['categories'].map { |c| [c['title'], c['id']] }
   end
 
   def category_name
-    @category_name ||= Requester.new("#{blue_pages_url}/categories/#{organization_list_category_id}", 'application/json').response_hash['title']
+    @category_name ||= Requester.new("#{blue_pages_url}/categories/#{organization_list_category_id}", { headers: { Accept: 'application/json' } }).response_hash['title']
   end
 
   def to_json

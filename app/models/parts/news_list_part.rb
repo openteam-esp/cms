@@ -56,7 +56,7 @@ class NewsListPart < Part
   end
 
   def channel_description
-    @channel_description ||= Requester.new("#{news_url}/channels/#{news_channel}", headers_accept).response_hash['description']
+    @channel_description ||= Requester.new("#{news_url}/channels/#{news_channel}", { headers: { Accept: headers_accept } }).response_hash['description']
   end
 
   def channels_for_select
