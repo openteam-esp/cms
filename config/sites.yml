@@ -1440,6 +1440,14 @@ sites:
           configurable: true
           indexable: true
 
+      educations_list:
+        <<: *tusur_inner_page
+
+        priem_content:
+          required: false
+          configurable: true
+          indexable: true
+
       academic_council:
         site_name:
           required: true
