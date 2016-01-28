@@ -143,7 +143,7 @@ class YoutubeListPart < Part
     end
 
     def channel_hash
-      @channel_hash ||= Requester.new("#{news_url}/channels/#{news_channel}", headers_accept).response_hash
+      @channel_hash ||= Requester.new("#{news_url}/channels/#{news_channel}", { headers: { Accept: headers_accept } }).response_hash
     end
 end
 
