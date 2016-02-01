@@ -3,7 +3,7 @@ class PriemPart < Part
 
   attr_accessible :priem_context_id, :priem_context_kind, :priem_kinds, :priem_forms
 
-  validates_presence_of :priem_context_id, :priem_kinds, :priem_forms
+  validates_presence_of :priem_kinds, :priem_forms
 
   extend Enumerize
 
@@ -35,6 +35,8 @@ class PriemPart < Part
   end
 
   def context_title
+    return unless priem_context_id.present?
+
     requester = Requester.new("#{priem_context_url}/#{priem_context_id}?context_kind=#{priem_context_kind}", { headers: { Accept: 'application/json' } })
     @context_title ||= requester.response_status == 200 ? requester.response_hash['title'] : "Подразделение не найдено в личном кабинете абитуриента"
   end
