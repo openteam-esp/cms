@@ -7,7 +7,7 @@ class DirectoryPart < Part
 
   default_value_for :directory_depth, 1
 
-  after_initialize :check_subdivision_url
+  after_initialize :check_subdivision_url, :unless => :new_record?
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
@@ -31,10 +31,8 @@ class DirectoryPart < Part
   def check_subdivision_url
     subdivision = { :id => response_hash['id'], :url => response_hash['url'], :title => response_hash['title'] }
 
-    if normalize_subdivision_title(node.title) == normalize_subdivision_title(subdivision[:title])
-      unless subdivision[:url] == node.url
-        Requester.new("#{Settings['directory.url']}/api/set_subdivision_url", { payload: { id: subdivision[:id], url: node.url }, method: :put })
-      end
+    if normalize_subdivision_title(node.title) == normalize_subdivision_title(subdivision[:title]) && subdivision[:url] != node.url
+      Requester.new("#{Settings['directory.url']}/api/set_subdivision_url", { payload: { id: subdivision[:id], url: node.url }, method: :put })
     end
   end
 
