@@ -1962,3 +1962,15 @@ sites:
           required: false
           configurable: true
           indexable: true
+
+  scd:
+    templates:
+      main_page:
+        site_name:
+          required: true
+          configurable: true
+
+        content:
+          required: false
+          configurable: true
+          indexable: true
