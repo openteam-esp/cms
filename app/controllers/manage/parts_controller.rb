@@ -8,13 +8,15 @@ class Manage::PartsController < Manage::ApplicationController
   protected
     def build_resource
       part_type = params[:part][:type]
+      if part_type.blank?
+        flash[:error] = "Не выбран тип для региона #{params['part']['region']}!"
+        redirect_to smart_resource_url and return
+      end
       if Part.descendants.map(&:to_s).include?(part_type)
         @part = part_type.constantize.new(params[:part])
         @part.node = parent
         @part
       else
-        flash[:error] = "Не выбран тип для региона #{params['part']['region']}!"
-        redirect_to smart_resource_url and return
         raise "Cann't constantize #{params[:part][:type].inspect}"
       end
     end
