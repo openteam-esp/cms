@@ -13,6 +13,8 @@ class Manage::PartsController < Manage::ApplicationController
         @part.node = parent
         @part
       else
+        flash[:error] = "Не выбран тип для региона #{params['part']['region']}!"
+        redirect_to smart_resource_url and return
         raise "Cann't constantize #{params[:part][:type].inspect}"
       end
     end

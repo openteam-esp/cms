@@ -1,4 +1,7 @@
 <% content_for :actions do %>
   <%= yield :extra_actions %>
 <% end %>
+<% if flash[:error].present? %>
+  <h1 class='type-not-select-error'><%= flash[:error] %></h1>
+<% end %>
 <%= render "view" %>
