@@ -1528,6 +1528,8 @@ sites:
           indexable: true
 
   sport:
+    part_templates:
+      news_item_part: events_item_part
     templates:
       main_page:
         site_name:
