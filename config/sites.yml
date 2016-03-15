@@ -1580,6 +1580,94 @@ sites:
           required: false
           configurable: true
           indexable: true
+        content_second:
+          required: false
+          configurable: true
+          indexable: true
+        content_third:
+          required: false
+          configurable: true
+          indexable: true
+
+      on_client:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        right_navigation:
+          required: true
+          configurable: true
+        right_links:
+          required: true
+          configurable: true
+        right_advert:
+          required: true
+          configurable: true
+        right_documents:
+          required: true
+          configurable: true
+        right_contacts:
+          required: true
+          configurable: true
+        right_html:
+          required: true
+          configurable: true
+        news_collection:
+          required: false
+          configurable: true
+        content:
+          required: false
+          configurable: true
+          indexable: true
+
+      section_page:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        right_navigation:
+          required: true
+          configurable: true
+        right_links:
+          required: true
+          configurable: true
+        right_advert:
+          required: true
+          configurable: true
+        right_documents:
+          required: true
+          configurable: true
+        right_contacts:
+          required: true
+          configurable: true
+        right_html:
+          required: true
+          configurable: true
+        news_collection:
+          required: false
+          configurable: true
+        content_first:
+          required: false
+          configurable: true
+          indexable: true
+        content_second:
+          required: false
+          configurable: true
+          indexable: true
+        content_third:
+          required: false
+          configurable: true
+          indexable: true
 
       sitemap:
         site_name:
