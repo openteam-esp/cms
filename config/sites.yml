@@ -1547,6 +1547,9 @@ sites:
         news_collection:
           required: false
           configurable: true
+        clubs_collection:
+          required: false
+          configurable: true
 
       inner_page:
         site_name:
