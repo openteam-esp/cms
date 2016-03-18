@@ -1544,12 +1544,6 @@ sites:
         breadcrumbs:
           required: true
           configurable: true
-        news_collection:
-          required: false
-          configurable: true
-        clubs_collection:
-          required: false
-          configurable: true
 
       inner_page:
         site_name:
@@ -1706,15 +1700,7 @@ sites:
         news_collection:
           required: false
           configurable: true
-        content_first:
-          required: false
-          configurable: true
-          indexable: true
-        content_second:
-          required: false
-          configurable: true
-          indexable: true
-        content_third:
+        content:
           required: false
           configurable: true
           indexable: true
