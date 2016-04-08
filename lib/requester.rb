@@ -9,7 +9,8 @@ class Requester
       timeout: nil,
       payload: nil,
       headers: { Accept: nil }
-    }.merge!(options)
+    }
+    opts.merge!(options) if options.is_a?(Hash)
 
     RestClient.enable Rack::CommonLogger
     RestClient.enable Rack::Cache,
