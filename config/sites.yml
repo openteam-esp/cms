@@ -1318,7 +1318,11 @@ sites:
         news:
           required: false
           configurable: true
-          indexable: true
+          indexable: false
+        statistics:
+          required: false
+          configurable: true
+          indexable: false
 
       aggregate_page:
         site_name:
