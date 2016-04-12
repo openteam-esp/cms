@@ -1323,6 +1323,9 @@ sites:
           required: false
           configurable: true
           indexable: false
+        news_collection:
+          required: false
+          configurable: true
 
       aggregate_page:
         site_name:
