@@ -1410,12 +1410,35 @@ sites:
       subdivision_list:
         <<: *tusur_inner_page
 
-        structure_navigation:
-          required: true
+        first_post_part:
+          required: false
           configurable: true
-
-        directory_part:
-          required: true
+        first_navigation_part:
+          required: false
+          configurable: true
+        second_post_part:
+          required: false
+          configurable: true
+        second_navigation_part:
+          required: false
+          configurable: true
+        third_post_part:
+          required: false
+          configurable: true
+        third_navigation_part:
+          required: false
+          configurable: true
+        fourth_post_part:
+          required: false
+          configurable: true
+        fourth_navigation_part:
+          required: false
+          configurable: true
+        fifth_post_part:
+          required: false
+          configurable: true
+        fifth_navigation_part:
+          required: false
           configurable: true
 
       subdivision: &tusur_subdivision_part
