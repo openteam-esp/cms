@@ -60,6 +60,7 @@ class Node < ActiveRecord::Base
       'page' => {
         'title' => node_for_json.page_title,
         'navigation_title' => node_for_json.navigation_title,
+        'alternative_title' => node_for_json.alternative_title,
         'slug' => node_for_json.slug,
         'template' => node_for_json.template,
         'external_link' => node_for_json.external_link,

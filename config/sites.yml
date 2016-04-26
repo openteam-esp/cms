@@ -1326,6 +1326,7 @@ sites:
         news_collection:
           required: false
           configurable: true
+          indexable: false
 
       aggregate_page:
         site_name:
@@ -1372,21 +1373,27 @@ sites:
         right_links:
           required: true
           configurable: true
+          indexable: true
         right_advert:
           required: true
           configurable: true
+          indexable: true
         right_documents:
           required: true
           configurable: true
+          indexable: true
         right_contacts:
           required: true
           configurable: true
+          indexable: true
         right_html_part:
           required: true
           configurable: true
+          indexable: true
         right_events:
           required: false
           configurable: true
+          indexable: true
         content:
           required: false
           configurable: true
@@ -1501,6 +1508,7 @@ sites:
         right_contacts:
           required: true
           configurable: true
+          indexable: true
         content_first:
           required: false
           configurable: true
@@ -1559,7 +1567,7 @@ sites:
         content:
           required: false
           configurable: true
-          indexable: true
+          indexable: false
 
   sport:
     part_templates:
