@@ -42,7 +42,7 @@ class NewsItemPart < Part
   end
 
   def url_with_slug(slug)
-    "#{node.url}-/#{slug}"
+    "#{node.url}/-/#{slug}"
   end
 
   def news_list_url(page = 1)
