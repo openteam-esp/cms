@@ -3,7 +3,8 @@ function priem_contexts_autocomplete() {
   var source = [];
   list.each(function(index, item) {
     source.push({id: $(item).data('context-id'), kind: $(item).data('context-kind'), value: $(item).text(), label: $(item).text()});
-    if ($('#priem_context_id').val() && $('#priem_context_id').val() == $(item).data('context-id')) {
+    if ($('#priem_context_id').val() && $('#priem_context_id').val() == $(item).data('context-id') &&
+        $('#priem_context_kind').val() && $('#priem_context_kind').val() == $(item).data('context-kind')) {
       $('#priem_context').val($(item).text());
     }
   });
