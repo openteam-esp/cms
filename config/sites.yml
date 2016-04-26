@@ -1420,33 +1420,43 @@ sites:
         first_post_part:
           required: false
           configurable: true
+          indexable: true
         first_navigation_part:
           required: false
           configurable: true
+          indexable: true
         second_post_part:
           required: false
           configurable: true
+          indexable: true
         second_navigation_part:
           required: false
           configurable: true
+          indexable: true
         third_post_part:
           required: false
           configurable: true
+          indexable: true
         third_navigation_part:
           required: false
           configurable: true
+          indexable: true
         fourth_post_part:
           required: false
           configurable: true
+          indexable: true
         fourth_navigation_part:
           required: false
           configurable: true
+          indexable: true
         fifth_post_part:
           required: false
           configurable: true
+          indexable: true
         fifth_navigation_part:
           required: false
           configurable: true
+          indexable: true
 
       subdivision: &tusur_subdivision_part
         <<: *tusur_inner_page
@@ -1464,6 +1474,7 @@ sites:
         directory_part:
           required: true
           configurable: true
+          indexable: true
 
       faculty:
         <<: *tusur_subdivision_part
