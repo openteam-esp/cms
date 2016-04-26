@@ -1327,6 +1327,14 @@ sites:
           required: false
           configurable: true
           indexable: false
+        photogalleries:
+          required: false
+          configurable: true
+          indexable: false
+        youtube:
+          required: false
+          configurable: true
+          indexable: false
 
       aggregate_page:
         site_name:
