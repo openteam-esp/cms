@@ -7,18 +7,14 @@ class SpotlightItem < ActiveRecord::Base
 
   validates_presence_of :kind, :title, :url
 
-  validates_presence_of :annotation,  :if => :kind_news?
   validates_presence_of :since,       :if => :kind_news?
 
-  validates_presence_of :annotation,  :if => :kind_event?
   validates_presence_of :starts_on,   :if => :kind_event?
   validates_presence_of :ends_on,     :if => :kind_event?
 
   validates_presence_of :since,       :if => :kind_photo?
 
   validates_presence_of :since,       :if => :kind_video?
-
-  validates_presence_of :annotation,  :if => :kind_other?
 
   has_many :spotlight_item_photos, :order => 'created_at', :dependent => :destroy
   accepts_nested_attributes_for :spotlight_item_photos, :allow_destroy => true
