@@ -1319,6 +1319,9 @@ sites:
           required: false
           configurable: true
           indexable: false
+        spotlight:
+          required: false
+          configurable: true
         statistics:
           required: false
           configurable: true
