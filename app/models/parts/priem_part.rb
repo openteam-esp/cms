@@ -25,7 +25,7 @@ class PriemPart < Part
   end
 
   def content
-    p response_hash
+    response_hash
   end
 
   alias_attribute :part_title, :title
