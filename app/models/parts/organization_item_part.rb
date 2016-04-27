@@ -14,7 +14,7 @@ class OrganizationItemPart < Part
 
     def urls_for_index
       @urls_for_reindex ||= Requester.new("#{blue_pages_url}/innorganizations", { headers: { Accept: headers_accept } }).response_hash['organizations'].map { |organization|
-        "#{node.url}-/#{organization['id']}"
+        "#{node.url}/-/#{organization['id']}"
       }
     end
 end
