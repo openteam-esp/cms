@@ -11,6 +11,7 @@ end
 group :default do
   gem 'acts_as_list'
   gem 'ancestry'
+  gem 'airbrake', '~> 4.3.4'
   gem 'attribute_normalizer'
   gem 'audited-activerecord'
   gem 'awesome_print'
