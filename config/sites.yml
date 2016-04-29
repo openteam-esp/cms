@@ -1487,6 +1487,11 @@ sites:
           configurable: true
           indexable: true
 
+        subtree_subdivisions_part:
+          required: false
+          configurable: true
+          indexable: false
+
       faculty:
         <<: *tusur_subdivision_part
 
