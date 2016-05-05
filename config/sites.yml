@@ -1409,6 +1409,10 @@ sites:
           required: true
           configurable: true
           indexable: true
+        right_news_part:
+          required: true
+          configurable: true
+          indexable: true
         right_events:
           required: false
           configurable: true
