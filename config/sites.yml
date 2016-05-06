@@ -1402,7 +1402,7 @@ sites:
           configurable: true
           indexable: true
         right_contacts:
-          required: true
+          required: false
           configurable: true
           indexable: true
         right_html_part:
