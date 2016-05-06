@@ -1360,7 +1360,7 @@ sites:
           required: true
           configurable: true
         spotlight:
-          required: false
+          required: true
           configurable: true
         news_collection:
           required: false
