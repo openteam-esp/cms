@@ -1390,15 +1390,15 @@ sites:
           required: true
           configurable: true
         right_links:
-          required: true
+          required: false
           configurable: true
           indexable: true
         right_advert:
-          required: true
+          required: false
           configurable: true
           indexable: true
         right_documents:
-          required: true
+          required: false
           configurable: true
           indexable: true
         right_contacts:
@@ -1406,11 +1406,11 @@ sites:
           configurable: true
           indexable: true
         right_html_part:
-          required: true
+          required: false
           configurable: true
           indexable: true
         right_news_part:
-          required: true
+          required: false
           configurable: true
           indexable: true
         right_events:
@@ -1549,7 +1549,7 @@ sites:
           required: true
           configurable: true
         right_contacts:
-          required: true
+          required: false
           configurable: true
           indexable: true
         content_first:
