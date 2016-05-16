@@ -1315,6 +1315,10 @@ sites:
         breadcrumbs:
           required: true
           configurable: true
+        promo:
+          required: false
+          configurable: true
+          indexable: true
         news:
           required: false
           configurable: true
