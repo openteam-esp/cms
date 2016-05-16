@@ -8,7 +8,7 @@
     return
 
   reorder_positions = ->
-    $('.spotlight_items .fields:visible .spotlight_position').each (index, item) ->
+    $('.spotlight_items .fields:visible .position').each (index, item) ->
       $(this).val(index + 1)
       return
     return
@@ -47,13 +47,13 @@
 
   $('.spotlight_items').bind 'nested:fieldAdded', (e) ->
     max_position = 0
-    positions = $('.fields:visible .spotlight_position', $(e.target).closest('.spotlight_items')).map ->
+    positions = $('.fields:visible .position', $(e.target).closest('.spotlight_items')).map ->
       parseInt($(this).val())
     .get()
     positions = positions.filter(Number)
     if positions.length
       max_position = Math.max.apply(null, positions)
-    $('.spotlight_position', e.target).val(max_position + 1)
+    $('.position', e.target).val(max_position + 1)
     reload_ckeditors()
     switch_dependent_fields_for($('.spotlight_kind', e.target))
     return

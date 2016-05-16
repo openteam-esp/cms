@@ -8,6 +8,7 @@ ru:
   add:                Добавить
   add_picture:        Добавить картинку
   add_spotlight_item: Добавить ссылку
+  add_promo_slide:    Добавить слайд
   add_grouping_item:  Добавить группировку
   add_news_collection_item: Добавить канал
   remove:             Удалить
@@ -148,6 +149,13 @@ ru:
 
       spotlight_item_photo:
         photo: Изображение
+
+      promo_slide:
+        title: Заголовок
+        url: Ссылка
+        video_url: Ссылка на видео
+        annotation: Описание
+        image: Изображение
 
       gpo_project_list_part:
         gpo_project_list_chair_id: Кафедра

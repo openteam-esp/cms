@@ -1,0 +1,30 @@
+<h3><%= promo_part.title %></h3>
+
+<ol>
+  <% promo_part.promo_slides.each do |slide| %>
+    <li>
+      <div class='presentation'>
+        <p>
+          <b>№ <%= slide.position %>:</b>
+          <%= slide.title %>
+        </p>
+        <% if slide.url.present? %>
+          <p><b>Ссылка:</b> <%= link_to slide.url, slide.url, :target => '_blank' %></p>
+        <% end %>
+        <% if slide.video_url.present? %>
+          <p><b>Ссылка на видео:</b> <%= link_to slide.video_url, slide.video_url, :target => '_blank' %></p>
+        <% end %>
+        <% if slide.annotation.present? %>
+          <p><b>Аннотация:</b></p>
+          <%= slide.annotation.html_safe %>
+        <% end %>
+        <% if slide.image.present? %>
+          <%= link_to slide.image.to_s, :class => 'js-colorbox', :rel => "colorbox-#{slide.id}" do %>
+            <%= image_tag slide.image.to_s.gsub(/\/\d+-\d+\//, '/100-100!n/'), :size => '100x100' %>
+          <% end %>
+        <% end %>
+      </div>
+      <hr />
+    </li>
+  <% end %>
+</ol>

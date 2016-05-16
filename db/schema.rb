@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160115050717) do
+ActiveRecord::Schema.define(:version => 20160516045051) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -192,6 +192,24 @@ ActiveRecord::Schema.define(:version => 20160115050717) do
   end
 
   add_index "permissions", ["user_id", "role", "context_id", "context_type"], :name => "by_user_and_role_and_context"
+
+  create_table "promo_slides", :force => true do |t|
+    t.string   "title"
+    t.text     "url"
+    t.text     "video_url"
+    t.text     "annotation"
+    t.integer  "position"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.text     "image_url"
+    t.integer  "promo_part_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "promo_slides", ["promo_part_id"], :name => "index_promo_slides_on_promo_part_id"
 
   create_table "spotlight_item_photos", :force => true do |t|
     t.integer  "spotlight_item_id"
