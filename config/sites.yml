@@ -2283,6 +2283,10 @@ sites:
         breadcrumbs:
           required: true
           configurable: true
+        content:
+          required: false
+          configurable: true
+          indexable: true
 
       inner_page:
         site_name:
