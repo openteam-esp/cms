@@ -2283,6 +2283,24 @@ sites:
         breadcrumbs:
           required: true
           configurable: true
+        right_navigation:
+          required: true
+          configurable: true
+        right_links:
+          required: true
+          configurable: true
+        right_advert:
+          required: true
+          configurable: true
+        right_documents:
+          required: true
+          configurable: true
+        right_contacts:
+          required: true
+          configurable: true
+        right_html:
+          required: true
+          configurable: true
         content:
           required: false
           configurable: true
