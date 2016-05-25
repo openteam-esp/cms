@@ -2267,3 +2267,64 @@ sites:
           required: false
           configurable: true
           indexable: true
+
+  journal:
+    templates:
+      main_page:
+        site_name:
+          required: true
+          configurable: true
+        main_navigation:
+          required: true
+          configurable: true
+        secondary_navigation:
+          required: true
+          configurable: true
+        breadcrumbs:
+          required: true
+          configurable: true
+
+      inner_page:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        right_navigation:
+          required: true
+          configurable: true
+        right_links:
+          required: true
+          configurable: true
+        right_advert:
+          required: true
+          configurable: true
+        right_documents:
+          required: true
+          configurable: true
+        right_contacts:
+          required: true
+          configurable: true
+        right_html:
+          required: true
+          configurable: true
+        content:
+          required: false
+          configurable: true
+          indexable: true
+
+      sitemap:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        content:
+          required: false
+          configurable: true
+          indexable: true
