@@ -1624,6 +1624,87 @@ sites:
           configurable: true
           indexable: false
 
+  postgraduate:
+    templates:
+      main_page:
+        site_name:
+          required: true
+          configurable: true
+        main_navigation:
+          required: true
+          configurable: true
+        breadcrumbs:
+          required: true
+          configurable: true
+        content:
+          required: false
+          configurable: true
+          indexable: true
+        banners:
+          required: true
+          configurable: true
+          indexable: false
+
+      inner_page: &postgraduate_inner_page
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        right_navigation_with_title:
+          required: true
+          configurable: true
+        right_navigation_without_title:
+          required: true
+          configurable: true
+        right_links:
+          required: false
+          configurable: true
+          indexable: true
+        right_documents:
+          required: false
+          configurable: true
+          indexable: true
+        right_contacts:
+          required: false
+          configurable: true
+          indexable: true
+        right_html_part:
+          required: false
+          configurable: true
+          indexable: true
+        content:
+          required: false
+          configurable: true
+          indexable: true
+        banners:
+          required: true
+          configurable: true
+          indexable: false
+
+      on_client:
+        <<: *postgraduate_inner_page
+
+      sitemap:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        content:
+          required: false
+          configurable: true
+          indexable: false
+        banners:
+          required: true
+          configurable: true
+          indexable: false
+
   sport:
     part_templates:
       news_item_part: events_item_part
