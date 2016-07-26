@@ -140,6 +140,7 @@ ru:
       spotlight_item:
         kind: Тип
         url: Ссылка
+        target_url: Открывать в новом окне
         legend: Надпись
         title: Заголовок
         annotation: Аннотация

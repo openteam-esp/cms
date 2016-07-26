@@ -16,7 +16,7 @@
           <%= f.input :legend, :input_html => { :placeholder => 'Пресс-релизы' } %>
           <%= f.input :title %>
           <%= f.input :url, :as => :string %>
-          <%= f.input :target_url, as: :boolean %>
+          <%= f.input :target_url, as: :boolean, input_html: { class: "target-url" } %>
           <%= f.input :annotation, :input_html => { :class => :ckeditor },
             :wrapper_html => { :class => 'annotation' } %>
           <%= f.input :since, :start_year => Time.zone.now.year, :end_year => (Time.zone.now - 10.years).year,
