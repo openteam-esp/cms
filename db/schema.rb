@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160516045051) do
+ActiveRecord::Schema.define(:version => 20160726055224) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -235,6 +235,7 @@ ActiveRecord::Schema.define(:version => 20160516045051) do
     t.datetime "since"
     t.datetime "starts_on"
     t.datetime "ends_on"
+    t.boolean  "target_url"
   end
 
   add_index "spotlight_items", ["spotlight_part_id"], :name => "index_spotlight_items_on_spotlight_part_id"

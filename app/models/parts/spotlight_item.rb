@@ -1,6 +1,6 @@
 class SpotlightItem < ActiveRecord::Base
 
-  attr_accessible :kind, :url, :title, :annotation, :legend, :since, :starts_on, :ends_on, :position,
+  attr_accessible :kind, :url, :target_url, :title, :annotation, :legend, :since, :starts_on, :ends_on, :position,
     :spotlight_item_photos_attributes
 
   belongs_to :spotlight_part
