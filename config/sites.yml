@@ -1707,7 +1707,8 @@ sites:
 
   sport:
     part_templates:
-      news_item_part: events_item_part
+      news_list_part: photo_album_list_part|smi_list_part|events_list_part
+      news_item_part: photo_album_item_part|smi_item_part|events_item_part
     templates:
       main_page:
         site_name:
@@ -1728,6 +1729,36 @@ sites:
         clubs_collection:
           required: false
           configurable: true
+
+      aggregate_page:
+        site_name:
+          required: true
+          configurable: false
+        main_navigation:
+          required: true
+          configurable: false
+        breadcrumbs:
+          required: true
+          configurable: false
+        right_navigation_with_title:
+          required: true
+          configurable: true
+        right_navigation_without_title:
+          required: true
+          configurable: true
+        spotlight:
+          required: true
+          configurable: true
+        news_collection:
+          required: false
+          configurable: true
+        contacts:
+          required: false
+          configurable: true
+        banners:
+          required: true
+          configurable: true
+          indexable: false
 
       inner_page:
         site_name:
