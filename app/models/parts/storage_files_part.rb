@@ -1,30 +1,31 @@
-class NewsCollectionPart < Part
-  attr_accessible :news_collection_items_attributes, :title, :node_id
+class StorageFilesPart < Part
+  attr_accessible :storage_directory_id, :storage_directory_name, :storage_directory_depth
 
-  has_many :news_collection_items
-  accepts_nested_attributes_for :news_collection_items, :allow_destroy => true
+  validates_presence_of :storage_directory_id, :storage_directory_name, :storage_directory_depth
+
+  default_value_for :storage_directory_depth, 1
 
   def to_json
     super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
   end
 
-  def part_title
-    title
-  end
-
   def content
-    { :items => news_collection_items.map(&:to_json) }
+    response_hash
   end
 
-  def response_status
-    nil
+  def autocomplete_url
+    %(#{storage_url}/api/find_entry_by_name.json)
   end
 
-  private
+  def storage_url
+    Settings['storage.url']
+  end
 
-    def urls_for_index
-      []
-    end
+  def url_for_request
+    %(#{storage_url}/api/files_by_node/#{storage_directory_id}.json?depth=#{storage_directory_depth})
+  end
+
+  alias_attribute :part_title, :title
 end
 
 # == Schema Information

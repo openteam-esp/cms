@@ -43,4 +43,5 @@ end
 #  since             :datetime
 #  starts_on         :datetime
 #  ends_on           :datetime
+#  target_url        :boolean
 #

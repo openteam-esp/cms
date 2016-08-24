@@ -17,6 +17,7 @@
  * = require jquery-colorbox.js
  * = require spotlight
  * = require sortable
+ * = require common_autocomplete
  */
 
 function init_colorbox() {
@@ -214,4 +215,5 @@ $(function() {
   manipulate_position_fields();
   manipulate_titles();
   choose_picture();
+  init_common_autocomplete();
 });

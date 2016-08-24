@@ -1346,6 +1346,10 @@ sites:
           required: true
           configurable: true
           indexable: false
+        storage_files:
+          required: true
+          configurable: true
+          indexable: false
 
       aggregate_page:
         site_name:

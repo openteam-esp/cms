@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160726055224) do
+ActiveRecord::Schema.define(:version => 20160824023804) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -178,6 +178,9 @@ ActiveRecord::Schema.define(:version => 20160726055224) do
     t.string   "priem_context_kind"
     t.string   "priem_kinds"
     t.string   "priem_forms"
+    t.integer  "storage_directory_id"
+    t.string   "storage_directory_name"
+    t.integer  "storage_directory_depth"
   end
 
   add_index "parts", ["node_id"], :name => "index_parts_on_node_id"

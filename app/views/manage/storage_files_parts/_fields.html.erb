@@ -1,0 +1,15 @@
+<%= form.inputs do %>
+  <%=
+    form.input :storage_directory_name,
+      input_html: { class: 'js-autocomplete', data: { source: form.object.autocomplete_url } }
+    %>
+  <%= form.input :storage_directory_depth %>
+
+  <%=
+    form.input :storage_directory_id,
+      as: :hidden,
+      input_html: { class: 'js-autocomplete-target' }
+    %>
+  <%= form.input :region, :as => :hidden %>
+  <%= form.input :type, :as => :hidden %>
+<% end %>
