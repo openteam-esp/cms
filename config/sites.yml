@@ -1685,6 +1685,10 @@ sites:
           required: false
           configurable: true
           indexable: true
+        gallery_content:
+          required: false
+          configurable: true
+          indexable: true
         banners:
           required: true
           configurable: true
