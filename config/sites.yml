@@ -1725,6 +1725,14 @@ sites:
         breadcrumbs:
           required: true
           configurable: true
+        event_calendar:
+          required: false
+          configurable: true
+          indexable: true
+        interesting:
+          required: false
+          configurable: true
+          indexable: true
         content:
           required: false
           configurable: true
