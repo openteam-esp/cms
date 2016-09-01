@@ -1737,6 +1737,14 @@ sites:
           required: false
           configurable: true
           indexable: true
+        photogalleries:
+          required: false
+          configurable: true
+          indexable: false
+        youtube:
+          required: false
+          configurable: true
+          indexable: false
         banners:
           required: true
           configurable: true
