@@ -1425,7 +1425,7 @@ sites:
           required: false
           configurable: true
           indexable: true
-        spotlight:
+        spotlight_inner:
           required: false
           configurable: true
         content:
