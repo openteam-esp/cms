@@ -1425,6 +1425,9 @@ sites:
           required: false
           configurable: true
           indexable: true
+        spotlight:
+          required: false
+          configurable: true
         content:
           required: false
           configurable: true
