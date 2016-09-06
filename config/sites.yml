@@ -1376,6 +1376,14 @@ sites:
         contacts:
           required: false
           configurable: true
+        photogalleries:
+          required: false
+          configurable: true
+          indexable: false
+        youtube:
+          required: false
+          configurable: true
+          indexable: false
         banners:
           required: true
           configurable: true
