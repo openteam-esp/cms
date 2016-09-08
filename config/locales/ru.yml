@@ -284,6 +284,7 @@ ru:
         subdivision_name: 'Подразделение'
         directory_subdivision: 'Подразделение'
         directory_depth: 'Конечный уровень'
+        directory_only_pps: 'Только профессорско-преподавательский состав'
 
       priem_part:
         context_title: 'Подразделение'

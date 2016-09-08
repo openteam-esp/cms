@@ -143,4 +143,5 @@ end
 #  storage_directory_id                   :integer
 #  storage_directory_name                 :string(255)
 #  storage_directory_depth                :integer
+#  directory_only_pps                     :boolean
 #
