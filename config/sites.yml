@@ -1744,6 +1744,10 @@ sites:
           required: false
           configurable: true
           indexable: true
+        right_about_part:
+          required: false
+          configurable: true
+          indexable: true
         right_contacts:
           required: false
           configurable: true
