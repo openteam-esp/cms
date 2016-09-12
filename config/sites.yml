@@ -1433,7 +1433,7 @@ sites:
           required: false
           configurable: true
           indexable: true
-        spotlight_inner:
+        spotlight:
           required: false
           configurable: true
         content:
