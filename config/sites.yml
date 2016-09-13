@@ -1805,6 +1805,10 @@ sites:
           required: false
           configurable: true
           indexable: true
+        right_about_part:
+          required: false
+          configurable: true
+          indexable: true
         directory_presentation:
           required: false
           configurable: true
