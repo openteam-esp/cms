@@ -9,7 +9,12 @@
           <%= slide.title %>
         </p>
         <% if slide.url.present? %>
-          <p><b>Ссылка:</b> <%= link_to slide.url, slide.url, :target => '_blank' %></p>
+          <p>
+            <b>Ссылка:</b> <%= link_to slide.url, slide.url, :target => '_blank' %>
+            <% if slide.target_blank %>
+              (в новом окне)
+            <% end %>
+          </p>
         <% end %>
         <% if slide.video_url.present? %>
           <p><b>Ссылка на видео:</b> <%= link_to slide.video_url, slide.video_url, :target => '_blank' %></p>

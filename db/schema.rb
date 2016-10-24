@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160908071448) do
+ActiveRecord::Schema.define(:version => 20161024091740) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(:version => 20160908071448) do
     t.integer  "promo_part_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.boolean  "target_blank"
   end
 
   add_index "promo_slides", ["promo_part_id"], :name => "index_promo_slides_on_promo_part_id"

@@ -154,6 +154,7 @@ ru:
       promo_slide:
         title: Заголовок
         url: Ссылка
+        target_blank: В новом окне
         video_url: Ссылка на видео
         annotation: Описание
         image: Изображение
