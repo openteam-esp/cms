@@ -1943,6 +1943,14 @@ sites:
         news_collection:
           required: false
           configurable: true
+        photogalleries:
+          required: false
+          configurable: true
+          indexable: false
+        youtube:
+          required: false
+          configurable: true
+          indexable: false
         clubs_collection:
           required: false
           configurable: true
