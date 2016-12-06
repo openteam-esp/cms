@@ -11,7 +11,6 @@ end
 group :default do
   gem 'acts_as_list'
   gem 'ancestry'
-  gem 'airbrake', '~> 4.3.4'
   gem 'attribute_normalizer'
   gem 'audited-activerecord'
   gem 'awesome_print'
@@ -30,10 +29,11 @@ group :default do
   gem 'inherited_resources'
   gem 'jquery-rails'
   gem 'nested_form'
+  gem 'openteam-commons', '~> 0.3.3'
   gem 'paperclip-elvfs'
   gem 'paperclip-meta'
   gem 'pg'
-  gem 'progress_bar', :require => false
+  gem 'progress_bar', require: false
   gem 'rack-utf8_sanitizer'
   gem 'rails', '~> 3.2.13'
   gem 'rest-client'
@@ -51,17 +51,15 @@ source 'https://rails-assets.org' do
 end
 
 group :development do
-  gem 'annotate', :require => false
-  gem 'brakeman', :require => false
-  gem 'capistrano', '~> 2.15.5', :require => false
-  gem 'capistrano-db-tasks', :git => 'git://github.com/sgruhier/capistrano-db-tasks', :ref => '396cbbf', :require => false
-  gem 'capistrano-unicorn', '~> 0.1.10', :require => false
-  gem 'hirb', :require => false
-  gem 'openteam-capistrano'
+  gem 'annotate', require: false
+  gem 'brakeman', require: false
+  gem 'capistrano-db-tasks', '0.4'
+  gem 'hirb', require: false
+  gem 'openteam-capistrano', '~> 1.0.16'
 end
 
 group :test do
-  gem 'fabrication',      '< 2.0.0',              :require => false
+  gem 'fabrication', '< 2.0.0', require: false
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'sqlite3'

@@ -3,7 +3,11 @@ app:
 
 errors:
   key:          KEY
-  url:          http://errors.openteam.ru
+  url:          http://errbit
+
+slack:
+  channel:      channel
+  webhook:      http://webhook
 
 sso:
   key:          KEY
