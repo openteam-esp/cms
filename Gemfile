@@ -53,7 +53,7 @@ end
 group :development do
   gem 'annotate', require: false
   gem 'brakeman', require: false
-  gem 'capistrano-db-tasks', '0.4', requre: false
+  gem 'capistrano-db-tasks', '0.4', require: false
   gem 'hirb', require: false
   gem 'openteam-capistrano', '~> 1.0.16'
 end
