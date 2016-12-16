@@ -14,7 +14,7 @@ class Site < Node
   after_create :create_stuff
 
   def create_stuff
-    self.site_setting = Setup.create! site_id: id
+    self.setup = Setup.create! site_id: id
 
     self.locales.create slug: 'ru',
       title: 'Главная',

@@ -1,7 +1,7 @@
 require 'progress_bar'
 
 def index(parts)
-  urls = parts.flat_map{|p| p.send(:urls_for_index) if p.indexable?}.compact.uniq.map{ |url| url.gsub(/\/$/, '') }
+  urls = parts.flat_map { |p| p.send(:urls_for_index) if p.indexable? }.compact.uniq.map { |url| url.gsub(/\/$/, '') }
   bar = ProgressBar.new(urls.count)
   urls.each do |url|
     begin
@@ -13,8 +13,8 @@ def index(parts)
   end
 end
 
-desc "Reindex site"
-task :reindex_site, [:slug] => :environment do |t, args|
+desc 'Reindex site'
+task :reindex_site, [:slug] => :environment do |_t, args|
   site = Site.find_by_slug! args.slug
   begin
     MessageMaker.make_message('esp.cms.searcher', 'remove', site.client_url) if Rails.env.production?
@@ -24,8 +24,7 @@ task :reindex_site, [:slug] => :environment do |t, args|
   index Part.includes(:node).where(site.descendant_conditions)
 end
 
-desc "Reindex parts"
-task :reindex_parts, [:type] => :environment do |t, args|
-  index Part.where(:type => args.type.to_s)
+desc 'Reindex parts'
+task :reindex_parts, [:type] => :environment do |_t, args|
+  index Part.where(type: args.type.to_s)
 end
-

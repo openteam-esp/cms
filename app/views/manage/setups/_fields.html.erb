@@ -1,5 +1,18 @@
+
 <div class='setup-wrapper'>
   <%= form.inputs do %>
+
+    <%= form.link_to_add 'Добавить ассоциацию частей', :part_templates, :class => 'button icon add' %>
+
+    <%= form.semantic_fields_for :part_templates do |tf| %>
+      <%= tf.input :title, label: 'Название части' %>
+      <%= tf.input :values, label: 'Значения', hint: 'Разделять через | без пробелов' %>
+
+      <%= tf.link_to_remove 'Удалить', class: 'button trash icon' %>
+    <% end %>
+
+    <hr />
+
     <%= form.link_to_add 'Добавить шаблон', :templates, :class => 'button icon add' if @site.setup.templates.any? %>
 
     <hr />
@@ -8,15 +21,17 @@
       <%= tf.input :title, label: 'Название шаблона' %>
       <%= tf.input :position, label: 'Позиция' %>
 
-      <div class='regions-wrapper'>
+      <div class='regions-wrapper js-sortable'>
         <%= tf.link_to_add 'Добавить регион', :regions, class: 'button icon add' %>
 
         <%= tf.semantic_fields_for :regions do |rf| %>
           <hr />
+          <span class='js-sortable-handler'></span>
           <%= rf.input :title, label: 'Название региона' %>
           <%= rf.input :required, label: 'Обязателен к заполнению' %>
           <%= rf.input :configurable, label: 'Возможно настраивать' %>
           <%= rf.input :indexable, label: 'Индексировать' %>
+          <%= rf.input :position, :as => :hidden, :input_html => { :class => 'js-sortable-position'  } %>
 
           <%= rf.link_to_remove 'Удалить регион', class: 'button trash icon' %>
 

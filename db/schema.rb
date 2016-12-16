@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161216081403) do
+ActiveRecord::Schema.define(:version => 20161216083753) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -121,6 +121,16 @@ ActiveRecord::Schema.define(:version => 20161216081403) do
     t.text     "alternative_title"
     t.integer  "locale_association_id"
   end
+
+  create_table "part_templates", :force => true do |t|
+    t.string   "title"
+    t.text     "values"
+    t.integer  "setup_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "part_templates", ["setup_id"], :name => "index_part_templates_on_setup_id"
 
   create_table "parts", :force => true do |t|
     t.datetime "created_at",                                            :null => false

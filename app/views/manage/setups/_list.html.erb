@@ -1,3 +1,26 @@
 <div class='actions'>
+  <div class='setup-wrapper'>
+    <%= show_for @site.setup do |setup| %>
+      <% setup.association :templates do |template| %>
+        <div class='tree'>
+          <p>Название шаблона: <%= template.title %></p>
+
+          <div class='regions-wrapper'>
+            <% template.regions.each do |region| %>
+              <div class='tree-item'>
+                <p>Название: <%= region.title %> </p>
+                <p>Обязателен: <%= region.required %> </p>
+                <p>Настраеваемый: <%= region.configurable %></p>
+                <p>Индексировать: <%= region.indexable %></p>
+
+                <hr />
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
   <%= link_to 'Настроить', edit_manage_site_setup_path(@site), :class => 'button icon edit' %>
 </div>

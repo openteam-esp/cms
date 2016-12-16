@@ -1,7 +1,9 @@
 class Region < ActiveRecord::Base
-  attr_accessible :configurable, :indexable, :required, :title
+  attr_accessible :configurable, :indexable, :required, :title, :position
 
   belongs_to :template
+
+  default_scope order(:position, :id)
 end
 
 # == Schema Information
@@ -16,4 +18,5 @@ end
 #  template_id  :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  position     :integer
 #

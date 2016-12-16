@@ -86,7 +86,7 @@ class Part < ActiveRecord::Base
     when nil
       ''
     else
-      'Replace me in CMS:app/models/part.rb:51'
+      'Replace me in CMS:app/models/part.rb:89'
     end
   end
 
@@ -99,7 +99,7 @@ class Part < ActiveRecord::Base
   end
 
   def templates_from_settings
-    node.site_settings['part_templates'].try(:[], self.class.name.underscore).try(:split, '|') || []
+    node.site.setup.part_templates.find_by_title(self.class.name.underscore).try(:values).try(:split, '|') || []
   end
 
   def urls_for_index

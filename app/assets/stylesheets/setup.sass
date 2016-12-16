@@ -1,3 +1,28 @@
 .setup-wrapper
+  .tree
+    position: relative
+
+    &:before
+      display: block
+      position: absolute
+      top: 26px
+      left: 0
+      height: 93%
+      content: ' '
+      border-left: 2px solid #ccc
+      display: block
+
+    .tree-item
+      position: relative
+
+      &:before
+        content: ' '
+        display: block
+        position: absolute
+        top: 8%
+        left: -13px
+        border-bottom: 2px solid #ccc
+        width: 10px
+
   .regions-wrapper
     padding-left: 15px
