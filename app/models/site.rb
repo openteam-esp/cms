@@ -11,6 +11,20 @@ class Site < Node
   has_one :site_setting, dependent: :destroy
   has_many :locale_associations, :dependent => :destroy
 
+  after_create :create_stuff
+
+  def create_stuff
+    self.site_setting = SiteSetting.create! site_id: id
+
+    self.locales.create slug: 'ru',
+      title: 'Главная',
+      template: 'main_page',
+      in_navigation: true,
+      navigation_position: 1
+
+    save!
+  end
+
   def locales
     Locale.where(:ancestry => child_ancestry)
   end

@@ -1,7 +1,7 @@
 class Template < ActiveRecord::Base
   attr_accessible :title
 
-  belongs_to :site_settings
+  belongs_to :site_setting
 
   has_many :regions, dependent: :destroy
 

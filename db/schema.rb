@@ -267,12 +267,12 @@ ActiveRecord::Schema.define(:version => 20161216042752) do
 
   create_table "templates", :force => true do |t|
     t.string   "title"
-    t.integer  "site_settings_id"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.integer  "site_setting_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
-  add_index "templates", ["site_settings_id"], :name => "index_templates_on_site_settings_id"
+  add_index "templates", ["site_setting_id"], :name => "index_templates_on_site_setting_id"
 
   create_table "users", :force => true do |t|
     t.string   "uid"
