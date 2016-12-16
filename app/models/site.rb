@@ -8,13 +8,13 @@ class Site < Node
   delegate :parts, :to => :default_locale
   delegate :template, :to => :default_locale
 
-  has_one :site_setting, dependent: :destroy
+  has_one :setup, dependent: :destroy
   has_many :locale_associations, :dependent => :destroy
 
   after_create :create_stuff
 
   def create_stuff
-    self.site_setting = SiteSetting.create! site_id: id
+    self.site_setting = Setup.create! site_id: id
 
     self.locales.create slug: 'ru',
       title: 'Главная',

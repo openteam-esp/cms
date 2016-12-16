@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161216042752) do
+ActiveRecord::Schema.define(:version => 20161216081403) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -224,17 +224,18 @@ ActiveRecord::Schema.define(:version => 20161216042752) do
     t.integer  "template_id"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+    t.integer  "position"
   end
 
   add_index "regions", ["template_id"], :name => "index_regions_on_template_id"
 
-  create_table "site_settings", :force => true do |t|
+  create_table "setups", :force => true do |t|
     t.integer  "site_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "site_settings", ["site_id"], :name => "index_site_settings_on_site_id"
+  add_index "setups", ["site_id"], :name => "index_setups_on_site_id"
 
   create_table "spotlight_item_photos", :force => true do |t|
     t.integer  "spotlight_item_id"
@@ -267,12 +268,13 @@ ActiveRecord::Schema.define(:version => 20161216042752) do
 
   create_table "templates", :force => true do |t|
     t.string   "title"
-    t.integer  "site_setting_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer  "setup_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "position"
   end
 
-  add_index "templates", ["site_setting_id"], :name => "index_templates_on_site_setting_id"
+  add_index "templates", ["setup_id"], :name => "index_templates_on_setup_id"
 
   create_table "users", :force => true do |t|
     t.string   "uid"

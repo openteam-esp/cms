@@ -48,6 +48,11 @@ ru:
       few: связи страниц
       many: связи
 
+    manage/site_setting:
+      one: настроек
+      few: настроек
+      many: настроек
+
     page: &pluralize_page
       one:            страница
       few:            страницы

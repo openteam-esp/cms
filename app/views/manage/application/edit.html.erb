@@ -1,8 +1,11 @@
 <%= semantic_nested_form_for resource, :url => resource_url, :html => { :multipart => true } do | form | %>
   <%= form.semantic_errors %>
+
   <%= render :partial => "fields", :locals => { :form => form } %>
+
   <%= form.actions do %>
     <%= form.action :submit, :button_html => { :class => 'button' } %>
     <%= form.action :cancel, :as => :link %>
   <% end %>
+
 <% end %>

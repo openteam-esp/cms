@@ -6,14 +6,14 @@ namespace :settings do
     pb = ProgressBar.new Site.count
 
     Site.find_each do |site|
-      site_setting = site.build_site_setting
+      setup = site.build_setup
 
       site_yaml = sites_yaml.select { |s| s == site.slug }[site.slug]
       templates = site_yaml['templates']
 
       templates.each do |template|
         template_title, regions = template
-        temp = site_setting.templates.build title: template_title
+        temp = setup.templates.build title: template_title
 
         regions.each do |region|
           reg_title, settings = region
@@ -25,7 +25,7 @@ namespace :settings do
         end
       end
 
-      site_setting.save!
+      setup.save!
 
       pb.increment!
     end

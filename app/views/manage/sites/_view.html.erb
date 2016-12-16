@@ -3,6 +3,7 @@
     <li><a href="#tab-1">Информация</a></li>
     <li><a href="#tab-2">Языки</a></li>
     <li><a href="#tab-3">Соответствия страниц</a></li>
+    <li><a href="#tab-4">Настройка шаблонов и регионов</a></li>
   </ul>
   <div id="tab-1">
     <%= render resource %>
@@ -12,5 +13,8 @@
   </div>
   <div id="tab-3">
     <%= render :partial => "manage/locale_associations/list", :locals => { :controller => 'locale_associations' } %>
+  </div>
+  <div id="tab-4">
+    <%= render :partial => "manage/setups/list", :locals => { :controller => 'site_settings' } %>
   </div>
 </div>

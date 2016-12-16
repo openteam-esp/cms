@@ -1,4 +1,6 @@
-class SiteSetting < ActiveRecord::Base
+class Setup < ActiveRecord::Base
+  attr_accessible :templates_attributes
+
   belongs_to :site
 
   has_many :templates, dependent: :destroy

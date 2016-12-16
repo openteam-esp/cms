@@ -1,0 +1,33 @@
+<div class='setup-wrapper'>
+  <%= form.inputs do %>
+    <%= form.link_to_add 'Добавить шаблон', :templates, :class => 'button icon add' if @site.setup.templates.any? %>
+
+    <hr />
+
+    <%= form.semantic_fields_for :templates do |tf| %>
+      <%= tf.input :title, label: 'Название шаблона' %>
+      <%= tf.input :position, label: 'Позиция' %>
+
+      <div class='regions-wrapper'>
+        <%= tf.link_to_add 'Добавить регион', :regions, class: 'button icon add' %>
+
+        <%= tf.semantic_fields_for :regions do |rf| %>
+          <hr />
+          <%= rf.input :title, label: 'Название региона' %>
+          <%= rf.input :required, label: 'Обязателен к заполнению' %>
+          <%= rf.input :configurable, label: 'Возможно настраивать' %>
+          <%= rf.input :indexable, label: 'Индексировать' %>
+
+          <%= rf.link_to_remove 'Удалить регион', class: 'button trash icon' %>
+
+          <hr />
+        <% end %>
+
+        <%= tf.link_to_remove 'Удалить шаблон', :class => 'button trash icon' %>
+      </div>
+    <% end %>
+
+    <hr />
+    <%= form.link_to_add 'Добавить шаблон', :templates, :class => 'button icon add' %>
+  <% end %>
+</div>
