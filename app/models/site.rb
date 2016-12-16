@@ -8,6 +8,7 @@ class Site < Node
   delegate :parts, :to => :default_locale
   delegate :template, :to => :default_locale
 
+  has_one :site_setting, dependent: :destroy
   has_many :locale_associations, :dependent => :destroy
 
   def locales

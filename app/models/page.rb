@@ -1,19 +1,19 @@
 class Page < Node
-  belongs_to :page_for_redirect, :class_name => 'Node', :foreign_key => :page_for_redirect_id
+  belongs_to :page_for_redirect, class_name: 'Node', foreign_key: :page_for_redirect_id
 
   validates_presence_of :parent, :template
 
-  before_validation :generate_slug, :unless => :slug?
+  before_validation :generate_slug, unless: :slug?
 
   attr_accessible :parent_id, :title, :navigation_title, :slug, :template,
-    :in_navigation, :navigation_group, :navigation_position,
-    :page_for_redirect_id, :external_link
+                  :in_navigation, :navigation_group, :navigation_position,
+                  :page_for_redirect_id, :external_link
 
   default_value_for :navigation_group do |object|
     object.parent.try(:navigation_group)
   end
 
-  alias :node :parent
+  alias node parent
 
   def locale
     ancestors.second
@@ -24,13 +24,14 @@ class Page < Node
   end
 
   private
-    def node_for_json
-      page_for_redirect ? page_for_redirect : super
-    end
 
-    def generate_slug
-      self.slug = ActiveSupport::Inflector.transliterate(self.title).gsub(/[^[:alnum:]]+/, '-').downcase.gsub(/\A-+/, '').gsub(/-+\z/, '')
-    end
+  def node_for_json
+    page_for_redirect ? page_for_redirect : super
+  end
+
+  def generate_slug
+    self.slug = ActiveSupport::Inflector.transliterate(title).gsub(/[^[:alnum:]]+/, '-').downcase.gsub(/\A-+/, '').gsub(/-+\z/, '')
+  end
 end
 
 # == Schema Information

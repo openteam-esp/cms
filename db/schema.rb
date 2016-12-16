@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161024091740) do
+ActiveRecord::Schema.define(:version => 20161216042752) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -216,6 +216,26 @@ ActiveRecord::Schema.define(:version => 20161024091740) do
 
   add_index "promo_slides", ["promo_part_id"], :name => "index_promo_slides_on_promo_part_id"
 
+  create_table "regions", :force => true do |t|
+    t.string   "title"
+    t.boolean  "required",     :default => false
+    t.boolean  "configurable", :default => false
+    t.boolean  "indexable",    :default => false
+    t.integer  "template_id"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "regions", ["template_id"], :name => "index_regions_on_template_id"
+
+  create_table "site_settings", :force => true do |t|
+    t.integer  "site_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "site_settings", ["site_id"], :name => "index_site_settings_on_site_id"
+
   create_table "spotlight_item_photos", :force => true do |t|
     t.integer  "spotlight_item_id"
     t.string   "photo_file_name"
@@ -244,6 +264,15 @@ ActiveRecord::Schema.define(:version => 20161024091740) do
   end
 
   add_index "spotlight_items", ["spotlight_part_id"], :name => "index_spotlight_items_on_spotlight_part_id"
+
+  create_table "templates", :force => true do |t|
+    t.string   "title"
+    t.integer  "site_settings_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "templates", ["site_settings_id"], :name => "index_templates_on_site_settings_id"
 
   create_table "users", :force => true do |t|
     t.string   "uid"

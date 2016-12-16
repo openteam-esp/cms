@@ -4,15 +4,15 @@ class Part < ActiveRecord::Base
 
   attr_accessor :current_node, :params, :resource_id
 
-  belongs_to :node, :touch => true
+  belongs_to :node, touch: true
 
   validates_presence_of :node, :region, :template
 
   attr_accessible :node, :region, :template, :type
 
-  after_create :index, :if => :indexable?
-  after_update :node_reindex, :if => [:indexable?, :need_to_reindex?]
-  after_destroy :node_reindex, :if => :indexable?
+  after_create :index, if: :indexable?
+  after_update :node_reindex, if: [:indexable?, :need_to_reindex?]
+  after_destroy :node_reindex, if: :indexable?
 
   default_value_for :params, {}
 
@@ -25,12 +25,12 @@ class Part < ActiveRecord::Base
   end
 
   def response
-    @response ||= Requester.new(url_for_request, { headers: { Accept: headers_accept } })
+    @response ||= Requester.new(url_for_request, headers: { Accept: headers_accept })
   end
 
   delegate :response_body,
            :response_headers,
-           :response_status, :to => :response
+           :response_status, to: :response
 
   audited
 
@@ -40,9 +40,9 @@ class Part < ActiveRecord::Base
 
   def to_json
     {}.tap do |hash|
-      hash.merge!('template' => template)
+      hash['template'] = template
 
-      hash.merge!('response_status' => response_status) if response_status
+      hash['response_status'] = response_status if response_status
       hash.merge!('title' => error_title) if bad_request?
     end
   end
@@ -74,38 +74,39 @@ class Part < ActiveRecord::Base
   end
 
   protected
-    def need_to_reindex?
-      title_changed? || region_changed? || template_changed?
-    end
 
-    def error_title
-      case response_status
-        when 404, 500
-          I18n.t("external_system_errors.#{response_status}")
-        when nil
-          ''
-        else
-          'Replace me in CMS:app/models/part.rb:51'
-      end
-    end
+  def need_to_reindex?
+    title_changed? || region_changed? || template_changed?
+  end
 
-    def bad_response_statuses
-      [400, 404, 500]
+  def error_title
+    case response_status
+    when 404, 500
+      I18n.t("external_system_errors.#{response_status}")
+    when nil
+      ''
+    else
+      'Replace me in CMS:app/models/part.rb:51'
     end
+  end
 
-    def bad_request?
-      bad_response_statuses.include? response_status
-    end
+  def bad_response_statuses
+    [400, 404, 500]
+  end
 
-    def templates_from_settings
-      node.site_settings['part_templates'].try(:[], self.class.name.underscore).try(:split, '|' ) || []
-    end
+  def bad_request?
+    bad_response_statuses.include? response_status
+  end
 
-    def urls_for_index
-      [node.url]
-    end
+  def templates_from_settings
+    node.site_settings['part_templates'].try(:[], self.class.name.underscore).try(:split, '|') || []
+  end
 
-    delegate :reindex, :to => :node, :prefix => true
+  def urls_for_index
+    [node.url]
+  end
+
+  delegate :reindex, to: :node, prefix: true
 end
 
 # == Schema Information
