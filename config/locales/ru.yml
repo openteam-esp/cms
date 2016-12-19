@@ -48,7 +48,7 @@ ru:
       few: связи страниц
       many: связи
 
-    manage/site_setting:
+    manage/setup:
       one: настроек
       few: настроек
       many: настроек
