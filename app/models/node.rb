@@ -222,7 +222,7 @@ class Node < ActiveRecord::Base
   end
 
   def regions_with_option(option)
-    site.setup.templates.find_by_title(template).regions.where("#{option} = ?", true).pluck(:title).compact
+    site.setup.templates.find_by_title(template).regions.where("#{option} = ?", true).pluck(:title).compact rescue []
   end
 
   def cache_route
