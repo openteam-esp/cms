@@ -100,6 +100,8 @@ class Part < ActiveRecord::Base
 
   def templates_from_settings
     node.site.setup.part_templates.find_by_title(self.class.name.underscore).try(:values).try(:split, '|') || []
+  rescue
+    node.site_settings['part_templates'].try(:[], self.class.name.underscore).try(:split, '|') || []
   end
 
   def urls_for_index

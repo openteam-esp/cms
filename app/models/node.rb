@@ -97,6 +97,8 @@ class Node < ActiveRecord::Base
 
   def templates
     site.setup.templates.pluck(:title).compact
+  rescue
+    templates_hash.keys
   end
 
   def configurable_regions
@@ -181,6 +183,15 @@ class Node < ActiveRecord::Base
     site.descendants
   end
 
+  def site_settings
+    @site_settings ||= YAML.load_file(Rails.root.join('config/sites.yml')).to_hash['sites'][site.slug]
+  end
+
+  def templates_hash
+    raise "Site not found! Set templates settings for site [slug: #{site.slug}, title: #{site.title}] in config/sites.yml" unless site_settings.present?
+    site_settings.try(:[], 'templates')
+  end
+
   def url
     "#{site.client_url}#{route_without_site}"
   end
@@ -222,7 +233,9 @@ class Node < ActiveRecord::Base
   end
 
   def regions_with_option(option)
-    site.setup.templates.find_by_title(template).regions.where("#{option} = ?", true).pluck(:title).compact rescue []
+    site.setup.templates.find_by_title(template).regions.where("#{option} = ?", true).pluck(:title).compact
+  rescue
+    templates_hash[template].select { | region, options | options[option] }.keys
   end
 
   def cache_route
