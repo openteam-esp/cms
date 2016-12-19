@@ -33,6 +33,7 @@ namespace :settings do
           setup.part_templates.build title: part_template_title, values: values
         end
       rescue
+        puts "Не нашел part_templates в sites.yml для сайта #{site.title}"
       end
 
       setup.save!
