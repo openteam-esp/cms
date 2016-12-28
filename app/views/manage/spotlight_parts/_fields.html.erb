@@ -19,11 +19,11 @@
           <%= f.input :target_url, as: :boolean, input_html: { class: "target-url" } %>
           <%= f.input :annotation, :input_html => { :class => :ckeditor },
             :wrapper_html => { :class => 'annotation' } %>
-          <%= f.input :since, :start_year => Time.zone.now.year, :end_year => (Time.zone.now - 10.years).year,
+          <%= f.input :since, :start_year => (Time.zone.now.year + 2), :end_year => (Time.zone.now.year - 8),
             :wrapper_html => { :class => 'hidden since' } %>
-          <%= f.input :starts_on, :start_year => Time.zone.now.year, :end_year => (Time.zone.now - 10.years).year,
+          <%= f.input :starts_on, :start_year => (Time.zone.now.year + 2), :end_year => (Time.zone.now.year - 8),
             :wrapper_html => { :class => 'hidden starts_on' } %>
-          <%= f.input :ends_on, :start_year => Time.zone.now.year, :end_year => (Time.zone.now - 10.years).year,
+          <%= f.input :ends_on, :start_year => (Time.zone.now.year + 2), :end_year => (Time.zone.now.year - 8),
             :wrapper_html => { :class => 'hidden ends_on' } %>
           <div class='photos'>
             <%= f.semantic_fields_for :spotlight_item_photos do |photo| %>
