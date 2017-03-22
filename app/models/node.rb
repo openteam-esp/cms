@@ -212,9 +212,9 @@ class Node < ActiveRecord::Base
   def unindex
     unless ancestry_callbacks_disabled?
       indexable_parts.select { |part| part.respond_to?(:additional_url_for_remove) }.map(&:additional_url_for_remove).compact.each do |url|
-        MessageMaker.make_message('esp.cms.searcher', 'remove', url)
+        MessageMaker.make_message('esp.cms.searcher', 'remove', url) if Rails.env.production?
       end
-      MessageMaker.make_message('esp.cms.searcher', 'remove', url)
+      MessageMaker.make_message('esp.cms.searcher', 'remove', url) if Rails.env.production?
     end
   end
 

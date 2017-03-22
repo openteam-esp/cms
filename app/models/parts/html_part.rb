@@ -47,16 +47,16 @@ class HtmlPart < Part
     end
 
     def register_in_storage
-      MessageMaker.make_message 'esp.cms.storage', 'lock_by_path', :external_url => url, :entry_path => html_info_path
+      MessageMaker.make_message('esp.cms.storage', 'lock_by_path', external_url: url, entry_path: html_info_path) if Rails.env.production?
     end
 
     def reregister_in_storage
-      MessageMaker.make_message 'esp.cms.storage', 'unlock_by_path', :external_url => url_was, :entry_path => html_info_path_was
-      MessageMaker.make_message 'esp.cms.storage', 'lock_by_path', :external_url => url, :entry_path => html_info_path
+      MessageMaker.make_message('esp.cms.storage', 'unlock_by_path', external_url: url_was, entry_path: html_info_path_was) if Rails.env.production?
+      MessageMaker.make_message('esp.cms.storage', 'lock_by_path', external_url: url, entry_path: html_info_path) if Rails.env.production?
     end
 
     def unregister_in_storage
-      MessageMaker.make_message 'esp.cms.storage', 'unlock_by_path', :external_url => url, :entry_path => html_info_path
+      MessageMaker.make_message('esp.cms.storage', 'unlock_by_path', external_url: url, entry_path: html_info_path) if Rails.env.production?
     end
 end
 

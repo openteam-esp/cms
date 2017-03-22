@@ -24,16 +24,16 @@ class GalleryPicture < ActiveRecord::Base
     end
 
     def register_in_storage
-      MessageMaker.make_message 'esp.cms.storage', 'lock_by_url', :external_url => url, :entry_url => picture_url
+      MessageMaker.make_message('esp.cms.storage', 'lock_by_url', external_url: url, entry_url: picture_url) if Rails.env.production?
     end
 
     def reregister_in_storage
-      MessageMaker.make_message 'esp.cms.storage', 'unlock_by_url', :external_url => url, :entry_url => picture_url_was
-      MessageMaker.make_message 'esp.cms.storage', 'lock_by_url', :external_url => url, :entry_url => picture_url
+      MessageMaker.make_message('esp.cms.storage', 'unlock_by_url', external_url: url, entry_url: picture_url_was) if Rails.env.production?
+      MessageMaker.make_message('esp.cms.storage', 'lock_by_url', external_url: url, entry_url: picture_url) if Rails.env.production?
     end
 
     def unregister_in_storage
-      MessageMaker.make_message 'esp.cms.storage', 'unlock_by_url', :external_url => url, :entry_url => picture_url
+      MessageMaker.make_message('esp.cms.storage', 'unlock_by_url', external_url: url, entry_url: picture_url) if Rails.env.production?
     end
 end
 

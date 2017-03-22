@@ -58,7 +58,7 @@ class Part < ActiveRecord::Base
   def index
     urls_for_index.each do |url|
       begin
-        MessageMaker.make_message('esp.cms.searcher', 'add', url)
+        MessageMaker.make_message('esp.cms.searcher', 'add', url) if Rails.env.production?
       rescue => e
         logger.fatal "Error make message with: #{e.inspect}"
       end

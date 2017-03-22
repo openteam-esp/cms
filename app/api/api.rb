@@ -6,6 +6,6 @@ class API < Grape::API
     requires :url, type: String, desc: "Url for index"
   end
   post do
-    MessageMaker.make_message('esp.cms.searcher', 'add', params[:url])
+    MessageMaker.make_message('esp.cms.searcher', 'add', params[:url]) if Rails.env.production?
   end
 end
