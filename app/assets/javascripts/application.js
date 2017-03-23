@@ -10,6 +10,8 @@
  * = require jquery.ui.datepicker-ru.js
  * = require jquery_ujs.js
  * = require jquery_nested_form.js
+ * = require ckeditor/init
+ * = require info_plugin
  * = require treeview/jquery.cookie.js
  * = require treeview/jquery.treeview.js
  * = require treeview/jquery.treeview.edit.js

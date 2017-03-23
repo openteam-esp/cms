@@ -48,8 +48,7 @@ Cms::Application.configure do
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %W[
                                   blue_pages.js
-                                  esp-ckeditor.js
-                                  esp-ckeditor/custom_config.js
+                                  ckeditor/*
                                   gallery_pictures_sort.js
                                   info_plugin.js
                                   priem.js
