@@ -37,6 +37,9 @@ CKEDITOR.editorConfig = function( config )
 
   config.startupOutlineBlocks = true;
 
+  // Syntax Highlighting for the CKEditor
+  config.extraPlugins = 'codemirror';
+
   // Toolbar groups configuration.
   config.toolbar = [
     {
@@ -321,8 +324,8 @@ CKEDITOR.editorConfig = function( config )
       ev.editor.dataProcessor.writer.setRules( e, {
         indent: true,
         breakBeforeOpen: true,
-        breakAfterOpen: false,
-        breakBeforeClose: false,
+        breakAfterOpen: true,
+        breakBeforeClose: true,
         breakAfterClose: true
       });
     }
