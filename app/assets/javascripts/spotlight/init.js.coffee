@@ -1,10 +1,9 @@
 @init_spotlight = ->
 
   reload_ckeditors = ->
-    $.each CKEDITOR.instances, (index, instance) ->
-      instance.destroy()
-      return
-    CKEDITOR.replaceAll()
+    for instance of CKEDITOR.instances
+      CKEDITOR.instances[instance].updateElement()
+
     return
 
   reorder_positions = ->
@@ -66,17 +65,20 @@
   $(document).on 'click', '.spotlight_items .item .handler_up', (e) ->
     block = $(this).closest('.fields')
     target = block.prevAll('.fields:visible').first()
-    console.log target
     return unless target.length
     block.swap
       target: target
       speed: 500
       callback: ->
-        $.each CKEDITOR.instances, (index, instance) ->
-          instance.destroy()
-          return
+        name = $('textarea', block).attr('id')
+        instance = CKEDITOR.instances[name]
+        height = instance.config.height
+        instance.destroy()
         block.removeAttr('style').insertBefore(target.removeAttr('style'))
-        CKEDITOR.replaceAll()
+        unless CKEDITOR.instances[name]
+          CKEDITOR.replace(name,
+            height: height
+          )
         reorder_positions()
         return
     return
@@ -89,11 +91,15 @@
       target: target
       speed: 500
       callback: ->
-        $.each CKEDITOR.instances, (index, instance) ->
-          instance.destroy()
-          return
+        name = $('textarea', block).attr('id')
+        instance = CKEDITOR.instances[name]
+        height = instance.config.height
+        instance.destroy()
         block.removeAttr('style').insertAfter(target.removeAttr('style'))
-        CKEDITOR.replaceAll()
+        unless CKEDITOR.instances[name]
+          CKEDITOR.replace(name,
+            height: height
+          )
         reorder_positions()
         return
     return

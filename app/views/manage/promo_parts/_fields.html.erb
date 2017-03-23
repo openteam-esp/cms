@@ -1,4 +1,4 @@
-<%= javascript_include_tag 'esp-ckeditor' %>
+<%= javascript_include_tag 'ckeditor/init' %>
 <%= javascript_include_tag 'info_plugin' %>
 
 <%= form.inputs do %>
@@ -16,7 +16,7 @@
           <%= f.input :url, :as => :string %>
           <%= f.input :target_blank %>
           <%= f.input :video_url, :as => :string %>
-          <%= f.input :annotation, :input_html => { :class => :ckeditor },
+          <%= f.input :annotation, as: :ckeditor, input_html: { ckeditor: { height: 200 } },
             :wrapper_html => { :class => 'annotation' } %>
           <% if f.object.persisted? && f.object.image.present? %>
             <%= link_to f.object.image.to_s, :class => 'js-colorbox', :rel => "colorbox-#{f.object.id}" do %>

@@ -9,15 +9,16 @@ $.fn.create_or_return_dialog = function(class_name){
   var clicked_link = $(this);
   var container = $('#'+class_name);
 
-  if (container.length == 0){
+  if (container.length == 0) {
+    dialog_height = Math.round(parseInt($(window).height()) * 0.8);
     $('<div/>', { id: class_name }).appendTo('body').dialog({
       autoOpen: false,
-      height: '525',
+      height: dialog_height,
       modal: true,
       position: 'center',
       resizable: false,
       title: 'Дополнительная информация (досье)',
-      width: '855',
+      width: '80%',
       beforeClose: function(event, ui){
         $('body').css({ overflow: 'inherit' });
         remove_ajax_and_unblock_link();
@@ -62,8 +63,8 @@ $.fn.create_or_return_ckeditor = function(){
     ckeditor_instance = CKEDITOR.appendTo(
       dialog_id,
       {
-        height: '310',
-        width: '830',
+        height: dialog.height() - 105,
+        width: '100%',
         resize_enabled: false
       }
     );

@@ -12,6 +12,19 @@
   &:focus
     background-color: #fcf1e0
 
+.ui-dialog textarea.cke_source
+  font-size: 16px
+  font-family: Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace
+  white-space: pre-wrap
+
+.cke_maximized
+  top: 30px !important
+
+  .cke_source
+    font-size: 16px
+    font-family: Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace
+    white-space: pre-wrap
+
 .formtastic
   .inputs
     .string,
@@ -81,6 +94,11 @@
     .ckeditor
       textarea
         +input_style
+    .ckeditor
+      textarea
+        font-size: 16px
+        font-family: Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace
+        white-space: pre-wrap
     .disabled
       +opacity(0.5)
 

@@ -33,7 +33,7 @@ Cms::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = false
+  config.assets.debug = true
 
   config.to_prepare do
     Dir[Rails.root.join('app/models/parts/*.rb')].each do | file |
