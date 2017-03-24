@@ -40,6 +40,10 @@ CKEDITOR.editorConfig = function( config )
   // Syntax Highlighting for the CKEditor
   config.extraPlugins = 'codemirror';
 
+  config.codemirror = {
+    enableSearchTools: false
+  };
+
   // Toolbar groups configuration.
   config.toolbar = [
     {
