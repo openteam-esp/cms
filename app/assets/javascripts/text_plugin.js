@@ -107,7 +107,7 @@ $.fn.get_file_content = function(common_path, text_path, textarea){
         // Загрузить файл в CKEditor
         $.get(common_path+'&root_path='+text_path+'&cmd=get&target='+file.hash, function(file_data){
           file_content = file_data.content;
-          textarea.val(file_content);
+          textarea.setData(file_content);
           dialog.open_dialog();
         });
         return false;
