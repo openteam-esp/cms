@@ -6,7 +6,7 @@ class Requester
     opts = {
       method: :get,
       url: url,
-      timeout: nil,
+      timeout: 300,
       payload: nil,
       headers: { Accept: nil }
     }
