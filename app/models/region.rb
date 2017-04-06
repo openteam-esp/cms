@@ -4,6 +4,8 @@ class Region < ActiveRecord::Base
   belongs_to :template
 
   default_scope order(:position, :id)
+
+  normalize_attribute :title, with: :squish
 end
 
 # == Schema Information

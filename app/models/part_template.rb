@@ -2,6 +2,8 @@ class PartTemplate < ActiveRecord::Base
   attr_accessible :title, :values
 
   belongs_to :setup
+  normalize_attribute :title, with: :squish
+  normalize_attribute :values, with: :squish
 end
 
 # == Schema Information
