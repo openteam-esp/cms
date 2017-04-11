@@ -38,11 +38,11 @@ CKEDITOR.editorConfig = function( config )
   config.startupOutlineBlocks = true;
 
   // Syntax Highlighting for the CKEditor
-  config.extraPlugins = 'codemirror';
+  //config.extraPlugins = 'codemirror';
 
-  config.codemirror = {
-    enableSearchTools: false
-  };
+  //config.codemirror = {
+    //enableSearchTools: false
+  //};
 
   // Toolbar groups configuration.
   config.toolbar = [
