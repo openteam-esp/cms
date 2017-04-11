@@ -7197,7 +7197,7 @@ function defineOptions(CodeMirror) {
   option("pollInterval", 100)
   option("undoDepth", 200, function (cm, val) { return cm.doc.history.undoDepth = val; })
   option("historyEventDelay", 1250)
-  option("viewportMargin", 10, function (cm) { return cm.refresh(); }, true)
+  option("viewportMargin", 1000, function (cm) { return cm.refresh(); }, true)
   option("maxHighlightLength", 10000, resetModeState, true)
   option("moveInputWithCursor", true, function (cm, val) {
     if (!val) { cm.display.input.resetPosition() }
