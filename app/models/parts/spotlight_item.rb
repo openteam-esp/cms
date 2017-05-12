@@ -5,7 +5,7 @@ class SpotlightItem < ActiveRecord::Base
 
   belongs_to :spotlight_part
 
-  validates_presence_of :kind, :title, :url
+  validates_presence_of :kind, :title
 
   validates_presence_of :since,       :if => :kind_news?
 
