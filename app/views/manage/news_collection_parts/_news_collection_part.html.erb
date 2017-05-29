@@ -10,6 +10,7 @@
         <p>Заголовок: <%= item.title %></p>
         <p>Страница: <%= (item.node.ancestors << item.node).map{ |node| node.title }.join(' / ') %></p>
         <p>Количество: <%= item.count %></p>
+        <p>Случайные новости: <%= item.random? ? 'Да' : 'Нет' %></p>
         <% if item.available_parts.empty? %>
           <p class='error'><b>На странице нет списка новостей</b></p>
         <% end %>

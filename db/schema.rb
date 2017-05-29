@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161216083753) do
+ActiveRecord::Schema.define(:version => 20170529094805) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20161216083753) do
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
     t.integer  "position"
+    t.boolean  "random"
   end
 
   add_index "news_collection_items", ["news_collection_part_id"], :name => "index_news_collection_items_on_news_collection_part_id"

@@ -1,6 +1,7 @@
 class NewsCollectionItem < ActiveRecord::Base
 
-  attr_accessible :count, :title, :node_id, :news_collection_part_id, :position
+  attr_accessible :count, :title, :node_id, :random,
+    :news_collection_part_id, :position
 
   belongs_to :node
   belongs_to :news_collection_part
@@ -8,6 +9,8 @@ class NewsCollectionItem < ActiveRecord::Base
   validates_presence_of :node_id, :count
 
   default_scope order(:position, :id)
+
+  default_value_for :random, false
 
   def types_for_json
     [
@@ -53,4 +56,5 @@ end
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  position                :integer
+#  random                  :boolean
 #
