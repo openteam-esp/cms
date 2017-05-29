@@ -34,6 +34,7 @@ class NewsCollectionItem < ActiveRecord::Base
     } if list_part.blank?
     list_part.params = {}
     list_part.news_per_page = count
+    list_part.news_random = random
     as_json(:only => [:title]).merge(
       :path => node.page_route,
       :type => list_part.type,

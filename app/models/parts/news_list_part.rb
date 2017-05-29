@@ -107,7 +107,14 @@ class NewsListPart < Part
     end
 
     def search_params
-      URI.escape("utf8=✓&entry_search[entry_type]=#{entry_type}&entry_search[channel_ids][]=#{news_channel}&per_page=#{news_per_page}&page=#{current_page}").tap do |s|
+      URI.escape([
+        "utf8=✓",
+        "entry_search[entry_type]=#{entry_type}",
+        "entry_search[channel_ids][]=#{news_channel}",
+        "per_page=#{news_per_page}",
+        "page=#{current_page}",
+        "random=#{news_random}"
+      ].join('&')).tap do |s|
         s << archive_params
       end
     end
