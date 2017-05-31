@@ -1,6 +1,6 @@
 class NewsCollectionItem < ActiveRecord::Base
 
-  attr_accessible :count, :title, :node_id, :random,
+  attr_accessible :count, :title, :node_id, :random, :period_for_random,
     :news_collection_part_id, :position
 
   belongs_to :node
@@ -11,6 +11,7 @@ class NewsCollectionItem < ActiveRecord::Base
   default_scope order(:position, :id)
 
   default_value_for :random, false
+  default_value_for :period_for_random, 12
 
   def types_for_json
     [
@@ -35,6 +36,7 @@ class NewsCollectionItem < ActiveRecord::Base
     list_part.params = {}
     list_part.news_per_page = count
     list_part.news_random = random
+    list_part.news_period_for_random = period_for_random
     as_json(:only => [:title]).merge(
       :path => node.page_route,
       :type => list_part.type,
@@ -57,5 +59,7 @@ end
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  position                :integer
+#  randomize               :boolean
 #  random                  :boolean
+#  period_for_random       :integer
 #

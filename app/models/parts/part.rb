@@ -2,7 +2,8 @@ class Part < ActiveRecord::Base
   attr_accessible :title
   attr_accessible :item_page
 
-  attr_accessor :current_node, :params, :resource_id, :news_random
+  attr_accessor :current_node, :params, :resource_id,
+    :news_random, :news_period_for_random
 
   belongs_to :node, touch: true
 

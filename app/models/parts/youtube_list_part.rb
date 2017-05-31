@@ -108,7 +108,8 @@ class YoutubeListPart < Part
         "entry_search[channel_ids][]=#{news_channel}",
         "per_page=#{news_per_page}",
         "page=#{current_page}",
-        "random=#{news_random}"
+        "random=#{news_random}",
+        "period_for_random=#{period_for_random}",
       ].join('&')).tap do |s|
         s << archive_params
       end

@@ -14,6 +14,7 @@
         :member_label => ->(n) { ('&nbsp;' * 2 * n.depth + n.title).html_safe } %>
       <%= f.input :count %>
       <%= f.input :random %>
+      <%= f.input :period_for_random %>
       <%= f.link_to_remove t('remove'), :class => 'button trash icon' %>
     <% end %>
 
