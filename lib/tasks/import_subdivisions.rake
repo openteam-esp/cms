@@ -6,6 +6,7 @@ task import_subdivisions: :environment do
     method: :get,
     url: "#{Settings['directory.url']}/api/subdivisions/317?depth=2",
     timeout: 600,
+    verify_ssl: false,
     headers: { Accept: 'application/json', timeout: 600 }
   ) do |response, _request, _result|
     JSON.parse(response.body)

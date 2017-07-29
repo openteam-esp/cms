@@ -8,6 +8,7 @@ class Spotlight
       method: :get,
       url: url,
       timeout: 600,
+      verify_ssl: false,
       headers: { :Accept => 'application/json', :timeout => 600 }
     ) do |response, request, result, &block|
       @response_code    = response.code

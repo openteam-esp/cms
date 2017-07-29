@@ -7,6 +7,7 @@ class Requester
       method: :get,
       url: url,
       timeout: 300,
+      verify_ssl: false,
       payload: nil,
       headers: { Accept: nil }
     }

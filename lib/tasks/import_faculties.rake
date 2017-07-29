@@ -6,6 +6,7 @@ task import_faculties: :environment do
     method: :get,
     url: "#{Settings['directory.url']}/api/structure.json",
     timeout: 600,
+    verify_ssl: false,
     headers: { Accept: 'application/json', timeout: 600 }
   ) do |response, _request, _result|
     JSON.parse(response.body)
