@@ -1,11 +1,11 @@
 // Добавление loader и блокировка ссылки
-$.fn.add_loader_and_lock = function(){
+$.fn.add_text_loader_and_lock = function(){
   $(this).append($('<span/>', { class: 'ajax_loading' }));
   $(this).addClass('clicked');
 };
 
 // Создание диалога
-$.fn.create_or_return_dialog = function(class_name){
+$.fn.create_or_return_text_dialog = function(class_name){
   var clicked_link = $(this);
   var container = $('#'+class_name);
 
@@ -29,7 +29,7 @@ $.fn.create_or_return_dialog = function(class_name){
 };
 
 // Загрузка iframe в диалог
-$.fn.load_iframe = function(){
+$.fn.load_text_iframe = function(){
   var dialog = $(this);
   dialog.dialog({height: '455'});
   dialog.html(
@@ -41,13 +41,13 @@ $.fn.load_iframe = function(){
         width: '825'
       }
     ).load(function(){
-      dialog.open_dialog();
+      dialog.open_text_dialog();
     })
   );
 };
 
 // Показать диалог
-$.fn.open_dialog = function(){
+$.fn.open_text_dialog = function(){
   remove_ajax_and_unblock_link();
   $('body').css({ overflow: 'hidden' });
   $(this).dialog('open');
@@ -65,7 +65,7 @@ $.fn.create_or_return_textarea = function(){
   return textarea_instance;
 };
 
-$.fn.save_file_content = function(common_path, text_path){
+$.fn.save_text_file_content = function(common_path, text_path){
   var dialog  = $(this);
   var content = $('textarea', dialog).val();
   var path_object = get_file_name_and_hash(text_path);
@@ -85,7 +85,7 @@ $.fn.save_file_content = function(common_path, text_path){
     .complete(function(){remove_ajax_and_unblock_link()});
 };
 
-$.fn.get_file_content = function(common_path, text_path, textarea){
+$.fn.get_text_file_content = function(common_path, text_path, textarea){
   var dialog = $(this);
   // Получить путь к папке, имя файла и base64 хеш файла
   var path_object = get_file_name_and_hash(text_path);
@@ -107,8 +107,8 @@ $.fn.get_file_content = function(common_path, text_path, textarea){
         // Загрузить файл в CKEditor
         $.get(common_path+'&root_path='+text_path+'&cmd=get&target='+file.hash, function(file_data){
           file_content = file_data.content;
-          textarea.setData(file_content);
-          dialog.open_dialog();
+          textarea.val(file_content);
+          dialog.open_text_dialog();
         });
         return false;
       }
@@ -117,7 +117,7 @@ $.fn.get_file_content = function(common_path, text_path, textarea){
     // Создать файл если его нет
     if (need_create_index_html){
       $.get(common_path+'&root_path='+text_path+'&cmd=mkfile&name='+file_name+'&target='+folder.hash, function(file_data){
-        dialog.open_dialog();
+        dialog.open_text_dialog();
       });
     };
   });
@@ -181,7 +181,10 @@ $.fn.watch_for_callback_from_elFinder = function(){
 
 //*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 $(function(){
-  var create_edit_link = $('.info_link');
+  var create_edit_link = $('.text_link');
+  if (create_edit_link.length == 0) {
+    return false;
+  }
   var choose_link      = $('.choose_link');
   var text_path_input  = $('#info_path');
   var text_path        = text_path_input.val(); // Путь к файлу контента
@@ -203,14 +206,14 @@ $(function(){
       return false;
     };
     // Добавить loader и заблокировать ссылку
-    create_edit_link.add_loader_and_lock();
+    create_edit_link.add_text_loader_and_lock();
 
     // Создать диалог для CKEditor
-    var dialog = create_edit_link.create_or_return_dialog('textarea_dialog');
+    var dialog = create_edit_link.create_or_return_text_dialog('textarea_dialog');
     dialog.dialog({
       buttons: {
         'Сохранить': function(){
-          dialog.save_file_content(common_path, text_path);
+          dialog.save_text_file_content(common_path, text_path);
         },
         'Отмена': function(){
           dialog.dialog('close');
@@ -227,7 +230,7 @@ $(function(){
     // Создать CKEditor
     var textarea = dialog.create_or_return_textarea();
 
-    dialog.get_file_content(common_path, text_path, textarea);
+    dialog.get_text_file_content(common_path, text_path, textarea);
 
     return false;
   });
@@ -237,13 +240,13 @@ $(function(){
       return false;
     };
     // Добавить loader и заблокировать ссылку
-    choose_link.add_loader_and_lock();
+    choose_link.add_text_loader_and_lock();
 
     // Создать диалог для elFinder
-    var dialog = choose_link.create_or_return_dialog('elfinder_dialog');
+    var dialog = choose_link.create_or_return_text_dialog('elfinder_dialog');
 
     // Загрузить iframe elFinder в диалог и показать его
-    dialog.load_iframe();
+    dialog.load_text_iframe();
 
     // Повесить обработчик на callback elFinder
     dialog.watch_for_callback_from_elFinder();

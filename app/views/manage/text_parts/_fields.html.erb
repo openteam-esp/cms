@@ -5,7 +5,7 @@
   <%= form.input :type, :as => :hidden %>
   <%= form.input :text_info_path, :as => :hidden, :input_html => { :id => 'info_path' } %>
   <li class='info_wrapper'>
-    <%= link_to content_tag(:span, t('create_edit_link'), :class => 'link'), '#', :parent_data => form.object.node.id, :class => 'info_link' %>
+    <%= link_to content_tag(:span, t('create_edit_link'), :class => 'link'), '#', :parent_data => form.object.node.id, :class => 'text_link' %>
     <%= link_to "(#{t('choose_link')})", '#', :class => 'choose_link' %>
   </li>
 <% end %>
