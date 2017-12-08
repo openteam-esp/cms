@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20170531091242) do
+ActiveRecord::Schema.define(:version => 20171201132857) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -95,7 +95,6 @@ ActiveRecord::Schema.define(:version => 20170531091242) do
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
     t.integer  "position"
-    t.boolean  "randomize"
     t.boolean  "random"
     t.integer  "period_for_random"
   end
@@ -278,6 +277,17 @@ ActiveRecord::Schema.define(:version => 20170531091242) do
   end
 
   add_index "spotlight_items", ["spotlight_part_id"], :name => "index_spotlight_items_on_spotlight_part_id"
+
+  create_table "temperature_items", :force => true do |t|
+    t.integer  "temperature_part_id"
+    t.string   "title"
+    t.string   "url"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "position"
+  end
+
+  add_index "temperature_items", ["temperature_part_id"], :name => "index_temperature_items_on_temperature_part_id"
 
   create_table "templates", :force => true do |t|
     t.string   "title"

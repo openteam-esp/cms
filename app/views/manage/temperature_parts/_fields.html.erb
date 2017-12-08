@@ -1,0 +1,15 @@
+<%= form.inputs do %>
+  <%= form.input :region, as: :hidden %>
+  <%= form.input :type, as: :hidden %>
+
+  <div class='grouiping_items js-sortable'>
+    <%= form.semantic_fields_for :temperature_items do |f| %>
+      <span class='js-sortable-handler'></span>
+      <%= f.input :position, as: :hidden, input_html: { class: 'js-sortable-position' } %>
+      <%= f.input :title, label: 'Заголовок' %>
+      <%= f.input :url, label: 'URL' %>
+      <%= f.link_to_remove t('remove'), class: 'button trash icon' %>
+    <% end %>
+    <%= form.link_to_add 'Добавить', :temperature_items, class: 'button icon add' %>
+  </div>
+<% end %>

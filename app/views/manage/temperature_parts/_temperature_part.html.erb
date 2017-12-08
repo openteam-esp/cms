@@ -1,0 +1,16 @@
+<h3><%= temperature_part.title %></h3>
+
+<div class='html_part'>
+  <ul>
+    <% temperature_part.temperature_items.each do |item| %>
+      <li>
+        <%= item.title %>:
+        <% if item.url.present? %>
+          <%= item.url =~ URI::regexp ? link_to(item.url, item.url, target: '_blank') : item.url %>
+        <% else %>
+          нет
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

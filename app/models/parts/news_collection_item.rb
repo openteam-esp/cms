@@ -59,7 +59,6 @@ end
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  position                :integer
-#  randomize               :boolean
 #  random                  :boolean
 #  period_for_random       :integer
 #
