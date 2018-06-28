@@ -1,17 +1,18 @@
 class DirectoryPart < Part
   attr_accessor :directory_subdivision
 
-  attr_accessible :directory_subdivision_id, :directory_depth, :directory_only_pps
+  attr_accessible :directory_subdivision_id, :directory_depth, :directory_only_pps, :without_chief
 
   validates_presence_of :directory_subdivision_id, :directory_depth
 
   default_value_for :directory_depth, 1
   default_value_for :directory_only_pps, false
+  default_value_for :without_chief, false
 
   after_initialize :check_subdivision_url, :unless => :new_record?
 
   def to_json
-    super.merge!(as_json(:only => :type, :methods => ['part_title', 'content']))
+    super.merge!(as_json(:only => :type, :methods => ['part_title', 'without_chief', 'content']))
   end
 
   def content

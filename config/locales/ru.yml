@@ -293,6 +293,7 @@ ru:
         directory_subdivision: 'Подразделение'
         directory_depth: 'Конечный уровень'
         directory_only_pps: 'Только профессорско-преподавательский состав'
+        without_chief: 'Без начальника'
 
       priem_part:
         context_title: 'Подразделение'

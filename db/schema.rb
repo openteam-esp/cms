@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20171201132857) do
+ActiveRecord::Schema.define(:version => 20180628090333) do
 
   create_table "audits", :force => true do |t|
     t.integer  "auditable_id"
@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(:version => 20171201132857) do
     t.string   "storage_directory_name"
     t.integer  "storage_directory_depth"
     t.boolean  "directory_only_pps"
+    t.boolean  "without_chief"
   end
 
   add_index "parts", ["node_id"], :name => "index_parts_on_node_id"
