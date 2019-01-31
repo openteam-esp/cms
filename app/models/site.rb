@@ -26,11 +26,11 @@ class Site < Node
   end
 
   def locales
-    Locale.where(:ancestry => child_ancestry)
+    @locales ||= Locale.where(ancestry: child_ancestry)
   end
 
   def default_locale
-    locales.where(:slug => 'ru').first
+    locales.where(slug: 'ru').first || locales.first
   end
 
   def page_title
