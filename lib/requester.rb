@@ -15,14 +15,16 @@ class Requester
 
     RestClient.enable Rack::CommonLogger
     RestClient.enable Rack::Cache,
-      :metastore => "file:#{Rails.root.join('tmp/rack-cache/meta')}",
-      :entitystore => "file:#{Rails.root.join('tmp/rack-cache/body')}",
-      :verbose => true
+      metastore: "file:#{Rails.root.join('tmp/rack-cache/meta')}",
+      entitystore: "file:#{Rails.root.join('tmp/rack-cache/body')}",
+      verbose: true
 
-    @response ||= RestClient::Request.execute(
-      opts
-    ) do |response, request, result, &block|
-      response
+    begin
+      @response ||= RestClient::Request.execute(opts) do |response, request, result, &block|
+        response
+      end
+    rescue URI::InvalidURIError
+      raise(ActionController::RoutingError.new('Not Found'))
     end
   end
 
